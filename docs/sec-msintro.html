@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 2 Introduction | R/Bioconductor for Mass Spectrometry and Proteomics" />
+<meta property="og:title" content="Chapter 2 Introduction | R for Mass Spectrometry" />
 <meta property="og:type" content="book" />
 
 
@@ -17,11 +17,10 @@
 <meta name="date" content="2021-03-19" />
 
 
-<meta name="description" content="Chapter 2 Introduction | R/Bioconductor for Mass Spectrometry and Proteomics">
+<meta name="description" content="Chapter 2 Introduction | R for Mass Spectrometry">
 
-<title>Chapter 2 Introduction | R/Bioconductor for Mass Spectrometry and Proteomics</title>
+<title>Chapter 2 Introduction | R for Mass Spectrometry</title>
 
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -46,27 +45,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -75,9 +73,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,7 +120,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="TOC">
 <ul class="navbar">
-<li class="msmb"><p class="title">R/Bioconductor for Mass Spectrometry and Proteomics<p><p class="author">Laurent Gatto, Sebastian Gibb, Johannes Rainer</p>
+<li class="msmb"><p class="title">R for Mass Spectrometry<p><p class="author">Laurent Gatto, Sebastian Gibb, Johannes Rainer</p>
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
@@ -144,10 +142,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:msintro" class="section level1" number="2">
+<html><body><div id="sec:msintro" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 2</span> Introduction</h1>
-<div id="how-does-mass-spectrometry-work" class="section level2" number="2.1">
+<div id="how-does-mass-spectrometry-work" class="section level2">
 <h2>
 <span class="header-section-number">2.1</span> How does mass spectrometry work?</h2>
 <p>Mass spectrometry (MS) is a technology that <em>separates</em> charged
@@ -247,7 +245,7 @@ Figure 2.6: MS2 spectra interleaved between two MS1 spectra..
 <img src="img/F02-3D-MS1-MS2-scans-100-1200-lattice.png" alt="MS2 spectra interleaved between two MS1 spectra.." width="100%">
 </div>
 </div>
-<div id="accessing-data" class="section level2" number="2.2">
+<div id="accessing-data" class="section level2">
 <h2>
 <span class="header-section-number">2.2</span> Accessing data</h2>
 <div id="from-the-proteomexchange-database" class="section level3 unnumbered">
@@ -264,8 +262,8 @@ Reaction Monitoring (SRM, i.e. targeted) data and the
 <a href="http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp">MassIVE</a>
 resource. These data can be downloaded within R using the
 <em><a href="https://bioconductor.org/packages/3.12/rpx">rpx</a></em> package.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sec-msintro.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rpx"</span>)</span>
-<span id="cb1-2"><a href="sec-msintro.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pxannounced</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">"rpx"</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">pxannounced</span>()</a></code></pre></div>
 <pre><code>## 15 new ProteomeXchange annoucements</code></pre>
 <pre><code>##     Data.Set Publication.Data Message
 ## 1  PXD018451             &lt;NA&gt;     New
@@ -287,13 +285,13 @@ resource. These data can be downloaded within R using the
 metadata that will be stored in a <code>PXDataset</code> object. The names of the
 files available in this data can be retrieved with the <code>pxfiles</code>
 accessor function.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sec-msintro.html#cb4-1" aria-hidden="true" tabindex="-1"></a>px <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD000001"</span>)</span>
-<span id="cb4-2"><a href="sec-msintro.html#cb4-2" aria-hidden="true" tabindex="-1"></a>px</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">px &lt;-<span class="st"> </span><span class="kw">PXDataset</span>(<span class="st">"PXD000001"</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">px</a></code></pre></div>
 <pre><code>## Object of class "PXDataset"
 ##  Id: PXD000001 with 11 files
 ##  [1] 'F063721.dat' ... [11] 'erwinia_carotovora.fasta'
 ##  Use 'pxfiles(.)' to see all files.</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-msintro.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxfiles</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">pxfiles</span>(px)</a></code></pre></div>
 <pre><code>##  [1] "F063721.dat"                                                         
 ##  [2] "F063721.dat-mztab.txt"                                               
 ##  [3] "PRIDE_Exp_Complete_Ac_22134.xml.gz"                                  
@@ -306,21 +304,21 @@ accessor function.</p>
 ## [10] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.raw"           
 ## [11] "erwinia_carotovora.fasta"</code></pre>
 <p>Other metadata for the <code>px</code> data set:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sec-msintro.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxtax</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">pxtax</span>(px)</a></code></pre></div>
 <pre><code>## [1] "Erwinia carotovora"</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-msintro.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxurl</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">pxurl</span>(px)</a></code></pre></div>
 <pre><code>## [1] "ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001"</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sec-msintro.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxref</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">pxref</span>(px)</a></code></pre></div>
 <pre><code>## [1] "Gatto L, Christoforou A. Using R and Bioconductor for proteomics data analysis. Biochim Biophys Acta. 2013 May 18. doi:pii: S1570-9639(13)00186-6. 10.1016/j.bbapap.2013.04.032"</code></pre>
 <p>Data files can then be downloaded with the <code>pxget</code> function. Below, we
 retrieve the raw data file. The file is
 downloaded<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> If the file is already available, it is not downloaded a second time.</span>
 in the working directory and the name of the file is return by the
 function and stored in the <code>mzf</code> variable for later use.<label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> This and other files are also availabel in the <code>msdata</code> package, described below</span></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-msintro.html#cb14-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
-<span id="cb14-2"><a href="sec-msintro.html#cb14-2" aria-hidden="true" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">fn &lt;-<span class="st"> "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></a>
+<a class="sourceLine" id="cb14-2" title="2">mzf &lt;-<span class="st"> </span><span class="kw">pxget</span>(px, fn)</a></code></pre></div>
 <pre><code>## Loading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML from cache.</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-msintro.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mzf</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">mzf</a></code></pre></div>
 <pre><code>## [1] "~/.cache/rpx/10c1f4e4c6980_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 </div>
 <div id="data-packages" class="section level3 unnumbered">
@@ -329,19 +327,19 @@ function and stored in the <code>mzf</code> variable for later use.<label for="t
 <em><a href="https://bioconductor.org/packages/3.12/msdata">msdata</a></em>, for example, provides some
 general raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-msintro.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb18-2"><a href="sec-msintro.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb18-3"><a href="sec-msintro.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">library</span>(<span class="st">"msdata"</span>)</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co">## proteomics raw data</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw">proteomics</span>()</a></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-msintro.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb20-2"><a href="sec-msintro.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co">## proteomics identification data</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">ident</span>()</a></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb22-2"><a href="sec-msintro.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co">## quantitative data</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">quant</span>()</a></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>More often, such <em>experiment packages</em> distribute processed data; an
 example of such is the <em><a href="https://bioconductor.org/packages/3.12/pRolocdata">pRolocdata</a></em>

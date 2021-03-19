@@ -1,6 +1,6 @@
 ---
-title: "R/Bioconductor for Mass Spectrometry and Proteomics"
-subtitle: ""
+title: "R for Mass Spectrometry"
+subtitle: "Applications in Proteomics and Metabolomics"
 author: "Laurent Gatto, Sebastian Gibb, Johannes Rainer"
 date: "`r Sys.Date()`"
 output:
