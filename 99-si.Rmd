@@ -1,0 +1,16 @@
+# References and session information {#sec:si}
+
+The following packages have been used to generate this document.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'msmbstyle'
+), 'packages.bib')
+```
+
+```{r si}
+sessionInfo()
+```
+
+## References {-}

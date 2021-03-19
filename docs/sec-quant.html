@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 5 Quantitative data | R/Bioconductor for Mass Spectrometry and Proteomics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
+
+<meta name="date" content="2021-03-19" />
+
+
+<meta name="description" content="Chapter 5 Quantitative data | R/Bioconductor for Mass Spectrometry and Proteomics">
+
+<title>Chapter 5 Quantitative data | R/Bioconductor for Mass Spectrometry and Proteomics</title>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">R/Bioconductor for Mass Spectrometry and Proteomics<p><p class="author">Laurent Gatto, Sebastian Gibb, Johannes Rainer</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html"><span class="toc-section-number">1</span> Preamble</a>
+<a href="sec-msintro.html"><span class="toc-section-number">2</span> Introduction</a>
+<a href="raw-ms-data.html"><span class="toc-section-number">3</span> Raw MS data</a>
+<a href="identification-data.html"><span class="toc-section-number">4</span> Identification data</a>
+<a id="active-page" href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a><ul class="toc-sections">
+<li class="toc"><a href="#quantitation-methodologies"> Quantitation methodologies</a></li>
+<li class="toc"><a href="#sec:qf"> QFeatures</a></li>
+<li class="toc"><a href="#creating-qfeatures-object"> Creating <code>QFeatures</code> object</a></li>
+<li class="toc"><a href="#analysis-pipeline"> Analysis pipeline</a></li>
+<li class="toc"><a href="#summary-exercice-1"> Summary exercice</a></li>
+</ul>
+<a href="sec-si.html"><span class="toc-section-number">6</span> References and session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div id="sec:quant" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Chapter 5</span> Quantitative data</h1>
+<div id="quantitation-methodologies" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Quantitation methodologies</h2>
+<p>There are a wide range of proteomics quantitation techniques that can
+broadly be classified as labelled vs. label-free, depending whether
+the features are labelled prior the MS acquisition and the MS level at
+which quantitation is inferred, namely MS1 or MS2.</p>
+<table>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">Label-free</th>
+<th align="left">Labelled</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">MS1</td>
+<td align="left">XIC</td>
+<td align="left">SILAC, 15N</td>
+</tr>
+<tr class="even">
+<td align="left">MS2</td>
+<td align="left">Counting</td>
+<td align="left">iTRAQ, TMT</td>
+</tr>
+</tbody>
+</table>
+<div id="label-free-ms2-spectral-counting" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Label-free MS2: Spectral counting</h3>
+<p>In spectral counting, on simply counts the number of quantified
+peptides that are assigned to a protein.</p>
+<div class="figure">
+<span id="fig:sc"></span>
+<p class="caption marginnote shownote">
+Figure 5.1: Spectral counting. Figure from the <code>Pbase</code> package.
+</p>
+<img src="img/pbase.png" alt="Spectral counting. Figure from the `Pbase` package." width="75%">
+</div>
+</div>
+<div id="labelled-ms2-isobaric-tagging" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Labelled MS2: Isobaric tagging</h3>
+<p>Isobaric tagging refers to the labelling using isobaric tags,
+i.e. chemical tags that have the same mass and hence can’t be
+distinguish by the spectrometer. The peptides of different samples (4,
+6, 10, 11 or 16) are labelled with different tags and combined prior
+to mass spectrometry acquisition. Given that they are isobaric, all
+identical peptides, irrespective of the tag and this the sample of
+origin, are co-analysed, up to fragmentation prior to MS2
+analysis. During fragmentation, the isobaric tags fall of, fragment
+themselves, and result in a set of sample specific peaks. These
+specific peaks can be used to infer sample-specific quantitation,
+while the rest of the MS2 spectrum is used for identification.</p>
+<div class="figure">
+<span id="fig:itraq"></span>
+<p class="caption marginnote shownote">
+Figure 5.2: iTRAQ 4-plex isobaric tagging. Tandem Mass Tags (TMT) offer up to 16 tags.
+</p>
+<img src="img/itraq.png" alt="iTRAQ 4-plex isobaric tagging. Tandem Mass Tags (TMT) offer up to 16 tags." width="75%">
+</div>
+</div>
+<div id="label-free-ms1-extracted-ion-chromatograms" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> Label-free MS1: extracted ion chromatograms</h3>
+<p>In label-free quantitation, the precursor peaks that match an
+identified peptide are integrated of retention time and the area under
+that <em>extracted ion chromatogram</em> is used to quantify that peptide in
+that sample.</p>
+<div class="figure">
+<span id="fig:lf"></span>
+<p class="caption marginnote shownote">
+Figure 5.3: Label-free quantitation. Figure credit <a href="https://github.com/jorainer/">Johannes Rainer</a>.
+</p>
+<img src="img/chrompeaks.png" alt="Label-free quantitation. Figure credit [Johannes Rainer](https://github.com/jorainer/)." width="75%">
+</div>
+</div>
+<div id="labelled-ms1-silac" class="section level3" number="5.1.4">
+<h3>
+<span class="header-section-number">5.1.4</span> Labelled MS1: SILAC</h3>
+<p>In SILAc quantitation, sample are grown in a medium that contains
+heavy amino acids (typically arginine and lysine). All proteins gown
+in this <em>heavy</em> growth medium contain the heavy form of these amino
+acids. Two samples, one grown in heavy medium, and one grown in normal
+(light) medium are then combined and analysed together. The heavy
+peptides precursor peaks are systematically shifted compared to the
+light ones, and the ratio between the height of a heavy and light
+peaks can be used to calculate peptide and protein fold-changes.</p>
+<div class="figure">
+<span id="fig:silab"></span>
+<p class="caption marginnote shownote">
+Figure 5.4: Silac quantitation. Figure credit Wikimedia Commons.
+</p>
+<img src="img/Silac.png" alt="Silac quantitation. Figure credit Wikimedia Commons." width="75%">
+</div>
+<p>These different quantitation techniques come with their respective
+benefits and distinct challenges, such as large quantities of raw data
+processing, data transformation and normalisation, missing values, and
+different underlying statistical models for the quantitative data
+(count data for spectral counting, continuous data for the others).</p>
+<p>In terms of raw data quantitation in R/Bioconductor, most efforts have
+been devoted to MS2-level quantitation. Label-free XIC quantitation
+has been addressed in the frame of metabolomics data processing by the
+<em><a href="https://bioconductor.org/packages/3.12/xcms">xcms</a></em> infrastructure.</p>
+<p>Below is a list of suggested packages for some common proteomics
+quantitation technologies:</p>
+<ul>
+<li>Isobaric tagging (iTRAQ and TMT): <em><a href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em> and <em><a href="https://bioconductor.org/packages/3.12/isobar">isobar</a></em>.</li>
+<li>Label-free: <em><a href="https://bioconductor.org/packages/3.12/xcms">xcms</a></em> (metabolomics).</li>
+<li>Counting: <em><a href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em> and <em><a href="https://bioconductor.org/packages/3.12/MSnID">MSnID</a></em> for
+peptide-spectrum matching confidence assessment.</li>
+<li>
+<em><a href="https://github.com/vladpetyuk/N14N15">N14N15</a></em> for heavy Nitrogen-labelled data.</li>
+</ul>
+</div>
+</div>
+<div id="sec:qf" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> QFeatures</h2>
+<p>Mass spectrometry-based quantitative proteomics data can be
+representated as a matrix of quantitative values for features (PSMs,
+peptides, proteins) arranged along the rows, measured for a set of
+samples, arranged along the columns. There is a common representation
+for such quantitative data set, namely the <code>SummarizedExperiment</code> (SE)
+<span class="citation">(<a href="sec-si.html#ref-SE" role="doc-biblioref">Morgan et al. 2020</a>)</span> class:</p>
+<div class="figure" style="text-align: center">
+<span id="fig:sefig"></span>
+<p class="caption marginnote shownote">
+Figure 5.5: Schematic representation of the anatomy of a <code>SummarizedExperiment</code> object. (Figure taken from the <code>SummarizedExperiment</code> package vignette.)
+</p>
+<img src="img/SE.png" alt="Schematic representation of the anatomy of a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)" width="100%">
+</div>
+<ul>
+<li>The sample (columns) metadata can be access with the <code>colData()</code>
+function.</li>
+<li>The features (rows) metadata can be access with the <code>rowData()</code>
+column.</li>
+<li>If the features represent ranges along genomic coordinates, these
+can be accessed with <code>rowRanges()</code>
+</li>
+<li>Additional metadata describing the overall experiment can be
+accessed with <code>metadata()</code>.</li>
+<li>The quantiative data can be accessed with <code>assay()</code>.</li>
+<li>
+<code>assays()</code> returns a list of matrix-like assays.</li>
+</ul>
+<div id="the-qfeatures-class" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> The QFeatures class</h3>
+<p>While mass spectrometers acquire data for spectra/peptides, the
+biological entity of interest are the protein. As part of the data
+processing, we are thus required to <strong>aggregate</strong> low-level
+quantitative features into higher level data.</p>
+<div class="figure">
+<span id="fig:featuresplot"></span>
+<p class="caption marginnote shownote">
+Figure 5.6: Conceptual representation of a <code>QFeatures</code> object and the aggregative relation between different assays.
+</p>
+<img src="R4MS_files/figure-html/featuresplot-1.png" alt="Conceptual representation of a `QFeatures` object and the aggregative relation between different assays." width="672">
+</div>
+<p>We are going to start to familiarise ourselves with the <code>QFeatures</code>
+class implemented in the
+<a href="https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html"><code>QFeatures</code></a>
+package. The class is derived from the Bioconductor
+<code>MultiAssayExperiment</code> <span class="citation">(<a href="sec-si.html#ref-MAE" role="doc-biblioref">Ramos et al. 2017</a>)</span> (MAE) class. Let’s start by loading the
+<code>QFeatures</code> package.</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-quant.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span></code></pre></div>
+<p>Next, we load the <code>feat1</code> test data, which is composed of single
+<em>assay</em> of class <code>SummarizedExperiment</code> composed of 10 rows and 2
+columns.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-quant.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(feat1)</span>
+<span id="cb238-2"><a href="sec-quant.html#cb238-2" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 1 assays:
+##  [1] psms: SummarizedExperiment with 10 rows and 2 columns</code></pre>
+<p>Let’s perform some simple operations to familiarise ourselves with the
+<code>QFeatures</code> class:</p>
+<ul>
+<li>Extract the sample metadata using the <code>colData()</code> accessor (like you
+have previously done with <code>SummarizedExperiment</code> objects).</li>
+</ul>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="sec-quant.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
+<pre><code>## DataFrame with 2 rows and 1 column
+##        Group
+##    &lt;integer&gt;
+## S1         1
+## S2         2</code></pre>
+<p>We can also further annotate the experiment by adding columns to the <code>colData</code> slot:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-quant.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>)</span>
+<span id="cb242-2"><a href="sec-quant.html#cb242-2" aria-hidden="true" tabindex="-1"></a>feat1<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Y1"</span>, <span class="st">"Y2"</span>)</span>
+<span id="cb242-3"><a href="sec-quant.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
+<pre><code>## DataFrame with 2 rows and 3 columns
+##        Group           X           Y
+##    &lt;integer&gt; &lt;character&gt; &lt;character&gt;
+## S1         1          X1          Y1
+## S2         2          X2          Y2</code></pre>
+<ul>
+<li>Extract the first (and only) assay composing this <code>QFeaures</code> data
+using the <code>[[</code> operator (as you have done to extract elements of a
+list) by using the assay’s index or name.</li>
+</ul>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-quant.html#cb244-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 10 2 
+## metadata(0):
+## assays(1): ''
+## rownames(10): PSM1 PSM2 ... PSM9 PSM10
+## rowData names(5): Sequence Protein Var location pval
+## colnames(2): S1 S2
+## colData names(0):</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="sec-quant.html#cb246-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="st">"psms"</span>]]</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 10 2 
+## metadata(0):
+## assays(1): ''
+## rownames(10): PSM1 PSM2 ... PSM9 PSM10
+## rowData names(5): Sequence Protein Var location pval
+## colnames(2): S1 S2
+## colData names(0):</code></pre>
+<ul>
+<li>Extract the <code>psms</code> assay’s row data and quantitative values.</li>
+</ul>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-quant.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>##       S1 S2
+## PSM1   1 11
+## PSM2   2 12
+## PSM3   3 13
+## PSM4   4 14
+## PSM5   5 15
+## PSM6   6 16
+## PSM7   7 17
+## PSM8   8 18
+## PSM9   9 19
+## PSM10 10 20</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-quant.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>## DataFrame with 10 rows and 5 columns
+##            Sequence     Protein       Var      location      pval
+##         &lt;character&gt; &lt;character&gt; &lt;integer&gt;   &lt;character&gt; &lt;numeric&gt;
+## PSM1       SYGFNAAR       ProtA         1 Mitochondr...     0.084
+## PSM2       SYGFNAAR       ProtA         2 Mitochondr...     0.077
+## PSM3       SYGFNAAR       ProtA         3 Mitochondr...     0.063
+## PSM4       ELGNDAYK       ProtA         4 Mitochondr...     0.073
+## PSM5       ELGNDAYK       ProtA         5 Mitochondr...     0.012
+## PSM6       ELGNDAYK       ProtA         6 Mitochondr...     0.011
+## PSM7  IAEESNFPFI...       ProtB         7       unknown     0.075
+## PSM8  IAEESNFPFI...       ProtB         8       unknown     0.038
+## PSM9  IAEESNFPFI...       ProtB         9       unknown     0.028
+## PSM10 IAEESNFPFI...       ProtB        10       unknown     0.097</code></pre>
+</div>
+<div id="feature-aggregation" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Feature aggregation</h3>
+<p>The central functionality of the <code>QFeatures</code> infrastructure is the
+aggregation of features into higher-level features while retaining the
+link between the different levels. This can be done with the
+<a href="https://rformassspectrometry.github.io/QFeatures/reference/QFeatures-aggregate.html"><code>aggregateFeatures()</code> function</a>.</p>
+<p>The call below will</p>
+<ul>
+<li>operate on the <code>psms</code> assay of the <code>feat1</code> objects;</li>
+<li>aggregate the rows the assay following the grouping defined in the
+<code>peptides</code> row data variables;</li>
+<li>perform aggregation using the <code>colMeans()</code> function;</li>
+<li>create a new assay named <code>peptides</code> and add it to the <code>feat1</code>
+object.</li>
+</ul>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-quant.html#cb252-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"psms"</span>,</span>
+<span id="cb252-2"><a href="sec-quant.html#cb252-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Sequence"</span>,</span>
+<span id="cb252-3"><a href="sec-quant.html#cb252-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb252-4"><a href="sec-quant.html#cb252-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMeans)</span>
+<span id="cb252-5"><a href="sec-quant.html#cb252-5" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 2 assays:
+##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns</code></pre>
+<ul>
+<li>Let’s convince yourself that we understand the effect of feature
+aggregation and repeat the calculations manually and check the
+content of the new assay’s row data.</li>
+</ul>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sec-quant.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="do">## SYGFNAAR</span></span>
+<span id="cb254-2"><a href="sec-quant.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ])</span></code></pre></div>
+<pre><code>## S1 S2 
+##  2 12</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-quant.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"SYGFNAAR"</span>, ]</span></code></pre></div>
+<pre><code>## S1 S2 
+##  2 12</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="sec-quant.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ELGNDAYK</span></span>
+<span id="cb258-2"><a href="sec-quant.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, ])</span></code></pre></div>
+<pre><code>## S1 S2 
+##  5 15</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="sec-quant.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"ELGNDAYK"</span>, ]</span></code></pre></div>
+<pre><code>## S1 S2 
+##  5 15</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="sec-quant.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="do">## IAEESNFPFIK</span></span>
+<span id="cb262-2"><a href="sec-quant.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>, ])</span></code></pre></div>
+<pre><code>##   S1   S2 
+##  8.5 18.5</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="sec-quant.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"IAEESNFPFIK"</span>, ]</span></code></pre></div>
+<pre><code>##   S1   S2 
+##  8.5 18.5</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="sec-quant.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">2</span>]])</span></code></pre></div>
+<pre><code>## DataFrame with 3 rows and 4 columns
+##                  Sequence     Protein      location        .n
+##               &lt;character&gt; &lt;character&gt;   &lt;character&gt; &lt;integer&gt;
+## ELGNDAYK         ELGNDAYK       ProtA Mitochondr...         3
+## IAEESNFPFIK IAEESNFPFI...       ProtB       unknown         4
+## SYGFNAAR         SYGFNAAR       ProtA Mitochondr...         3</code></pre>
+<p>We can now aggregate the peptide-level data into a new protein-level
+assay using the <code>colMedians()</code> aggregation function.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="sec-quant.html#cb268-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb268-2"><a href="sec-quant.html#cb268-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Protein"</span>,</span>
+<span id="cb268-3"><a href="sec-quant.html#cb268-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"proteins"</span>,</span>
+<span id="cb268-4"><a href="sec-quant.html#cb268-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMedians)</span>
+<span id="cb268-5"><a href="sec-quant.html#cb268-5" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 3 assays:
+##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns 
+##  [3] proteins: SummarizedExperiment with 2 rows and 2 columns</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="sec-quant.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="st">"proteins"</span>]])</span></code></pre></div>
+<pre><code>##        S1   S2
+## ProtA 3.5 13.5
+## ProtB 8.5 18.5</code></pre>
+</div>
+<div id="subsetting-and-filtering" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Subsetting and filtering</h3>
+<p>The link between the assays becomes apparent when we now subset the
+assays for protein A as shown below or using the <code>subsetByFeature()</code>
+function. This creates a new instance of class <code>QFeatures</code> containing
+assays with the expression data for protein, its peptides and their
+PSMs.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="sec-quant.html#cb272-1" aria-hidden="true" tabindex="-1"></a>feat1[<span class="st">"ProtA"</span>, , ]</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 3 assays:
+##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
+##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
+<p>The <code>filterFeatures()</code> function can be used to filter rows the assays
+composing a <code>QFeatures</code> object using the row data variables. We can
+for example retain rows that have a <code>pval</code> &lt; 0.05, which would only
+keep rows in the <code>psms</code> assay because the <code>pval</code> is only relevant for
+that assay.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sec-quant.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 3 assays:
+##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 0 rows and 2 columns 
+##  [3] proteins: SummarizedExperiment with 0 rows and 2 columns</code></pre>
+<p>On the other hand, if we filter assay rows for those that localise to
+the mitochondrion, we retain the relevant protein, peptides and PSMs.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-quant.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">==</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 3 assays:
+##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
+##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
+<p>As an exercise, let’s filter rows that do not localise to the
+mitochondrion.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-quant.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">!=</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 3 assays:
+##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
+##  [2] peptides: SummarizedExperiment with 1 rows and 2 columns 
+##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
+<p>You can refer to the <a href="https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html"><em>Quantitative features for mass spectrometry
+data</em></a>
+vignette and the <code>QFeature</code> <a href="https://rformassspectrometry.github.io/QFeatures/reference/QFeatures-class.html">manual
+page</a>
+for more details about the class.</p>
+</div>
+</div>
+<div id="creating-qfeatures-object" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Creating <code>QFeatures</code> object</h2>
+<p>While <code>QFeatures</code> objects can be created manually (see <code>?QFeatures</code>
+for details), most users will probably possess quantitative data in a
+spreadsheet or a dataframe. In such cases, the easiest is to use the
+<code>readQFeatures</code> function to extract the quantitative data and metadata
+columns. Below, we load the <code>hlpsms</code> dataframe that contains data for
+28 PSMs from the TMT-10plex <em>hyper</em>LOPIT spatial
+proteomics experiment from <span class="citation">(<a href="sec-si.html#ref-Christoforou:2016" role="doc-biblioref">Christoforou et al. 2016</a>)</span>. The <code>ecol</code> argument
+specifies that columns 1 to 10 contain quantitation data, and that the
+assay should be named <code>psms</code> in the returned <code>QFeatures</code> object, to
+reflect the nature of the data.</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-quant.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hlpsms)</span>
+<span id="cb280-2"><a href="sec-quant.html#cb280-2" aria-hidden="true" tabindex="-1"></a>hl <span class="ot">&lt;-</span> <span class="fu">readQFeatures</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">name =</span> <span class="st">"psms"</span>)</span>
+<span id="cb280-3"><a href="sec-quant.html#cb280-3" aria-hidden="true" tabindex="-1"></a>hl</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 1 assays:
+##  [1] psms: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
+<p>Below, we see that we can extract an assay using its index or its
+name. The individual assays are stored as <em>SummerizedExperiment</em>
+object and further access its quantitative data and metadata using
+the <code>assay</code> and <code>rowData</code> functions</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-quant.html#cb282-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 3010 10 
+## metadata(0):
+## assays(1): ''
+## rownames(3010): 1 2 ... 3009 3010
+## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
+## colnames(10): X126 X127C ... X130N X131
+## colData names(0):</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sec-quant.html#cb284-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="st">"psms"</span>]]</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 3010 10 
+## metadata(0):
+## assays(1): ''
+## rownames(3010): 1 2 ... 3009 3010
+## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
+## colnames(10): X126 X127C ... X130N X131
+## colData names(0):</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-quant.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
+<pre><code>##         X126      X127C       X127N      X128C       X128N      X129C
+## 1 0.12283431 0.08045915 0.070804055 0.09386901 0.051815695 0.13034383
+## 2 0.35268185 0.14162381 0.167523880 0.07843497 0.071087436 0.03214548
+## 3 0.01546089 0.16142297 0.086938133 0.23120844 0.114664348 0.09610188
+## 4 0.04702854 0.09288723 0.102012167 0.11125409 0.067969116 0.14155358
+## 5 0.01044693 0.15866147 0.167315736 0.21017494 0.147946673 0.07088253
+## 6 0.04955362 0.01215244 0.002477681 0.01297833 0.002988949 0.06253195
+##        X129N       X130C      X130N       X131
+## 1 0.17540095 0.040068658 0.11478839 0.11961594
+## 2 0.06686260 0.031961793 0.02810434 0.02957384
+## 3 0.15977819 0.010127118 0.08059400 0.04370403
+## 4 0.18015910 0.035329902 0.12166589 0.10014038
+## 5 0.17555789 0.007088253 0.02884754 0.02307803
+## 6 0.01726511 0.172651119 0.37007905 0.29732174</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-quant.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
+<pre><code>## DataFrame with 6 rows and 18 columns
+##      Sequence ProteinDescriptions NbProteins ProteinGroupAccessions
+##   &lt;character&gt;         &lt;character&gt;  &lt;integer&gt;            &lt;character&gt;
+## 1     SQGEIDk       Tetratrico...          1                 Q8BYY4
+## 2     YEAQGDk       Vacuolar p...          1                 P46467
+## 3     TTScDTk       C-type man...          1                 Q64449
+## 4     aEELESR       Liprin-alp...          1                 P60469
+##   Modifications    qValue       PEP  IonScore NbMissedCleavages
+##     &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;integer&gt;         &lt;integer&gt;
+## 1 K7(TMT6ple...     0.008   0.11800        27                 0
+## 2 K7(TMT6ple...     0.001   0.01070        27                 0
+## 3 C4(Carbami...     0.008   0.11800        11                 0
+## 4 N-Term(TMT...     0.002   0.04450        24                 0
+##   IsolationInterference IonInjectTimems Intensity    Charge      mzDa      MHDa
+##               &lt;integer&gt;       &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt; &lt;numeric&gt; &lt;numeric&gt;
+## 1                     0              70    335000         2   503.274   1005.54
+## 2                     0              70    926000         2   520.267   1039.53
+## 3                     0              70    159000         2   521.258   1041.51
+## 4                     0              70    232000         2   531.785   1062.56
+##   DeltaMassPPM     RTmin       markers
+##      &lt;numeric&gt; &lt;numeric&gt;   &lt;character&gt;
+## 1        -0.38     24.02       unknown
+## 2         0.61     18.85       unknown
+## 3         1.11     10.17       unknown
+## 4         0.35     29.18       unknown
+##  [ reached getOption("max.print") -- omitted 2 rows ]</code></pre>
+<p>For further details on how to manipulate such objects, refer to the
+<em><a href="https://bioconductor.org/packages/3.12/MultiAssayExperiment">MultiAssayExperiment</a></em> <span class="citation">(<a href="sec-si.html#ref-MAE" role="doc-biblioref">Ramos et al. 2017</a>)</span> and
+<em><a href="https://bioconductor.org/packages/3.12/SummerizedExperiment">SummerizedExperiment</a></em> <span class="citation">(<a href="sec-si.html#ref-SE" role="doc-biblioref">Morgan et al. 2020</a>)</span> packages.</p>
+<p>It is also possible to first create a <code>SummerizedExperiment</code>, and then
+only include it into a <code>QFeatures</code> object.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-quant.html#cb290-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb290-2"><a href="sec-quant.html#cb290-2" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 3010 10 
+## metadata(0):
+## assays(1): ''
+## rownames(3010): 1 2 ... 3009 3010
+## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
+## colnames(10): X126 X127C ... X130N X131
+## colData names(0):</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-quant.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">psm =</span> se))</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 1 assays:
+##  [1] psm: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
+<p>At this stage, i.e. at the beginning of the analysis, and respectively
+whether you have a <code>SummerizedExperiment</code> or a <code>QFeatures</code> object, it
+is a good time to define the experimental design in the <code>colData</code>
+slot.</p>
+<div id="exercice-1" class="section level3 unnumbered">
+<h3>Exercice</h3>
+<p>The CPTAC spike-in study 6 <span class="citation">(<a href="sec-si.html#ref-Paulovich:2010" role="doc-biblioref">Paulovich et al. 2010</a>)</span> combines the Sigma UPS1
+standard containing 48 different human proteins that are spiked in at
+5 different concentrations (conditions A to E) into a constant yeast
+protein background. The sample were acquired in triplicate on
+different instruments in different labs. We are going to start with a
+subset of the CPTAC study 6 containing conditions A and B for a single
+lab.</p>
+<div class="figure" style="text-align: center">
+<span id="fig:cptac"></span>
+<p class="caption marginnote shownote">
+Figure 5.7: The CPTAC spike-in study design (credit Lieven Clement, statOmics, Ghent University).
+</p>
+<img src="img/cptac.png" alt="The CPTAC spike-in study design (credit Lieven Clement, statOmics, Ghent University)." width="70%">
+</div>
+<p>The peptide-level data, as processed by MaxQuant <span class="citation">(<a href="sec-si.html#ref-Cox:2008" role="doc-biblioref">Cox and Mann 2008</a>)</span> is
+available in the <code>msdata</code> package:</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-quant.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">quant</span>(<span class="at">pattern =</span> <span class="st">"cptac"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
+<p>Read these data in as either a <code>SummerizedExperiment</code> or a <code>QFeatures</code>
+object and annotated the experiment.</p>
+<details><p>From the names of the columns, we see that the quantitative columns,
+starting with <code>"Intensity."</code> (note the dot!) are at positions 56 to
+61.</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="sec-quant.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">read.delim</span>(f))</span></code></pre></div>
+<pre><code>##  [1] "Sequence"                 "N.term.cleavage.window"  
+##  [3] "C.term.cleavage.window"   "Amino.acid.before"       
+##  [5] "First.amino.acid"         "Second.amino.acid"       
+##  [7] "Second.last.amino.acid"   "Last.amino.acid"         
+##  [9] "Amino.acid.after"         "A.Count"                 
+## [11] "R.Count"                  "N.Count"                 
+## [13] "D.Count"                  "C.Count"                 
+## [15] "Q.Count"                  "E.Count"                 
+## [17] "G.Count"                  "H.Count"                 
+## [19] "I.Count"                  "L.Count"                 
+## [21] "K.Count"                  "M.Count"                 
+## [23] "F.Count"                  "P.Count"                 
+## [25] "S.Count"                  "T.Count"                 
+## [27] "W.Count"                  "Y.Count"                 
+## [29] "V.Count"                  "U.Count"                 
+## [31] "Length"                   "Missed.cleavages"        
+## [33] "Mass"                     "Proteins"                
+## [35] "Leading.razor.protein"    "Start.position"          
+## [37] "End.position"             "Unique..Groups."         
+## [39] "Unique..Proteins."        "Charges"                 
+## [41] "PEP"                      "Score"                   
+## [43] "Identification.type.6A_7" "Identification.type.6A_8"
+## [45] "Identification.type.6A_9" "Identification.type.6B_7"
+## [47] "Identification.type.6B_8" "Identification.type.6B_9"
+## [49] "Experiment.6A_7"          "Experiment.6A_8"         
+## [51] "Experiment.6A_9"          "Experiment.6B_7"         
+## [53] "Experiment.6B_8"          "Experiment.6B_9"         
+## [55] "Intensity"                "Intensity.6A_7"          
+## [57] "Intensity.6A_8"           "Intensity.6A_9"          
+## [59] "Intensity.6B_7"           "Intensity.6B_8"          
+## [61] "Intensity.6B_9"           "Reverse"                 
+## [63] "Potential.contaminant"    "id"                      
+## [65] "Protein.group.IDs"        "Mod..peptide.IDs"        
+## [67] "Evidence.IDs"             "MS.MS.IDs"               
+## [69] "Best.MS.MS"               "Oxidation..M..site.IDs"  
+## [71] "MS.MS.Count"</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="sec-quant.html#cb298-1" aria-hidden="true" tabindex="-1"></a>(i <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Intensity</span><span class="sc">\\</span><span class="st">."</span>, <span class="fu">names</span>(<span class="fu">read.delim</span>(f))))</span></code></pre></div>
+<pre><code>## [1] 56 57 58 59 60 61</code></pre>
+<p>We now read these data using the <code>readSummarizedExperiment</code>
+function. This peptide-level expression data will be imported into R
+as an instance of class <code>SummarizedExperiment</code>. We also use the
+<code>fnames</code> argument to set the row-names of the <code>peptides</code> assay to the
+peptide sequences and specify that the file is a tab-separated table.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="sec-quant.html#cb300-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(f, <span class="at">ecol =</span> i, <span class="at">fnames =</span> <span class="st">"Sequence"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb300-2"><a href="sec-quant.html#cb300-2" aria-hidden="true" tabindex="-1"></a>cptac_se</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 11466 6 
+## metadata(0):
+## assays(1): ''
+## rownames(11466): AAAAGAGGAGDSGDAVTK AAAALAGGK ... YYTVFDRDNNR
+##   YYTVFDRDNNRVGFAEAAR
+## rowData names(65): Sequence N.term.cleavage.window ...
+##   Oxidation..M..site.IDs MS.MS.Count
+## colnames(6): Intensity.6A_7 Intensity.6A_8 ... Intensity.6B_8
+##   Intensity.6B_9
+## colData names(0):</code></pre>
+<p>Before proceeding, we are going to clean up the sample names and
+annotate the experiment:</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="sec-quant.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"I.+</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb302-2"><a href="sec-quant.html#cb302-2" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_[7-9]"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb302-3"><a href="sec-quant.html#cb302-3" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb302-4"><a href="sec-quant.html#cb302-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac_se)</span></code></pre></div>
+<pre><code>## DataFrame with 6 rows and 2 columns
+##        condition          id
+##      &lt;character&gt; &lt;character&gt;
+## 6A_7          6A           7
+## 6A_8          6A           8
+## 6A_9          6A           9
+## 6B_7          6B           7
+## 6B_8          6B           8
+## 6B_9          6B           9</code></pre>
+</details>
+</div>
+<div id="exercice-2" class="section level3 unnumbered">
+<h3>Exercice</h3>
+<p>There are many row variables that aren’t useful here. Get rid or all
+of them but <code>Sequence</code>, <code>Proteins</code>, <code>Leading.razor.protein</code>, <code>PEP</code>,
+<code>Score</code>, <code>Reverse</code>, and <code>Potential.contaminant</code>.</p>
+<details><div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="sec-quant.html#cb304-1" aria-hidden="true" tabindex="-1"></a>keep_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sequence"</span>, <span class="st">"Proteins"</span>, <span class="st">"Leading.razor.protein"</span>, <span class="st">"PEP"</span>,</span>
+<span id="cb304-2"><a href="sec-quant.html#cb304-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Score"</span>, <span class="st">"Reverse"</span>, <span class="st">"Potential.contaminant"</span>)</span>
+<span id="cb304-3"><a href="sec-quant.html#cb304-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb304-4"><a href="sec-quant.html#cb304-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">rowData</span>(cptac_se)[, keep_var]</span></code></pre></div>
+</details>
+</div>
+</div>
+<div id="analysis-pipeline" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Analysis pipeline</h2>
+<p>A typical quantitative proteomics data processing is composed of the
+following steps, which we are going to apply to the cptac data created
+above.</p>
+<ul>
+<li>Data import</li>
+<li>Exploratory data analysis (PCA)</li>
+<li>Missing data management (filtering and/or imputation)</li>
+<li>Data cleaning</li>
+<li>Transformation and normalisation</li>
+<li>Aggregation</li>
+<li>Downstream analysis</li>
+</ul>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="sec-quant.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb305-2"><a href="sec-quant.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb305-3"><a href="sec-quant.html#cb305-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span>
+<span id="cb305-4"><a href="sec-quant.html#cb305-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span></code></pre></div>
+<div id="missing-values" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> Missing values</h3>
+<p>Missing values can be highly frequent in proteomics. These exist two
+reasons supporting the existence of missing values, namely biological
+or technical.</p>
+<ol style="list-style-type: decimal">
+<li><p>Values that are missing due to the absence (or extremely low
+contentration) of a protein are observed for biological reasons,
+and their pattern <strong>aren’t random</strong> (MNAR). A protein missing in
+due to the suppression of its expression will not be missing at
+random: it will be missing in the condition in which it was
+suppressed, and be present in the condition where it is expressed.</p></li>
+<li><p>Due to it’s data-dependent acquisition, mass spectrometry isn’t
+capable to assaying all peptides in a sample. Peptides that are
+less abundant than some of their co-eluting ions, peptides that do
+not ionise well or peptides that do not get identified might be
+sporadically missing in the final quantitation table, despite their
+presence in the biological samples. Their absence patterns are
+(completely) <strong>random</strong> (MAR or MCAR) in such cases.</p></li>
+</ol>
+<p>Often, third party software that produce quantiative data use zeros
+instead of properly reporting missing values. We can use the
+<code>zeroIsNA()</code> function to replace the <code>0</code> by <code>NA</code> values in our
+<code>cptac_se</code> object and then explore the missing data patterns across
+columns and rows.</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="sec-quant.html#cb306-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">zeroIsNA</span>(cptac_se)</span>
+<span id="cb306-2"><a href="sec-quant.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nNA</span>(cptac_se)</span></code></pre></div>
+<pre><code>## $nNA
+## DataFrame with 1 row and 2 columns
+##         nNA       pNA
+##   &lt;integer&gt; &lt;numeric&gt;
+## 1     31130   45.2497
+## 
+## $nNArows
+## DataFrame with 11466 rows and 3 columns
+##                name       nNA       pNA
+##         &lt;character&gt; &lt;integer&gt; &lt;numeric&gt;
+## 1     AAAAGAGGAG...         4   66.6667
+## 2         AAAALAGGK         0    0.0000
+## 3        AAAALAGGKK         0    0.0000
+## 4     AAADALSDLE...         0    0.0000
+## 5     AAADALSDLE...         0    0.0000
+## ...             ...       ...       ...
+## 11462 YYSIYDLGNN...         6  100.0000
+## 11463 YYTFNGPNYN...         3   50.0000
+## 11464    YYTITEVATR         4   66.6667
+## 11465 YYTVFDRDNN...         6  100.0000
+## 11466 YYTVFDRDNN...         6  100.0000
+## 
+## $nNAcols
+## DataFrame with 6 rows and 3 columns
+##          name       nNA       pNA
+##   &lt;character&gt; &lt;integer&gt; &lt;numeric&gt;
+## 1        6A_7      4743   41.3658
+## 2        6A_8      5483   47.8196
+## 3        6A_9      5320   46.3980
+## 4        6B_7      4721   41.1739
+## 5        6B_8      5563   48.5174
+## 6        6B_9      5300   46.2236</code></pre>
+<div class="figure">
+<span id="fig:imagena"></span>
+<p class="caption marginnote shownote">
+Figure 5.8: Distribution of missing value (white). Peptides row with more missing values are moved towards the top of the figure.
+</p>
+<img src="R4MS_files/figure-html/imagena-1.png" alt="Distribution of missing value (white). Peptides row with more missing values are moved towards the top of the figure." width="672">
+</div>
+<p>Let’s now explore these missing values:</p>
+<ul>
+<li>Explore the number or proportion of missing values across peptides
+and samples of the <code>cptac_se</code> data.</li>
+</ul>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="sec-quant.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNAcols<span class="sc">$</span>pNA)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/na2-1.png" width="672"></p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="sec-quant.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNArows<span class="sc">$</span>nNA)</span></code></pre></div>
+<pre><code>## 
+##    0    1    2    3    4    5    6 
+## 4059  990  884  717  934  807 3075</code></pre>
+<ul>
+<li>Remove row that have <em>too many</em> missing values. You can do this by
+hand or using the <code>filterNA()</code> function.</li>
+</ul>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="sec-quant.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="do">## remove rows that have 4 or more NAs out of 6</span></span>
+<span id="cb311-2"><a href="sec-quant.html#cb311-2" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">filterNA</span>(cptac_se, <span class="at">pNA =</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">6</span>)</span></code></pre></div>
+</div>
+<div id="imputation" class="section level3" number="5.4.2">
+<h3>
+<span class="header-section-number">5.4.2</span> Imputation</h3>
+<p>Imputation is the technique of replacing missing data with probable
+values. This can be done with <code>impute()</code> method. As we have discussed
+above, there are however two types of missing values in mass
+spectrometry-based proteomics, namely data missing at random (MAR),
+and data missing not at random (MNAR). These two types of missing
+data, those missing at random, and those missing not at random, need
+to be imputed with <a href="https://rformassspectrometry.github.io/QFeatures/articles/Processing.html#imputation-1">different types of imputation
+methods</a>
+<span class="citation">(<a href="sec-si.html#ref-Lazar:2016" role="doc-biblioref">Lazar et al. 2016</a>)</span>.</p>
+<div class="figure">
+<span id="fig:miximp"></span>
+<p class="caption marginnote shownote">
+Figure 5.9: Mixed imputation method. Black cells represent presence of quantitation values and light grey corresponds to missing data. The two groups of interest are depicted in green and blue along the heatmap columns. Two classes of proteins are annotated on the left: yellow are proteins with randomly occurring missing values (if any) while proteins in brown are candidates for non-random missing value imputation.
+</p>
+<img src="R4MS_files/figure-html/miximp-1.png" alt="Mixed imputation method. Black cells represent presence of quantitation values and light grey corresponds to missing data. The two groups of interest are depicted in green and blue along the heatmap columns. Two classes of proteins are annotated on the left: yellow are proteins with randomly occurring missing values (if any) while proteins in brown are candidates for non-random missing value imputation." width="672">
+</div>
+<div class="figure">
+<span id="fig:lazar"></span>
+<p class="caption marginnote shownote">
+Figure 5.10: Effect of the nature of missing values on their imputation. Root-mean-square error (RMSE) observations standard deviation ratio (RSR), KNN and MinDet imputation. Lower (blue) is better.
+</p>
+<img src="img/imp-sim.png" alt="Effect of the nature of missing values on their imputation. Root-mean-square error (RMSE) observations standard deviation ratio (RSR), KNN and MinDet imputation. Lower (blue) is better." width="100%">
+</div>
+<p>Generally, it is recommended to use <strong>hot deck</strong> methods (nearest
+neighbour (<strong>left</strong>), maximum likelihood, …) when data are missing
+at random.Conversely, MNAR features should ideally be imputed with a
+<strong>left-censor</strong> (minimum value (<strong>right</strong>), but not zero, …) method.</p>
+<p>There are various methods to perform data imputation, as described in
+<code>?impute</code>. The <em><a href="https://CRAN.R-project.org/package=imp4p">imp4p</a></em> package contains additional
+functionality, including some to estimate the randomness of missing
+data.</p>
+<p>The general syntax for imputation is</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="sec-quant.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(se_na2)</span>
+<span id="cb312-2"><a href="sec-quant.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="do">## impute missing values using knn imputation</span></span>
+<span id="cb312-3"><a href="sec-quant.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
+<pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
+##  mean imputation used for these rows</code></pre>
+<pre><code>## class: SummarizedExperiment 
+## dim: 689 16 
+## metadata(3): MSnbaseFiles MSnbaseProcessing MSnbaseVersion
+## assays(1): ''
+## rownames(689): AT1G09210 AT1G21750 ... AT4G11150 AT4G39080
+## rowData names(2): nNA randna
+## colnames(16): M1F1A M1F4A ... M2F8B M2F11B
+## colData names(1): nNA</code></pre>
+<div id="exercise-15" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Following the example above, apply a mixed imputation, using knn for
+data missing at random and the deterministic minumum left-cencored
+imputation for data missing no at random.</p>
+<details><div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="sec-quant.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="st">"mixed"</span>,</span>
+<span id="cb315-2"><a href="sec-quant.html#cb315-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">randna =</span> <span class="fu">rowData</span>(se_na2)<span class="sc">$</span>randna,</span>
+<span id="cb315-3"><a href="sec-quant.html#cb315-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mar =</span> <span class="st">"knn"</span>, <span class="at">mnar =</span> <span class="st">"MinDet"</span>)</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 689 16 
+## metadata(3): MSnbaseFiles MSnbaseProcessing MSnbaseVersion
+## assays(1): ''
+## rownames(689): AT1G09210 AT1G21750 ... AT4G11150 AT4G39080
+## rowData names(2): nNA randna
+## colnames(16): M1F1A M1F4A ... M2F8B M2F11B
+## colData names(1): nNA</code></pre>
+</details>
+</div>
+<div id="exercise-16" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>When assessing missing data imputation methods, such as in <a href="https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.5b00981">Lazar et
+al. (2016)</a>,
+one often replaces values with missing data, imputes these with a
+method of choice, then quantifies the difference between original
+(expected) and observed (imputed) values. Here, using the <code>se_na2</code>
+data, use this strategy to assess the difference between knn and
+Bayesian PCA imputation.</p>
+<details><div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="sec-quant.html#cb317-1" aria-hidden="true" tabindex="-1"></a>imp1 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
+<pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
+##  mean imputation used for these rows</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="sec-quant.html#cb319-1" aria-hidden="true" tabindex="-1"></a>imp2 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>)</span>
+<span id="cb319-2"><a href="sec-quant.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">abs</span>(<span class="fu">assay</span>(imp1)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))] <span class="sc">-</span> <span class="fu">assay</span>(imp2)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))]))</span></code></pre></div>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 5.332e-05 6.594e-03 1.535e-02 2.315e-02 2.855e-02 2.579e-01</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="sec-quant.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.numeric</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.0170  0.1865  0.2440  0.2500  0.3080  0.6587</code></pre>
+</details>
+</div>
+<div id="exercise-17" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>When assessing the impact of missing value imputation on real data,
+one can’t use the strategy above. Another useful approach is to assess
+the impact of the imputation method on the distribution of the
+quantitative data. For instance, here is the intensity distribution of
+the <code>se_na2</code> data. Verify the effect of applying <code>knn</code>, <code>zero</code>,
+<code>MinDet</code> and <code>bpca</code> on this distribution.</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="sec-quant.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
+<div class="figure">
+<span id="fig:nasetdist"></span>
+<p class="caption marginnote shownote">
+Figure 5.11: Intensity disctribution of the <code>naset</code> data.
+</p>
+<img src="R4MS_files/figure-html/nasetdist-1.png" alt="Intensity disctribution of the `naset` data." width="672">
+</div>
+<details><div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="sec-quant.html#cb324-1" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"steelblue"</span>, <span class="st">"orange"</span>)</span>
+<span id="cb324-2"><a href="sec-quant.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))), <span class="at">col =</span> cls[<span class="dv">1</span>])</span>
+<span id="cb324-3"><a href="sec-quant.html#cb324-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>))), <span class="at">col =</span> cls[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
+##  mean imputation used for these rows</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sec-quant.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"zero"</span>))), <span class="at">col =</span> cls[<span class="dv">3</span>])</span>
+<span id="cb326-2"><a href="sec-quant.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"MinDet"</span>))), <span class="at">col =</span> cls[<span class="dv">4</span>])</span>
+<span id="cb326-3"><a href="sec-quant.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>))), <span class="at">col =</span> cls[<span class="dv">5</span>])</span>
+<span id="cb326-4"><a href="sec-quant.html#cb326-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"orig"</span>, <span class="st">"knn"</span>, <span class="st">"zero"</span>, <span class="st">"MinDet"</span>, <span class="st">"bpca"</span>),</span>
+<span id="cb326-5"><a href="sec-quant.html#cb326-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> cls, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div>
+<img src="R4MS_files/figure-html/naex3-1.png" width="672"></details><p><strong>Tip</strong>: When downstream analyses permit, it might be safer not to
+impute data and deal explicitly with missing values. Indeed misssing
+data impuration is however not a straightforward thing, as is likely
+to dramatically fail when a high proportion of data is missing (10s of
+%). It is possible to keep NAs when performing hypothesis
+tests<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Still, it is recommended to explore missingness as part of the
+exploratory data analysis.</span>, but not to perform a principal component
+analysis.</p>
+</div>
+</div>
+<div id="identification-quality-control" class="section level3" number="5.4.3">
+<h3>
+<span class="header-section-number">5.4.3</span> Identification quality control</h3>
+<p>As discussed in the previous chapter, PSMs are deemed relevant after
+comparison against hist from a decoy database. The origin of these
+hits is recorded with <code>+</code> in the <code>Reverse</code> variable:</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="sec-quant.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Reverse)</span></code></pre></div>
+<pre><code>## 
+##         + 
+## 7572   12</code></pre>
+<p>Similarly, a proteomics experiment is also searched against a database
+of contaminants:</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="sec-quant.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Potential.contaminant)</span></code></pre></div>
+<pre><code>## 
+##         + 
+## 7558   26</code></pre>
+<p>Let’s visualise some of the cptac’s metadata using standard <code>ggplot2</code>
+code:</p>
+<div id="exercise-18" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Visualise the identification score and the posterior probability
+probability (PEP) distributions from forward and reverse hits and
+interpret the figure.</p>
+<details><div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="sec-quant.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
+<span id="cb331-2"><a href="sec-quant.html#cb331-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb331-3"><a href="sec-quant.html#cb331-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Score, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
+<span id="cb331-4"><a href="sec-quant.html#cb331-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/idqc1-1.png" width="672"></p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sec-quant.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
+<span id="cb332-2"><a href="sec-quant.html#cb332-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb332-3"><a href="sec-quant.html#cb332-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PEP, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
+<span id="cb332-4"><a href="sec-quant.html#cb332-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/idqc2-1.png" width="672"></p>
+</details>
+</div>
+</div>
+<div id="creating-the-qfeatures-data" class="section level3" number="5.4.4">
+<h3>
+<span class="header-section-number">5.4.4</span> Creating the QFeatures data</h3>
+<p>We can now create our <code>QFeatures</code> object using the
+<code>SummarizedExperiment</code> as show below.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="sec-quant.html#cb333-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">peptides =</span> cptac_se))</span>
+<span id="cb333-2"><a href="sec-quant.html#cb333-2" aria-hidden="true" tabindex="-1"></a>cptac</span></code></pre></div>
+<pre><code>## An instance of class QFeatures containing 1 assays:
+##  [1] peptides: SummarizedExperiment with 7584 rows and 6 columns</code></pre>
+<p>We should also assign the <code>QFeatures</code> column data with the
+<code>SummarizedExperiment</code> slot.</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="sec-quant.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac_se)</span></code></pre></div>
+<p>Note that it is also possible to directly create a <code>QFeatures</code> object
+with the <code>readQFeatures()</code> function and the same arguments as the
+<code>readSummarizedExperiment()</code> used above. In addition, most functions
+used above and below work on single <code>SummarizedExperiment</code> objects or
+assays within a <code>QFeatures</code> object.</p>
+</div>
+<div id="filtering-out-contaminants-and-reverse-hits" class="section level3" number="5.4.5">
+<h3>
+<span class="header-section-number">5.4.5</span> Filtering out contaminants and reverse hits</h3>
+<div id="exercise-19" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Using the <code>filterFeatures()</code> function, filter out the reverse and
+contaminant hits, and also retein those that have a posterior error
+probability smaller than 0.05.</p>
+<details><div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-quant.html#cb336-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
+<span id="cb336-2"><a href="sec-quant.html#cb336-2" aria-hidden="true" tabindex="-1"></a>    cptac <span class="sc">%&gt;%</span></span>
+<span id="cb336-3"><a href="sec-quant.html#cb336-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Reverse <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb336-4"><a href="sec-quant.html#cb336-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb336-5"><a href="sec-quant.html#cb336-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> PEP <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+</details>
+</div>
+</div>
+<div id="log-transformation-and-normaliation" class="section level3" number="5.4.6">
+<h3>
+<span class="header-section-number">5.4.6</span> Log-transformation and normaliation</h3>
+<p>The two code chunks below log-transform and normalise using the assay
+<code>i</code> as input and adding a new one names as defined by <code>name</code>.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="sec-quant.html#cb337-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">logTransform</span>(cptac, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb337-2"><a href="sec-quant.html#cb337-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"log_peptides"</span>)</span></code></pre></div>
+<div id="exercise-20" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Use the <code>normalize()</code> method to normalise the data. The syntax is the
+same as <code>logTransform()</code>. Use the <code>centre.median</code> method.</p>
+<details><div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-quant.html#cb338-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">normalize</span>(cptac, <span class="at">i =</span> <span class="st">"log_peptides"</span>,</span>
+<span id="cb338-2"><a href="sec-quant.html#cb338-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">"lognorm_peptides"</span>,</span>
+<span id="cb338-3"><a href="sec-quant.html#cb338-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"center.median"</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="exercise-21" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Visualise the result of the transformations above. The
+<code>plotDensities()</code> function from the <code>limma</code> package is very
+convenient, but feel free to use boxplots, violin plots, or any other
+visualisation that you deem useful to assess the tranformations.</p>
+<details><div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sec-quant.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb339-2"><a href="sec-quant.html#cb339-2" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"peptides"</span>]]))</span>
+<span id="cb339-3"><a href="sec-quant.html#cb339-3" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"log_peptides"</span>]]))</span>
+<span id="cb339-4"><a href="sec-quant.html#cb339-4" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"lognorm_peptides"</span>]]))</span></code></pre></div>
+<div class="figure">
+<span id="fig:plotdens"></span>
+<p class="caption marginnote shownote">
+Figure 5.12: Three peptide level assays: raw data, log transformed and normalised.
+</p>
+<img src="R4MS_files/figure-html/plotdens-1.png" alt="Three peptide level assays: raw data, log transformed and normalised." width="1440">
+</div>
+</details>
+</div>
+</div>
+<div id="aggregation" class="section level3" number="5.4.7">
+<h3>
+<span class="header-section-number">5.4.7</span> Aggregation</h3>
+<div id="exercise-22" class="section level4 unnumbered">
+<h4>Exercise</h4>
+<p>Use median aggregation to aggregation peptides into protein
+values. This is not necessarily not the best choice, as we will see
+later, but a good star.</p>
+<details><div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="sec-quant.html#cb340-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
+<span id="cb340-2"><a href="sec-quant.html#cb340-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aggregateFeatures</span>(cptac,</span>
+<span id="cb340-3"><a href="sec-quant.html#cb340-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"lognorm_peptides"</span>,</span>
+<span id="cb340-4"><a href="sec-quant.html#cb340-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"proteins_med"</span>,</span>
+<span id="cb340-5"><a href="sec-quant.html#cb340-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fcol =</span> <span class="st">"Leading.razor.protein"</span>,</span>
+<span id="cb340-6"><a href="sec-quant.html#cb340-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fun =</span> colMedians,</span>
+<span id="cb340-7"><a href="sec-quant.html#cb340-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</details><p>Looking at the <code>.n</code> row variable computed during the aggregation, we
+see that most proteins result of the aggregation of 5 peptides or
+less, while very few proteins are accounted for by tens of peptides.</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sec-quant.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac[[<span class="st">"proteins_med"</span>]])<span class="sc">$</span>.n)</span></code></pre></div>
+<pre><code>## 
+##   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+## 327 234 167 132  84  73  62  49  49  29  29  24  20  13  15  12   4   6  11   5 
+##  21  22  23  24  25  26  28  29  30  31  32  34  37  38  39  42  51  52  62 
+##   7   4   7   2   2   3   1   3   1   2   2   1   1   1   1   2   1   1   1</code></pre>
+</div>
+</div>
+<div id="principal-component-analysis" class="section level3" number="5.4.8">
+<h3>
+<span class="header-section-number">5.4.8</span> Principal component analysis</h3>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="sec-quant.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb343-2"><a href="sec-quant.html#cb343-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-3"><a href="sec-quant.html#cb343-3" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="ot">&lt;-</span></span>
+<span id="cb343-4"><a href="sec-quant.html#cb343-4" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"lognorm_peptides"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb343-5"><a href="sec-quant.html#cb343-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-6"><a href="sec-quant.html#cb343-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-7"><a href="sec-quant.html#cb343-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-8"><a href="sec-quant.html#cb343-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb343-9"><a href="sec-quant.html#cb343-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition, <span class="at">title =</span> <span class="st">"Peptides"</span>)</span>
+<span id="cb343-10"><a href="sec-quant.html#cb343-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-11"><a href="sec-quant.html#cb343-11" aria-hidden="true" tabindex="-1"></a>pca_prot <span class="ot">&lt;-</span></span>
+<span id="cb343-12"><a href="sec-quant.html#cb343-12" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"proteins_med"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb343-13"><a href="sec-quant.html#cb343-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-14"><a href="sec-quant.html#cb343-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-15"><a href="sec-quant.html#cb343-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-16"><a href="sec-quant.html#cb343-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb343-17"><a href="sec-quant.html#cb343-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition,</span>
+<span id="cb343-18"><a href="sec-quant.html#cb343-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Proteins (median aggregation)"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="sec-quant.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb344-2"><a href="sec-quant.html#cb344-2" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="sc">+</span> pca_prot</span></code></pre></div>
+<div class="figure">
+<span id="fig:plotpca"></span>
+<p class="caption marginnote shownote">
+Figure 5.13: Peptide and protein level PCA analyses.
+</p>
+<img src="R4MS_files/figure-html/plotpca-1.png" alt="Peptide and protein level PCA analyses." width="1152">
+</div>
+</div>
+<div id="visualisation" class="section level3" number="5.4.9">
+<h3>
+<span class="header-section-number">5.4.9</span> Visualisation</h3>
+<p>Below, we use the <code>longFormat()</code> function to extract the quantitative
+and row data in a long format, that can be directly reused by the
+tidyverse tools.</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sec-quant.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">longFormat</span>(cptac[<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>, ,</span>
+<span id="cb345-2"><a href="sec-quant.html#cb345-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"lognorm_peptides"</span>, <span class="st">"proteins_med"</span>)]) <span class="sc">%&gt;%</span></span>
+<span id="cb345-3"><a href="sec-quant.html#cb345-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb345-4"><a href="sec-quant.html#cb345-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"A"</span>, colname), <span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-5"><a href="sec-quant.html#cb345-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> colname, <span class="at">y =</span> value, <span class="at">colour =</span> rowname, <span class="at">shape =</span> condition)) <span class="sc">+</span></span>
+<span id="cb345-6"><a href="sec-quant.html#cb345-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb345-7"><a href="sec-quant.html#cb345-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> rowname)) <span class="sc">+</span></span>
+<span id="cb345-8"><a href="sec-quant.html#cb345-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span> assay) <span class="sc">+</span></span>
+<span id="cb345-9"><a href="sec-quant.html#cb345-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>)</span></code></pre></div>
+<div class="figure">
+<span id="fig:vis"></span>
+<p class="caption marginnote shownote">
+Figure 5.14: Peptide and protein expression profile.
+</p>
+<img src="R4MS_files/figure-html/vis-1.png" alt="Peptide and protein expression profile." width="1152">
+</div>
+</div>
+<div id="statistical-analysis" class="section level3" number="5.4.10">
+<h3>
+<span class="header-section-number">5.4.10</span> Statistical analysis</h3>
+<p>R in general and Bioconductor in particular are well suited for the
+statistical analysis of data of quantitative proteomics data. Several
+packages provide dedicated resources for proteomics data:</p>
+<ul>
+<li><p><em><a href="https://bioconductor.org/packages/3.12/MSstats">MSstats</a></em> and <em><a href="https://bioconductor.org/packages/3.12/MSstatsTMT">MSstatsTMT</a></em>: A set of tools
+for statistical relative protein significanceanalysis in Data dependent
+(DDA), SRM, Data independent acquisition (DIA) and TMT experiments.</p></li>
+<li><p><em><a href="https://bioconductor.org/packages/3.12/msmsTests">msmsTests</a></em>: Statistical tests for label-free LC-MS/MS
+data by spectral counts, to discover differentially expressed
+proteins between two biological conditions. Three tests are
+available: Poisson GLM regression, quasi-likelihood GLM regression,
+and the negative binomial of the <em><a href="https://bioconductor.org/packages/3.12/edgeR">edgeR</a></em>
+package. All can be readily applied on <code>MSnSet</code> instances produced,
+for example by <code>MSnID</code>.</p></li>
+<li><p><em><a href="https://bioconductor.org/packages/3.12/DEP">DEP</a></em> provides an integrated analysis workflow for the
+analysis of mass spectrometry proteomics data for differential
+protein expression or differential enrichment.</p></li>
+<li><p><em><a href="https://github.com/statOmics/MSqRob">MSqRob</a></em>: The <code>MSqRob</code> package
+allows a user to do quantitative protein-level statistical inference
+on LC-MS proteomics data. More specifically, our package makes use
+of peptide-level input data, thus correcting for unbalancedness and
+peptide-specific biases. As previously shown (<a href="https://pubs.acs.org/doi/abs/10.1021/pr501223t">Goeminne et
+al. (2015)</a>), this
+approach is both more sensitive and specific than summarizing
+peptide-level input to protein-level values. Model estimates are
+stabilized by ridge regression, empirical Bayes variance estimation
+and downweighing of outliers. Currently, only label-free proteomics
+data types are supported. <code>msqrob2</code> is currently under development
+and will be using <code>QFeatures</code> objects.</p></li>
+<li><p><em><a href="https://github.com/const-ae/proDA">proDA</a></em> accounts for missing
+values in label-free mass spectrometry data without imputation. The
+package implements a probabilistic dropout model that ensures that
+the information from observed and missing values are properly
+combined. It adds empirical Bayesian priors to increase power to
+detect differentially abundant proteins.</p></li>
+</ul>
+<p>Others, while not specfic to proteomics, are also recommended, such as
+the <em><a href="https://bioconductor.org/packages/3.12/limma">limma</a></em> package. When analysing spectral counting
+data, methods for high throughput sequencing data are
+applicable. Below, we illustrate how to apply a typical <code>edgeR</code> test
+to count data using the <code>msms.edgeR</code> function from the <code>msmsTests</code>
+package.</p>
+<p>Below, we are going to perform our statistical analysis on the protein
+data using <code>limma</code>.</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-quant.html#cb346-1" aria-hidden="true" tabindex="-1"></a>prots <span class="ot">&lt;-</span> cptac[[<span class="st">"proteins_med"</span>]]</span>
+<span id="cb346-2"><a href="sec-quant.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(prots) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac)</span></code></pre></div>
+<p>The <em><a href="https://bioconductor.org/packages/3.12/limma">limma</a></em> package is the precursor package
+that enables the consistent application of linear models to normalliy
+distributed omics data in general, and microarrays in
+particuar.</p>
+<p>The <code>limma</code> package implements an empirical Bayes method that provides
+borrows information across features to estimate the standard error and
+calculate (so called moderate) t statistics. This approach is
+demonstrably more powerful that a standard t-tests when the number of
+samples is lot.</p>
+<p>The code chunk below illstrated how to set up the model, fit it, and
+apply the empirical Bayes moderation.</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-quant.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span>
+<span id="cb347-2"><a href="sec-quant.html#cb347-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> prots<span class="sc">$</span>condition)</span>
+<span id="cb347-3"><a href="sec-quant.html#cb347-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(<span class="fu">assay</span>(prots), design)</span></code></pre></div>
+<pre><code>## Warning: Partial NA coefficients for 25 probe(s)</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-quant.html#cb349-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span></code></pre></div>
+<p>Finally, the <code>topTable()</code> function is used the extract the results for
+the coefficient of interest.</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="sec-quant.html#cb350-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
+<span id="cb350-2"><a href="sec-quant.html#cb350-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"prots$condition6B"</span>, <span class="at">number =</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb350-3"><a href="sec-quant.html#cb350-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">"protein"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb350-4"><a href="sec-quant.html#cb350-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb350-5"><a href="sec-quant.html#cb350-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">TP =</span> <span class="fu">grepl</span>(<span class="st">"ups"</span>, protein))</span></code></pre></div>
+<p>Note the warning about partial <code>NA</code> coefficients for 23 probes:</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sec-quant.html#cb351-1" aria-hidden="true" tabindex="-1"></a>na_coefs <span class="ot">&lt;-</span></span>
+<span id="cb351-2"><a href="sec-quant.html#cb351-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(res, <span class="fu">is.na</span>(t)) <span class="sc">%&gt;%</span></span>
+<span id="cb351-3"><a href="sec-quant.html#cb351-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(protein)</span>
+<span id="cb351-4"><a href="sec-quant.html#cb351-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(prots[na_coefs, ])</span></code></pre></div>
+<pre><code>##                                6A_7      6A_8       6A_9       6B_7       6B_8
+## P00167ups|CYB5_HUMAN_UPS        NaN       NaN        NaN -0.7840558 -2.0282987
+## P01112ups|RASH_HUMAN_UPS        NaN       NaN        NaN -1.5564896        NaN
+## P05413ups|FABPH_HUMAN_UPS       NaN       NaN        NaN -3.3419480        NaN
+## P08758ups|ANXA5_HUMAN_UPS       NaN       NaN        NaN -2.7973872 -2.0137585
+## sp|P06704|CDC31_YEAST           NaN       NaN        NaN -1.2032046 -2.1252371
+## sp|P25574|EMC1_YEAST      -1.506177 -1.983737 -0.7795009        NaN        NaN
+## sp|P32608|RTG2_YEAST            NaN       NaN        NaN        NaN -4.4424189
+## sp|P32769|HBS1_YEAST            NaN -1.384031 -0.7285780        NaN        NaN
+## sp|P34217|PIN4_YEAST            NaN       NaN        NaN -0.8378614 -0.1316397
+## sp|P34237|CASP_YEAST            NaN       NaN        NaN -1.5645172 -1.6600291
+## sp|P38166|SFT2_YEAST      -1.585685 -1.076707        NaN        NaN        NaN
+## sp|P40056|GET2_YEAST            NaN -1.091696 -1.4014211        NaN        NaN
+## sp|P40533|TED1_YEAST            NaN       NaN        NaN -2.0491876        NaN
+## sp|P43582|WWM1_YEAST            NaN       NaN        NaN -0.5538711 -0.7360990
+## sp|P46965|SPC1_YEAST            NaN -3.428771 -3.6321984        NaN        NaN
+## sp|P48363|PFD3_YEAST            NaN       NaN        NaN -0.1904905        NaN
+##                                 6B_9
+## P00167ups|CYB5_HUMAN_UPS  -1.1230809
+## P01112ups|RASH_HUMAN_UPS  -1.5618192
+## P05413ups|FABPH_HUMAN_UPS -3.8907081
+## P08758ups|ANXA5_HUMAN_UPS -2.0894752
+## sp|P06704|CDC31_YEAST     -1.5844104
+## sp|P25574|EMC1_YEAST             NaN
+## sp|P32608|RTG2_YEAST      -2.7873186
+## sp|P32769|HBS1_YEAST             NaN
+## sp|P34217|PIN4_YEAST      -0.1989392
+## sp|P34237|CASP_YEAST      -1.6877463
+## sp|P38166|SFT2_YEAST             NaN
+## sp|P40056|GET2_YEAST             NaN
+## sp|P40533|TED1_YEAST      -1.7474812
+## sp|P43582|WWM1_YEAST      -0.7207043
+## sp|P46965|SPC1_YEAST             NaN
+## sp|P48363|PFD3_YEAST      -0.5087747
+##  [ reached getOption("max.print") -- omitted 9 rows ]</code></pre>
+<p>We can now visualise the results using a volcano plot:</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sec-quant.html#cb353-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb353-2"><a href="sec-quant.html#cb353-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(adj.P.Val))) <span class="sc">+</span></span>
+<span id="cb353-3"><a href="sec-quant.html#cb353-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> TP)) <span class="sc">+</span></span>
+<span id="cb353-4"><a href="sec-quant.html#cb353-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb353-5"><a href="sec-quant.html#cb353-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb353-6"><a href="sec-quant.html#cb353-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 25 rows containing missing values (geom_point).</code></pre>
+<div class="figure">
+<span id="fig:vp"></span>
+<p class="caption marginnote shownote">
+Figure 5.15: Volcano plot highlighing spiked-in proteins in red.
+</p>
+<img src="R4MS_files/figure-html/vp-1.png" alt="Volcano plot highlighing spiked-in proteins in red." width="672">
+</div>
+<p>Using the pipeline described above, we would would identify a single
+differentially expressed protein at an 5 percent FDR but miss out the
+other 36 expected spike-in proteins.</p>
+<p>We can assess our results in terms of true/false postitves/negatives:</p>
+<ul>
+<li>True positives: 1</li>
+<li>False positives: 0</li>
+<li>True negatives: 1330</li>
+<li>False negatives: 32</li>
+</ul>
+</div>
+</div>
+<div id="summary-exercice-1" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Summary exercice</h2>
+<p>As shown below, it is possible to substantially improve these results
+by aggregating features using a robust summarisation (available as
+<code>MsCoreUtils::robustSummary()</code>), i.e robust regression with
+M-estimation using Huber weights, as described in section 2.7 in
+<span class="citation">(<a href="sec-si.html#ref-Sticker:2019" role="doc-biblioref">Sticker et al. 2019</a>)</span>.</p>
+<div class="figure">
+<span id="fig:unnamed-chunk-63"></span>
+<p class="caption marginnote shownote">
+Figure 5.16: Aggregation using robust summarisation.
+</p>
+<img src="img/vp2.png" alt="Aggregation using robust summarisation." width="1048">
+</div>
+<ul>
+<li>True positives: 21</li>
+<li>False positives: 2</li>
+<li>True negatives: 1340</li>
+<li>False negatives: 12</li>
+</ul>
+<p>Repeat and adapt what we have seen here using, for example, the
+<code>robustSummary()</code> function.</p>
+
+</div>
+</div></body></html>
+
+<p style="text-align: center;">
+<a href="identification-data.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-si.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2021-03-19
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 6 References and session information | R/Bioconductor for Mass Spectrometry and Proteomics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
+
+<meta name="date" content="2021-03-19" />
+
+
+<meta name="description" content="Chapter 6 References and session information | R/Bioconductor for Mass Spectrometry and Proteomics">
+
+<title>Chapter 6 References and session information | R/Bioconductor for Mass Spectrometry and Proteomics</title>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">R/Bioconductor for Mass Spectrometry and Proteomics<p><p class="author">Laurent Gatto, Sebastian Gibb, Johannes Rainer</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html"><span class="toc-section-number">1</span> Preamble</a>
+<a href="sec-msintro.html"><span class="toc-section-number">2</span> Introduction</a>
+<a href="raw-ms-data.html"><span class="toc-section-number">3</span> Raw MS data</a>
+<a href="identification-data.html"><span class="toc-section-number">4</span> Identification data</a>
+<a href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a>
+<a id="active-page" href="sec-si.html"><span class="toc-section-number">6</span> References and session information</a><ul class="toc-sections">
+<li class="toc"><a href="#references">References</a></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div id="sec:si" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Chapter 6</span> References and session information</h1>
+<p>The following packages have been used to generate this document.</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="sec-si.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.0.3 Patched (2021-01-13 r79827)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 20.04.2 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/libf77blas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=de_BE.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=de_BE.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=de_BE.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=de_BE.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+## [8] methods   base     
+## 
+## other attached packages:
+##  [1] patchwork_1.1.1              factoextra_1.0.7            
+##  [3] gplots_3.1.1                 limma_3.46.0                
+##  [5] forcats_0.5.1                stringr_1.4.0               
+##  [7] purrr_0.3.4                  readr_1.4.0                 
+##  [9] tidyr_1.1.3                  tibble_3.1.0                
+## [11] tidyverse_1.3.0              MSnID_1.24.0                
+## [13] mzID_1.28.0                  ggplot2_3.3.3               
+## [15] dplyr_1.0.5                  magrittr_2.0.1              
+## [17] msdata_0.30.0                rpx_1.99.3                  
+## [19] MsCoreUtils_1.3.2            QFeatures_1.1.2             
+## [21] MultiAssayExperiment_1.17.18 SummarizedExperiment_1.20.0 
+## [23] Biobase_2.50.0               GenomicRanges_1.42.0        
+## [25] GenomeInfoDb_1.26.4          IRanges_2.24.1              
+## [27] MatrixGenerics_1.2.1         matrixStats_0.58.0          
+## [29] Spectra_1.1.9                ProtGenerics_1.23.6         
+## [31] BiocParallel_1.24.1          S4Vectors_0.28.1            
+## [33] BiocGenerics_0.36.0          mzR_2.24.1                  
+## [35] Rcpp_1.0.6                   BiocStyle_2.18.1            
+## 
+## loaded via a namespace (and not attached):
+##   [1] utf8_1.1.4              R.utils_2.10.1          gmm_1.6-6              
+##   [4] tidyselect_1.1.0        RSQLite_2.2.4           AnnotationDbi_1.52.0   
+##   [7] grid_4.0.3              norm_1.0-9.5            munsell_0.5.0          
+##  [10] codetools_0.2-18        preprocessCore_1.52.1   withr_2.4.1            
+##  [13] colorspace_2.0-0        highr_0.8               knitr_1.31             
+##  [16] rstudioapi_0.13         ggsignif_0.6.1          labeling_0.4.2         
+##  [19] GenomeInfoDbData_1.2.4  bit64_4.0.5             farver_2.1.0           
+##  [22] pheatmap_1.0.12         rhdf5_2.34.0            vctrs_0.3.6            
+##  [25] generics_0.1.0          xfun_0.22               BiocFileCache_1.14.0   
+##  [28] R6_2.5.0                doParallel_1.0.16       AnnotationFilter_1.14.0
+##  [31] bitops_1.0-6            rhdf5filters_1.2.0      cachem_1.0.4           
+##  [34] DelayedArray_0.16.2     assertthat_0.2.1        promises_1.2.0.1       
+##  [37] scales_1.1.1            gtable_0.3.0            affy_1.68.0            
+##  [40] sandwich_3.0-0          rlang_0.4.10            rstatix_0.7.0          
+##  [43] lazyeval_0.2.2          impute_1.64.0           broom_0.7.5            
+##  [46] abind_1.4-5             BiocManager_1.30.10     yaml_2.2.1             
+##  [49] reshape2_1.4.4          modelr_0.1.8            backports_1.2.1        
+##  [52] httpuv_1.5.5            tools_4.0.3             bookdown_0.21          
+##  [55] affyio_1.60.0           ellipsis_0.3.1          jquerylib_0.1.3        
+##  [58] RColorBrewer_1.1-2      MSnbase_2.17.1          plyr_1.8.6             
+##  [61] zlibbioc_1.36.0         RCurl_1.98-1.2          ps_1.6.0               
+##  [64] ggpubr_0.4.0            zoo_1.8-9               haven_2.3.1            
+##  [67] ggrepel_0.9.1           fs_1.5.0                data.table_1.14.0      
+##  [70] openxlsx_4.2.3          reprex_1.0.0            pcaMethods_1.82.0      
+##  [73] mvtnorm_1.1-1           msmbstyle_0.0.11        R.cache_0.14.0         
+##  [76] hms_1.0.0               mime_0.10               evaluate_0.14          
+##  [79] xtable_1.8-4            XML_3.99-0.5            rio_0.5.26             
+##  [82] readxl_1.3.1            compiler_4.0.3          KernSmooth_2.23-18     
+##  [85] ncdf4_1.17              crayon_1.4.1            R.oo_1.24.0            
+##  [88] htmltools_0.5.1.1       later_1.1.0.1           lubridate_1.7.10       
+##  [91] DBI_1.1.1               dbplyr_2.1.0            MASS_7.3-53            
+##  [94] tmvtnorm_1.4-10         rappdirs_0.3.3          Matrix_1.3-2           
+##  [97] car_3.0-10              cli_2.3.1               vsn_3.58.0             
+## [100] imputeLCMD_2.0         
+##  [ reached getOption("max.print") -- omitted 38 entries ]</code></pre>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Christoforou:2016" class="csl-entry">
+Christoforou, Andy, Claire M Mulvey, Lisa M Breckels, Aikaterini Geladaki, Tracey Hurrell, Penelope C Hayward, Thomas Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.
+</div>
+<div id="ref-Cox:2008" class="csl-entry">
+Cox, J, and M Mann. 2008. <span>“MaxQuant Enables High Peptide Identification Rates, Individualized p.p.b.-Range Mass Accuracies and Proteome-Wide Protein Quantification.”</span> <em>Nat Biotechnol</em> 26 (12): 1367–72. <a href="https://doi.org/10.1038/nbt.1511">https://doi.org/10.1038/nbt.1511</a>.
+</div>
+<div id="ref-Gatto:2020" class="csl-entry">
+Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.
+</div>
+<div id="ref-Lazar:2016" class="csl-entry">
+Lazar, C, L Gatto, M Ferro, C Bruley, and T Burger. 2016. <span>“Accounting for the Multiple Natures of Missing Values in Label-Free Quantitative Proteomics Data Sets to Compare Imputation Strategies.”</span> <em>J Proteome Res</em> 15 (4): 1116–25. <a href="https://doi.org/10.1021/acs.jproteome.5b00981">https://doi.org/10.1021/acs.jproteome.5b00981</a>.
+</div>
+<div id="ref-SE" class="csl-entry">
+Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.
+</div>
+<div id="ref-Paulovich:2010" class="csl-entry">
+Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.
+</div>
+<div id="ref-MAE" class="csl-entry">
+Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.
+</div>
+<div id="ref-Sticker:2019" class="csl-entry">
+Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.
+</div>
+</div>
+</div>
+</div></body></html>
+
+<p style="text-align: center;">
+<a href="sec-quant.html"><button class="btn btn-default">Previous</button></a>
+</p>
+<p class="build-date">Page built: 
+2021-03-19
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>
