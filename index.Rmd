@@ -35,6 +35,29 @@ work.
 knitr::include_graphics("https://github.com/rformassspectrometry/stickers/raw/master/sticker/RforMassSpectrometry.png")
 ```
 
+This material introduces participants to the analysis and exploration
+of mass spectrometry (MS) based proteomics data using R and
+Bioconductor. The course will cover all levels of MS data, from raw
+data to identification and quantitation data, up to the statistical
+interpretation of a typical shotgun MS experiment and will focus on
+hands-on tutorials. At the end of this course, the participants will
+be able to manipulate MS data in R and use existing packages for their
+exploratory and statistical proteomics data analysis.
+
+## Targeted audience and assumed background  {-}
+
+The course material is targeted to either proteomics practitioners or
+data analysts/bioinformaticians that would like to learn how to use R
+and Bioconductor to analyse proteomics data. Familiarity with MS or
+proteomics in general is desirable, but not essential as we will walk
+through and describe a typical MS data as part of learning about the
+tools. A working knowledge of R (R syntax, commonly used functions,
+basic data structures such as data frames, vectors, matrices, ... and
+their manipulation) is required. Familiarity with other Bioconductor
+omics data classes and the tidyverse syntax is useful, but not
+necessary.
+
+
 ```{r bib, include=FALSE}
 # create a bib file for the R packages used in this document
 knitr::write_bib(c('base', 'rmarkdown', 'bookdown', 'msmbstyle'), file = 'skeleton.bib')
@@ -47,6 +70,30 @@ suppressPackageStartupMessages(library("Spectra"))
 suppressPackageStartupMessages(library("QFeatures"))
 suppressPackageStartupMessages(library("MsCoreUtils"))
 ```
+
+## Setup {-}
+
+This material uses the latest version of the R for Mass Spectrometry
+package and their dependencies. It might this be possible that even
+the latest Bioconductor stable version aren't recent enough.
+
+To install the very latest and experimental versions of all the
+package, please execute:
+
+```{r setup, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("msdata")
+BiocManager::install("mzR")
+BiocManager::install("lgatto/ProtGenerics")
+BiocManager::install("lgatto/rpx")
+BiocManager::install("RforMassSpectrometry/MsCoreUtils")
+BiocManager::install("RforMassSpectrometry/QFeatures")
+BiocManager::install("RforMassSpectrometry/PSM")
+BiocManager::install("RforMassSpectrometry/Spectra")
+```
+
 
 ## License {-}
 

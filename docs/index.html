@@ -14,13 +14,14 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-03-19" />
+<meta name="date" content="2021-03-22" />
 
 
 <meta name="description" content="Chapter 1 Preamble | R for Mass Spectrometry">
 
 <title>Chapter 1 Preamble | R for Mass Spectrometry</title>
 
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -45,26 +46,27 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -73,9 +75,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +127,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
 <a id="active-page" href="index.html"><span class="toc-section-number">1</span> Preamble</a><ul class="toc-sections">
+<li class="toc"><a href="#targeted-audience-and-assumed-background">Targeted audience and assumed background</a></li>
+<li class="toc"><a href="#setup">Setup</a></li>
 <li class="toc"><a href="#license">License</a></li>
 </ul>
 <a href="sec-msintro.html"><span class="toc-section-number">2</span> Introduction</a>
@@ -141,7 +145,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<!--bookdown:title:end--><!--bookdown:title:start--><html><body><div id="preamble" class="section level1">
+<!--bookdown:title:end--><!--bookdown:title:start--><html><body><div id="preamble" class="section level1" number="1">
 <h1>
 <span class="header-section-number">Chapter 1</span> Preamble</h1>
 <p>The aim of the <a href="https://www.rformassspectrometry.org/">R for Mass
@@ -161,6 +165,46 @@ work.</p>
 <p class="caption marginnote">-->Figure 1.1: The <em>R for Mass Spectrometry</em> intiative sticker, designed by Johannes Rainer.<!--</p>-->
 <!--</div>--></span>
 </p>
+<p>This material introduces participants to the analysis and exploration
+of mass spectrometry (MS) based proteomics data using R and
+Bioconductor. The course will cover all levels of MS data, from raw
+data to identification and quantitation data, up to the statistical
+interpretation of a typical shotgun MS experiment and will focus on
+hands-on tutorials. At the end of this course, the participants will
+be able to manipulate MS data in R and use existing packages for their
+exploratory and statistical proteomics data analysis.</p>
+<div id="targeted-audience-and-assumed-background" class="section level2 unnumbered">
+<h2>Targeted audience and assumed background</h2>
+<p>The course material is targeted to either proteomics practitioners or
+data analysts/bioinformaticians that would like to learn how to use R
+and Bioconductor to analyse proteomics data. Familiarity with MS or
+proteomics in general is desirable, but not essential as we will walk
+through and describe a typical MS data as part of learning about the
+tools. A working knowledge of R (R syntax, commonly used functions,
+basic data structures such as data frames, vectors, matrices, … and
+their manipulation) is required. Familiarity with other Bioconductor
+omics data classes and the tidyverse syntax is useful, but not
+necessary.</p>
+</div>
+<div id="setup" class="section level2 unnumbered">
+<h2>Setup</h2>
+<p>This material uses the latest version of the R for Mass Spectrometry
+package and their dependencies. It might this be possible that even
+the latest Bioconductor stable version aren’t recent enough.</p>
+<p>To install the very latest and experimental versions of all the
+package, please execute:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mzR"</span>)</span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"lgatto/ProtGenerics"</span>)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"lgatto/rpx"</span>)</span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/MsCoreUtils"</span>)</span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/QFeatures"</span>)</span>
+<span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/PSM"</span>)</span>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/Spectra"</span>)</span></code></pre></div>
+</div>
 <div id="license" class="section level2 unnumbered">
 <h2>License</h2>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This material is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
@@ -177,7 +221,7 @@ distribute your contributions under the same license as the original.</p>
 <a href="sec-msintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-03-19
+2021-03-22
 </p>
 </div>
 </div>
