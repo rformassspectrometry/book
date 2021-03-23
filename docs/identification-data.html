@@ -1329,9 +1329,10 @@ must now be performed by spectrum ids and by files.</p>
 <span id="cb223-2"><a href="identification-data.html#cb223-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">gsub</span>(<span class="st">"^.+</span><span class="sc">\\</span><span class="st">QEP"</span>, <span class="st">"QEP"</span>, id_filtered<span class="sc">$</span>spectrumFile),</span>
 <span id="cb223-3"><a href="identification-data.html#cb223-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sub</span>(<span class="st">"^.+=1 "</span>, <span class="st">"::"</span>, id_filtered<span class="sc">$</span>spectrumID))</span>
 <span id="cb223-4"><a href="identification-data.html#cb223-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb223-5"><a href="identification-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">## For simplicity, let keep single hits per spectrum id. Removes PTMs.</span></span>
+<span id="cb223-5"><a href="identification-data.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">## For simplicity, let keep single hits per spectrum id.</span></span>
 <span id="cb223-6"><a href="identification-data.html#cb223-6" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> id_filtered[<span class="sc">!</span><span class="fu">duplicated</span>(id_filtered<span class="sc">$</span>by), ]</span>
-<span id="cb223-7"><a href="identification-data.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>by)</span></code></pre></div>
+<span id="cb223-7"><a href="identification-data.html#cb223-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-8"><a href="identification-data.html#cb223-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>by)</span></code></pre></div>
 <pre><code>## [1] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::scan=15857"
 ## [2] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::scan=8552" 
 ## [3] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::scan=11533"
@@ -1388,7 +1389,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 13          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 23 09:43:09 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 23 13:40:31 2021]</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="identification-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb229-2"><a href="identification-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb229-3"><a href="identification-data.html#cb229-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>

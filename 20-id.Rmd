@@ -602,8 +602,9 @@ id_filtered$by <-
     paste0(gsub("^.+\\QEP", "QEP", id_filtered$spectrumFile),
            sub("^.+=1 ", "::", id_filtered$spectrumID))
 
-## For simplicity, let keep single hits per spectrum id. Removes PTMs.
+## For simplicity, let keep single hits per spectrum id.
 id_filtered <- id_filtered[!duplicated(id_filtered$by), ]
+
 head(id_filtered$by)
 
 sp <- joinSpectraData(sp, id_filtered, by.x = "by")
@@ -651,7 +652,6 @@ plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 ```
 `r msmbstyle::solution_end()`
-
 
 
 ## Exploration and Assessment of Identifications using `MSnID`
