@@ -11,7 +11,7 @@ output:
     split_by: chapter
     margin_references: FALSE
     css: style.css
-bibliography: refs.bib
+bibliography: [refs.bib, packages.bib]
 link-citations: yes
 ---
 
@@ -19,6 +19,7 @@ link-citations: yes
 
 ```{r, echo = FALSE}
 options(bitmapType="cairo")
+
 ```
 
 The aim of the [R for Mass

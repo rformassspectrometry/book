@@ -28,12 +28,14 @@ n_scans <- length(unique(id$spectrumID))
 n_seqs <- length(unique(id$sequence))
 ```
 
-#### Exercise {-}
+`r msmbstyle::question_begin()`
 
 Verify that this table contains `r n_matches` matches for `r n_scans`
 scans and `r n_seqs` peptides sequences.
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r}
 nrow(id) ## number of matches
@@ -41,7 +43,7 @@ length(unique(id$spectrumID)) ## number of scans
 length(unique(id$sequence))   ## number of peptide sequences
 ```
 
-</details>
+`r msmbstyle::solution_end()`
 
 The PSM data are read as is, without and filtering. As we can see
 below, we still have all the hits from the forward and reverse (decoy)
@@ -115,27 +117,39 @@ id_tbl <- tidyr::as_tibble(id)
 id_tbl
 ```
 
-#### Exercise {-}
+`r msmbstyle::question_begin()`
 
 - Remove decoy hits
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
 ```{r, message = FALSE}
 id_tbl <- id_tbl %>%
     filter(!isDecoy)
 id_tbl
 ```
-</details>
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
 
 - Keep first rank matches
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+
 ```{r}
 id_tbl <- id_tbl %>%
     filter(rank == 1)
 id_tbl
 ```
-</details>
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
 
 - Remove non-proteotypic peptides. Start by identifying scans that
   match different proteins. For example scan 4884 matches proteins
@@ -143,8 +157,10 @@ id_tbl
   `XXX_ECA4416_2` and `XXX_ECA4416_3`. Then remove the scans that
   match any of these proteins.
 
+`r msmbstyle::question_end()`
 
-<details>
+`r msmbstyle::solution_begin()`
+
 ```{r}
 mltm <-
     id_tbl %>%
@@ -160,7 +176,8 @@ id_tbl <-
     filter(!spectrumID %in% mltm$spectrumID)
 id_tbl
 ```
-</details>
+`r msmbstyle::solution_end()`
+
 
 Which leaves us with `r nrow(id_tbl)` PSMs.
 
@@ -170,12 +187,14 @@ This can also be achieved with the `filterPSMs()` function:
 id_filtered <- filterPSMs(id)
 ```
 
-#### Exercise {-}
+`r msmbstyle::question_begin()`
 
 Compare the distribution of raw idenfication scores of the decoy and
 non-decoy hits. Interpret the figure.
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r}
 library(ggplot2)
@@ -185,9 +204,9 @@ as_tibble(id) %>%
     geom_density()
 ```
 
-</details>
+`r msmbstyle::solution_end()`
 
-### Exercise {-}
+`r msmbstyle::question_begin()`
 
 The `r CRANpkg("tidyverse")`
 tools are fit for data wrangling with identification data. Using the
@@ -197,8 +216,11 @@ number of peptides for each protein (defined as
 `DatabaseDescription`). Plot the length of the proteins against their
 respective number of peptides.
 
+`r msmbstyle::question_end()`
 
-<details>
+`r msmbstyle::solution_begin()`
+
+
 ```{r answid1, fig.cap = "Identifcation data wrangling."}
 suppressPackageStartupMessages(library("dplyr"))
 iddf <- as_tibble(id_filtered) %>%
@@ -211,7 +233,8 @@ iddf <- full_join(iddf, npeps)
 library("ggplot2")
 ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 ```
-</details>
+
+`r msmbstyle::solution_end()`
 
 
 ## Low level access to id data (optional)
@@ -299,12 +322,14 @@ a `Spectra` object) by adding new spectra variables to the appropriate
 MS2 spectra. Scans and peptide-spectrum matches can be matched by
 their spectrum identifers.
 
-### Exercise {-}
+`r msmbstyle::question_begin()`
 
 Identify the spectum identifier columns in the `sp` the `id_filtered`
 variables.
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 In the raw data, it is encoded as `spectrumId`, while in the
 identification data, we have `spectrumID`.
@@ -313,7 +338,8 @@ identification data, we have `spectrumID`.
 spectraVariables(sp)
 names(id_filtered)
 ```
-</details>
+
+`r msmbstyle::solution_end()`
 
 These two data can thus simply be joined using:
 
@@ -324,34 +350,37 @@ sp <- joinSpectraData(sp, id_filtered,
 spectraVariables(sp)
 ```
 
-### Exercise {-}
+`r msmbstyle::question_begin()`
 
 Verify that the identification data has been added to the correct
 spectra.
 
-<details>
+`r msmbstyle::question_end()`
 
-1. Let's first verify that no identification data has been added to
-   the MS1 scans.
+`r msmbstyle::solution_begin()`
+
+
+Let's first verify that no identification data has been added to the
+MS1 scans.
 
 ```{r}
 all(is.na(filterMsLevel(sp, 1)$sequence))
 ```
 
-2. They have indeed been added to 56% of the MS2 spectra.
+They have indeed been added to 56% of the MS2 spectra.
 
 ```{r}
 sp_2 <- filterMsLevel(sp, 2)
 table(is.na(sp_2$sequence))
 ```
 
-3. Let's compare the precursor/peptide mass to charges
+Let's compare the precursor/peptide mass to charges
 
 ```{r}
 sp_2 <- sp_2[!is.na(sp_2$sequence)]
 summary(sp_2$precursorMz - sp_2$experimentalMassToCharge)
 ```
-</details>
+`r msmbstyle::solution_end()`
 
 
 ## Visualising peptide-spectrum matches
@@ -403,38 +432,53 @@ calculateFragments(sp[i]$sequence)
 The `compareSpectra()` can be used to compare spectra (by default,
 computing the normalised dot product).
 
-### Exercise {-}
+`r msmbstyle::question_begin()`
 
 1. Create a new `Spectra` object containing the MS2 spectra with
    sequences `"SQILQQAGTSVLSQANQVPQTVLSLLR"` and
    `"TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR"`.
 
+`r msmbstyle::question_end()`
 
-<details>
+`r msmbstyle::solution_begin()`
+
 ```{r}
 k <- which(sp$sequence %in% c("SQILQQAGTSVLSQANQVPQTVLSLLR", "TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR"))
 sp_k <- sp[k]
 sp_k
 ```
-</details>
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
 
 2. Calculate the `r length(sp_k)` by `r length(sp_k)` distance matrix
    between all spectra using `compareSpectra`. See the `?Spectra` man
    page for details. Draw a heatmap of that distance matrix
 
+`r msmbstyle::question_end()`
 
-<details>
+`r msmbstyle::solution_begin()`
+
+
 ```{r}
 distmat <- compareSpectra(sp_k)
 rownames(distmat) <- colnames(distmat) <- strtrim(sp_k$sequence, 2)
 distmat
 pheatmap::pheatmap(distmat)
 ```
-</details>
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
 
 3. Compare the spectra with the plotting function seen previously.
 
-<details>
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+
 ```{r}
 filterIntensity(sp_k, 1e3) %>% plotSpectra(main = sp_k$sequence)
 ```
@@ -445,18 +489,23 @@ plotSpectraMirror(sp_k[1], sp_k[2], main = "TK...")
 plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 ```
-</details>
+`r msmbstyle::solution_end()`
 
 
 ## Summary exercice
 
-1. Download the 3 first mzML and mzID files from the
-   [PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
-   project [@Morgenstern:2020]. Hint: you will need to execute
-   `rpx:::apply_fix_issue_5(FALSE)` before instantiating the data
-   object if you user `rpx` version < 1.99.4.
+`r msmbstyle::question_begin()`
 
-<details>
+Download the 3 first mzML and mzID files from the
+[PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
+project [@Morgenstern:2020]. Hint: you will need to execute
+`rpx:::apply_fix_issue_5(FALSE)` before instantiating the data object
+if you user `rpx` version < 1.99.4.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
 ```{r}
 ## Getting data from PX/PRIDE
 library(rpx)
@@ -473,14 +522,21 @@ pxfiles(PXD022816)
 (mzids <- pxget(PXD022816, grep("mzID", pxfiles(PXD022816))[1:3]))
 (mzmls <- pxget(PXD022816, grep("mzML", pxfiles(PXD022816))[1:3]))
 ```
-</details>
 
-2. Generate a `Spectra` object and a table of filtered PSMs. Visualise
-   the totla ion chromatograms and check the quality of the
-   identification data by comparing the density of the decoy and
-   target PSMs id scores for each file.
+`r msmbstyle::solution_end()`
 
-<details>
+
+`r msmbstyle::question_begin()`
+
+Generate a `Spectra` object and a table of filtered PSMs. Visualise
+the totla ion chromatograms and check the quality of the
+identification data by comparing the density of the decoy and target
+PSMs id scores for each file.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
 ```{r, message = FALSE}
 ## Loading raw data
 library("Spectra")
@@ -523,12 +579,18 @@ tidyr::as_tibble(id) %>%
 id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
-</details>
+`r msmbstyle::solution_end()`
 
-3. Join the raw and identification data. Beware though that the
-   joining must now be performed by spectrum ids and by files.
 
-<details>
+`r msmbstyle::question_begin()`
+
+Join the raw and identification data. Beware though that the oining
+must now be performed by spectrum ids and by files.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
 ```{r}
 sp$by <-
     paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))),
@@ -549,15 +611,20 @@ sp <- joinSpectraData(sp, id_filtered, by.x = "by")
 ## Number of MS2 scans with a PSM
 table(!is.na(filterMsLevel(sp, 2)$sequence))
 ```
-</details>
-
-4. Extract the PSMs that have been matched to peptides from protein
-   `O43175` and compare and cluster the scans. Hint: once you have
-   created the smaller `Spectra` object with the scans of interest,
-   switch to an in-memory backend to seed up the calculations.
+`r msmbstyle::solution_end()`
 
 
-<details>
+`r msmbstyle::question_begin()`
+
+Extract the PSMs that have been matched to peptides from protein
+`O43175` and compare and cluster the scans. Hint: once you have
+created the smaller `Spectra` object with the scans of interest,
+switch to an in-memory backend to seed up the calculations.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
 ```{r}
 sp_O43175 <- sp[which(sp$DatabaseAccess == "O43175")]
 sp_O43175 <- setBackend(sp_O43175, MsBackendDataFrame())
@@ -583,7 +650,8 @@ spectraData(sp_O43175[i])$modName
 plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 ```
-</details>
+`r msmbstyle::solution_end()`
+
 
 
 ## Exploration and Assessment of Identifications using `MSnID`
