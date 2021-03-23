@@ -481,7 +481,8 @@ pxfiles(PXD022816)
    target PSMs id scores for each file.
 
 <details>
-```{r}
+```{r, message = FALSE}
+## Loading raw data
 library("Spectra")
 sp <- Spectra(mzmls)
 sp
@@ -504,12 +505,8 @@ filterMsLevel(sp, 1) %>%
                colour = basename(dataOrigin))) +
     geom_line()
 
-```
-</details>
-
-
-<details>
-```{r}
+## Identification data
+library("PSM")
 id <- readPSMs(mzids)
 
 ## Number of PSMs per acquisition
