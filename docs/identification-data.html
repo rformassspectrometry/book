@@ -1183,16 +1183,16 @@ if you user <code>rpx</code> version &lt; 1.99.4.</p>
 ## [31] "README.txt"                               
 ## [32] "checksum.txt"</code></pre>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="identification-data.html#cb199-1" aria-hidden="true" tabindex="-1"></a>(mzids <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzID"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz file.</code></pre>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz file.</code></pre>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz file.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz from cache.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz from cache.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz from cache.</code></pre>
 <pre><code>## [1] "~/.cache/rpx/c22763b9b0c_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz" 
 ## [2] "~/.cache/rpx/c2274bfbfc58_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
 ## [3] "~/.cache/rpx/c22730c3851b_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="identification-data.html#cb204-1" aria-hidden="true" tabindex="-1"></a>(mzmls <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_01-calib.mzML file.</code></pre>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_02-calib.mzML file.</code></pre>
-<pre><code>## Downloading QEP2LC6_HeLa_50ng_251120_03-calib.mzML file.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzML from cache.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzML from cache.</code></pre>
+<pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzML from cache.</code></pre>
 <pre><code>## [1] "~/.cache/rpx/c22759c1dddc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
 ## [2] "~/.cache/rpx/c2275e7771d7_QEP2LC6_HeLa_50ng_251120_02-calib.mzML"
 ## [3] "~/.cache/rpx/c2272ca2819d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
@@ -1388,7 +1388,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 13          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 23 09:21:45 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 23 09:43:09 2021]</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="identification-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb229-2"><a href="identification-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb229-3"><a href="identification-data.html#cb229-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1468,9 +1468,8 @@ course be more that one).</p>
 ## spectrumFile
 ## spectrumID</code></pre>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="identification-data.html#cb248-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">read_mzIDs</span>(msnid, mzids)</span></code></pre></div>
-<pre><code>## Reading from mzIdentMLs ...</code></pre>
-<pre><code>## reading c_elegans.mzid.gz... DONE!</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="identification-data.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<pre><code>## Loaded cached data</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="identification-data.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1494,7 +1493,7 @@ properly function, it expects to have access to the following data</p>
 ## [5] "isDecoy"                  "peptide"                 
 ## [7] "spectrumFile"             "spectrumID"</code></pre>
 <p>which are indeed present in our data:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="identification-data.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="identification-data.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(msnid)</span></code></pre></div>
 <pre><code>##  [1] "spectrumID"                "scan number(s)"           
 ##  [3] "acquisitionNum"            "passThreshold"            
 ##  [5] "rank"                      "calculatedMassToCharge"   
@@ -1522,8 +1521,8 @@ package’s vignette for more details:</p>
 missing cleavage site within the peptide sequences. The following two
 function call create the new <code>numMisCleavages</code> and <code>numIrregCleavages</code>
 columns in the <code>MSnID</code> object</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="identification-data.html#cb256-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_termini</span>(msnid, <span class="at">validCleavagePattern=</span><span class="st">"[KR]</span><span class="sc">\\</span><span class="st">.[^P]"</span>)</span>
-<span id="cb256-2"><a href="identification-data.html#cb256-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_missed_cleavages</span>(msnid, <span class="at">missedCleavagePattern=</span><span class="st">"[KR](?=[^P$])"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="identification-data.html#cb255-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_termini</span>(msnid, <span class="at">validCleavagePattern=</span><span class="st">"[KR]</span><span class="sc">\\</span><span class="st">.[^P]"</span>)</span>
+<span id="cb255-2"><a href="identification-data.html#cb255-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_missed_cleavages</span>(msnid, <span class="at">missedCleavagePattern=</span><span class="st">"[KR](?=[^P$])"</span>)</span></code></pre></div>
 </div>
 <div id="trimming-the-data" class="section level3" number="4.10.3">
 <h3>
@@ -1533,9 +1532,9 @@ columns in the <code>MSnID</code> object</p>
 filters. The strings passed to the function represent expressions that
 will be evaluated, thus keeping only PSMs that have 0 irregular
 cleavages and 2 or less missed cleavages.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="identification-data.html#cb257-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numIrregCleavages == 0"</span>)</span>
-<span id="cb257-2"><a href="identification-data.html#cb257-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numMissCleavages &lt;= 2"</span>)</span>
-<span id="cb257-3"><a href="identification-data.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="identification-data.html#cb256-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numIrregCleavages == 0"</span>)</span>
+<span id="cb256-2"><a href="identification-data.html#cb256-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numMissCleavages &lt;= 2"</span>)</span>
+<span id="cb256-3"><a href="identification-data.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1550,12 +1549,12 @@ cleavages and 2 or less missed cleavages.</p>
 <p>Using <code>"calculatedMassToCharge"</code> and <code>"experimentalMassToCharge"</code>, the
 <code>mass_measurement_error</code> function calculates the parent ion mass
 measurement error in parts per million.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="identification-data.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="identification-data.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -2184.0640    -0.6992     0.0000    17.6146     0.7512  2012.5178</code></pre>
 <p>We then filter any matches that do not fit the +/- 20 ppm tolerance</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="identification-data.html#cb261-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"abs(mass_measurement_error(msnid)) &lt; 20"</span>)</span>
-<span id="cb261-2"><a href="identification-data.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="identification-data.html#cb260-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"abs(mass_measurement_error(msnid)) &lt; 20"</span>)</span>
+<span id="cb260-2"><a href="identification-data.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ## -19.7797  -0.5866   0.0000  -0.2970   0.5713  19.6758</code></pre>
 </div>
@@ -1568,11 +1567,11 @@ measurement error in parts per million.</p>
 <li>-log10 transformed MS-GF+ Spectrum E-value, reflecting the goodness
 of match experimental and theoretical fragmentation patterns</li>
 </ul>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="identification-data.html#cb263-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(msnid<span class="sc">$</span><span class="st">`</span><span class="at">MS-GF:SpecEValue</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="identification-data.html#cb262-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(msnid<span class="sc">$</span><span class="st">`</span><span class="at">MS-GF:SpecEValue</span><span class="st">`</span>)</span></code></pre></div>
 <ul>
 <li>the absolute mass measurement error (in ppm units) of the parent ion</li>
 </ul>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="identification-data.html#cb264-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="identification-data.html#cb263-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 </div>
 <div id="setting-filters" class="section level3" number="4.10.6">
 <h3>
@@ -1583,16 +1582,16 @@ individual filters are set by name (that is present in <code>names(msnid)</code>
 and comparison operator (&gt;, &lt;, = , …) defining if we should retain
 hits with higher or lower given the threshold and finally the
 threshold value itself.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="identification-data.html#cb265-1" aria-hidden="true" tabindex="-1"></a>filtObj <span class="ot">&lt;-</span> <span class="fu">MSnIDFilter</span>(msnid)</span>
-<span id="cb265-2"><a href="identification-data.html#cb265-2" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&lt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
-<span id="cb265-3"><a href="identification-data.html#cb265-3" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&gt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
-<span id="cb265-4"><a href="identification-data.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="identification-data.html#cb264-1" aria-hidden="true" tabindex="-1"></a>filtObj <span class="ot">&lt;-</span> <span class="fu">MSnIDFilter</span>(msnid)</span>
+<span id="cb264-2"><a href="identification-data.html#cb264-2" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&lt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
+<span id="cb264-3"><a href="identification-data.html#cb264-3" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&gt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
+<span id="cb264-4"><a href="identification-data.html#cb264-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj)</span></code></pre></div>
 <pre><code>## MSnIDFilter object
 ## (absParentMassErrorPPM &lt; 10) &amp; (msmsScore &gt; 10)</code></pre>
 <p>We can then evaluate the filter on the identification data object,
 which return the false discovery rate and number of retained
 identifications for the filtering criteria at hand.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="identification-data.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="identification-data.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj)</span></code></pre></div>
 <pre><code>##           fdr    n
 ## PSM         0 3807
 ## peptide     0 2455
@@ -1604,21 +1603,21 @@ identifications for the filtering criteria at hand.</p>
 </h3>
 <p>Rather than setting filtering values by hand, as shown above, these
 can be set automatically to meet a specific false discovery rate.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="identification-data.html#cb269-1" aria-hidden="true" tabindex="-1"></a>filtObj.grid <span class="ot">&lt;-</span> <span class="fu">optimize_filter</span>(filtObj, msnid, <span class="at">fdr.max=</span><span class="fl">0.01</span>,</span>
-<span id="cb269-2"><a href="identification-data.html#cb269-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">method=</span><span class="st">"Grid"</span>, <span class="at">level=</span><span class="st">"peptide"</span>,</span>
-<span id="cb269-3"><a href="identification-data.html#cb269-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">n.iter=</span><span class="dv">500</span>)</span>
-<span id="cb269-4"><a href="identification-data.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj.grid)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="identification-data.html#cb268-1" aria-hidden="true" tabindex="-1"></a>filtObj.grid <span class="ot">&lt;-</span> <span class="fu">optimize_filter</span>(filtObj, msnid, <span class="at">fdr.max=</span><span class="fl">0.01</span>,</span>
+<span id="cb268-2"><a href="identification-data.html#cb268-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">method=</span><span class="st">"Grid"</span>, <span class="at">level=</span><span class="st">"peptide"</span>,</span>
+<span id="cb268-3"><a href="identification-data.html#cb268-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">n.iter=</span><span class="dv">500</span>)</span>
+<span id="cb268-4"><a href="identification-data.html#cb268-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj.grid)</span></code></pre></div>
 <pre><code>## MSnIDFilter object
 ## (absParentMassErrorPPM &lt; 3) &amp; (msmsScore &gt; 7.4)</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="identification-data.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj.grid)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="identification-data.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj.grid)</span></code></pre></div>
 <pre><code>##                   fdr    n
 ## PSM       0.004097561 5146
 ## peptide   0.006447651 3278
 ## accession 0.021996616 1208</code></pre>
 <p>Filters can eventually be applied (rather than just evaluated) using
 the <code>apply_filter</code> function.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="identification-data.html#cb273-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, filtObj.grid)</span>
-<span id="cb273-2"><a href="identification-data.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="identification-data.html#cb272-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, filtObj.grid)</span>
+<span id="cb272-2"><a href="identification-data.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1627,9 +1626,9 @@ the <code>apply_filter</code> function.</p>
 ## #accessions: 1208 at 2.2 % FDR</code></pre>
 <p>And finally, identifications that matched decoy and contaminant
 protein sequences are removed</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="identification-data.html#cb275-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"isDecoy == FALSE"</span>)</span>
-<span id="cb275-2"><a href="identification-data.html#cb275-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"!grepl('Contaminant',accession)"</span>)</span>
-<span id="cb275-3"><a href="identification-data.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="identification-data.html#cb274-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"isDecoy == FALSE"</span>)</span>
+<span id="cb274-2"><a href="identification-data.html#cb274-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"!grepl('Contaminant',accession)"</span>)</span>
+<span id="cb274-3"><a href="identification-data.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1645,7 +1644,7 @@ protein sequences are removed</p>
 <code>data.frame</code> (or to a dedicated <code>MSnSet</code> data structure from the
 <code>MSnbase</code> package) for quantitative MS data, described below, and
 further processed and analyses using appropriate statistical tests.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="identification-data.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="identification-data.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(msnid))</span></code></pre></div>
 <pre><code>##   spectrumID scan number(s) acquisitionNum passThreshold rank
 ## 1 index=7151           8819           7151          TRUE    1
 ## 2 index=8520          10419           8520          TRUE    1
