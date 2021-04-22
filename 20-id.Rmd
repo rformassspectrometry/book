@@ -500,7 +500,7 @@ Download the 3 first mzML and mzID files from the
 [PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
 project [@Morgenstern:2020]. Hint: you will need to execute
 `rpx:::apply_fix_issue_5(FALSE)` before instantiating the data object
-if you user `rpx` version < 1.99.4.
+if you use `rpx` version < 1.99.4.
 
 `r msmbstyle::question_end()`
 
@@ -529,7 +529,7 @@ pxfiles(PXD022816)
 `r msmbstyle::question_begin()`
 
 Generate a `Spectra` object and a table of filtered PSMs. Visualise
-the totla ion chromatograms and check the quality of the
+the total ion chromatograms and check the quality of the
 identification data by comparing the density of the decoy and target
 PSMs id scores for each file.
 
@@ -547,7 +547,9 @@ sp
 table(basename(sp$dataOrigin))
 ## all levels are centroided
 table(sp$centroided, sp$msLevel)
+```
 
+```{r, message = FALSE, fig.width = 12}
 library("ggplot2")
 library("tidyr")
 library("magrittr")
@@ -560,7 +562,9 @@ filterMsLevel(sp, 1) %>%
                y = totIonCurrent,
                colour = basename(dataOrigin))) +
     geom_line()
+```
 
+```{r, message = FALSE}
 ## Identification data
 library("PSM")
 id <- PSM(mzids)
