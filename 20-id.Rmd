@@ -564,7 +564,7 @@ filterMsLevel(sp, 1) %>%
     geom_line()
 ```
 
-```{r, message = FALSE}
+```{r, message = FALSE, fig.width = 12}
 ## Identification data
 library("PSM")
 id <- PSM(mzids)
@@ -578,10 +578,11 @@ tidyr::as_tibble(id) %>%
     geom_density() +
     facet_wrap(~ spectrumFile)
 
-
-
+```{r}
 id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
+```
+
 ```
 `r msmbstyle::solution_end()`
 
@@ -652,7 +653,9 @@ plotSpectra(sp_O43175[i], labels = addFragments,
 spectraData(sp_O43175[i])$precursorCharge
 spectraData(sp_O43175[i])$precursorMz
 spectraData(sp_O43175[i])$modName
+```
 
+```{r}
 ## Directly compare spectra with/without Carbamyl
 plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
