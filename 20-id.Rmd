@@ -563,7 +563,7 @@ filterMsLevel(sp, 1) %>%
 
 ## Identification data
 library("PSM")
-id <- readPSMs(mzids)
+id <- PSM(mzids)
 
 ## Number of PSMs per acquisition
 table(id$idFile)
@@ -584,7 +584,7 @@ max(id_filtered$PSM.level.q.value)
 
 `r msmbstyle::question_begin()`
 
-Join the raw and identification data. Beware though that the oining
+Join the raw and identification data. Beware though that the joining
 must now be performed by spectrum ids and by files.
 
 `r msmbstyle::question_end()`
@@ -592,22 +592,24 @@ must now be performed by spectrum ids and by files.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-sp$by <-
+## primary key for spectra
+sp$pkey <-
     paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))),
-           gsub("^.+=1 ", "::", sp$spectrumId))
-head(sp$by)
+           gsub("^.+=", "::", sp$spectrumId))
+head(sp$pkey)
 
-
-id_filtered$by <-
+## primary key for PSMs
+id_filtered$pkey <-
     paste0(gsub("^.+\\QEP", "QEP", id_filtered$spectrumFile),
-           sub("^.+=1 ", "::", id_filtered$spectrumID))
+           sub("^.+=", "::", id_filtered$spectrumID))
+head(id_filtered$pkey)
 
 ## For simplicity, let keep single hits per spectrum id.
-id_filtered <- id_filtered[!duplicated(id_filtered$by), ]
+id_filtered <- id_filtered[!duplicated(id_filtered$pkey), ]
 
-head(id_filtered$by)
+head(id_filtered$pkey)
 
-sp <- joinSpectraData(sp, id_filtered, by.x = "by")
+sp <- joinSpectraData(sp, id_filtered, by.x = "pkey")
 
 ## Number of MS2 scans with a PSM
 table(!is.na(filterMsLevel(sp, 2)$sequence))
