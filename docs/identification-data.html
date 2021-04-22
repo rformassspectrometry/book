@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-03-23" />
+<meta name="date" content="2021-04-06" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -285,13 +285,8 @@ have 1, 2, … up to 5 matches.</p>
 <code>RTRYQAEVR</code>, which itself matches to 4 different proteins:</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="identification-data.html#cb119-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(id<span class="sc">$</span>spectrumID <span class="sc">==</span> <span class="st">"controllerType=0 controllerNumber=1 scan=1774"</span>)</span>
 <span id="cb119-2"><a href="identification-data.html#cb119-2" aria-hidden="true" tabindex="-1"></a>id[i, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
-<pre><code>## DataFrame with 4 rows and 5 columns
-##      sequence    spectrumID chargeState      rank passThreshold
-##   &lt;character&gt;   &lt;character&gt;   &lt;integer&gt; &lt;integer&gt;     &lt;logical&gt;
-## 1   RTRYQAEVR controller...           2         1          TRUE
-## 2   RTRYQAEVR controller...           2         1          TRUE
-## 3   RTRYQAEVR controller...           2         1          TRUE
-## 4   RTRYQAEVR controller...           2         1          TRUE</code></pre>
+<pre><code>## PSM with 4 rows and 5 columns.
+## names(5): sequence spectrumID ... rank passThreshold</code></pre>
 <p>If the goal is to keep all the matches, but arranged by scan/spectrum,
 one can <em>reduce</em> the <code>DataFrame</code> object by the <code>spectrumID</code> variable,
 so that each scan correponds to a single row that still stores all
@@ -1039,7 +1034,7 @@ sequences <code>"SQILQQAGTSVLSQANQVPQTVLSLLR"</code> and
 ##  ... 67 more variables/columns.
 ## 
 ## file(s):
-## 8557a69f9bf8_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+## b87c573dec94f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1186,16 +1181,16 @@ if you user <code>rpx</code> version &lt; 1.99.4.</p>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz from cache.</code></pre>
-<pre><code>## [1] "~/.cache/rpx/c22763b9b0c_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz" 
-## [2] "~/.cache/rpx/c2274bfbfc58_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
-## [3] "~/.cache/rpx/c22730c3851b_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/13706ba650b9_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz"
+## [2] "/home/lgatto/.cache/R/rpx/137039853acf_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
+## [3] "/home/lgatto/.cache/R/rpx/13706596a57b_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="identification-data.html#cb204-1" aria-hidden="true" tabindex="-1"></a>(mzmls <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzML from cache.</code></pre>
-<pre><code>## [1] "~/.cache/rpx/c22759c1dddc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
-## [2] "~/.cache/rpx/c2275e7771d7_QEP2LC6_HeLa_50ng_251120_02-calib.mzML"
-## [3] "~/.cache/rpx/c2272ca2819d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/13701d85f1bc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
+## [2] "/home/lgatto/.cache/R/rpx/13707d04ce6b_QEP2LC6_HeLa_50ng_251120_02-calib.mzML"
+## [3] "/home/lgatto/.cache/R/rpx/1370516b50aa_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1241,17 +1236,17 @@ PSMs id scores for each file.</p>
 ##  ... 33 more variables/columns.
 ## 
 ## file(s):
-## c22759c1dddc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
-## c2275e7771d7_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
-## c2272ca2819d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
+## 13701d85f1bc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
+## 13707d04ce6b_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
+## 1370516b50aa_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="identification-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="do">## number of spectra per file</span></span>
 <span id="cb211-2"><a href="identification-data.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">basename</span>(sp<span class="sc">$</span>dataOrigin))</span></code></pre></div>
 <pre><code>## 
-## c2272ca2819d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
-##                                               28740 
-## c22759c1dddc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
+## 13701d85f1bc_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
 ##                                               29575 
-## c2275e7771d7_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
+## 1370516b50aa_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
+##                                               28740 
+## 13707d04ce6b_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
 ##                                               29332</code></pre>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="identification-data.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="do">## all levels are centroided</span></span>
 <span id="cb213-2"><a href="identification-data.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp<span class="sc">$</span>centroided, sp<span class="sc">$</span>msLevel)</span></code></pre></div>
@@ -1278,11 +1273,11 @@ PSMs id scores for each file.</p>
 <span id="cb216-5"><a href="identification-data.html#cb216-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of PSMs per acquisition</span></span>
 <span id="cb216-6"><a href="identification-data.html#cb216-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(id<span class="sc">$</span>idFile)</span></code></pre></div>
 <pre><code>## 
-## c22730c3851b_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
-##                                                  24436 
-## c2274bfbfc58_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
+## 137039853acf_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
 ##                                                  25083 
-##  c22763b9b0c_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
+## 13706596a57b_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
+##                                                  24436 
+## 13706ba650b9_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
 ##                                                  25231</code></pre>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="identification-data.html#cb218-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">%&gt;%</span></span>
 <span id="cb218-2"><a href="identification-data.html#cb218-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MetaMorpheus.score,</span>
@@ -1389,7 +1384,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 13          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 23 13:40:31 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Apr  6 19:27:35 2021]</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="identification-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb229-2"><a href="identification-data.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb229-3"><a href="identification-data.html#cb229-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1695,7 +1690,7 @@ Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBe
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-03-23
+2021-04-06
  using 
 R version 4.0.3 Patched (2021-01-18 r79847)
 </p>
