@@ -577,13 +577,13 @@ tidyr::as_tibble(id) %>%
                colour = isDecoy)) +
     geom_density() +
     facet_wrap(~ spectrumFile)
+```
 
 ```{r}
 id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
 
-```
 `r msmbstyle::solution_end()`
 
 
