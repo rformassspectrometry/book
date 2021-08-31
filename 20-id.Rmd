@@ -1,4 +1,4 @@
-# Identification data
+# Identification data {#sec-id}
 
 
 ## Identification data.frame
@@ -498,9 +498,7 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 
 Download the 3 first mzML and mzID files from the
 [PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
-project [@Morgenstern:2020]. Hint: you will need to execute
-`rpx:::apply_fix_issue_5(FALSE)` before instantiating the data object
-if you use `rpx` version < 1.99.4.
+project [@Morgenstern:2020].
 
 `r msmbstyle::question_end()`
 

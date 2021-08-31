@@ -1,4 +1,4 @@
-# Quantitative data {#sec:quant}
+# Quantitative data {#sec-quant}
 
 ## Quantitation methodologies
 
@@ -93,7 +93,7 @@ quantitation technologies:
   peptide-spectrum matching confidence assessment.
 * `r Githubpkg("vladpetyuk/N14N15")` for heavy Nitrogen-labelled data.
 
-## QFeatures {#sec:qf}
+## QFeatures {#sec-qf}
 
 Mass spectrometry-based quantitative proteomics data can be
 representated as a matrix of quantitative values for features (PSMs,

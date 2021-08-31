@@ -1,4 +1,4 @@
-# Introduction {#sec:msintro}
+# Introduction {#sec-msintro}
 
 
 ## How does mass spectrometry work?
