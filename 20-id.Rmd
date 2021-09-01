@@ -1,5 +1,28 @@
 # Identification data {#sec-id}
 
+Peptide identification is performed using third-party software - there
+is no package to run these searches directly in R. When using line
+search engines it possible to hard-code or automatically generate the
+search command lines and run them from R using a `system()` call. This
+allows to generate these reproducibly (especially useful if many
+command lines need to be run) and to keep a record in the R script of
+the exact command.
+
+The example below illustrates this for 3 mzML files to be searched
+using `MSGFplus`:
+
+```{r msgf, eval = TRUE}
+(mzmls <- paste0("file_", 1:3, ".mzML"))
+(mzids <- sub("mzML", "mzid", mzmls))
+
+paste0("java -jar /path/to/MSGFPlus.jar",
+       " -s ", mzmls,
+       " -o ", mzids,
+       " -d uniprot.fas",
+       " -t 20ppm",
+       " -m 0",
+       " int 1")
+```
 
 ## Identification data.frame
 
@@ -304,13 +327,6 @@ The identification data can be accessed as a `data.frame` with the
 head(psms(id2))
 ```
 
-## MS/MS database search
-
-Searches are generally performed using third-party software
-independently of R or can be started from R using a `system` call.
-The `r Biocpkg("MSGFplus")` package can be used to perform a search
-using the MSGF+ engine directly from R and `r Biocpkg("MSGFgui")` can
-be used to explore the identification results.
 
 ## Adding identification data to raw data
 
