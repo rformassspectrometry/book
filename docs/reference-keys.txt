@@ -45,7 +45,6 @@ identification-data.frame
 keeping-all-matches
 filtering-data
 low-level-access-to-id-data-optional
-msms-database-search
 adding-identification-data-to-raw-data
 visualising-peptide-spectrum-matches
 comparing-spectra
