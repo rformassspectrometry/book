@@ -375,10 +375,10 @@ abline(v = rtime(sp)[2807], col = "red")
 
 `r msmbstyle::question_begin()`
 
-2. The `filterPrecursorScan()` function can be used to retains parent
-   (MS1) and children scans (MS2) of a scan, as defined by its
-   acquisition number. Use it to extract the MS1 scan of interest and
-   all its MS2 children.
+2. The `filterPrecursorScan()` function can be used to retain a set
+   parent (MS1) and children scans (MS2), as defined by an acquisition
+   number. Use it to extract the MS1 scan of interest and all its MS2
+   children.
 
 `r msmbstyle::question_end()`
 
