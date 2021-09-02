@@ -103,7 +103,7 @@ values[^rownames]:
 [^rownames]: The rownames aren't needed here are are removed to reduce
     to output in the the next code chunk display parts of `id2`.
 
-```{r}
+```{r, warning = FALSE}
 id2 <- QFeatures::reduceDataFrame(id, id$spectrumID)
 rownames(id2) <- NULL ## rownames not needed here
 dim(id2)
@@ -289,7 +289,7 @@ Which of these packages is used by `readPSMs()` can be defined by the
 The main functions are `mzID` to read the data into a dedicated data
 class and `flatten` to transform it into a `data.frame`.
 
-```{r mzid1}
+```{r mzid1, warning = FALSE}
 idf
 library("mzID")
 id <- mzID(idf)
