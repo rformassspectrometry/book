@@ -233,8 +233,9 @@ that will store all data, i.e. raw and metadata, on disk.
 
 
 If you would like to learn more about how the raw MS formats are
-handled by `Spectra` via the `mzR` package, check out the
-\@ref(sec-raw2) section in the annexe..
+handled by `Spectra` via the `r BiocStyle::Biocpkg("mzR")` package,
+check out the \@ref(sec-raw2) section in the annexe..
+
 
 ## Visualisation of raw MS data
 

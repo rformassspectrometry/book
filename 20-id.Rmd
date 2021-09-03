@@ -260,8 +260,8 @@ ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 `r msmbstyle::solution_end()`
 
 If you would like to learn more about how the mzid data are handled by
-`PSM` via the `mzID` and `mzR` packages, check out the \@ref(sec-id2)
-section in the annexe.
+`PSM` via the `r BiocStyle::Biocpkg("mzR")` and `r BiocStyle::Biocpkg("mzID")`
+packages, check out the \@ref(sec-id2) section in the annexe.
 
 
 ## Adding identification data to raw data

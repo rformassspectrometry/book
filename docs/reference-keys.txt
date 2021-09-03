@@ -33,7 +33,6 @@ what-is-raw-data-in-r
 the-spectra-class
 spectra-from-mzml-files
 backends
-under-the-hood-mzr-optional
 visualisation-of-raw-ms-data
 raw-data-processing-and-manipulation
 a-note-on-efficiency
@@ -44,7 +43,6 @@ sec-id
 identification-data.frame
 keeping-all-matches
 filtering-data
-low-level-access-to-id-data-optional
 adding-identification-data-to-raw-data
 visualising-peptide-spectrum-matches
 comparing-spectra
@@ -81,4 +79,7 @@ principal-component-analysis
 visualisation
 statistical-analysis
 summary-exercice-1
+sec-anx
+sec-raw2
+sec-id2
 sec-si
