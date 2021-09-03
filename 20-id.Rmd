@@ -259,73 +259,9 @@ ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 
 `r msmbstyle::solution_end()`
 
-
-## Low level access to id data (optional)
-
-There are two packages that can be used to parse `mzIdentML` files,
-namely `mzR` (that we have already used for raw data) and `mzID`. The
-major difference is that the former leverages C++ code from
-`proteowizard` and is hence faster than the latter (which uses the
-`XML` R package). They both work in similar ways.
-
-```{r idpkgs, echo = FALSE, eval = FALSE}
-x <- RforProteomics:::msDataTab()
-sel <- x[, 1] %in% c("Identification")
-knitr::kable(x[sel, ])
-```
-
-```
-|Data type      |File format |Data structure |Package |
-|:--------------|:-----------|:--------------|:-------|
-|Identification |mzIdentML   |mzRident       |mzR     |
-|Identification |mzIdentML   |mzID           |mzID    |
-```
-
-Which of these packages is used by `readPSMs()` can be defined by the
-`parser` argument.
-
-### `mzID` {-}
-
-The main functions are `mzID` to read the data into a dedicated data
-class and `flatten` to transform it into a `data.frame`.
-
-```{r mzid1, warning = FALSE}
-idf
-library("mzID")
-id <- mzID(idf)
-id
-```
-
-Various data can be extracted from the `mzID` object, using one the
-accessor functions such as `database`, `software`, `scans`, `peptides`,
-... The object can also be converted into a `data.frame` using the
-`flatten` function.
-
-```{r flatmzid}
-head(flatten(id))
-```
-
-### `mzR` {-}
-
-The `mzR` interface provides a similar interface. It is however much
-faster as it does not read all the data into memory and only extracts
-relevant data on demand. It has also accessor functions such as
-`softwareInfo`, `mzidInfo`, ... (use `showMethods(classes = "mzRident", where = "package:mzR")`)
-to see all available methods.
-
-```{r idmzr}
-library("mzR")
-id2 <- openIDfile(idf)
-id2
-softwareInfo(id2)
-```
-
-The identification data can be accessed as a `data.frame` with the
-`psms` accessor.
-
-```{r psmsmzr}
-head(psms(id2))
-```
+If you would like to learn more about how the mzid data are handled by
+`PSM` via the `mzID` and `mzR` packages, check out the \@ref(sec-id2)
+section in the annexe.
 
 
 ## Adding identification data to raw data

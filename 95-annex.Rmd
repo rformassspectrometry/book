@@ -1,0 +1,159 @@
+# Annex {#sec-anx}
+
+
+## Raw MS data under the hood: the `mzR` package {#sec-raw2}
+
+The `mzR` package in a direct interface to the
+[proteowizard](http://proteowizard.sourceforge.net/) code base. It
+includes a substantial proportion of *pwiz*'s C/C++ code for fast and
+efficient parsing of these large raw data files.
+
+Let's start by using some raw data files from the `msdata`
+package. After loading it, we use the `proteomics()` function to
+return the full file names for two raw data files. We will start by
+focusing on the second one.
+
+```{r rwfiles}
+f <- msdata::proteomics(full.names = TRUE)
+f
+(f2 <- grep("20141210", f, value = TRUE))
+```
+
+The three main functions of `mzR` are
+
+* `openMSfile` to create a file handle to a raw data file
+* `header` to extract metadata about the spectra contained in the file
+* `peaks` to extract one or multiple spectra of interest.
+
+Other functions such as `instrumentInfo`, or `runInfo` can be used to
+gather general information about a run.
+
+
+```{r rawms}
+library("mzR")
+ms <- openMSfile(f2)
+ms
+```
+
+```{r hd}
+hd <- header(ms)
+dim(hd)
+names(hd)
+```
+
+```{r peaks}
+head(peaks(ms, 117))
+str(peaks(ms, 1:5))
+```
+
+`r msmbstyle::question_begin()`
+
+Let's extract the index of the MS2 spectrum with the highest base peak
+intensity and plot its spectrum. Is the data centroided or in profile
+mode?
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r ex_raw, echo=TRUE, eval=TRUE, fig.align='center'}
+hd2 <- hd[hd$msLevel == 2, ]
+i <- which.max(hd2$basePeakIntensity)
+hd2[i, ]
+pi <- peaks(ms, hd2[i, 1])
+plot(pi, type = "h")
+mz <- hd2[i, "basePeakMZ"]
+plot(pi, type = "h", xlim = c(mz - 0.5, mz + 0.5))
+```
+
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Pick an MS1 spectrum and visually check whether it is centroided or in
+profile mode.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r ex_raw2}
+## Zooming into spectrum 300 (an MS1 spectrum).
+j <- 300
+pj <- peaks(ms, j)
+plot(pj, type = "l")
+mz <- hd[j, "basePeakMZ"]
+plot(pj, type = "l", xlim = c(mz - 0.5, mz + 0.5))
+```
+
+`r msmbstyle::solution_end()`
+
+
+## PSM data under the hood {#sec-id2}
+
+There are two packages that can be used to parse `mzIdentML` files,
+namely `mzR` (that we have already used for raw data) and `mzID`. The
+major difference is that the former leverages C++ code from
+`proteowizard` and is hence faster than the latter (which uses the
+`XML` R package). They both work in similar ways.
+
+```{r idpkgs, echo = FALSE, eval = FALSE}
+x <- RforProteomics:::msDataTab()
+sel <- x[, 1] %in% c("Identification")
+knitr::kable(x[sel, ])
+```
+
+```
+|Data type      |File format |Data structure |Package |
+|:--------------|:-----------|:--------------|:-------|
+|Identification |mzIdentML   |mzRident       |mzR     |
+|Identification |mzIdentML   |mzID           |mzID    |
+```
+
+Which of these packages is used by `readPSMs()` can be defined by the
+`parser` argument, as documented in `?readPSMs`.
+
+### `mzID` {-}
+
+The main functions are `mzID` to read the data into a dedicated data
+class and `flatten` to transform it into a `data.frame`.
+
+```{r mzid1, warning = FALSE}
+idf
+library("mzID")
+id <- mzID(idf)
+id
+```
+
+Various data can be extracted from the `mzID` object, using one the
+accessor functions such as `database`, `software`, `scans`, `peptides`,
+... The object can also be converted into a `data.frame` using the
+`flatten` function.
+
+```{r flatmzid}
+head(flatten(id))
+```
+
+### `mzR` {-}
+
+The `mzR` interface provides a similar interface. It is however much
+faster as it does not read all the data into memory and only extracts
+relevant data on demand. It has also accessor functions such as
+`softwareInfo`, `mzidInfo`, ... (use `showMethods(classes = "mzRident", where = "package:mzR")`)
+to see all available methods.
+
+```{r idmzr}
+library("mzR")
+id2 <- openIDfile(idf)
+id2
+softwareInfo(id2)
+```
+
+The identification data can be accessed as a `data.frame` with the
+`psms` accessor.
+
+```{r psmsmzr}
+head(psms(id2))
+```

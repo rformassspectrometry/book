@@ -232,95 +232,9 @@ There is also an (under development) SQLite-based backend called
 that will store all data, i.e. raw and metadata, on disk.
 
 
-## Under the hood: `mzR` (optional)
-
-The `mzR` package in a direct interface to the
-[proteowizard](http://proteowizard.sourceforge.net/) code base. It
-includes a substantial proportion of *pwiz*'s C/C++ code for fast and
-efficient parsing of these large raw data files.
-
-Let's start by using some raw data files from the `msdata`
-package. After loading it, we use the `proteomics()` function to
-return the full file names for two raw data files. We will start by
-focusing on the second one.
-
-```{r rwfiles}
-f <- msdata::proteomics(full.names = TRUE)
-f
-(f2 <- grep("20141210", f, value = TRUE))
-```
-
-The three main functions of `mzR` are
-
-* `openMSfile` to create a file handle to a raw data file
-* `header` to extract metadata about the spectra contained in the file
-* `peaks` to extract one or multiple spectra of interest.
-
-Other functions such as `instrumentInfo`, or `runInfo` can be used to
-gather general information about a run.
-
-
-```{r rawms}
-library("mzR")
-ms <- openMSfile(f2)
-ms
-```
-
-```{r hd}
-hd <- header(ms)
-dim(hd)
-names(hd)
-```
-
-```{r peaks}
-head(peaks(ms, 117))
-str(peaks(ms, 1:5))
-```
-
-`r msmbstyle::question_begin()`
-
-Let's extract the index of the MS2 spectrum with the highest base peak
-intensity and plot its spectrum. Is the data centroided or in profile
-mode?
-`r msmbstyle::question_end()`
-
-
-`r msmbstyle::solution_begin()`
-
-```{r ex_raw, echo=TRUE, eval=TRUE, fig.align='center'}
-hd2 <- hd[hd$msLevel == 2, ]
-i <- which.max(hd2$basePeakIntensity)
-hd2[i, ]
-pi <- peaks(ms, hd2[i, 1])
-plot(pi, type = "h")
-mz <- hd2[i, "basePeakMZ"]
-plot(pi, type = "h", xlim = c(mz - 0.5, mz + 0.5))
-```
-
-`r msmbstyle::solution_end()`
-
-
-`r msmbstyle::question_begin()`
-
-Pick an MS1 spectrum and visually check whether it is centroided or in
-profile mode.
-
-`r msmbstyle::question_end()`
-
-
-`r msmbstyle::solution_begin()`
-
-```{r ex_raw2}
-## Zooming into spectrum 300 (an MS1 spectrum).
-j <- 300
-pj <- peaks(ms, j)
-plot(pj, type = "l")
-mz <- hd[j, "basePeakMZ"]
-plot(pj, type = "l", xlim = c(mz - 0.5, mz + 0.5))
-```
-
-`r msmbstyle::solution_end()`
-
+If you would like to learn more about how the raw MS formats are
+handled by `Spectra` via the `mzR` package, check out the
+\@ref(sec-raw2) section in the annexe..
 
 ## Visualisation of raw MS data
 
