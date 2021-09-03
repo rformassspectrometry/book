@@ -93,6 +93,7 @@ BiocManager::install("RforMassSpectrometry/MsCoreUtils")
 BiocManager::install("RforMassSpectrometry/QFeatures")
 BiocManager::install("RforMassSpectrometry/PSM")
 BiocManager::install("RforMassSpectrometry/Spectra")
+BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
 
 

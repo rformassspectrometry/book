@@ -416,6 +416,30 @@ plotSpectraMirror(sp2i[1], sp2i[2])
 `r msmbstyle::solution_end()`
 
 
+It is also possible to explore raw data interactively with the
+[`SpectraVis`
+package](https://rformassspectrometry.github.io/SpectraVis/):
+
+- The
+  [`browseSpectra()`](https://rformassspectrometry.github.io/SpectraVis/reference/browseSpectra.html)
+  function opens a simple shiny application that allows to browse
+  trough the individual scans of a Spectra object.
+
+- The
+  [`plotlySpectra()`](https://rformassspectrometry.github.io/SpectraVis/reference/plotlySpectra.html)
+  function displays a single spectrum using
+  [`plotly`](https://plotly.com/r/) allowing to explore (zooming,
+  panning) the spectrum interactively.
+
+
+`r msmbstyle::question_begin()`
+
+Test the `SpectraVis` function on some the `Spectra` objects produce
+above.
+
+`r msmbstyle::question_end()`
+
+
 ## Raw data processing and manipulation
 
 Apart from *classical* subsetting operations such as `[` and `split`,
