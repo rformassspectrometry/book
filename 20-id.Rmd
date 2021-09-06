@@ -293,6 +293,43 @@ names(id_filtered)
 
 `r msmbstyle::solution_end()`
 
+We still have several PTMs that are matched to a single spectrum
+identifier:
+
+```{r}
+table(table(id_filtered$spectrumID))
+```
+
+Let's look at `"controllerType=0 controllerNumber=1 scan=5490"`, the
+has 4 matching PSMs in detail.
+
+
+```{r}
+which(table(id_filtered$spectrumID) == 4)
+id_4 <- id_filtered[id_filtered$spectrumID == "controllerType=0 controllerNumber=1 scan=5490", ] %>%
+    as.data.frame()
+id_4
+```
+
+We can see that these 4 PSMs differ by the location of the
+Carbamidomethyl modification.
+
+```{r}
+id_4[, c("modName", "modLocation")]
+```
+
+Let's reduce that PSM table before joining it to the `Spectra` object,
+to make sure we have unique one-to-one matches between the raw spectra
+and the PSMs.
+
+
+```{r, warning = FALSE}
+id_filtered <- QFeatures::reduceDataFrame(id_filtered, id_filtered$spectrumID)
+as(id_filtered, "PSM")
+```
+
+
+
 These two data can thus simply be joined using:
 
 ```{r}
@@ -560,6 +597,7 @@ id_filtered$pkey <-
 head(id_filtered$pkey)
 
 ## For simplicity, let keep single hits per spectrum id.
+## Alternatively, explore duplicates and use QFeatures::reduceDataFrame
 id_filtered <- id_filtered[!duplicated(id_filtered$pkey), ]
 
 head(id_filtered$pkey)
