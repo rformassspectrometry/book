@@ -310,49 +310,20 @@ have 1, 2, … up to 5 matches.</p>
 <pre><code>## PSM with 4 rows and 5 columns.
 ## names(5): sequence spectrumID ... rank passThreshold</code></pre>
 <p>If the goal is to keep all the matches, but arranged by scan/spectrum,
-one can <em>reduce</em> the <code>DataFrame</code> object by the <code>spectrumID</code> variable,
-so that each scan correponds to a single row that still stores all
+one can <em>reduce</em> the <code>PSM</code> object by the <code>spectrumID</code> variable, so
+that each scan correponds to a single row that still stores all
 values<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> The rownames aren’t needed here are are removed to reduce
 to output in the the next code chunk display parts of <code>id2</code>.</span>:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sec-id.html#cb110-1" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> QFeatures<span class="sc">::</span><span class="fu">reduceDataFrame</span>(id, id<span class="sc">$</span>spectrumID)</span>
-<span id="cb110-2"><a href="sec-id.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(id2) <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="do">## rownames not needed here</span></span>
-<span id="cb110-3"><a href="sec-id.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(id2)</span></code></pre></div>
-<pre><code>## [1] 5343   35</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sec-id.html#cb110-1" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">reducePSMs</span>(id, id<span class="sc">$</span>spectrumID)</span>
+<span id="cb110-2"><a href="sec-id.html#cb110-2" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
+<pre><code>## Reduced PSM with 5343 rows and 35 columns.
+## names(35): sequence spectrumID ... subReplacementResidue subLocation</code></pre>
 <p>The resulting object contains a single entrie for scan 1774 with
 information for the multiple matches stored as lists within the cells.</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="sec-id.html#cb112-1" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="fu">which</span>(id2<span class="sc">$</span>spectrumID <span class="sc">==</span> <span class="st">"controllerType=0 controllerNumber=1 scan=1774"</span>)</span>
 <span id="cb112-2"><a href="sec-id.html#cb112-2" aria-hidden="true" tabindex="-1"></a>id2[j, ]</span></code></pre></div>
-<pre><code>## DataFrame with 1 row and 35 columns
-##                            sequence    spectrumID chargeState          rank
-##                     &lt;CharacterList&gt;   &lt;character&gt;   &lt;integer&gt; &lt;IntegerList&gt;
-## 1 RTRYQAEVR,RTRYQAEVR,RTRYQAEVR,... controller...           2     1,1,1,...
-##   passThreshold experimentalMassToCharge      calculatedMassToCharge
-##       &lt;logical&gt;                &lt;numeric&gt;               &lt;NumericList&gt;
-## 1          TRUE                  589.821 589.823,589.823,589.823,...
-##                    peptideRef        modNum               isDecoy
-##               &lt;CharacterList&gt; &lt;IntegerList&gt;         &lt;LogicalList&gt;
-## 1 Pep1890,Pep1890,Pep1890,...     0,0,0,... FALSE,FALSE,FALSE,...
-##              post             pre         start           end
-##   &lt;CharacterList&gt; &lt;CharacterList&gt; &lt;IntegerList&gt; &lt;IntegerList&gt;
-## 1       P,P,P,...       R,R,R,...  89,99,89,... 97,107,97,...
-##                DatabaseAccess     DBseqLength DatabaseSeq
-##               &lt;CharacterList&gt;   &lt;IntegerList&gt; &lt;character&gt;
-## 1 ECA2104,ECA2867,ECA3427,... 675,619,678,...            
-##                             DatabaseDescription scan.number.s. acquisitionNum
-##                                 &lt;CharacterList&gt;      &lt;numeric&gt;      &lt;numeric&gt;
-## 1 ECA2104 Vg...,ECA2867 pu...,ECA3427 co...,...           1774           1774
-##    spectrumFile        idFile MS.GF.RawScore MS.GF.DeNovoScore MS.GF.SpecEValue
-##     &lt;character&gt;   &lt;character&gt;      &lt;numeric&gt;         &lt;numeric&gt;        &lt;numeric&gt;
-## 1 TMT_Erwini... TMT_Erwini...              0                96      3.69254e-06
-##                  MS.GF.EValue MS.GF.QValue                MS.GF.PepQValue
-##                 &lt;NumericList&gt;    &lt;numeric&gt;                  &lt;NumericList&gt;
-## 1 10.5388,10.5388,10.5388,...            1 0.990816,0.990816,0.990816,...
-##     modPeptideRef         modName       modMass   modLocation
-##   &lt;CharacterList&gt; &lt;CharacterList&gt; &lt;NumericList&gt; &lt;IntegerList&gt;
-## 1    NA,NA,NA,...    NA,NA,NA,...  NA,NA,NA,...  NA,NA,NA,...
-##   subOriginalResidue subReplacementResidue subLocation
-##          &lt;character&gt;           &lt;character&gt;   &lt;integer&gt;
-## 1                 NA                    NA          NA</code></pre>
+<pre><code>## Reduced PSM with 1 rows and 35 columns.
+## names(35): sequence spectrumID ... subReplacementResidue subLocation</code></pre>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sec-id.html#cb114-1" aria-hidden="true" tabindex="-1"></a>id2[j, <span class="st">"DatabaseAccess"</span>]</span></code></pre></div>
 <pre><code>## CharacterList of length 1
 ## [["controllerType=0 controllerNumber=1 scan=1774"]] ECA2104 ECA2867 ECA3427 ECA4142</code></pre>
@@ -766,9 +737,9 @@ Carbamidomethyl modification.</p>
 <p>Let’s reduce that PSM table before joining it to the <code>Spectra</code> object,
 to make sure we have unique one-to-one matches between the raw spectra
 and the PSMs.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-id.html#cb150-1" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> QFeatures<span class="sc">::</span><span class="fu">reduceDataFrame</span>(id_filtered, id_filtered<span class="sc">$</span>spectrumID)</span>
-<span id="cb150-2"><a href="sec-id.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as</span>(id_filtered, <span class="st">"PSM"</span>)</span></code></pre></div>
-<pre><code>## PSM with 2646 rows and 35 columns.
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-id.html#cb150-1" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> <span class="fu">reducePSMs</span>(id_filtered, id_filtered<span class="sc">$</span>spectrumID)</span>
+<span id="cb150-2"><a href="sec-id.html#cb150-2" aria-hidden="true" tabindex="-1"></a>id_filtered</span></code></pre></div>
+<pre><code>## Reduced PSM with 2646 rows and 35 columns.
 ## names(35): sequence spectrumID ... subReplacementResidue subLocation</code></pre>
 <p>These two data can thus simply be joined using:</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="sec-id.html#cb152-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">joinSpectraData</span>(sp, id_filtered,</span>
@@ -1317,7 +1288,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 13          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Sep  6 18:31:35 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Sep  6 19:59:26 2021]</code></pre>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-id.html#cb224-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb224-2"><a href="sec-id.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb224-3"><a href="sec-id.html#cb224-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
