@@ -476,7 +476,7 @@ of them but `Sequence`, `Proteins`, `Leading.razor.protein`, `PEP`,
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-`
+
 ```{r vars}
 keep_var <- c("Sequence", "Proteins", "Leading.razor.protein", "PEP",
               "Score", "Reverse", "Potential.contaminant")
@@ -484,7 +484,7 @@ keep_var <- c("Sequence", "Proteins", "Leading.razor.protein", "PEP",
 rowData(cptac_se) <- rowData(cptac_se)[, keep_var]
 ```
 
-`r msmbstyle::solution_end()
+`r msmbstyle::solution_end()`
 
 
 ## Analysis pipeline
