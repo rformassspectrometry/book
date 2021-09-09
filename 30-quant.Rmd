@@ -955,8 +955,9 @@ statistical analysis of data of quantitative proteomics data. Several
 packages provide dedicated resources for proteomics data:
 
 - `r Biocpkg("MSstats")` and `r Biocpkg("MSstatsTMT")`: A set of tools
-  for statistical relative protein significanceanalysis in Data dependent
-  (DDA), SRM, Data independent acquisition (DIA) and TMT experiments.
+  for statistical relative protein significanc eanalysis in Data
+  dependent (DDA), SRM, Data independent acquisition (DIA) and TMT
+  experiments.
 
 - `r Biocpkg("msmsTests")`: Statistical tests for label-free LC-MS/MS
   data by spectral counts, to discover differentially expressed
