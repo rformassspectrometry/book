@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-09-06" />
+<meta name="date" content="2021-09-09" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -191,7 +191,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-quant" class="section level1" number="5">
+<html><body>
+<div id="sec-quant" class="section level1" number="5">
 <h1>
 <span class="header-section-number">Chapter 5</span> Quantitative data</h1>
 <div id="quantitation-methodologies" class="section level2" number="5.1">
@@ -819,15 +820,16 @@ of them but <code>Sequence</code>, <code>Proteins</code>, <code>Leading.razor.pr
 <p class="solution-begin">
 ► Solution<span id="sol-start-25" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-25', 'sol-start-25')"></span>
 </p>
-<div class="solution-body" id="sol-body-25" style="display: none;">
-
-
-<p>`</p>
+<div id="sol-body-25" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-quant.html#cb348-1" aria-hidden="true" tabindex="-1"></a>keep_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sequence"</span>, <span class="st">"Proteins"</span>, <span class="st">"Leading.razor.protein"</span>, <span class="st">"PEP"</span>,</span>
 <span id="cb348-2"><a href="sec-quant.html#cb348-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Score"</span>, <span class="st">"Reverse"</span>, <span class="st">"Potential.contaminant"</span>)</span>
 <span id="cb348-3"><a href="sec-quant.html#cb348-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb348-4"><a href="sec-quant.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">rowData</span>(cptac_se)[, keep_var]</span></code></pre></div>
-<p>`r msmbstyle::solution_end()</p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 </div>
 <div id="analysis-pipeline" class="section level2" number="5.4">
@@ -1557,7 +1559,7 @@ Figure 5.16: Aggregation using robust summarisation.
 
 </div>
 </div>
-<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('creating-qfeatures-object')" onmouseout="reset_tooltip('creating-qfeatures-object-tooltip')"><span class="tooltiptext" id="creating-qfeatures-object-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Christoforou:2016" class="csl-entry">
@@ -1582,15 +1584,14 @@ Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Ro
 Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.
 </div>
 </div>
-</div>
-</div></body></html>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-id.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-09-06
+2021-09-09
  using 
 R version 4.1.0 (2021-05-18)
 </p>
