@@ -87,6 +87,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 BiocManager::install("msdata")
 BiocManager::install("mzR")
+BiocManager::install("rhdf5")
 BiocManager::install("lgatto/rpx")
 BiocManager::install("RforMassSpectrometry/ProtGenerics")
 BiocManager::install("RforMassSpectrometry/MsCoreUtils")
