@@ -14,14 +14,14 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-21" />
 
 
 <meta name="description" content="Chapter 7 References and session information | R for Mass Spectrometry">
 
 <title>Chapter 7 References and session information | R for Mass Spectrometry</title>
 
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -191,7 +191,7 @@ div.csl-indent {
 <h1>
 <span class="header-section-number">Chapter 7</span> References and session information</h1>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sec-si.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="sec-si.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Manjaro Linux
@@ -213,57 +213,57 @@ div.csl-indent {
 ## [8] base     
 ## 
 ## other attached packages:
-##  [1] mzID_1.31.0                  patchwork_1.1.1             
-##  [3] factoextra_1.0.7             gplots_3.1.1                
+##  [1] patchwork_1.1.1              factoextra_1.0.7            
+##  [3] mzID_1.31.0                  gplots_3.1.1                
 ##  [5] limma_3.49.4                 forcats_0.5.1               
 ##  [7] stringr_1.4.0                purrr_0.3.4                 
-##  [9] readr_2.0.1                  tibble_3.1.4                
+##  [9] readr_2.0.2                  tibble_3.1.5                
 ## [11] tidyverse_1.3.1              MSnID_1.27.0                
-## [13] tidyr_1.1.3                  ggplot2_3.3.5               
+## [13] tidyr_1.1.4                  ggplot2_3.3.5               
 ## [15] dplyr_1.0.7                  magrittr_2.0.1              
-## [17] msdata_0.33.0                rpx_2.1.9                   
+## [17] msdata_0.33.0                rpx_2.1.12                  
 ## [19] MsCoreUtils_1.5.0            QFeatures_1.3.7             
-## [21] MultiAssayExperiment_1.19.10 SummarizedExperiment_1.23.4 
+## [21] MultiAssayExperiment_1.19.16 SummarizedExperiment_1.23.5 
 ## [23] Biobase_2.53.0               GenomicRanges_1.45.0        
 ## [25] GenomeInfoDb_1.29.8          IRanges_2.27.2              
-## [27] MatrixGenerics_1.5.4         matrixStats_0.60.1          
-## [29] Spectra_1.3.9                ProtGenerics_1.25.2         
-## [31] BiocParallel_1.27.4          S4Vectors_0.31.3            
+## [27] MatrixGenerics_1.5.4         matrixStats_0.61.0          
+## [29] Spectra_1.3.11               ProtGenerics_1.25.2         
+## [31] BiocParallel_1.27.17         S4Vectors_0.31.5            
 ## [33] BiocGenerics_0.39.2          mzR_2.27.1                  
 ## [35] Rcpp_1.0.7                   BiocStyle_2.21.3            
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] utf8_1.2.2              R.utils_2.10.1          gmm_1.6-6              
+##   [1] utf8_1.2.2              R.utils_2.11.0          gmm_1.6-6              
 ##   [4] tidyselect_1.1.1        RSQLite_2.2.8           AnnotationDbi_1.55.1   
 ##   [7] grid_4.1.0              norm_1.0-9.5            munsell_0.5.0          
 ##  [10] codetools_0.2-18        preprocessCore_1.55.2   withr_2.4.2            
 ##  [13] colorspace_2.0-2        filelock_1.0.2          highr_0.9              
-##  [16] knitr_1.33              rstudioapi_0.13         ggsignif_0.6.2         
-##  [19] labeling_0.4.2          GenomeInfoDbData_1.2.6  bit64_4.0.5            
-##  [22] farver_2.1.0            pheatmap_1.0.12         rhdf5_2.37.0           
-##  [25] vctrs_0.3.8             generics_0.1.0          xfun_0.25              
+##  [16] knitr_1.36              rstudioapi_0.13         ggsignif_0.6.3         
+##  [19] labeling_0.4.2          GenomeInfoDbData_1.2.7  bit64_4.0.5            
+##  [22] farver_2.1.0            pheatmap_1.0.12         rhdf5_2.37.4           
+##  [25] vctrs_0.3.8             generics_0.1.0          xfun_0.26              
 ##  [28] BiocFileCache_2.1.1     R6_2.5.1                doParallel_1.0.16      
-##  [31] clue_0.3-59             AnnotationFilter_1.17.1 bitops_1.0-7           
-##  [34] rhdf5filters_1.5.0      cachem_1.0.6            DelayedArray_0.19.2    
+##  [31] clue_0.3-60             AnnotationFilter_1.17.1 bitops_1.0-7           
+##  [34] rhdf5filters_1.5.0      cachem_1.0.6            DelayedArray_0.19.4    
 ##  [37] assertthat_0.2.1        promises_1.2.0.1        scales_1.1.1           
 ##  [40] gtable_0.3.0            affy_1.71.0             sandwich_3.0-1         
 ##  [43] rlang_0.4.11            rstatix_0.7.0           lazyeval_0.2.2         
 ##  [46] impute_1.67.0           broom_0.7.9             abind_1.4-5            
 ##  [49] BiocManager_1.30.16     yaml_2.2.1              reshape2_1.4.4         
-##  [52] modelr_0.1.8            backports_1.2.1         httpuv_1.6.2           
+##  [52] modelr_0.1.8            backports_1.2.1         httpuv_1.6.3           
 ##  [55] tools_4.1.0             bookdown_0.24           affyio_1.63.2          
 ##  [58] ellipsis_0.3.2          jquerylib_0.1.4         RColorBrewer_1.1-2     
 ##  [61] MSnbase_2.19.2          plyr_1.8.6              zlibbioc_1.39.0        
-##  [64] RCurl_1.98-1.4          ggpubr_0.4.0            zoo_1.8-9              
+##  [64] RCurl_1.98-1.5          ggpubr_0.4.0            zoo_1.8-9              
 ##  [67] haven_2.4.3             ggrepel_0.9.1           cluster_2.1.2          
-##  [70] fs_1.5.0                data.table_1.14.0       openxlsx_4.2.4         
-##  [73] reprex_2.0.1            pcaMethods_1.85.0       mvtnorm_1.1-2          
-##  [76] msmbstyle_0.0.19        R.cache_0.15.0          hms_1.1.0              
-##  [79] mime_0.11               evaluate_0.14           xtable_1.8-4           
-##  [82] XML_3.99-0.7            rio_0.5.27              readxl_1.3.1           
+##  [70] fs_1.5.0                data.table_1.14.2       openxlsx_4.2.4         
+##  [73] reprex_2.0.1            pcaMethods_1.85.0       mvtnorm_1.1-3          
+##  [76] msmbstyle_0.0.19        R.cache_0.15.0          hms_1.1.1              
+##  [79] mime_0.12               evaluate_0.14           xtable_1.8-4           
+##  [82] XML_3.99-0.8            rio_0.5.27              readxl_1.3.1           
 ##  [85] compiler_4.1.0          KernSmooth_2.23-20      ncdf4_1.17             
 ##  [88] crayon_1.4.1            R.oo_1.24.0             htmltools_0.5.2        
-##  [91] later_1.3.0             tzdb_0.1.2              lubridate_1.7.10       
+##  [91] later_1.3.0             tzdb_0.1.2              lubridate_1.8.0        
 ##  [94] DBI_1.1.1               dbplyr_2.1.1            MASS_7.3-54            
 ##  [97] tmvtnorm_1.4-10         rappdirs_0.3.3          car_3.0-11             
 ## [100] Matrix_1.3-4           
@@ -308,7 +308,7 @@ Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <s
 <a href="sec-anx.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-09-09
+2021-10-21
  using 
 R version 4.1.0 (2021-05-18)
 </p>

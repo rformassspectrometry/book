@@ -14,14 +14,14 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-21" />
 
 
 <meta name="description" content="Chapter 6 Annex | R for Mass Spectrometry">
 
 <title>Chapter 6 Annex | R for Mass Spectrometry</title>
 
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -358,8 +358,8 @@ major difference is that the former leverages C++ code from
 |:--------------|:-----------|:--------------|:-------|
 |Identification |mzIdentML   |mzRident       |mzR     |
 |Identification |mzIdentML   |mzID           |mzID    |</code></pre>
-<p>Which of these packages is used by <code>readPSMs()</code> can be defined by the
-<code>parser</code> argument, as documented in <code>?readPSMs</code>.</p>
+<p>Which of these packages is used by <code>PSM()</code> can be defined by the
+<code>parser</code> argument, as documented in <code>?PSM</code>.</p>
 <div id="mzid" class="section level3 unnumbered">
 <h3>
 <code>mzID</code><div class="tooltip"><button class="internal-link-btn" onclick="copy_link('mzid')" onmouseout="reset_tooltip('mzid-tooltip')"><span class="tooltiptext" id="mzid-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -368,18 +368,10 @@ major difference is that the former leverages C++ code from
 class and <code>flatten</code> to transform it into a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sec-anx.html#cb423-1" aria-hidden="true" tabindex="-1"></a>idf</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.1/msdata/ident/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="sec-anx.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'mzID'</code></pre>
-<pre><code>## The following object is masked from 'package:purrr':
-## 
-##     flatten</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     id</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-anx.html#cb429-1" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">mzID</span>(idf)</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="sec-anx.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span>
+<span id="cb425-2"><a href="sec-anx.html#cb425-2" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">mzID</span>(idf)</span></code></pre></div>
 <pre><code>## reading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid... DONE!</code></pre>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-anx.html#cb431-1" aria-hidden="true" tabindex="-1"></a>id</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="sec-anx.html#cb427-1" aria-hidden="true" tabindex="-1"></a>id</span></code></pre></div>
 <pre><code>## An mzID object
 ## 
 ## Software used:   MS-GF+ (version: Beta (v10072))
@@ -394,7 +386,7 @@ class and <code>flatten</code> to transform it into a <code>data.frame</code>.</
 accessor functions such as <code>database</code>, <code>software</code>, <code>scans</code>, <code>peptides</code>,
 … The object can also be converted into a <code>data.frame</code> using the
 <code>flatten</code> function.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-anx.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">flatten</span>(id))</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-anx.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">flatten</span>(id))</span></code></pre></div>
 <pre><code>##                                      spectrumid scan number(s) acquisitionnum
 ## 1 controllerType=0 controllerNumber=1 scan=5782           5782           5782
 ## 2 controllerType=0 controllerNumber=1 scan=6037           6037           6037
@@ -446,18 +438,18 @@ faster as it does not read all the data into memory and only extracts
 relevant data on demand. It has also accessor functions such as
 <code>softwareInfo</code>, <code>mzidInfo</code>, … (use <code>showMethods(classes = "mzRident", where = "package:mzR")</code>)
 to see all available methods.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-anx.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
-<span id="cb435-2"><a href="sec-anx.html#cb435-2" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">openIDfile</span>(idf)</span>
-<span id="cb435-3"><a href="sec-anx.html#cb435-3" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-anx.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
+<span id="cb431-2"><a href="sec-anx.html#cb431-2" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">openIDfile</span>(idf)</span>
+<span id="cb431-3"><a href="sec-anx.html#cb431-3" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
 <pre><code>## Identification file handle.
 ## Filename:  TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid 
 ## Number of psms:  5759</code></pre>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="sec-anx.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">softwareInfo</span>(id2)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-anx.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">softwareInfo</span>(id2)</span></code></pre></div>
 <pre><code>## [1] "MS-GF+ Beta (v10072) "                      
 ## [2] "ProteoWizard MzIdentML 3.0.501 ProteoWizard"</code></pre>
 <p>The identification data can be accessed as a <code>data.frame</code> with the
 <code>psms</code> accessor.</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="sec-anx.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(id2))</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-anx.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(id2))</span></code></pre></div>
 <pre><code>##                                      spectrumID chargeState rank passThreshold
 ## 1 controllerType=0 controllerNumber=1 scan=5782           3    1          TRUE
 ## 2 controllerType=0 controllerNumber=1 scan=6037           3    1          TRUE
@@ -505,7 +497,7 @@ to see all available methods.</p>
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-09-09
+2021-10-21
  using 
 R version 4.1.0 (2021-05-18)
 </p>

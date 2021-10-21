@@ -112,8 +112,8 @@ knitr::kable(x[sel, ])
 |Identification |mzIdentML   |mzID           |mzID    |
 ```
 
-Which of these packages is used by `readPSMs()` can be defined by the
-`parser` argument, as documented in `?readPSMs`.
+Which of these packages is used by `PSM()` can be defined by the
+`parser` argument, as documented in `?PSM`.
 
 ### `mzID` {-}
 

@@ -35,12 +35,16 @@ basename(idf)
 
 The easiest way to read identification data in `mzIdentML` (often
 abbreviated with `mzid`) into R is to read it with `readPSMs()`
-function from the [`PSM`](https://rformassspectrometry.github.io/PSM/)
-package. The function will parse the file and return a `DataFrame`.
+function from the
+[`PSMatch`](https://rformassspectrometry.github.io/PSMatch/)
+package[^oldname]. The function will parse the file and return a
+`DataFrame`.
+
+[^oldname]: Previously named `PSM`.
 
 ```{r readid, message = FALSE}
-library(PSM)
-id <- readPSMs(idf)
+library(PSMatch)
+id <- PSM(idf)
 dim(id)
 names(id)
 ```
@@ -259,7 +263,7 @@ ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 `r msmbstyle::solution_end()`
 
 If you would like to learn more about how the mzid data are handled by
-`PSM` via the `r BiocStyle::Biocpkg("mzR")` and `r BiocStyle::Biocpkg("mzID")`
+`PSMatch` via the `r BiocStyle::Biocpkg("mzR")` and `r BiocStyle::Biocpkg("mzID")`
 packages, check out the \@ref(sec-id2) section in the annexe.
 
 
@@ -552,7 +556,7 @@ filterMsLevel(sp, 1) %>%
 
 ```{r, message = FALSE, fig.width = 12}
 ## Identification data
-library("PSM")
+library("PSMatch")
 id <- PSM(mzids)
 
 ## Number of PSMs per acquisition
@@ -653,7 +657,7 @@ plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 ## Exploration and Assessment of Identifications using `MSnID`
 
 ```{r, echo = FALSE}
-unloadNamespace("PSM")
+unloadNamespace("PSMatch")
 ```
 
 The `MSnID` package extracts MS/MS ID data from mzIdentML (leveraging
