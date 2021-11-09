@@ -177,8 +177,8 @@ id_tbl
 
 `r msmbstyle::question_begin()`
 
-- Remove non-proteotypic peptides. Start by identifying scans that
-  match different proteins. For example scan 4884 matches proteins
+- Remove shared peptides. Start by identifying scans that match
+  different proteins. For example scan 4884 matches proteins
   `XXX_ECA3406` and `ECA3415`. Scan 4099 match `XXX_ECA4416_1`,
   `XXX_ECA4416_2` and `XXX_ECA4416_3`. Then remove the scans that
   match any of these proteins.
