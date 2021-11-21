@@ -375,6 +375,51 @@ summary(sp_2$precursorMz - sp_2$experimentalMassToCharge)
 `r msmbstyle::solution_end()`
 
 
+
+Now that we have combined raw data and their associated
+peptide-spectrum matches, we can produced an improved total ion
+chromatogram, identifying MS1 scans that lead to successful
+identifications.
+
+The `nSequences()` function is going to tally the number of
+identifications (i.e non-missing characters in the `sequence` spectra
+variable) for each scan. In the case of MS2 scans, these will be
+either 1 or 0, depending the presence of a sequence). For MS1 scans,
+the function will count the number of sequences for the descendant MS2
+scans, i.e. those produced from precursor ions from each MS1 scan.
+
+
+```{r nSequence, cache = TRUE}
+sp <- nSequences(sp)
+```
+
+Below, we see on the second line that 3457 MS2 scans lead to no PSM,
+while 2546 lead to an identifcation. Among all MS1 scans, 833 lead to
+no MS2 scans with PSMs. 30 MS1 scans generated one MS2 scan that lead
+to a PSM, 45 lead to two PSMs, ...
+
+```{r nSequenceRes}
+table(msLevel(sp), sp$nSequences)
+```
+
+These data can also be visualised on the total ion chromatogram:
+
+```{r nSequencePlot}
+sp |>
+filterMsLevel(1) |>
+spectraData() |>
+as_tibble() |>
+ggplot(aes(x = rtime,
+           y = totIonCurrent)) +
+    geom_line(alpha = 0.25) +
+    geom_point(aes(colour = ifelse(nSequences == 0, NA, nSequences)),
+               size = 0.75,
+               alpha = 0.5) +
+    scale_colour_gradient(low = "orange", high = "red") +
+    facet_grid(sub("^.+_", "", basename(dataOrigin)) ~ .) +
+    labs(colour = "Number of ids")
+```
+
 ## Visualising peptide-spectrum matches
 
 Let's choose a MS2 spectrum with a high identication score and plot
@@ -652,6 +697,16 @@ plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 ```
 `r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Generate total ion chromatograms for each acquisition and annotate the
+MS1 scans with the number of PSMs using the `nSequence()` function, as
+shown above. The function will automatically perform the counts in
+parallel for each acquisition.
+
+`r msmbstyle::question_end()`
 
 
 ## Exploration and Assessment of Identifications using `MSnID`
