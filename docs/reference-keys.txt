@@ -44,6 +44,7 @@ identification-data.frame
 keeping-all-matches
 filtering-data
 adding-identification-data-to-raw-data
+an-identification-annotated-chromatogram
 visualising-peptide-spectrum-matches
 comparing-spectra
 summary-exercice

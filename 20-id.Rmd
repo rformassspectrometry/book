@@ -96,7 +96,7 @@ Below, we can see how scan 1774 has 4 matches, all to sequence
 
 ```{r}
 i <- which(id$spectrumID == "controllerType=0 controllerNumber=1 scan=1774")
-id[i, 1:5]
+data.frame(id[i, ])[1:5]
 ```
 
 If the goal is to keep all the matches, but arranged by scan/spectrum,
@@ -375,6 +375,7 @@ summary(sp_2$precursorMz - sp_2$experimentalMassToCharge)
 `r msmbstyle::solution_end()`
 
 
+## An identification-annotated chromatogram
 
 Now that we have combined raw data and their associated
 peptide-spectrum matches, we can produced an improved total ion
@@ -404,7 +405,7 @@ table(msLevel(sp), sp$nSequences)
 
 These data can also be visualised on the total ion chromatogram:
 
-```{r nSequencePlot}
+```{r nSequencePlot, fig.fullwidth = TRUE}
 sp |>
 filterMsLevel(1) |>
 spectraData() |>

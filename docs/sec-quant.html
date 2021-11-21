@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-10-21" />
+<meta name="date" content="2021-11-21" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -68,7 +68,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -367,12 +366,12 @@ class implemented in the
 package. The class is derived from the Bioconductor
 <code>MultiAssayExperiment</code> <span class="citation">(<a href="#ref-MAE" role="doc-biblioref">Ramos et al. 2017</a>)</span> (MAE) class. Let’s start by loading the
 <code>QFeatures</code> package.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="sec-quant.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="sec-quant.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span></code></pre></div>
 <p>Next, we load the <code>feat1</code> test data, which is composed of single
 <em>assay</em> of class <code>SummarizedExperiment</code> composed of 10 rows and 2
 columns.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sec-quant.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(feat1)</span>
-<span id="cb274-2"><a href="sec-quant.html#cb274-2" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-quant.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(feat1)</span>
+<span id="cb290-2"><a href="sec-quant.html#cb290-2" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns</code></pre>
 <p>Let’s perform some simple operations to familiarise ourselves with the
@@ -381,16 +380,16 @@ columns.</p>
 <li>Extract the sample metadata using the <code>colData()</code> accessor (like you
 have previously done with <code>SummarizedExperiment</code> objects).</li>
 </ul>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-quant.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-quant.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
 <pre><code>## DataFrame with 2 rows and 1 column
 ##        Group
 ##    &lt;integer&gt;
 ## S1         1
 ## S2         2</code></pre>
 <p>We can also further annotate the experiment by adding columns to the <code>colData</code> slot:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-quant.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>)</span>
-<span id="cb278-2"><a href="sec-quant.html#cb278-2" aria-hidden="true" tabindex="-1"></a>feat1<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Y1"</span>, <span class="st">"Y2"</span>)</span>
-<span id="cb278-3"><a href="sec-quant.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-quant.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>)</span>
+<span id="cb294-2"><a href="sec-quant.html#cb294-2" aria-hidden="true" tabindex="-1"></a>feat1<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Y1"</span>, <span class="st">"Y2"</span>)</span>
+<span id="cb294-3"><a href="sec-quant.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(feat1)</span></code></pre></div>
 <pre><code>## DataFrame with 2 rows and 3 columns
 ##        Group           X           Y
 ##    &lt;integer&gt; &lt;character&gt; &lt;character&gt;
@@ -401,7 +400,7 @@ have previously done with <code>SummarizedExperiment</code> objects).</li>
 using the <code>[[</code> operator (as you have done to extract elements of a
 list) by using the assay’s index or name.</li>
 </ul>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-quant.html#cb280-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="sec-quant.html#cb296-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 10 2 
 ## metadata(0):
@@ -410,7 +409,7 @@ list) by using the assay’s index or name.</li>
 ## rowData names(5): Sequence Protein Var location pval
 ## colnames(2): S1 S2
 ## colData names(0):</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-quant.html#cb282-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="st">"psms"</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="sec-quant.html#cb298-1" aria-hidden="true" tabindex="-1"></a>feat1[[<span class="st">"psms"</span>]]</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 10 2 
 ## metadata(0):
@@ -422,7 +421,7 @@ list) by using the assay’s index or name.</li>
 <ul>
 <li>Extract the <code>psms</code> assay’s row data and quantitative values.</li>
 </ul>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sec-quant.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="sec-quant.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>##       S1 S2
 ## PSM1   1 11
 ## PSM2   2 12
@@ -434,7 +433,7 @@ list) by using the assay’s index or name.</li>
 ## PSM8   8 18
 ## PSM9   9 19
 ## PSM10 10 20</code></pre>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-quant.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="sec-quant.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>## DataFrame with 10 rows and 5 columns
 ##            Sequence     Protein       Var      location      pval
 ##         &lt;character&gt; &lt;character&gt; &lt;integer&gt;   &lt;character&gt; &lt;numeric&gt;
@@ -466,17 +465,11 @@ link between the different levels. This can be done with the
 <li>create a new assay named <code>peptides</code> and add it to the <code>feat1</code>
 object.</li>
 </ul>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-quant.html#cb288-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"psms"</span>,</span>
-<span id="cb288-2"><a href="sec-quant.html#cb288-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Sequence"</span>,</span>
-<span id="cb288-3"><a href="sec-quant.html#cb288-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"peptides"</span>,</span>
-<span id="cb288-4"><a href="sec-quant.html#cb288-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMeans)</span></code></pre></div>
-<pre><code>## Warning: The dim() method for DataFrameList objects is deprecated. Please use
-##   dims() on these objects instead.</code></pre>
-<pre><code>## Warning: The nrow() method for DataFrameList objects is deprecated. Please use
-##   nrows() on these objects instead.</code></pre>
-<pre><code>## Warning: The ncol() method for CompressedSplitDataFrameList objects is
-##   deprecated. Please use ncols() on these objects instead.</code></pre>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-quant.html#cb292-1" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="sec-quant.html#cb304-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"psms"</span>,</span>
+<span id="cb304-2"><a href="sec-quant.html#cb304-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Sequence"</span>,</span>
+<span id="cb304-3"><a href="sec-quant.html#cb304-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb304-4"><a href="sec-quant.html#cb304-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMeans)</span>
+<span id="cb304-5"><a href="sec-quant.html#cb304-5" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 2 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns</code></pre>
@@ -485,28 +478,28 @@ object.</li>
 aggregation and repeat the calculations manually and check the
 content of the new assay’s row data.</li>
 </ul>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-quant.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="do">## SYGFNAAR</span></span>
-<span id="cb294-2"><a href="sec-quant.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="sec-quant.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="do">## SYGFNAAR</span></span>
+<span id="cb306-2"><a href="sec-quant.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ])</span></code></pre></div>
 <pre><code>## S1 S2 
 ##  2 12</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="sec-quant.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"SYGFNAAR"</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="sec-quant.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"SYGFNAAR"</span>, ]</span></code></pre></div>
 <pre><code>## S1 S2 
 ##  2 12</code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="sec-quant.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ELGNDAYK</span></span>
-<span id="cb298-2"><a href="sec-quant.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="sec-quant.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ELGNDAYK</span></span>
+<span id="cb310-2"><a href="sec-quant.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, ])</span></code></pre></div>
 <pre><code>## S1 S2 
 ##  5 15</code></pre>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="sec-quant.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"ELGNDAYK"</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="sec-quant.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"ELGNDAYK"</span>, ]</span></code></pre></div>
 <pre><code>## S1 S2 
 ##  5 15</code></pre>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="sec-quant.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="do">## IAEESNFPFIK</span></span>
-<span id="cb302-2"><a href="sec-quant.html#cb302-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="sec-quant.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="do">## IAEESNFPFIK</span></span>
+<span id="cb314-2"><a href="sec-quant.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(<span class="fu">assay</span>(feat1[[<span class="dv">1</span>]])[<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>, ])</span></code></pre></div>
 <pre><code>##   S1   S2 
 ##  8.5 18.5</code></pre>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="sec-quant.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"IAEESNFPFIK"</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="sec-quant.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="dv">2</span>]])[<span class="st">"IAEESNFPFIK"</span>, ]</span></code></pre></div>
 <pre><code>##   S1   S2 
 ##  8.5 18.5</code></pre>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="sec-quant.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">2</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="sec-quant.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(feat1[[<span class="dv">2</span>]])</span></code></pre></div>
 <pre><code>## DataFrame with 3 rows and 4 columns
 ##                  Sequence     Protein      location        .n
 ##               &lt;character&gt; &lt;character&gt;   &lt;character&gt; &lt;integer&gt;
@@ -515,25 +508,19 @@ content of the new assay’s row data.</li>
 ## SYGFNAAR         SYGFNAAR       ProtA Mitochondr...         3</code></pre>
 <p>We can now aggregate the peptide-level data into a new protein-level
 assay using the <code>colMedians()</code> aggregation function.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="sec-quant.html#cb308-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
-<span id="cb308-2"><a href="sec-quant.html#cb308-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Protein"</span>,</span>
-<span id="cb308-3"><a href="sec-quant.html#cb308-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"proteins"</span>,</span>
-<span id="cb308-4"><a href="sec-quant.html#cb308-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMedians)</span></code></pre></div>
-<pre><code>## Warning: The dim() method for DataFrameList objects is deprecated. Please use
-##   dims() on these objects instead.</code></pre>
-<pre><code>## Warning: The nrow() method for DataFrameList objects is deprecated. Please use
-##   nrows() on these objects instead.</code></pre>
-<pre><code>## Warning: The ncol() method for CompressedSplitDataFrameList objects is
-##   deprecated. Please use ncols() on these objects instead.</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="sec-quant.html#cb312-1" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="sec-quant.html#cb320-1" aria-hidden="true" tabindex="-1"></a>feat1 <span class="ot">&lt;-</span> <span class="fu">aggregateFeatures</span>(feat1, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb320-2"><a href="sec-quant.html#cb320-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fcol =</span> <span class="st">"Protein"</span>,</span>
+<span id="cb320-3"><a href="sec-quant.html#cb320-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"proteins"</span>,</span>
+<span id="cb320-4"><a href="sec-quant.html#cb320-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fun =</span> colMedians)</span>
+<span id="cb320-5"><a href="sec-quant.html#cb320-5" aria-hidden="true" tabindex="-1"></a>feat1</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 2 rows and 2 columns</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="sec-quant.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="st">"proteins"</span>]])</span></code></pre></div>
-<pre><code>##        S1   S2
-## ProtA 3.5 13.5
-## ProtB 8.5 18.5</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="sec-quant.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(feat1[[<span class="st">"proteins"</span>]])</span></code></pre></div>
+<pre><code>##       [,1] [,2]
+## ProtA  3.5 13.5
+## ProtB  8.5 18.5</code></pre>
 </div>
 <div id="subsetting-and-filtering" class="section level3" number="5.2.3">
 <h3>
@@ -544,31 +531,31 @@ assays for protein A as shown below or using the <code>subsetByFeature()</code>
 function. This creates a new instance of class <code>QFeatures</code> containing
 assays with the expression data for protein, its peptides and their
 PSMs.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="sec-quant.html#cb316-1" aria-hidden="true" tabindex="-1"></a>feat1[<span class="st">"ProtA"</span>, , ]</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="sec-quant.html#cb324-1" aria-hidden="true" tabindex="-1"></a>feat1[<span class="st">"ProtA"</span>, , ]</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
-##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
+##  [3] proteins: SummarizedExperiment with 1 rows and 0 columns</code></pre>
 <p>The <code>filterFeatures()</code> function can be used to filter rows the assays
 composing a <code>QFeatures</code> object using the row data variables. We can
 for example retain rows that have a <code>pval</code> &lt; 0.05, which would only
 keep rows in the <code>psms</code> assay because the <code>pval</code> is only relevant for
 that assay.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="sec-quant.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sec-quant.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 0 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 0 rows and 2 columns</code></pre>
 <p>On the other hand, if we filter assay rows for those that localise to
 the mitochondrion, we retain the relevant protein, peptides and PSMs.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="sec-quant.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">==</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-quant.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">==</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
 <p>As an exercise, let’s filter rows that do not localise to the
 mitochondrion.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="sec-quant.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">!=</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sec-quant.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">!=</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 1 rows and 2 columns 
@@ -594,16 +581,16 @@ proteomics experiment from <span class="citation">(<a href="#ref-Christoforou:20
 specifies that columns 1 to 10 contain quantitation data, and that the
 assay should be named <code>psms</code> in the returned <code>QFeatures</code> object, to
 reflect the nature of the data.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="sec-quant.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hlpsms)</span>
-<span id="cb324-2"><a href="sec-quant.html#cb324-2" aria-hidden="true" tabindex="-1"></a>hl <span class="ot">&lt;-</span> <span class="fu">readQFeatures</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">name =</span> <span class="st">"psms"</span>)</span>
-<span id="cb324-3"><a href="sec-quant.html#cb324-3" aria-hidden="true" tabindex="-1"></a>hl</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sec-quant.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hlpsms)</span>
+<span id="cb332-2"><a href="sec-quant.html#cb332-2" aria-hidden="true" tabindex="-1"></a>hl <span class="ot">&lt;-</span> <span class="fu">readQFeatures</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">name =</span> <span class="st">"psms"</span>)</span>
+<span id="cb332-3"><a href="sec-quant.html#cb332-3" aria-hidden="true" tabindex="-1"></a>hl</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psms: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>Below, we see that we can extract an assay using its index or its
 name. The individual assays are stored as <em>SummerizedExperiment</em>
 object and further access its quantitative data and metadata using
 the <code>assay</code> and <code>rowData</code> functions</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sec-quant.html#cb326-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sec-quant.html#cb334-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 3010 10 
 ## metadata(0):
@@ -612,7 +599,7 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 ## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
 ## colnames(10): X126 X127C ... X130N X131
 ## colData names(0):</code></pre>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-quant.html#cb328-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="st">"psms"</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-quant.html#cb336-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="st">"psms"</span>]]</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 3010 10 
 ## metadata(0):
@@ -621,7 +608,7 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 ## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
 ## colnames(10): X126 X127C ... X130N X131
 ## colData names(0):</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sec-quant.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-quant.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
 <pre><code>##         X126      X127C       X127N      X128C       X128N      X129C
 ## 1 0.12283431 0.08045915 0.070804055 0.09386901 0.051815695 0.13034383
 ## 2 0.35268185 0.14162381 0.167523880 0.07843497 0.071087436 0.03214548
@@ -636,7 +623,7 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 ## 4 0.18015910 0.035329902 0.12166589 0.10014038
 ## 5 0.17555789 0.007088253 0.02884754 0.02307803
 ## 6 0.01726511 0.172651119 0.37007905 0.29732174</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sec-quant.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="sec-quant.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hl[[<span class="st">"psms"</span>]]))</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 18 columns
 ##      Sequence ProteinDescriptions NbProteins ProteinGroupAccessions
 ##   &lt;character&gt;         &lt;character&gt;  &lt;integer&gt;            &lt;character&gt;
@@ -668,8 +655,8 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 <em><a href="https://bioconductor.org/packages/3.14/SummerizedExperiment">SummerizedExperiment</a></em> <span class="citation">(<a href="#ref-SE" role="doc-biblioref">Morgan et al. 2020</a>)</span> packages.</p>
 <p>It is also possible to first create a <code>SummerizedExperiment</code>, and then
 only include it into a <code>QFeatures</code> object.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sec-quant.html#cb334-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb334-2"><a href="sec-quant.html#cb334-2" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="sec-quant.html#cb342-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb342-2"><a href="sec-quant.html#cb342-2" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 3010 10 
 ## metadata(0):
@@ -678,7 +665,7 @@ only include it into a <code>QFeatures</code> object.</p>
 ## rowData names(18): Sequence ProteinDescriptions ... RTmin markers
 ## colnames(10): X126 X127C ... X130N X131
 ## colData names(0):</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-quant.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">psm =</span> se))</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="sec-quant.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">psm =</span> se))</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psm: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>At this stage, i.e. at the beginning of the analysis, and respectively
@@ -704,7 +691,7 @@ Figure 5.7: The CPTAC spike-in study design (credit Lieven Clement, statOmics, G
 </div>
 <p>The peptide-level data, as processed by MaxQuant <span class="citation">(<a href="#ref-Cox:2008" role="doc-biblioref">Cox and Mann 2008</a>)</span> is
 available in the <code>msdata</code> package:</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-quant.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">quant</span>(<span class="at">pattern =</span> <span class="st">"cptac"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-quant.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">quant</span>(<span class="at">pattern =</span> <span class="st">"cptac"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <div class="question">
 <p class="question-begin">
@@ -726,7 +713,7 @@ object and annotated the experiment.</p>
 <p>From the names of the columns, we see that the quantitative columns,
 starting with <code>"Intensity."</code> (note the dot!) are at positions 56 to
 61.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="sec-quant.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">read.delim</span>(f))</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-quant.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">read.delim</span>(f))</span></code></pre></div>
 <pre><code>##  [1] "Sequence"                 "N.term.cleavage.window"  
 ##  [3] "C.term.cleavage.window"   "Amino.acid.before"       
 ##  [5] "First.amino.acid"         "Second.amino.acid"       
@@ -763,15 +750,15 @@ starting with <code>"Intensity."</code> (note the dot!) are at positions 56 to
 ## [67] "Evidence.IDs"             "MS.MS.IDs"               
 ## [69] "Best.MS.MS"               "Oxidation..M..site.IDs"  
 ## [71] "MS.MS.Count"</code></pre>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="sec-quant.html#cb342-1" aria-hidden="true" tabindex="-1"></a>(i <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Intensity</span><span class="sc">\\</span><span class="st">."</span>, <span class="fu">names</span>(<span class="fu">read.delim</span>(f))))</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="sec-quant.html#cb350-1" aria-hidden="true" tabindex="-1"></a>(i <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Intensity</span><span class="sc">\\</span><span class="st">."</span>, <span class="fu">names</span>(<span class="fu">read.delim</span>(f))))</span></code></pre></div>
 <pre><code>## [1] 56 57 58 59 60 61</code></pre>
 <p>We now read these data using the <code>readSummarizedExperiment</code>
 function. This peptide-level expression data will be imported into R
 as an instance of class <code>SummarizedExperiment</code>. We also use the
 <code>fnames</code> argument to set the row-names of the <code>peptides</code> assay to the
 peptide sequences and specify that the file is a tab-separated table.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="sec-quant.html#cb344-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(f, <span class="at">ecol =</span> i, <span class="at">fnames =</span> <span class="st">"Sequence"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
-<span id="cb344-2"><a href="sec-quant.html#cb344-2" aria-hidden="true" tabindex="-1"></a>cptac_se</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="sec-quant.html#cb352-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(f, <span class="at">ecol =</span> i, <span class="at">fnames =</span> <span class="st">"Sequence"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb352-2"><a href="sec-quant.html#cb352-2" aria-hidden="true" tabindex="-1"></a>cptac_se</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 11466 6 
 ## metadata(0):
@@ -785,10 +772,10 @@ peptide sequences and specify that the file is a tab-separated table.</p>
 ## colData names(0):</code></pre>
 <p>Before proceeding, we are going to clean up the sample names and
 annotate the experiment:</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-quant.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"I.+</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
-<span id="cb346-2"><a href="sec-quant.html#cb346-2" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_[7-9]"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
-<span id="cb346-3"><a href="sec-quant.html#cb346-3" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
-<span id="cb346-4"><a href="sec-quant.html#cb346-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac_se)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sec-quant.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"I.+</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb354-2"><a href="sec-quant.html#cb354-2" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_[7-9]"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb354-3"><a href="sec-quant.html#cb354-3" aria-hidden="true" tabindex="-1"></a>cptac_se<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(cptac_se))</span>
+<span id="cb354-4"><a href="sec-quant.html#cb354-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac_se)</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 2 columns
 ##        condition          id
 ##      &lt;character&gt; &lt;character&gt;
@@ -821,10 +808,10 @@ of them but <code>Sequence</code>, <code>Proteins</code>, <code>Leading.razor.pr
 ► Solution<span id="sol-start-25" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-25', 'sol-start-25')"></span>
 </p>
 <div id="sol-body-25" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-quant.html#cb348-1" aria-hidden="true" tabindex="-1"></a>keep_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sequence"</span>, <span class="st">"Proteins"</span>, <span class="st">"Leading.razor.protein"</span>, <span class="st">"PEP"</span>,</span>
-<span id="cb348-2"><a href="sec-quant.html#cb348-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Score"</span>, <span class="st">"Reverse"</span>, <span class="st">"Potential.contaminant"</span>)</span>
-<span id="cb348-3"><a href="sec-quant.html#cb348-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-4"><a href="sec-quant.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">rowData</span>(cptac_se)[, keep_var]</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-quant.html#cb356-1" aria-hidden="true" tabindex="-1"></a>keep_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sequence"</span>, <span class="st">"Proteins"</span>, <span class="st">"Leading.razor.protein"</span>, <span class="st">"PEP"</span>,</span>
+<span id="cb356-2"><a href="sec-quant.html#cb356-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Score"</span>, <span class="st">"Reverse"</span>, <span class="st">"Potential.contaminant"</span>)</span>
+<span id="cb356-3"><a href="sec-quant.html#cb356-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb356-4"><a href="sec-quant.html#cb356-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="ot">&lt;-</span> <span class="fu">rowData</span>(cptac_se)[, keep_var]</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -848,10 +835,10 @@ above.</p>
 <li>Aggregation</li>
 <li>Downstream analysis</li>
 </ul>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-quant.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb349-2"><a href="sec-quant.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb349-3"><a href="sec-quant.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span>
-<span id="cb349-4"><a href="sec-quant.html#cb349-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="sec-quant.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb357-2"><a href="sec-quant.html#cb357-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb357-3"><a href="sec-quant.html#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span>
+<span id="cb357-4"><a href="sec-quant.html#cb357-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span></code></pre></div>
 <div id="missing-values" class="section level3" number="5.4.1">
 <h3>
 <span class="header-section-number">5.4.1</span> Missing values<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('missing-values')" onmouseout="reset_tooltip('missing-values-tooltip')"><span class="tooltiptext" id="missing-values-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -879,8 +866,8 @@ instead of properly reporting missing values. We can use the
 <code>zeroIsNA()</code> function to replace the <code>0</code> by <code>NA</code> values in our
 <code>cptac_se</code> object and then explore the missing data patterns across
 columns and rows.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="sec-quant.html#cb350-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">zeroIsNA</span>(cptac_se)</span>
-<span id="cb350-2"><a href="sec-quant.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nNA</span>(cptac_se)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sec-quant.html#cb358-1" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">zeroIsNA</span>(cptac_se)</span>
+<span id="cb358-2"><a href="sec-quant.html#cb358-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nNA</span>(cptac_se)</span></code></pre></div>
 <pre><code>## $nNA
 ## DataFrame with 1 row and 2 columns
 ##         nNA       pNA
@@ -925,9 +912,9 @@ Figure 5.8: Distribution of missing value (white). Peptides row with more missin
 <li>Explore the number or proportion of missing values across peptides
 and samples of the <code>cptac_se</code> data.</li>
 </ul>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="sec-quant.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNAcols<span class="sc">$</span>pNA)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sec-quant.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNAcols<span class="sc">$</span>pNA)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/na2-1.png" width="672"></p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sec-quant.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNArows<span class="sc">$</span>nNA)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-quant.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">nNA</span>(cptac_se)<span class="sc">$</span>nNArows<span class="sc">$</span>nNA)</span></code></pre></div>
 <pre><code>## 
 ##    0    1    2    3    4    5    6 
 ## 4059  990  884  717  934  807 3075</code></pre>
@@ -935,8 +922,8 @@ and samples of the <code>cptac_se</code> data.</li>
 <li>Remove row that have <em>too many</em> missing values. You can do this by
 hand or using the <code>filterNA()</code> function.</li>
 </ul>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="sec-quant.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="do">## remove rows that have 4 or more NAs out of 6</span></span>
-<span id="cb355-2"><a href="sec-quant.html#cb355-2" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">filterNA</span>(cptac_se, <span class="at">pNA =</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="sec-quant.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="do">## remove rows that have 4 or more NAs out of 6</span></span>
+<span id="cb363-2"><a href="sec-quant.html#cb363-2" aria-hidden="true" tabindex="-1"></a>cptac_se <span class="ot">&lt;-</span> <span class="fu">filterNA</span>(cptac_se, <span class="at">pNA =</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">6</span>)</span></code></pre></div>
 </div>
 <div id="imputation" class="section level3" number="5.4.2">
 <h3>
@@ -974,9 +961,9 @@ at random.Conversely, MNAR features should ideally be imputed with a
 functionality, including some to estimate the randomness of missing
 data.</p>
 <p>The general syntax for imputation is</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-quant.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(se_na2)</span>
-<span id="cb356-2"><a href="sec-quant.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="do">## impute missing values using knn imputation</span></span>
-<span id="cb356-3"><a href="sec-quant.html#cb356-3" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="sec-quant.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(se_na2)</span>
+<span id="cb364-2"><a href="sec-quant.html#cb364-2" aria-hidden="true" tabindex="-1"></a><span class="do">## impute missing values using knn imputation</span></span>
+<span id="cb364-3"><a href="sec-quant.html#cb364-3" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
 <pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
 ##  mean imputation used for these rows</code></pre>
 <pre><code>## class: SummarizedExperiment 
@@ -1005,9 +992,9 @@ imputation for data missing no at random.</p>
 ► Solution<span id="sol-start-26" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-26', 'sol-start-26')"></span>
 </p>
 <div id="sol-body-26" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="sec-quant.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="st">"mixed"</span>,</span>
-<span id="cb359-2"><a href="sec-quant.html#cb359-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">randna =</span> <span class="fu">rowData</span>(se_na2)<span class="sc">$</span>randna,</span>
-<span id="cb359-3"><a href="sec-quant.html#cb359-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mar =</span> <span class="st">"knn"</span>, <span class="at">mnar =</span> <span class="st">"MinDet"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="sec-quant.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">impute</span>(se_na2, <span class="st">"mixed"</span>,</span>
+<span id="cb367-2"><a href="sec-quant.html#cb367-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">randna =</span> <span class="fu">rowData</span>(se_na2)<span class="sc">$</span>randna,</span>
+<span id="cb367-3"><a href="sec-quant.html#cb367-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mar =</span> <span class="st">"knn"</span>, <span class="at">mnar =</span> <span class="st">"MinDet"</span>)</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 689 16 
 ## metadata(3): MSnbaseFiles MSnbaseProcessing MSnbaseVersion
@@ -1043,14 +1030,14 @@ Bayesian PCA imputation.</p>
 ► Solution<span id="sol-start-27" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-27', 'sol-start-27')"></span>
 </p>
 <div id="sol-body-27" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-quant.html#cb361-1" aria-hidden="true" tabindex="-1"></a>imp1 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="sec-quant.html#cb369-1" aria-hidden="true" tabindex="-1"></a>imp1 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
 <pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
 ##  mean imputation used for these rows</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="sec-quant.html#cb363-1" aria-hidden="true" tabindex="-1"></a>imp2 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>)</span>
-<span id="cb363-2"><a href="sec-quant.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">abs</span>(<span class="fu">assay</span>(imp1)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))] <span class="sc">-</span> <span class="fu">assay</span>(imp2)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))]))</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="sec-quant.html#cb371-1" aria-hidden="true" tabindex="-1"></a>imp2 <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>)</span>
+<span id="cb371-2"><a href="sec-quant.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">abs</span>(<span class="fu">assay</span>(imp1)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))] <span class="sc">-</span> <span class="fu">assay</span>(imp2)[<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2))]))</span></code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 ## 5.332e-05 6.594e-03 1.535e-02 2.315e-02 2.855e-02 2.579e-01</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="sec-quant.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.numeric</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="sec-quant.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.numeric</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.0170  0.1865  0.2440  0.2500  0.3080  0.6587</code></pre>
 <p class="solution-end">
@@ -1069,7 +1056,7 @@ the impact of the imputation method on the distribution of the
 quantitative data. For instance, here is the intensity distribution of
 the <code>se_na2</code> data. Verify the effect of applying <code>knn</code>, <code>zero</code>,
 <code>MinDet</code> and <code>bpca</code> on this distribution.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="sec-quant.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="sec-quant.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))))</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:nasetdist"></span>
 <p class="caption marginnote shownote">
@@ -1087,16 +1074,16 @@ Figure 5.11: Intensity disctribution of the <code>naset</code> data.
 ► Solution<span id="sol-start-28" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-28', 'sol-start-28')"></span>
 </p>
 <div id="sol-body-28" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="sec-quant.html#cb368-1" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"steelblue"</span>, <span class="st">"orange"</span>)</span>
-<span id="cb368-2"><a href="sec-quant.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))), <span class="at">col =</span> cls[<span class="dv">1</span>])</span>
-<span id="cb368-3"><a href="sec-quant.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>))), <span class="at">col =</span> cls[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="sec-quant.html#cb376-1" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"steelblue"</span>, <span class="st">"orange"</span>)</span>
+<span id="cb376-2"><a href="sec-quant.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">na.omit</span>(<span class="fu">assay</span>(se_na2))), <span class="at">col =</span> cls[<span class="dv">1</span>])</span>
+<span id="cb376-3"><a href="sec-quant.html#cb376-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"knn"</span>))), <span class="at">col =</span> cls[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## Warning in knnimp(x, k, maxmiss = rowmax, maxp = maxp): 12 rows with more than 50 % entries missing;
 ##  mean imputation used for these rows</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="sec-quant.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"zero"</span>))), <span class="at">col =</span> cls[<span class="dv">3</span>])</span>
-<span id="cb370-2"><a href="sec-quant.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"MinDet"</span>))), <span class="at">col =</span> cls[<span class="dv">4</span>])</span>
-<span id="cb370-3"><a href="sec-quant.html#cb370-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>))), <span class="at">col =</span> cls[<span class="dv">5</span>])</span>
-<span id="cb370-4"><a href="sec-quant.html#cb370-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"orig"</span>, <span class="st">"knn"</span>, <span class="st">"zero"</span>, <span class="st">"MinDet"</span>, <span class="st">"bpca"</span>),</span>
-<span id="cb370-5"><a href="sec-quant.html#cb370-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> cls, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="sec-quant.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"zero"</span>))), <span class="at">col =</span> cls[<span class="dv">3</span>])</span>
+<span id="cb378-2"><a href="sec-quant.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"MinDet"</span>))), <span class="at">col =</span> cls[<span class="dv">4</span>])</span>
+<span id="cb378-3"><a href="sec-quant.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">assay</span>(<span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"bpca"</span>))), <span class="at">col =</span> cls[<span class="dv">5</span>])</span>
+<span id="cb378-4"><a href="sec-quant.html#cb378-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"orig"</span>, <span class="st">"knn"</span>, <span class="st">"zero"</span>, <span class="st">"MinDet"</span>, <span class="st">"bpca"</span>),</span>
+<span id="cb378-5"><a href="sec-quant.html#cb378-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> cls, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/naex3-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1119,13 +1106,13 @@ analysis.</p>
 <p>As discussed in the previous chapter, PSMs are deemed relevant after
 comparison against hist from a decoy database. The origin of these
 hits is recorded with <code>+</code> in the <code>Reverse</code> variable:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="sec-quant.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Reverse)</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="sec-quant.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Reverse)</span></code></pre></div>
 <pre><code>## 
 ##         + 
 ## 7572   12</code></pre>
 <p>Similarly, a proteomics experiment is also searched against a database
 of contaminants:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="sec-quant.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Potential.contaminant)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="sec-quant.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Potential.contaminant)</span></code></pre></div>
 <pre><code>## 
 ##         + 
 ## 7558   26</code></pre>
@@ -1149,15 +1136,15 @@ interpret the figure.</p>
 ► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
 </p>
 <div id="sol-body-29" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="sec-quant.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
-<span id="cb375-2"><a href="sec-quant.html#cb375-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb375-3"><a href="sec-quant.html#cb375-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Score, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
-<span id="cb375-4"><a href="sec-quant.html#cb375-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-quant.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
+<span id="cb383-2"><a href="sec-quant.html#cb383-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb383-3"><a href="sec-quant.html#cb383-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Score, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
+<span id="cb383-4"><a href="sec-quant.html#cb383-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/idqc1-1.png" width="672"></p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="sec-quant.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
-<span id="cb376-2"><a href="sec-quant.html#cb376-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb376-3"><a href="sec-quant.html#cb376-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PEP, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
-<span id="cb376-4"><a href="sec-quant.html#cb376-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="sec-quant.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
+<span id="cb384-2"><a href="sec-quant.html#cb384-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb384-3"><a href="sec-quant.html#cb384-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PEP, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
+<span id="cb384-4"><a href="sec-quant.html#cb384-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/idqc2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1171,13 +1158,13 @@ interpret the figure.</p>
 </h3>
 <p>We can now create our <code>QFeatures</code> object using the
 <code>SummarizedExperiment</code> as show below.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="sec-quant.html#cb377-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">peptides =</span> cptac_se))</span>
-<span id="cb377-2"><a href="sec-quant.html#cb377-2" aria-hidden="true" tabindex="-1"></a>cptac</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="sec-quant.html#cb385-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">peptides =</span> cptac_se))</span>
+<span id="cb385-2"><a href="sec-quant.html#cb385-2" aria-hidden="true" tabindex="-1"></a>cptac</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] peptides: SummarizedExperiment with 7584 rows and 6 columns</code></pre>
 <p>We should also assign the <code>QFeatures</code> column data with the
 <code>SummarizedExperiment</code> slot.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="sec-quant.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac_se)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="sec-quant.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cptac) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac_se)</span></code></pre></div>
 <p>Note that it is also possible to directly create a <code>QFeatures</code> object
 with the <code>readQFeatures()</code> function and the same arguments as the
 <code>readSummarizedExperiment()</code> used above. In addition, most functions
@@ -1206,11 +1193,11 @@ probability smaller than 0.05.</p>
 ► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
 </p>
 <div id="sol-body-30" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="sec-quant.html#cb380-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
-<span id="cb380-2"><a href="sec-quant.html#cb380-2" aria-hidden="true" tabindex="-1"></a>    cptac <span class="sc">%&gt;%</span></span>
-<span id="cb380-3"><a href="sec-quant.html#cb380-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Reverse <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb380-4"><a href="sec-quant.html#cb380-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb380-5"><a href="sec-quant.html#cb380-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> PEP <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="sec-quant.html#cb388-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
+<span id="cb388-2"><a href="sec-quant.html#cb388-2" aria-hidden="true" tabindex="-1"></a>    cptac <span class="sc">%&gt;%</span></span>
+<span id="cb388-3"><a href="sec-quant.html#cb388-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Reverse <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb388-4"><a href="sec-quant.html#cb388-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb388-5"><a href="sec-quant.html#cb388-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> PEP <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1223,8 +1210,8 @@ probability smaller than 0.05.</p>
 </h3>
 <p>The two code chunks below log-transform and normalise using the assay
 <code>i</code> as input and adding a new one names as defined by <code>name</code>.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="sec-quant.html#cb381-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">logTransform</span>(cptac, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
-<span id="cb381-2"><a href="sec-quant.html#cb381-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"log_peptides"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="sec-quant.html#cb389-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">logTransform</span>(cptac, <span class="at">i =</span> <span class="st">"peptides"</span>,</span>
+<span id="cb389-2"><a href="sec-quant.html#cb389-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"log_peptides"</span>)</span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -1242,9 +1229,9 @@ same as <code>logTransform()</code>. Use the <code>centre.median</code> method.<
 ► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
 </p>
 <div id="sol-body-31" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="sec-quant.html#cb382-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">normalize</span>(cptac, <span class="at">i =</span> <span class="st">"log_peptides"</span>,</span>
-<span id="cb382-2"><a href="sec-quant.html#cb382-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">"lognorm_peptides"</span>,</span>
-<span id="cb382-3"><a href="sec-quant.html#cb382-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"center.median"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="sec-quant.html#cb390-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">normalize</span>(cptac, <span class="at">i =</span> <span class="st">"log_peptides"</span>,</span>
+<span id="cb390-2"><a href="sec-quant.html#cb390-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">"lognorm_peptides"</span>,</span>
+<span id="cb390-3"><a href="sec-quant.html#cb390-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"center.median"</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1269,10 +1256,10 @@ visualisation that you deem useful to assess the tranformations.</p>
 ► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
 </p>
 <div id="sol-body-32" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-quant.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb383-2"><a href="sec-quant.html#cb383-2" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"peptides"</span>]]))</span>
-<span id="cb383-3"><a href="sec-quant.html#cb383-3" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"log_peptides"</span>]]))</span>
-<span id="cb383-4"><a href="sec-quant.html#cb383-4" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"lognorm_peptides"</span>]]))</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="sec-quant.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb391-2"><a href="sec-quant.html#cb391-2" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"peptides"</span>]]))</span>
+<span id="cb391-3"><a href="sec-quant.html#cb391-3" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"log_peptides"</span>]]))</span>
+<span id="cb391-4"><a href="sec-quant.html#cb391-4" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(<span class="fu">assay</span>(cptac[[<span class="st">"lognorm_peptides"</span>]]))</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plotdens"></span>
 <p class="caption marginnote shownote">
@@ -1308,19 +1295,13 @@ later, but a good star.</p>
 ► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
 </p>
 <div id="sol-body-33" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="sec-quant.html#cb384-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
-<span id="cb384-2"><a href="sec-quant.html#cb384-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aggregateFeatures</span>(cptac,</span>
-<span id="cb384-3"><a href="sec-quant.html#cb384-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"lognorm_peptides"</span>,</span>
-<span id="cb384-4"><a href="sec-quant.html#cb384-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"proteins_med"</span>,</span>
-<span id="cb384-5"><a href="sec-quant.html#cb384-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fcol =</span> <span class="st">"Leading.razor.protein"</span>,</span>
-<span id="cb384-6"><a href="sec-quant.html#cb384-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fun =</span> colMedians,</span>
-<span id="cb384-7"><a href="sec-quant.html#cb384-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## Warning: The dim() method for DataFrameList objects is deprecated. Please use
-##   dims() on these objects instead.</code></pre>
-<pre><code>## Warning: The nrow() method for DataFrameList objects is deprecated. Please use
-##   nrows() on these objects instead.</code></pre>
-<pre><code>## Warning: The ncol() method for CompressedSplitDataFrameList objects is
-##   deprecated. Please use ncols() on these objects instead.</code></pre>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-quant.html#cb392-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
+<span id="cb392-2"><a href="sec-quant.html#cb392-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aggregateFeatures</span>(cptac,</span>
+<span id="cb392-3"><a href="sec-quant.html#cb392-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"lognorm_peptides"</span>,</span>
+<span id="cb392-4"><a href="sec-quant.html#cb392-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"proteins_med"</span>,</span>
+<span id="cb392-5"><a href="sec-quant.html#cb392-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fcol =</span> <span class="st">"Leading.razor.protein"</span>,</span>
+<span id="cb392-6"><a href="sec-quant.html#cb392-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fun =</span> colMedians,</span>
+<span id="cb392-7"><a href="sec-quant.html#cb392-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1329,7 +1310,7 @@ later, but a good star.</p>
 <p>Looking at the <code>.n</code> row variable computed during the aggregation, we
 see that most proteins result of the aggregation of 5 peptides or
 less, while very few proteins are accounted for by tens of peptides.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="sec-quant.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac[[<span class="st">"proteins_med"</span>]])<span class="sc">$</span>.n)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="sec-quant.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac[[<span class="st">"proteins_med"</span>]])<span class="sc">$</span>.n)</span></code></pre></div>
 <pre><code>## 
 ##   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
 ## 327 234 167 132  84  73  62  49  49  29  29  24  20  13  15  12   4   6  11   5 
@@ -1340,26 +1321,26 @@ less, while very few proteins are accounted for by tens of peptides.</p>
 <h3>
 <span class="header-section-number">5.4.8</span> Principal component analysis<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('principal-component-analysis')" onmouseout="reset_tooltip('principal-component-analysis-tooltip')"><span class="tooltiptext" id="principal-component-analysis-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="sec-quant.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb390-2"><a href="sec-quant.html#cb390-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb390-3"><a href="sec-quant.html#cb390-3" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="ot">&lt;-</span></span>
-<span id="cb390-4"><a href="sec-quant.html#cb390-4" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"lognorm_peptides"</span>]] <span class="sc">%&gt;%</span></span>
-<span id="cb390-5"><a href="sec-quant.html#cb390-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-6"><a href="sec-quant.html#cb390-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-7"><a href="sec-quant.html#cb390-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-8"><a href="sec-quant.html#cb390-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb390-9"><a href="sec-quant.html#cb390-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition, <span class="at">title =</span> <span class="st">"Peptides"</span>)</span>
-<span id="cb390-10"><a href="sec-quant.html#cb390-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb390-11"><a href="sec-quant.html#cb390-11" aria-hidden="true" tabindex="-1"></a>pca_prot <span class="ot">&lt;-</span></span>
-<span id="cb390-12"><a href="sec-quant.html#cb390-12" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"proteins_med"</span>]] <span class="sc">%&gt;%</span></span>
-<span id="cb390-13"><a href="sec-quant.html#cb390-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-14"><a href="sec-quant.html#cb390-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-15"><a href="sec-quant.html#cb390-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-16"><a href="sec-quant.html#cb390-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb390-17"><a href="sec-quant.html#cb390-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition,</span>
-<span id="cb390-18"><a href="sec-quant.html#cb390-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Proteins (median aggregation)"</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="sec-quant.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
-<span id="cb391-2"><a href="sec-quant.html#cb391-2" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="sc">+</span> pca_prot</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="sec-quant.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb395-2"><a href="sec-quant.html#cb395-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-3"><a href="sec-quant.html#cb395-3" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="ot">&lt;-</span></span>
+<span id="cb395-4"><a href="sec-quant.html#cb395-4" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"lognorm_peptides"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb395-5"><a href="sec-quant.html#cb395-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-6"><a href="sec-quant.html#cb395-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-7"><a href="sec-quant.html#cb395-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-8"><a href="sec-quant.html#cb395-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb395-9"><a href="sec-quant.html#cb395-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition, <span class="at">title =</span> <span class="st">"Peptides"</span>)</span>
+<span id="cb395-10"><a href="sec-quant.html#cb395-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-11"><a href="sec-quant.html#cb395-11" aria-hidden="true" tabindex="-1"></a>pca_prot <span class="ot">&lt;-</span></span>
+<span id="cb395-12"><a href="sec-quant.html#cb395-12" aria-hidden="true" tabindex="-1"></a>    cptac[[<span class="st">"proteins_med"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb395-13"><a href="sec-quant.html#cb395-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-14"><a href="sec-quant.html#cb395-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-15"><a href="sec-quant.html#cb395-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-16"><a href="sec-quant.html#cb395-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prcomp</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb395-17"><a href="sec-quant.html#cb395-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition,</span>
+<span id="cb395-18"><a href="sec-quant.html#cb395-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Proteins (median aggregation)"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="sec-quant.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb396-2"><a href="sec-quant.html#cb396-2" aria-hidden="true" tabindex="-1"></a>pca_pep <span class="sc">+</span> pca_prot</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plotpca"></span>
 <p class="caption marginnote shownote">
@@ -1375,15 +1356,15 @@ Figure 5.13: Peptide and protein level PCA analyses.
 <p>Below, we use the <code>longFormat()</code> function to extract the quantitative
 and row data in a long format, that can be directly reused by the
 tidyverse tools.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-quant.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">longFormat</span>(cptac[<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>, ,</span>
-<span id="cb392-2"><a href="sec-quant.html#cb392-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"lognorm_peptides"</span>, <span class="st">"proteins_med"</span>)]) <span class="sc">%&gt;%</span></span>
-<span id="cb392-3"><a href="sec-quant.html#cb392-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb392-4"><a href="sec-quant.html#cb392-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"A"</span>, colname), <span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb392-5"><a href="sec-quant.html#cb392-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> colname, <span class="at">y =</span> value, <span class="at">colour =</span> rowname, <span class="at">shape =</span> condition)) <span class="sc">+</span></span>
-<span id="cb392-6"><a href="sec-quant.html#cb392-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb392-7"><a href="sec-quant.html#cb392-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> rowname)) <span class="sc">+</span></span>
-<span id="cb392-8"><a href="sec-quant.html#cb392-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span> assay) <span class="sc">+</span></span>
-<span id="cb392-9"><a href="sec-quant.html#cb392-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="sec-quant.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">longFormat</span>(cptac[<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>, ,</span>
+<span id="cb397-2"><a href="sec-quant.html#cb397-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"lognorm_peptides"</span>, <span class="st">"proteins_med"</span>)]) <span class="sc">%&gt;%</span></span>
+<span id="cb397-3"><a href="sec-quant.html#cb397-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb397-4"><a href="sec-quant.html#cb397-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"A"</span>, colname), <span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb397-5"><a href="sec-quant.html#cb397-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> colname, <span class="at">y =</span> value, <span class="at">colour =</span> rowname, <span class="at">shape =</span> condition)) <span class="sc">+</span></span>
+<span id="cb397-6"><a href="sec-quant.html#cb397-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb397-7"><a href="sec-quant.html#cb397-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> rowname)) <span class="sc">+</span></span>
+<span id="cb397-8"><a href="sec-quant.html#cb397-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span> assay) <span class="sc">+</span></span>
+<span id="cb397-9"><a href="sec-quant.html#cb397-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:vis"></span>
 <p class="caption marginnote shownote">
@@ -1441,8 +1422,8 @@ to count data using the <code>msms.edgeR</code> function from the <code>msmsTest
 package.</p>
 <p>Below, we are going to perform our statistical analysis on the protein
 data using <code>limma</code>.</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="sec-quant.html#cb393-1" aria-hidden="true" tabindex="-1"></a>prots <span class="ot">&lt;-</span> cptac[[<span class="st">"proteins_med"</span>]]</span>
-<span id="cb393-2"><a href="sec-quant.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(prots) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac)</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="sec-quant.html#cb398-1" aria-hidden="true" tabindex="-1"></a>prots <span class="ot">&lt;-</span> cptac[[<span class="st">"proteins_med"</span>]]</span>
+<span id="cb398-2"><a href="sec-quant.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(prots) <span class="ot">&lt;-</span> <span class="fu">colData</span>(cptac)</span></code></pre></div>
 <p>The <em><a href="https://bioconductor.org/packages/3.14/limma">limma</a></em> package is the precursor package
 that enables the consistent application of linear models to normalliy
 distributed omics data in general, and microarrays in
@@ -1454,23 +1435,23 @@ demonstrably more powerful that a standard t-tests when the number of
 samples is lot.</p>
 <p>The code chunk below illstrated how to set up the model, fit it, and
 apply the empirical Bayes moderation.</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="sec-quant.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span>
-<span id="cb394-2"><a href="sec-quant.html#cb394-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> prots<span class="sc">$</span>condition)</span>
-<span id="cb394-3"><a href="sec-quant.html#cb394-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(<span class="fu">assay</span>(prots), design)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="sec-quant.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span>
+<span id="cb399-2"><a href="sec-quant.html#cb399-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> prots<span class="sc">$</span>condition)</span>
+<span id="cb399-3"><a href="sec-quant.html#cb399-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(<span class="fu">assay</span>(prots), design)</span></code></pre></div>
 <pre><code>## Warning: Partial NA coefficients for 25 probe(s)</code></pre>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="sec-quant.html#cb396-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="sec-quant.html#cb401-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span></code></pre></div>
 <p>Finally, the <code>topTable()</code> function is used the extract the results for
 the coefficient of interest.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="sec-quant.html#cb397-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
-<span id="cb397-2"><a href="sec-quant.html#cb397-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"prots$condition6B"</span>, <span class="at">number =</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb397-3"><a href="sec-quant.html#cb397-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">"protein"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb397-4"><a href="sec-quant.html#cb397-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb397-5"><a href="sec-quant.html#cb397-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">TP =</span> <span class="fu">grepl</span>(<span class="st">"ups"</span>, protein))</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="sec-quant.html#cb402-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
+<span id="cb402-2"><a href="sec-quant.html#cb402-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"prots$condition6B"</span>, <span class="at">number =</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb402-3"><a href="sec-quant.html#cb402-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">"protein"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb402-4"><a href="sec-quant.html#cb402-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb402-5"><a href="sec-quant.html#cb402-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">TP =</span> <span class="fu">grepl</span>(<span class="st">"ups"</span>, protein))</span></code></pre></div>
 <p>Note the warning about partial <code>NA</code> coefficients for 23 probes:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="sec-quant.html#cb398-1" aria-hidden="true" tabindex="-1"></a>na_coefs <span class="ot">&lt;-</span></span>
-<span id="cb398-2"><a href="sec-quant.html#cb398-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(res, <span class="fu">is.na</span>(t)) <span class="sc">%&gt;%</span></span>
-<span id="cb398-3"><a href="sec-quant.html#cb398-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(protein)</span>
-<span id="cb398-4"><a href="sec-quant.html#cb398-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(prots[na_coefs, ])</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="sec-quant.html#cb403-1" aria-hidden="true" tabindex="-1"></a>na_coefs <span class="ot">&lt;-</span></span>
+<span id="cb403-2"><a href="sec-quant.html#cb403-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(res, <span class="fu">is.na</span>(t)) <span class="sc">%&gt;%</span></span>
+<span id="cb403-3"><a href="sec-quant.html#cb403-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(protein)</span>
+<span id="cb403-4"><a href="sec-quant.html#cb403-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(prots[na_coefs, ])</span></code></pre></div>
 <pre><code>##                                6A_7      6A_8       6A_9       6B_7       6B_8
 ## P00167ups|CYB5_HUMAN_UPS        NaN       NaN        NaN -0.7840558 -2.0282987
 ## P01112ups|RASH_HUMAN_UPS        NaN       NaN        NaN -1.5564896        NaN
@@ -1507,12 +1488,12 @@ the coefficient of interest.</p>
 ## sp|P48363|PFD3_YEAST      -0.5087747
 ##  [ reached getOption("max.print") -- omitted 9 rows ]</code></pre>
 <p>We can now visualise the results using a volcano plot:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="sec-quant.html#cb400-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb400-2"><a href="sec-quant.html#cb400-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(adj.P.Val))) <span class="sc">+</span></span>
-<span id="cb400-3"><a href="sec-quant.html#cb400-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> TP)) <span class="sc">+</span></span>
-<span id="cb400-4"><a href="sec-quant.html#cb400-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb400-5"><a href="sec-quant.html#cb400-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
-<span id="cb400-6"><a href="sec-quant.html#cb400-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="sec-quant.html#cb405-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb405-2"><a href="sec-quant.html#cb405-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(adj.P.Val))) <span class="sc">+</span></span>
+<span id="cb405-3"><a href="sec-quant.html#cb405-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> TP)) <span class="sc">+</span></span>
+<span id="cb405-4"><a href="sec-quant.html#cb405-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb405-5"><a href="sec-quant.html#cb405-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb405-6"><a href="sec-quant.html#cb405-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))</span></code></pre></div>
 <pre><code>## Warning: Removed 25 rows containing missing values (geom_point).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:vp"></span>
@@ -1592,9 +1573,9 @@ Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <s
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-10-21
+2021-11-21
  using 
-R version 4.1.0 (2021-05-18)
+R version 4.1.2 (2021-11-01)
 </p>
 </div>
 </div>
