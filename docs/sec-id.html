@@ -867,7 +867,7 @@ to a PSM, 45 lead to two PSMs, …</p>
 <span id="cb172-12"><a href="sec-id.html#cb172-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">basename</span>(dataOrigin)) <span class="sc">~</span> .) <span class="sc">+</span></span>
 <span id="cb172-13"><a href="sec-id.html#cb172-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
 <div class="figure fullwidth">
-<img src="R4MS_files/figure-html/nSequencePlot-1.png" alt=" " width="672"><p class="caption marginnote shownote">
+<img src="R4MS_files/figure-html/nSequencePlot-1.png" alt=" " width="768"><p class="caption marginnote shownote">
 </p>
 </div>
 </div>
@@ -1343,7 +1343,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Sun Nov 21 14:30:17 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Sun Nov 21 14:48:04 2021]</code></pre>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="sec-id.html#cb240-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb240-2"><a href="sec-id.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb240-3"><a href="sec-id.html#cb240-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>

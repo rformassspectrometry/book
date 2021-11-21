@@ -477,7 +477,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Sun Nov 21 14:29:18 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Sun Nov 21 14:47:21 2021]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -507,7 +507,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Sun Nov 21 14:29:30 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Sun Nov 21 14:47:29 2021]</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sec-raw.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.1/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -516,9 +516,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-raw.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpLD8qmN/20171016_POOL_POS_1_105-134.h5 
+## /tmp/Rtmp8iTOmw/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmpLD8qmN/20171016_POOL_POS_3_105-134.h5 
+## /tmp/Rtmp8iTOmw/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -631,7 +631,7 @@ children.</li>
 ## file(s):
 ## 53fd9a5bb5f5_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Sun Nov 21 14:29:30 2021]</code></pre>
+##  Filter: select parent/children scans for 2807 [Sun Nov 21 14:47:30 2021]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -906,8 +906,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.1/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Sun Nov 21 14:29:33 2021]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Sun Nov 21 14:29:33 2021]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.1/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Sun Nov 21 14:47:32 2021]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Sun Nov 21 14:47:32 2021]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -989,7 +989,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Sun Nov 21 14:29:33 2021]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Sun Nov 21 14:47:33 2021]</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sec-raw.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## </code></pre>
 <pre><code>## [1] 412</code></pre>
