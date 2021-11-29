@@ -382,7 +382,7 @@ peptide-spectrum matches, we can produced an improved total ion
 chromatogram, identifying MS1 scans that lead to successful
 identifications.
 
-The `nSequences()` function is going to tally the number of
+The `countIdentifications()` function is going to tally the number of
 identifications (i.e non-missing characters in the `sequence` spectra
 variable) for each scan. In the case of MS2 scans, these will be
 either 1 or 0, depending the presence of a sequence). For MS1 scans,
@@ -391,7 +391,7 @@ scans, i.e. those produced from precursor ions from each MS1 scan.
 
 
 ```{r nSequence, cache = TRUE}
-sp <- nSequences(sp)
+sp <- countIdentifications(sp)
 ```
 
 Below, we see on the second line that 3457 MS2 scans lead to no PSM,
@@ -400,7 +400,7 @@ no MS2 scans with PSMs. 30 MS1 scans generated one MS2 scan that lead
 to a PSM, 45 lead to two PSMs, ...
 
 ```{r nSequenceRes}
-table(msLevel(sp), sp$nSequences)
+table(msLevel(sp), sp$countIdentifications)
 ```
 
 These data can also be visualised on the total ion chromatogram:
@@ -413,7 +413,8 @@ as_tibble() |>
 ggplot(aes(x = rtime,
            y = totIonCurrent)) +
     geom_line(alpha = 0.25) +
-    geom_point(aes(colour = ifelse(nSequences == 0, NA, nSequences)),
+    geom_point(aes(colour = ifelse(countIdentifications == 0,
+                                   NA, countIdentifications)),
                size = 0.75,
                alpha = 0.5) +
     scale_colour_gradient(low = "orange", high = "red") +
