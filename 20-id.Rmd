@@ -385,7 +385,7 @@ identifications.
 The `countIdentifications()` function is going to tally the number of
 identifications (i.e non-missing characters in the `sequence` spectra
 variable) for each scan. In the case of MS2 scans, these will be
-either 1 or 0, depending the presence of a sequence). For MS1 scans,
+either 1 or 0, depending the presence of a sequence. For MS1 scans,
 the function will count the number of sequences for the descendant MS2
 scans, i.e. those produced from precursor ions from each MS1 scan.
 
