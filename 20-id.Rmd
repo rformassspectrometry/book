@@ -702,12 +702,38 @@ plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 `r msmbstyle::question_begin()`
 
 Generate total ion chromatograms for each acquisition and annotate the
-MS1 scans with the number of PSMs using the `nSequence()` function, as
-shown above. The function will automatically perform the counts in
-parallel for each acquisition.
+MS1 scans with the number of PSMs using the `countIdentifications()`
+function, as shown above. The function will automatically perform the
+counts in parallel for each acquisition.
 
 `r msmbstyle::question_end()`
 
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+sp <- countIdentifications(sp)
+table(msLevel(sp), sp$countIdentifications)
+```
+
+```{r}
+sp |>
+ filterMsLevel(1) |>
+ spectraData() |>
+ as_tibble() |>
+ ggplot(aes(x = rtime,
+            y = totIonCurrent)) +
+     geom_line(alpha = 0.25) +
+     geom_point(aes(colour = ifelse(countIdentifications == 0,
+                                    NA, countIdentifications)),
+                size = 0.75,
+                alpha = 0.5) +
+     scale_colour_gradient(low = "orange", high = "red") +
+     facet_grid(sub("^.+_", "", basename(dataOrigin)) ~ .) +
+     labs(colour = "Number of ids")
+```
+
+`r msmbstyle::solution_end()`
 
 ## Exploration and Assessment of Identifications using `MSnID`
 
