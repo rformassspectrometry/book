@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2021-12-23" />
+<meta name="date" content="2021-12-24" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -865,9 +865,7 @@ to a PSM, 45 lead to two PSMs, …</p>
 <span id="cb164-9"><a href="sec-id.html#cb164-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">NA</span>, countIdentifications)),</span>
 <span id="cb164-10"><a href="sec-id.html#cb164-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="fl">0.75</span>,</span>
 <span id="cb164-11"><a href="sec-id.html#cb164-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb164-12"><a href="sec-id.html#cb164-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradient</span>(<span class="at">low =</span> <span class="st">"orange"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb164-13"><a href="sec-id.html#cb164-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">basename</span>(dataOrigin)) <span class="sc">~</span> .) <span class="sc">+</span></span>
-<span id="cb164-14"><a href="sec-id.html#cb164-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
+<span id="cb164-12"><a href="sec-id.html#cb164-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
 <div class="figure fullwidth">
 <img src="R4MS_files/figure-html/nSequencePlot-1.png" alt=" " width="768"><p class="caption marginnote shownote">
 </p>
@@ -1343,7 +1341,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Dec 23 23:26:17 2021]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Fri Dec 24 10:26:19 2021]</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="sec-id.html#cb229-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb229-2"><a href="sec-id.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb229-3"><a href="sec-id.html#cb229-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1665,7 +1663,7 @@ Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBe
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-12-23
+2021-12-24
  using 
 R version 4.1.2 (2021-11-01)
 </p>

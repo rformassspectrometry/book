@@ -417,8 +417,6 @@ ggplot(aes(x = rtime,
                                    NA, countIdentifications)),
                size = 0.75,
                alpha = 0.5) +
-    scale_colour_gradient(low = "orange", high = "red") +
-    facet_grid(sub("^.+_", "", basename(dataOrigin)) ~ .) +
     labs(colour = "Number of ids")
 ```
 
