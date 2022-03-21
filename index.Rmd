@@ -85,16 +85,27 @@ package, please execute:
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
+BiocManager::install("grimbough/msmbstyle")
 BiocManager::install("msdata")
 BiocManager::install("mzR")
 BiocManager::install("rhdf5")
 BiocManager::install("lgatto/rpx")
-BiocManager::install("RforMassSpectrometry/ProtGenerics")
-BiocManager::install("RforMassSpectrometry/MsCoreUtils")
-BiocManager::install("RforMassSpectrometry/QFeatures")
+BiocManager::install("ProtGenerics")
+BiocManager::install("MsCoreUtils")
+BiocManager::install("QFeatures")
+BiocManager::install("Spectra")
 BiocManager::install("RforMassSpectrometry/PSMatch")
-BiocManager::install("RforMassSpectrometry/Spectra")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
+BiocManager::install("pheatmap")
+```
+
+To compile and render the teaching material, you will also need the
+(slighly modified) [Modern Statistics for Model Biology (msmb) HTML
+Book Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
+Smith:
+
+```{r setup2, eval = FALSE}
+BiocManager::install("lgatto/msmbstyle")
 ```
 
 
