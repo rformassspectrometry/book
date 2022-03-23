@@ -85,11 +85,10 @@ package, please execute:
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("grimbough/msmbstyle")
 BiocManager::install("msdata")
 BiocManager::install("mzR")
 BiocManager::install("rhdf5")
-BiocManager::install("lgatto/rpx")
+BiocManager::install("rpx")
 BiocManager::install("ProtGenerics")
 BiocManager::install("MsCoreUtils")
 BiocManager::install("QFeatures")
