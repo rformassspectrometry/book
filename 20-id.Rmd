@@ -213,6 +213,30 @@ This can also be achieved with the `filterPSMs()` function:
 id_filtered <- filterPSMs(id)
 ```
 
+The `describePeptides()` and `describeProteins()` functions from the
+`PSMatch` package provide useful summaries of preptides and proteins
+in a PSM search result.
+
+
+- `describePeptides()` gives the number of unique and shared peptides
+  and for the latter, the size of their protein groups:
+
+```{r}
+describePeptides(id_filtered)
+```
+
+- `describeProteins()` gives the number of protein defined by only
+  unique, only shared, or a mixture of unique/shared peptides:
+
+```{r}
+describeProteins(id_filtered)
+```
+
+See [Understanding protein groups with adjacency
+matrices](https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html)
+`PSMatch` vignette provides additional tools to explore how proteins
+were inferred from peptides.
+
 `r msmbstyle::question_begin()`
 
 Compare the distribution of raw idenfication scores of the decoy and
@@ -261,6 +285,8 @@ ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 ```
 
 `r msmbstyle::solution_end()`
+
+
 
 If you would like to learn more about how the mzid data are handled by
 `PSMatch` via the `r BiocStyle::Biocpkg("mzR")` and `r BiocStyle::Biocpkg("mzID")`
