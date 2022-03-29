@@ -207,7 +207,9 @@ id_tbl
 
 Which leaves us with `r nrow(id_tbl)` PSMs.
 
-This can also be achieved with the `filterPSMs()` function:
+This can also be achieved with the `filterPSMs()` function, or the
+individual `filterPsmRank()`, `filterPsmDecoy` and `filterPsmShared()`
+functions:
 
 ```{r}
 id_filtered <- filterPSMs(id)

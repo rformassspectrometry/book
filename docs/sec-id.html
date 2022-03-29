@@ -539,7 +539,9 @@ match any of these proteins.</li>
 </div>
 </div>
 <p>Which leaves us with 2666 PSMs.</p>
-<p>This can also be achieved with the <code>filterPSMs()</code> function:</p>
+<p>This can also be achieved with the <code>filterPSMs()</code> function, or the
+individual <code>filterPsmRank()</code>, <code>filterPsmDecoy</code> and <code>filterPsmShared()</code>
+functions:</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="sec-id.html#cb129-1" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> <span class="fu">filterPSMs</span>(id)</span></code></pre></div>
 <pre><code>## Starting with 5802 PSMs:</code></pre>
 <pre><code>## Removed 2896 decoy hits.</code></pre>
@@ -1366,7 +1368,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 29 12:42:55 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 29 12:53:36 2022]</code></pre>
 <div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="sec-id.html#cb239-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb239-2"><a href="sec-id.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb239-3"><a href="sec-id.html#cb239-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
