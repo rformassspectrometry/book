@@ -58,7 +58,7 @@ knitr::include_graphics("./img/chrompeaks.png")
 
 ### Labelled MS1: SILAC
 
-In SILAc quantitation, sample are grown in a medium that contains
+In SILAC quantitation, sample are grown in a medium that contains
 heavy amino acids (typically arginine and lysine). All proteins gown
 in this *heavy* growth medium contain the heavy form of these amino
 acids. Two samples, one grown in heavy medium, and one grown in normal
@@ -713,7 +713,7 @@ legend("topright", legend = c("orig", "knn", "zero", "MinDet", "bpca"),
 
 
 **Tip**: When downstream analyses permit, it might be safer not to
-impute data and deal explicitly with missing values. Indeed misssing
+impute data and deal explicitly with missing values. Indeed missing
 data impuration is however not a straightforward thing, as is likely
 to dramatically fail when a high proportion of data is missing (10s of
 %). It is possible to keep NAs when performing hypothesis
