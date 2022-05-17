@@ -802,7 +802,7 @@ We start by loading the package, initialising the `MSnID` object, and
 add the identification result from our `mzid` file (there could of
 course be more that one).
 
-```{r msnid1}
+```{r msnid1, warning = FALSE}
 library("MSnID")
 msnid <- MSnID(".")
 msnid <- read_mzIDs(msnid, mzids)

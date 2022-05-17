@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-03-29" />
+<meta name="date" content="2022-05-17" />
 
 
 <meta name="description" content="Chapter 2 Introduction | R for Mass Spectrometry">
@@ -186,7 +186,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-msintro" class="section level1" number="2">
+<html><body>
+<div id="sec-msintro" class="section level1" number="2">
 <h1>
 <span class="header-section-number">Chapter 2</span> Introduction</h1>
 <div id="how-does-mass-spectrometry-work" class="section level2" number="2.1">
@@ -226,9 +227,7 @@ below), which is not enough to infer their identify (i.e. their
 sequence).</p>
 <p>In MSMS (or MS2), the settings of the mass spectrometer are set
 automatically to select a certain number of MS1 peaks (for example
-20)<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Here, we will focus in data dependent acquisition (DDA), where
-MS1 peaks a selected. In data independent acquisition (DIA), all peaks
-in the MS1 spectrum are fragmented.</span>. Once a narrow M/Z range has been
+20)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Once a narrow M/Z range has been
 selected (corresponding to one high-intensity peak, a peptide, and
 some background noise), it is fragmented (using for example
 collision-induced dissociation (CID), higher energy collisional
@@ -308,7 +307,7 @@ quantitative data, as opposed as the name suggests),
 Reaction Monitoring (SRM, i.e. targeted) data and the
 <a href="http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp">MassIVE</a>
 resource. These data can be downloaded within R using the
-<em><a href="https://bioconductor.org/packages/3.14/rpx">rpx</a></em> package.</p>
+<em><a href="https://bioconductor.org/packages/3.15/rpx">rpx</a></em> package.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-msintro.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rpx"</span>)</span>
 <span id="cb3-2"><a href="sec-msintro.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pxannounced</span>()</span></code></pre></div>
 <pre><code>## The google group rss feeds are currenlty down (see
@@ -347,9 +346,9 @@ accessor function.</p>
 <pre><code>## [1] "Gatto L, Christoforou A; Using R and Bioconductor for proteomics data analysis., Biochim Biophys Acta, 2013 May 18, doi:10.1016/j.bbapap.2013.04.032 PMID:23692960"</code></pre>
 <p>Data files can then be downloaded with the <code>pxget</code> function. Below, we
 retrieve the raw data file. The file is
-downloaded<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> If the file is already available, it is not downloaded a second time.</span>
+downloaded<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 in the working directory and the name of the file is return by the
-function and stored in the <code>mzf</code> variable for later use <label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> This and other files are also availabel in the <code>msdata</code> package, described below</span>.</p>
+function and stored in the <code>mzf</code> variable for later use <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-msintro.html#cb19-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
 <span id="cb19-2"><a href="sec-msintro.html#cb19-2" aria-hidden="true" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span></code></pre></div>
 <pre><code>## Loading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML from cache.</code></pre>
@@ -360,7 +359,7 @@ function and stored in the <code>mzf</code> variable for later use <label for="t
 <h3>Data packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-packages')" onmouseout="reset_tooltip('data-packages-tooltip')"><span class="tooltiptext" id="data-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>Some data are also distributed through dedicated packages. The
-<em><a href="https://bioconductor.org/packages/3.14/msdata">msdata</a></em>, for example, provides some
+<em><a href="https://bioconductor.org/packages/3.15/msdata">msdata</a></em>, for example, provides some
 general raw data files relevant for both proteomics and
 metabolomics.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-msintro.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
@@ -378,21 +377,32 @@ metabolomics.</p>
 <span id="cb27-2"><a href="sec-msintro.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>More often, such <em>experiment packages</em> distribute processed data; an
-example of such is the <em><a href="https://bioconductor.org/packages/3.14/pRolocdata">pRolocdata</a></em>
+example of such is the <em><a href="https://bioconductor.org/packages/3.15/pRolocdata">pRolocdata</a></em>
 package, that offers quantitative proteomics data.</p>
 
 </div>
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="1">
+<li id="fn1"><p>Here, we will focus in data dependent acquisition (DDA), where
+MS1 peaks a selected. In data independent acquisition (DIA), all peaks
+in the MS1 spectrum are fragmented.<a href="sec-msintro.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>If the file is already available, it is not downloaded a second time.<a href="sec-msintro.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>This and other files are also availabel in the <code>msdata</code> package, described below<a href="sec-msintro.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="index.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-raw.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-03-29
+2022-05-17
  using 
-R version 4.1.2 Patched (2021-12-10 r81360)
+R version 4.2.0 Patched (2022-05-13 r82357)
 </p>
 </div>
 </div>
