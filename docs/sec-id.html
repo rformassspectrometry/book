@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-05-17" />
+<meta name="date" content="2022-05-23" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -66,7 +66,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -232,7 +231,7 @@ using <code>MSGFplus</code>:</p>
 abbreviated with <code>mzid</code>) into R is to read it with <code>readPSMs()</code>
 function from the
 <a href="https://rformassspectrometry.github.io/PSMatch/"><code>PSMatch</code></a>
-package<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. The function will parse the file and return a
+package<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> Previously named <code>PSM</code>.</span>. The function will parse the file and return a
 <code>DataFrame</code>.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="sec-id.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PSMatch)</span>
 <span id="cb98-2"><a href="sec-id.html#cb98-2" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">PSM</span>(idf)</span>
@@ -321,7 +320,8 @@ have 1, 2, … up to 5 matches.</p>
 <p>If the goal is to keep all the matches, but arranged by scan/spectrum,
 one can <em>reduce</em> the <code>PSM</code> object by the <code>spectrumID</code> variable, so
 that each scan correponds to a single row that still stores all
-values<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>:</p>
+values<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> The rownames aren’t needed here are are removed to reduce
+to output in the the next code chunk display parts of <code>id2</code>.</span>:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sec-id.html#cb114-1" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">reducePSMs</span>(id, id<span class="sc">$</span>spectrumID)</span>
 <span id="cb114-2"><a href="sec-id.html#cb114-2" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
 <pre><code>## Reduced PSM with 5343 rows and 35 columns.
@@ -596,7 +596,7 @@ non-decoy hits. Interpret the figure.</p>
 <span id="cb148-3"><a href="sec-id.html#cb148-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MS.GF.RawScore,</span>
 <span id="cb148-4"><a href="sec-id.html#cb148-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
 <span id="cb148-5"><a href="sec-id.html#cb148-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-45-1.png" width="672"></p>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -870,28 +870,29 @@ either 1 or 0, depending the presence of a sequence. For MS1 scans,
 the function will count the number of sequences for the descendant MS2
 scans, i.e. those produced from precursor ions from each MS1 scan.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="sec-id.html#cb174-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">countIdentifications</span>(sp)</span></code></pre></div>
+<pre><code>## </code></pre>
 <p>Below, we see on the second line that 3457 MS2 scans lead to no PSM,
 while 2546 lead to an identifcation. Among all MS1 scans, 833 lead to
 no MS2 scans with PSMs. 30 MS1 scans generated one MS2 scan that lead
 to a PSM, 45 lead to two PSMs, …</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-id.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">msLevel</span>(sp), sp<span class="sc">$</span>countIdentifications)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="sec-id.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">msLevel</span>(sp), sp<span class="sc">$</span>countIdentifications)</span></code></pre></div>
 <pre><code>##    
 ##        0    1    2    3    4    5    6    7    8    9   10
 ##   1  833   30   45   97  139  132   92   42   17    3    1
 ##   2 3457 2646    0    0    0    0    0    0    0    0    0</code></pre>
 <p>These data can also be visualised on the total ion chromatogram:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-id.html#cb177-1" aria-hidden="true" tabindex="-1"></a>sp <span class="sc">|&gt;</span></span>
-<span id="cb177-2"><a href="sec-id.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filterMsLevel</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb177-3"><a href="sec-id.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>() <span class="sc">|&gt;</span></span>
-<span id="cb177-4"><a href="sec-id.html#cb177-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb177-5"><a href="sec-id.html#cb177-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
-<span id="cb177-6"><a href="sec-id.html#cb177-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> totIonCurrent)) <span class="sc">+</span></span>
-<span id="cb177-7"><a href="sec-id.html#cb177-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb177-8"><a href="sec-id.html#cb177-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">ifelse</span>(countIdentifications <span class="sc">==</span> <span class="dv">0</span>,</span>
-<span id="cb177-9"><a href="sec-id.html#cb177-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">NA</span>, countIdentifications)),</span>
-<span id="cb177-10"><a href="sec-id.html#cb177-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="fl">0.75</span>,</span>
-<span id="cb177-11"><a href="sec-id.html#cb177-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb177-12"><a href="sec-id.html#cb177-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-id.html#cb178-1" aria-hidden="true" tabindex="-1"></a>sp <span class="sc">|&gt;</span></span>
+<span id="cb178-2"><a href="sec-id.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filterMsLevel</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb178-3"><a href="sec-id.html#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>() <span class="sc">|&gt;</span></span>
+<span id="cb178-4"><a href="sec-id.html#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb178-5"><a href="sec-id.html#cb178-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
+<span id="cb178-6"><a href="sec-id.html#cb178-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> totIonCurrent)) <span class="sc">+</span></span>
+<span id="cb178-7"><a href="sec-id.html#cb178-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb178-8"><a href="sec-id.html#cb178-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">ifelse</span>(countIdentifications <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb178-9"><a href="sec-id.html#cb178-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">NA</span>, countIdentifications)),</span>
+<span id="cb178-10"><a href="sec-id.html#cb178-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="fl">0.75</span>,</span>
+<span id="cb178-11"><a href="sec-id.html#cb178-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb178-12"><a href="sec-id.html#cb178-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
 <div class="figure fullwidth">
 <img src="R4MS_files/figure-html/nSequencePlot-1.png" alt=" " width="768"><p class="caption marginnote shownote">
 </p>
@@ -903,14 +904,14 @@ to a PSM, 45 lead to two PSMs, …</p>
 </h2>
 <p>Let’s choose a MS2 spectrum with a high identication score and plot
 it.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-id.html#cb178-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(sp<span class="sc">$</span>MS.GF.RawScore <span class="sc">&gt;</span> <span class="dv">100</span>)[<span class="dv">1</span>]</span>
-<span id="cb178-2"><a href="sec-id.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[i])</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-55-1.png" width="672"></p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-id.html#cb179-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(sp<span class="sc">$</span>MS.GF.RawScore <span class="sc">&gt;</span> <span class="dv">100</span>)[<span class="dv">1</span>]</span>
+<span id="cb179-2"><a href="sec-id.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[i])</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-51-1.png" width="672"></p>
 <p>We have seen above that we can add labels to each peak using the
 <code>labels</code> argument in <code>plotSpectra()</code>. The <code>addFragments()</code> function
 takes a spectrum as input (that is a <code>Spectra</code> object of length 1) and
 annotates its peaks.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-id.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addFragments</span>(sp[i])</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-id.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addFragments</span>(sp[i])</span></code></pre></div>
 <pre><code>##   [1] NA    NA    NA    "b1"  NA    NA    NA    NA    NA    NA    NA    NA   
 ##  [13] NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA   
 ##  [25] NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA   
@@ -922,9 +923,9 @@ annotates its peaks.</p>
 ##  [97] NA    NA    NA    NA   
 ##  [ reached getOption("max.print") -- omitted 227 entries ]</code></pre>
 <p>It can be directly used with <code>plotSpectra()</code>:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-id.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[i], <span class="at">labels =</span> addFragments,</span>
-<span id="cb181-2"><a href="sec-id.html#cb181-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labelPos =</span> <span class="dv">3</span>, <span class="at">labelCol =</span> <span class="st">"steelblue"</span>)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-57-1.png" width="672"></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-id.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[i], <span class="at">labels =</span> addFragments,</span>
+<span id="cb182-2"><a href="sec-id.html#cb182-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labelPos =</span> <span class="dv">3</span>, <span class="at">labelCol =</span> <span class="st">"steelblue"</span>)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-53-1.png" width="672"></p>
 <p>When a precursor peptide ion is fragmented in a CID cell, it breaks at
 specific bonds, producing sets of peaks (<em>a</em>, <em>b</em>, <em>c</em> and <em>x</em>, <em>y</em>,
 <em>z</em>) that can be predicted.</p>
@@ -936,9 +937,9 @@ specific bonds, producing sets of peaks (<em>a</em>, <em>b</em>, <em>c</em> and 
 </div>
 <p>The annotation of spectra is obtained by simulating fragmentation of a
 peptide and matching observed peaks to fragments:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-id.html#cb182-1" aria-hidden="true" tabindex="-1"></a>sp[i]<span class="sc">$</span>sequence</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-id.html#cb183-1" aria-hidden="true" tabindex="-1"></a>sp[i]<span class="sc">$</span>sequence</span></code></pre></div>
 <pre><code>## [1] "THSQEEMQHMQR"</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="sec-id.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculateFragments</span>(sp[i]<span class="sc">$</span>sequence)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="sec-id.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculateFragments</span>(sp[i]<span class="sc">$</span>sequence)</span></code></pre></div>
 <pre><code>## Modifications used: C=57.02146</code></pre>
 <pre><code>##           mz ion type pos z         seq
 ## 1   102.0550  b1    b   1 1           T
@@ -985,9 +986,9 @@ sequences <code>"SQILQQAGTSVLSQANQVPQTVLSLLR"</code> and
 ► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
 </p>
 <div id="sol-body-17" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="sec-id.html#cb187-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">which</span>(sp<span class="sc">$</span>sequence <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SQILQQAGTSVLSQANQVPQTVLSLLR"</span>, <span class="st">"TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR"</span>))</span>
-<span id="cb187-2"><a href="sec-id.html#cb187-2" aria-hidden="true" tabindex="-1"></a>sp_k <span class="ot">&lt;-</span> sp[k]</span>
-<span id="cb187-3"><a href="sec-id.html#cb187-3" aria-hidden="true" tabindex="-1"></a>sp_k</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="sec-id.html#cb188-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">which</span>(sp<span class="sc">$</span>sequence <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SQILQQAGTSVLSQANQVPQTVLSLLR"</span>, <span class="st">"TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR"</span>))</span>
+<span id="cb188-2"><a href="sec-id.html#cb188-2" aria-hidden="true" tabindex="-1"></a>sp_k <span class="ot">&lt;-</span> sp[k]</span>
+<span id="cb188-3"><a href="sec-id.html#cb188-3" aria-hidden="true" tabindex="-1"></a>sp_k</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 5 spectra in a MsBackendMzR backend:
 ##     msLevel     rtime scanIndex
 ##   &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -999,7 +1000,7 @@ sequences <code>"SQILQQAGTSVLSQANQVPQTVLSLLR"</code> and
 ##  ... 68 more variables/columns.
 ## 
 ## file(s):
-## 10a06e77fb5a02_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+## 53fd9a5bb5f5_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1025,17 +1026,17 @@ page for details. Draw a heatmap of that distance matrix</li>
 ► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
 </p>
 <div id="sol-body-18" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-id.html#cb189-1" aria-hidden="true" tabindex="-1"></a>distmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_k)</span>
-<span id="cb189-2"><a href="sec-id.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(distmat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(distmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_k<span class="sc">$</span>sequence, <span class="dv">2</span>)</span>
-<span id="cb189-3"><a href="sec-id.html#cb189-3" aria-hidden="true" tabindex="-1"></a>distmat</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-id.html#cb190-1" aria-hidden="true" tabindex="-1"></a>distmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_k)</span>
+<span id="cb190-2"><a href="sec-id.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(distmat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(distmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_k<span class="sc">$</span>sequence, <span class="dv">2</span>)</span>
+<span id="cb190-3"><a href="sec-id.html#cb190-3" aria-hidden="true" tabindex="-1"></a>distmat</span></code></pre></div>
 <pre><code>##              TK          TK           SQ          SQ           SQ
 ## TK 1.0000000000 0.109126094 0.0009373465 0.001261338 0.0008256185
 ## TK 0.1091260942 1.000000000 0.0025314670 0.001459654 0.0017613212
 ## SQ 0.0009373465 0.002531467 1.0000000000 0.432133016 0.6879331218
 ## SQ 0.0012613380 0.001459654 0.4321330158 1.000000000 0.4467153012
 ## SQ 0.0008256185 0.001761321 0.6879331218 0.446715301 1.0000000000</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-id.html#cb191-1" aria-hidden="true" tabindex="-1"></a>pheatmap<span class="sc">::</span><span class="fu">pheatmap</span>(distmat)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-59-1.png" width="672"></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-id.html#cb192-1" aria-hidden="true" tabindex="-1"></a>pheatmap<span class="sc">::</span><span class="fu">pheatmap</span>(distmat)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-55-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1059,13 +1060,13 @@ page for details. Draw a heatmap of that distance matrix</li>
 ► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
 </p>
 <div id="sol-body-19" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-id.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterIntensity</span>(sp_k, <span class="fl">1e3</span>) <span class="sc">%&gt;%</span> <span class="fu">plotSpectra</span>(<span class="at">main =</span> sp_k<span class="sc">$</span>sequence)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-60-1.png" width="672"></p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-id.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
-<span id="cb193-2"><a href="sec-id.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">1</span>], sp_k[<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"TK..."</span>)</span>
-<span id="cb193-3"><a href="sec-id.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">3</span>], sp_k[<span class="dv">4</span>], <span class="at">main =</span> <span class="st">"SQ..."</span>)</span>
-<span id="cb193-4"><a href="sec-id.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">3</span>], sp_k[<span class="dv">4</span>], <span class="at">main =</span> <span class="st">"SQ..."</span>)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-61-1.png" width="672"></p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-id.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filterIntensity</span>(sp_k, <span class="fl">1e3</span>) <span class="sc">%&gt;%</span> <span class="fu">plotSpectra</span>(<span class="at">main =</span> sp_k<span class="sc">$</span>sequence)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-56-1.png" width="672"></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-id.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb194-2"><a href="sec-id.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">1</span>], sp_k[<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"TK..."</span>)</span>
+<span id="cb194-3"><a href="sec-id.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">3</span>], sp_k[<span class="dv">4</span>], <span class="at">main =</span> <span class="st">"SQ..."</span>)</span>
+<span id="cb194-4"><a href="sec-id.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">3</span>], sp_k[<span class="dv">4</span>], <span class="at">main =</span> <span class="st">"SQ..."</span>)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-57-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1094,22 +1095,22 @@ project <span class="citation">(<a href="#ref-Morgenstern:2020" role="doc-biblio
 ► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
 </p>
 <div id="sol-body-20" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-id.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting data from PX/PRIDE</span></span>
-<span id="cb194-2"><a href="sec-id.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpx)</span>
-<span id="cb194-3"><a href="sec-id.html#cb194-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-4"><a href="sec-id.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="do">## https://www.ebi.ac.uk/pride/archive/projects/PXD022816</span></span>
-<span id="cb194-5"><a href="sec-id.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="do">## RawBeans: A Simple, Vendor-Independent, Raw-Data Quality-Control</span></span>
-<span id="cb194-6"><a href="sec-id.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Tool ()</span></span>
-<span id="cb194-7"><a href="sec-id.html#cb194-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-8"><a href="sec-id.html#cb194-8" aria-hidden="true" tabindex="-1"></a>PXD022816 <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD022816"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sec-id.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting data from PX/PRIDE</span></span>
+<span id="cb195-2"><a href="sec-id.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpx)</span>
+<span id="cb195-3"><a href="sec-id.html#cb195-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-4"><a href="sec-id.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="do">## https://www.ebi.ac.uk/pride/archive/projects/PXD022816</span></span>
+<span id="cb195-5"><a href="sec-id.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="do">## RawBeans: A Simple, Vendor-Independent, Raw-Data Quality-Control</span></span>
+<span id="cb195-6"><a href="sec-id.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Tool ()</span></span>
+<span id="cb195-7"><a href="sec-id.html#cb195-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-8"><a href="sec-id.html#cb195-8" aria-hidden="true" tabindex="-1"></a>PXD022816 <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD022816"</span>)</span></code></pre></div>
 <pre><code>## Loading PXD022816 from cache.</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-id.html#cb196-1" aria-hidden="true" tabindex="-1"></a>PXD022816</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sec-id.html#cb197-1" aria-hidden="true" tabindex="-1"></a>PXD022816</span></code></pre></div>
 <pre><code>## Project PXD022816 with 31 files
 ## </code></pre>
-<pre><code>## Resource ID BFC72 in cache in /home/lgatto/.cache/R/rpx.</code></pre>
+<pre><code>## Resource ID BFC572 in cache in /home/lgatto/.cache/R/rpx.</code></pre>
 <pre><code>##  [1] 'checksum.txt' ... [31] 'QEP2LC6_HeLa_50ng_251120_10-calib.mzML'
 ##  Use 'pxfiles(.)' to see all files.</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-id.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxfiles</span>(PXD022816)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sec-id.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxfiles</span>(PXD022816)</span></code></pre></div>
 <pre><code>## Project PXD022816 files (31):
 ##  [remote] checksum.txt
 ##  [remote] QEP2LC6_HeLa_50ng_251120_01.raw
@@ -1122,7 +1123,7 @@ project <span class="citation">(<a href="#ref-Morgenstern:2020" role="doc-biblio
 ##  [remote] QEP2LC6_HeLa_50ng_251120_08.raw
 ##  [remote] QEP2LC6_HeLa_50ng_251120_09.raw
 ##  ...</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sec-id.html#cb202-1" aria-hidden="true" tabindex="-1"></a>(mzids <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzID"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sec-id.html#cb203-1" aria-hidden="true" tabindex="-1"></a>(mzids <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzID"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
 <pre><code>## Project PXD022816 files (31):
 ##  [remote] checksum.txt
 ##  [remote] QEP2LC6_HeLa_50ng_251120_01.raw
@@ -1138,10 +1139,10 @@ project <span class="citation">(<a href="#ref-Morgenstern:2020" role="doc-biblio
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz from cache.</code></pre>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/1ee5da68127b1b_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz"
-## [2] "/home/lgatto/.cache/R/rpx/1ee5da6b6c9284_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
-## [3] "/home/lgatto/.cache/R/rpx/1ee5da3fdbd55d_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sec-id.html#cb208-1" aria-hidden="true" tabindex="-1"></a>(mzmls <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/82de44aa46c9d_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz"
+## [2] "/home/lgatto/.cache/R/rpx/82de432e033ee_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
+## [3] "/home/lgatto/.cache/R/rpx/82de47c698b6c_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sec-id.html#cb209-1" aria-hidden="true" tabindex="-1"></a>(mzmls <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
 <pre><code>## Project PXD022816 files (31):
 ##  [remote] checksum.txt
 ##  [remote] QEP2LC6_HeLa_50ng_251120_01.raw
@@ -1157,9 +1158,9 @@ project <span class="citation">(<a href="#ref-Morgenstern:2020" role="doc-biblio
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzML from cache.</code></pre>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/1ee5da28234f6d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
-## [2] "/home/lgatto/.cache/R/rpx/1ee5daa4084_QEP2LC6_HeLa_50ng_251120_02-calib.mzML"   
-## [3] "/home/lgatto/.cache/R/rpx/1ee5da1a92c9e5_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/82de43809d942_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
+## [2] "/home/lgatto/.cache/R/rpx/82de47014cc4_QEP2LC6_HeLa_50ng_251120_02-calib.mzML" 
+## [3] "/home/lgatto/.cache/R/rpx/84af9624aa9f_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1184,10 +1185,10 @@ PSMs id scores for each file.</p>
 ► Solution<span id="sol-start-21" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-21', 'sol-start-21')"></span>
 </p>
 <div id="sol-body-21" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="sec-id.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading raw data</span></span>
-<span id="cb214-2"><a href="sec-id.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Spectra"</span>)</span>
-<span id="cb214-3"><a href="sec-id.html#cb214-3" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzmls)</span>
-<span id="cb214-4"><a href="sec-id.html#cb214-4" aria-hidden="true" tabindex="-1"></a>sp</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="sec-id.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading raw data</span></span>
+<span id="cb215-2"><a href="sec-id.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Spectra"</span>)</span>
+<span id="cb215-3"><a href="sec-id.html#cb215-3" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzmls)</span>
+<span id="cb215-4"><a href="sec-id.html#cb215-4" aria-hidden="true" tabindex="-1"></a>sp</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 87647 spectra in a MsBackendMzR backend:
 ##         msLevel     rtime scanIndex
 ##       &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -1205,62 +1206,62 @@ PSMs id scores for each file.</p>
 ##  ... 33 more variables/columns.
 ## 
 ## file(s):
-## 1ee5da28234f6d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
-## 1ee5daa4084_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
-## 1ee5da1a92c9e5_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="sec-id.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="do">## number of spectra per file</span></span>
-<span id="cb216-2"><a href="sec-id.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">basename</span>(sp<span class="sc">$</span>dataOrigin))</span></code></pre></div>
+## 82de43809d942_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
+## 82de47014cc4_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
+## 84af9624aa9f_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="sec-id.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="do">## number of spectra per file</span></span>
+<span id="cb217-2"><a href="sec-id.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">basename</span>(sp<span class="sc">$</span>dataOrigin))</span></code></pre></div>
 <pre><code>## 
-## 1ee5da1a92c9e5_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
-##                                                 28740 
-## 1ee5da28234f6d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
-##                                                 29575 
-##    1ee5daa4084_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
-##                                                 29332</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="sec-id.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="do">## all levels are centroided</span></span>
-<span id="cb218-2"><a href="sec-id.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp<span class="sc">$</span>centroided, sp<span class="sc">$</span>msLevel)</span></code></pre></div>
+## 82de43809d942_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
+##                                                29575 
+##  82de47014cc4_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
+##                                                29332 
+##  84af9624aa9f_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
+##                                                28740</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="sec-id.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="do">## all levels are centroided</span></span>
+<span id="cb219-2"><a href="sec-id.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp<span class="sc">$</span>centroided, sp<span class="sc">$</span>msLevel)</span></code></pre></div>
 <pre><code>##       
 ##            1     2
 ##   TRUE 19607 68040</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="sec-id.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb220-2"><a href="sec-id.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
-<span id="cb220-3"><a href="sec-id.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
-<span id="cb220-4"><a href="sec-id.html#cb220-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-5"><a href="sec-id.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Chromatograms</span></span>
-<span id="cb220-6"><a href="sec-id.html#cb220-6" aria-hidden="true" tabindex="-1"></a><span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb220-7"><a href="sec-id.html#cb220-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spectraData</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb220-8"><a href="sec-id.html#cb220-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb220-9"><a href="sec-id.html#cb220-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
-<span id="cb220-10"><a href="sec-id.html#cb220-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> totIonCurrent,</span>
-<span id="cb220-11"><a href="sec-id.html#cb220-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="fu">basename</span>(dataOrigin))) <span class="sc">+</span></span>
-<span id="cb220-12"><a href="sec-id.html#cb220-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-64-1.png" width="1152"></p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="sec-id.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Identification data</span></span>
-<span id="cb221-2"><a href="sec-id.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PSMatch"</span>)</span>
-<span id="cb221-3"><a href="sec-id.html#cb221-3" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">PSM</span>(mzids)</span>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="sec-id.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb221-2"><a href="sec-id.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb221-3"><a href="sec-id.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
 <span id="cb221-4"><a href="sec-id.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb221-5"><a href="sec-id.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of PSMs per acquisition</span></span>
-<span id="cb221-6"><a href="sec-id.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(id<span class="sc">$</span>idFile)</span></code></pre></div>
+<span id="cb221-5"><a href="sec-id.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Chromatograms</span></span>
+<span id="cb221-6"><a href="sec-id.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb221-7"><a href="sec-id.html#cb221-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spectraData</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb221-8"><a href="sec-id.html#cb221-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb221-9"><a href="sec-id.html#cb221-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
+<span id="cb221-10"><a href="sec-id.html#cb221-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> totIonCurrent,</span>
+<span id="cb221-11"><a href="sec-id.html#cb221-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="fu">basename</span>(dataOrigin))) <span class="sc">+</span></span>
+<span id="cb221-12"><a href="sec-id.html#cb221-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-60-1.png" width="1152"></p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="sec-id.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Identification data</span></span>
+<span id="cb222-2"><a href="sec-id.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PSMatch"</span>)</span>
+<span id="cb222-3"><a href="sec-id.html#cb222-3" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">PSM</span>(mzids)</span>
+<span id="cb222-4"><a href="sec-id.html#cb222-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-5"><a href="sec-id.html#cb222-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of PSMs per acquisition</span></span>
+<span id="cb222-6"><a href="sec-id.html#cb222-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(id<span class="sc">$</span>idFile)</span></code></pre></div>
 <pre><code>## 
-## 1ee5da3fdbd55d_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
-##                                                    24436 
-## 1ee5da68127b1b_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
-##                                                    25231 
-## 1ee5da6b6c9284_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
-##                                                    25083</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="sec-id.html#cb223-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb223-2"><a href="sec-id.html#cb223-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MetaMorpheus.score,</span>
-<span id="cb223-3"><a href="sec-id.html#cb223-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
-<span id="cb223-4"><a href="sec-id.html#cb223-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb223-5"><a href="sec-id.html#cb223-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> spectrumFile)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-65-1.png" width="1152"></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-id.html#cb224-1" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> <span class="fu">filterPSMs</span>(id)</span></code></pre></div>
+## 82de432e033ee_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
+##                                                   25083 
+## 82de44aa46c9d_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
+##                                                   25231 
+## 82de47c698b6c_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
+##                                                   24436</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-id.html#cb224-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb224-2"><a href="sec-id.html#cb224-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MetaMorpheus.score,</span>
+<span id="cb224-3"><a href="sec-id.html#cb224-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
+<span id="cb224-4"><a href="sec-id.html#cb224-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb224-5"><a href="sec-id.html#cb224-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> spectrumFile)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-61-1.png" width="1152"></p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="sec-id.html#cb225-1" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> <span class="fu">filterPSMs</span>(id)</span></code></pre></div>
 <pre><code>## Starting with 74750 PSMs:</code></pre>
 <pre><code>## Removed 543 decoy hits.</code></pre>
 <pre><code>## Removed 0 PSMs with rank &gt; 1.</code></pre>
 <pre><code>## Removed 11310 shared peptides.</code></pre>
 <pre><code>## 62897 PSMs left.</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="sec-id.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(id_filtered<span class="sc">$</span>PSM.level.q.value)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-id.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(id_filtered<span class="sc">$</span>PSM.level.q.value)</span></code></pre></div>
 <pre><code>## [1] 0.009994817</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1284,43 +1285,43 @@ must now be performed by spectrum ids and by files.</p>
 ► Solution<span id="sol-start-22" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-22', 'sol-start-22')"></span>
 </p>
 <div id="sol-body-22" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="sec-id.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="do">## primary key for spectra</span></span>
-<span id="cb232-2"><a href="sec-id.html#cb232-2" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>pkey <span class="ot">&lt;-</span></span>
-<span id="cb232-3"><a href="sec-id.html#cb232-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">sub</span>(<span class="st">"^.+_QEP"</span>, <span class="st">"QEP"</span>, <span class="fu">basename</span>(<span class="fu">dataOrigin</span>(sp))),</span>
-<span id="cb232-4"><a href="sec-id.html#cb232-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">gsub</span>(<span class="st">"^.+="</span>, <span class="st">"::"</span>, sp<span class="sc">$</span>spectrumId))</span>
-<span id="cb232-5"><a href="sec-id.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sp<span class="sc">$</span>pkey)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="sec-id.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="do">## primary key for spectra</span></span>
+<span id="cb233-2"><a href="sec-id.html#cb233-2" aria-hidden="true" tabindex="-1"></a>sp<span class="sc">$</span>pkey <span class="ot">&lt;-</span></span>
+<span id="cb233-3"><a href="sec-id.html#cb233-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">sub</span>(<span class="st">"^.+_QEP"</span>, <span class="st">"QEP"</span>, <span class="fu">basename</span>(<span class="fu">dataOrigin</span>(sp))),</span>
+<span id="cb233-4"><a href="sec-id.html#cb233-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">gsub</span>(<span class="st">"^.+="</span>, <span class="st">"::"</span>, sp<span class="sc">$</span>spectrumId))</span>
+<span id="cb233-5"><a href="sec-id.html#cb233-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sp<span class="sc">$</span>pkey)</span></code></pre></div>
 <pre><code>## [1] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::1"
 ## [2] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::2"
 ## [3] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::3"
 ## [4] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::4"
 ## [5] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::5"
 ## [6] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::6"</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="sec-id.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="do">## primary key for PSMs</span></span>
-<span id="cb234-2"><a href="sec-id.html#cb234-2" aria-hidden="true" tabindex="-1"></a>id_filtered<span class="sc">$</span>pkey <span class="ot">&lt;-</span></span>
-<span id="cb234-3"><a href="sec-id.html#cb234-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">gsub</span>(<span class="st">"^.+</span><span class="sc">\\</span><span class="st">QEP"</span>, <span class="st">"QEP"</span>, id_filtered<span class="sc">$</span>spectrumFile),</span>
-<span id="cb234-4"><a href="sec-id.html#cb234-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sub</span>(<span class="st">"^.+="</span>, <span class="st">"::"</span>, id_filtered<span class="sc">$</span>spectrumID))</span>
-<span id="cb234-5"><a href="sec-id.html#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>pkey)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="sec-id.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="do">## primary key for PSMs</span></span>
+<span id="cb235-2"><a href="sec-id.html#cb235-2" aria-hidden="true" tabindex="-1"></a>id_filtered<span class="sc">$</span>pkey <span class="ot">&lt;-</span></span>
+<span id="cb235-3"><a href="sec-id.html#cb235-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="fu">gsub</span>(<span class="st">"^.+</span><span class="sc">\\</span><span class="st">QEP"</span>, <span class="st">"QEP"</span>, id_filtered<span class="sc">$</span>spectrumFile),</span>
+<span id="cb235-4"><a href="sec-id.html#cb235-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sub</span>(<span class="st">"^.+="</span>, <span class="st">"::"</span>, id_filtered<span class="sc">$</span>spectrumID))</span>
+<span id="cb235-5"><a href="sec-id.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>pkey)</span></code></pre></div>
 <pre><code>## [1] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::3426" 
 ## [2] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::20165"
 ## [3] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::20180"
 ## [4] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::15180"
 ## [5] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::10327"
 ## [6] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::12894"</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-id.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="do">## For simplicity, let keep single hits per spectrum id.</span></span>
-<span id="cb236-2"><a href="sec-id.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternatively, explore duplicates and use QFeatures::reduceDataFrame</span></span>
-<span id="cb236-3"><a href="sec-id.html#cb236-3" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> id_filtered[<span class="sc">!</span><span class="fu">duplicated</span>(id_filtered<span class="sc">$</span>pkey), ]</span>
-<span id="cb236-4"><a href="sec-id.html#cb236-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-5"><a href="sec-id.html#cb236-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>pkey)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-id.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="do">## For simplicity, let keep single hits per spectrum id.</span></span>
+<span id="cb237-2"><a href="sec-id.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternatively, explore duplicates and use QFeatures::reduceDataFrame</span></span>
+<span id="cb237-3"><a href="sec-id.html#cb237-3" aria-hidden="true" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> id_filtered[<span class="sc">!</span><span class="fu">duplicated</span>(id_filtered<span class="sc">$</span>pkey), ]</span>
+<span id="cb237-4"><a href="sec-id.html#cb237-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb237-5"><a href="sec-id.html#cb237-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>pkey)</span></code></pre></div>
 <pre><code>## [1] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::3426" 
 ## [2] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::20165"
 ## [3] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::20180"
 ## [4] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::15180"
 ## [5] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::10327"
 ## [6] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::12894"</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-id.html#cb238-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">joinSpectraData</span>(sp, id_filtered, <span class="at">by.x =</span> <span class="st">"pkey"</span>)</span>
-<span id="cb238-2"><a href="sec-id.html#cb238-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-3"><a href="sec-id.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of MS2 scans with a PSM</span></span>
-<span id="cb238-4"><a href="sec-id.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">2</span>)<span class="sc">$</span>sequence))</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="sec-id.html#cb239-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">joinSpectraData</span>(sp, id_filtered, <span class="at">by.x =</span> <span class="st">"pkey"</span>)</span>
+<span id="cb239-2"><a href="sec-id.html#cb239-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb239-3"><a href="sec-id.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of MS2 scans with a PSM</span></span>
+<span id="cb239-4"><a href="sec-id.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">2</span>)<span class="sc">$</span>sequence))</span></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ## 22006 46034</code></pre>
@@ -1348,9 +1349,9 @@ switch to an in-memory backend to seed up the calculations.</p>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="sec-id.html#cb240-1" aria-hidden="true" tabindex="-1"></a>sp_O43175 <span class="ot">&lt;-</span> sp[<span class="fu">which</span>(sp<span class="sc">$</span>DatabaseAccess <span class="sc">==</span> <span class="st">"O43175"</span>)]</span>
-<span id="cb240-2"><a href="sec-id.html#cb240-2" aria-hidden="true" tabindex="-1"></a>sp_O43175 <span class="ot">&lt;-</span> <span class="fu">setBackend</span>(sp_O43175, <span class="fu">MsBackendDataFrame</span>())</span>
-<span id="cb240-3"><a href="sec-id.html#cb240-3" aria-hidden="true" tabindex="-1"></a>sp_O43175</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="sec-id.html#cb241-1" aria-hidden="true" tabindex="-1"></a>sp_O43175 <span class="ot">&lt;-</span> sp[<span class="fu">which</span>(sp<span class="sc">$</span>DatabaseAccess <span class="sc">==</span> <span class="st">"O43175"</span>)]</span>
+<span id="cb241-2"><a href="sec-id.html#cb241-2" aria-hidden="true" tabindex="-1"></a>sp_O43175 <span class="ot">&lt;-</span> <span class="fu">setBackend</span>(sp_O43175, <span class="fu">MsBackendDataFrame</span>())</span>
+<span id="cb241-3"><a href="sec-id.html#cb241-3" aria-hidden="true" tabindex="-1"></a>sp_O43175</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 77 spectra in a MsBackendDataFrame backend:
 ##       msLevel     rtime scanIndex
 ##     &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -1367,32 +1368,32 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue May 17 17:52:33 2022]</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-id.html#cb242-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
-<span id="cb242-2"><a href="sec-id.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
-<span id="cb242-3"><a href="sec-id.html#cb242-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
-<span id="cb242-4"><a href="sec-id.html#cb242-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-5"><a href="sec-id.html#cb242-5" aria-hidden="true" tabindex="-1"></a>pheatmap<span class="sc">::</span><span class="fu">pheatmap</span>(cmat)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-68-1.png" width="672"></p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-id.html#cb243-1" aria-hidden="true" tabindex="-1"></a>(i <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">rownames</span>(cmat) <span class="sc">==</span> <span class="st">"DLP"</span>))</span></code></pre></div>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon May 23 13:29:14 2022]</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-id.html#cb243-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
+<span id="cb243-2"><a href="sec-id.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
+<span id="cb243-3"><a href="sec-id.html#cb243-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
+<span id="cb243-4"><a href="sec-id.html#cb243-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-5"><a href="sec-id.html#cb243-5" aria-hidden="true" tabindex="-1"></a>pheatmap<span class="sc">::</span><span class="fu">pheatmap</span>(cmat)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-64-1.png" width="672"></p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-id.html#cb244-1" aria-hidden="true" tabindex="-1"></a>(i <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">rownames</span>(cmat) <span class="sc">==</span> <span class="st">"DLP"</span>))</span></code></pre></div>
 <pre><code>## [1] 21 23 45 46 49 73 74 77</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="sec-id.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp_O43175[i], <span class="at">labels =</span> addFragments,</span>
-<span id="cb245-2"><a href="sec-id.html#cb245-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labelPos =</span> <span class="dv">3</span>, <span class="at">labelCol =</span> <span class="st">"steelblue"</span>,</span>
-<span id="cb245-3"><a href="sec-id.html#cb245-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> sp_O43175<span class="sc">$</span>sequence[i])</span>
-<span id="cb245-4"><a href="sec-id.html#cb245-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-5"><a href="sec-id.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>precursorCharge</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="sec-id.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp_O43175[i], <span class="at">labels =</span> addFragments,</span>
+<span id="cb246-2"><a href="sec-id.html#cb246-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labelPos =</span> <span class="dv">3</span>, <span class="at">labelCol =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb246-3"><a href="sec-id.html#cb246-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">main =</span> sp_O43175<span class="sc">$</span>sequence[i])</span>
+<span id="cb246-4"><a href="sec-id.html#cb246-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-5"><a href="sec-id.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>precursorCharge</span></code></pre></div>
 <pre><code>## [1] 2 2 2 2 2 2 2 2</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="sec-id.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>precursorMz</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-id.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>precursorMz</span></code></pre></div>
 <pre><code>## [1] 493.8055 515.3086 493.8383 493.8380 515.3084 493.8057 493.8390 515.3087</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="sec-id.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>modName</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectraData</span>(sp_O43175[i])<span class="sc">$</span>modName</span></code></pre></div>
 <pre><code>## [1] NA         "Carbamyl" NA         NA         "Carbamyl" NA         NA        
 ## [8] "Carbamyl"</code></pre>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-68-2.png" width="672"></p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="sec-id.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Directly compare spectra with/without Carbamyl</span></span>
-<span id="cb251-2"><a href="sec-id.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_O43175[<span class="dv">4</span>], sp_O43175[<span class="dv">9</span>])</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-69-1.png" width="672"></p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-id.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_O43175[<span class="dv">2</span>], sp_O43175[<span class="dv">10</span>])</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-69-2.png" width="672"></p>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-64-2.png" width="672"></p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-id.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Directly compare spectra with/without Carbamyl</span></span>
+<span id="cb252-2"><a href="sec-id.html#cb252-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_O43175[<span class="dv">4</span>], sp_O43175[<span class="dv">9</span>])</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-65-1.png" width="672"></p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="sec-id.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_O43175[<span class="dv">2</span>], sp_O43175[<span class="dv">10</span>])</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-65-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1417,27 +1418,27 @@ counts in parallel for each acquisition.</p>
 ► Solution<span id="sol-start-24" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-24', 'sol-start-24')"></span>
 </p>
 <div id="sol-body-24" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="sec-id.html#cb253-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">countIdentifications</span>(sp)</span>
-<span id="cb253-2"><a href="sec-id.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">msLevel</span>(sp), sp<span class="sc">$</span>countIdentifications)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sec-id.html#cb254-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">countIdentifications</span>(sp)</span>
+<span id="cb254-2"><a href="sec-id.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">msLevel</span>(sp), sp<span class="sc">$</span>countIdentifications)</span></code></pre></div>
 <pre><code>##    
 ##         0     1     2     3     4     5     6     7     8     9    10
 ##   1 12937   488   254   213   237   345   588   991  1439  1401   714
 ##   2 22006 46034     0     0     0     0     0     0     0     0     0</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="sec-id.html#cb255-1" aria-hidden="true" tabindex="-1"></a>sp <span class="sc">|&gt;</span></span>
-<span id="cb255-2"><a href="sec-id.html#cb255-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filterMsLevel</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb255-3"><a href="sec-id.html#cb255-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">spectraData</span>() <span class="sc">|&gt;</span></span>
-<span id="cb255-4"><a href="sec-id.html#cb255-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb255-5"><a href="sec-id.html#cb255-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
-<span id="cb255-6"><a href="sec-id.html#cb255-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> totIonCurrent)) <span class="sc">+</span></span>
-<span id="cb255-7"><a href="sec-id.html#cb255-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb255-8"><a href="sec-id.html#cb255-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">ifelse</span>(countIdentifications <span class="sc">==</span> <span class="dv">0</span>,</span>
-<span id="cb255-9"><a href="sec-id.html#cb255-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">NA</span>, countIdentifications)),</span>
-<span id="cb255-10"><a href="sec-id.html#cb255-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="fl">0.75</span>,</span>
-<span id="cb255-11"><a href="sec-id.html#cb255-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb255-12"><a href="sec-id.html#cb255-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_colour_gradient</span>(<span class="at">low =</span> <span class="st">"orange"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb255-13"><a href="sec-id.html#cb255-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">facet_grid</span>(<span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">basename</span>(dataOrigin)) <span class="sc">~</span> .) <span class="sc">+</span></span>
-<span id="cb255-14"><a href="sec-id.html#cb255-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/unnamed-chunk-71-1.png" width="672"></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-id.html#cb256-1" aria-hidden="true" tabindex="-1"></a>sp <span class="sc">|&gt;</span></span>
+<span id="cb256-2"><a href="sec-id.html#cb256-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filterMsLevel</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb256-3"><a href="sec-id.html#cb256-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">spectraData</span>() <span class="sc">|&gt;</span></span>
+<span id="cb256-4"><a href="sec-id.html#cb256-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb256-5"><a href="sec-id.html#cb256-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
+<span id="cb256-6"><a href="sec-id.html#cb256-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> totIonCurrent)) <span class="sc">+</span></span>
+<span id="cb256-7"><a href="sec-id.html#cb256-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb256-8"><a href="sec-id.html#cb256-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">ifelse</span>(countIdentifications <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb256-9"><a href="sec-id.html#cb256-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">NA</span>, countIdentifications)),</span>
+<span id="cb256-10"><a href="sec-id.html#cb256-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="fl">0.75</span>,</span>
+<span id="cb256-11"><a href="sec-id.html#cb256-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb256-12"><a href="sec-id.html#cb256-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_colour_gradient</span>(<span class="at">low =</span> <span class="st">"orange"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb256-13"><a href="sec-id.html#cb256-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">facet_grid</span>(<span class="fu">sub</span>(<span class="st">"^.+_"</span>, <span class="st">""</span>, <span class="fu">basename</span>(dataOrigin)) <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb256-14"><a href="sec-id.html#cb256-14" aria-hidden="true" tabindex="-1"></a>     <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Number of ids"</span>)</span></code></pre></div>
+<p><img src="R4MS_files/figure-html/unnamed-chunk-67-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1463,25 +1464,25 @@ measurement accuracy, etc.</p>
 </h3>
 <p>Let’s reproduce parts of the analysis described the <code>MSnID</code>
 vignette. You can explore more with</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-id.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">"msnid_vignette"</span>, <span class="at">package =</span> <span class="st">"MSnID"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sec-id.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">"msnid_vignette"</span>, <span class="at">package =</span> <span class="st">"MSnID"</span>)</span></code></pre></div>
 <p>The <em><a href="https://bioconductor.org/packages/3.15/MSnID">MSnID</a></em> package can be used for post-search filtering
 of MS/MS identifications. One starts with the construction of an
 <code>MSnID</code> object that is populated with identification results that can
 be imported from a <code>data.frame</code> or from <code>mzIdenML</code> files. Here, we
 will use the example identification data provided with the package.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sec-id.html#cb257-1" aria-hidden="true" tabindex="-1"></a>mzids <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"c_elegans.mzid.gz"</span>, <span class="at">package=</span><span class="st">"MSnID"</span>)</span>
-<span id="cb257-2"><a href="sec-id.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(mzids)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="sec-id.html#cb258-1" aria-hidden="true" tabindex="-1"></a>mzids <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"c_elegans.mzid.gz"</span>, <span class="at">package=</span><span class="st">"MSnID"</span>)</span>
+<span id="cb258-2"><a href="sec-id.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(mzids)</span></code></pre></div>
 <pre><code>## [1] "c_elegans.mzid.gz"</code></pre>
 <p>We start by loading the package, initialising the <code>MSnID</code> object, and
 add the identification result from our <code>mzid</code> file (there could of
 course be more that one).</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="sec-id.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnID"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="sec-id.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnID"</span>)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'MSnID'</code></pre>
 <pre><code>## The following object is masked from 'package:ProtGenerics':
 ## 
 ##     peptides</code></pre>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="sec-id.html#cb262-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">MSnID</span>(<span class="st">"."</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="sec-id.html#cb263-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">MSnID</span>(<span class="st">"."</span>)</span></code></pre></div>
 <pre><code>## Note, the anticipated/suggested columns in the
 ## peptide-to-spectrum matching results are:
 ## -----------------------------------------------
@@ -1493,9 +1494,9 @@ course be more that one).</p>
 ## peptide
 ## spectrumFile
 ## spectrumID</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="sec-id.html#cb264-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">read_mzIDs</span>(msnid, mzids)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="sec-id.html#cb265-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">read_mzIDs</span>(msnid, mzids)</span></code></pre></div>
 <pre><code>## Loaded cached data</code></pre>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="sec-id.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="sec-id.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1519,7 +1520,7 @@ properly function, it expects to have access to the following data</p>
 ## [5] "isDecoy"                  "peptide"                 
 ## [7] "spectrumFile"             "spectrumID"</code></pre>
 <p>which are indeed present in our data:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="sec-id.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="sec-id.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(msnid)</span></code></pre></div>
 <pre><code>##  [1] "spectrumID"                "scan number(s)"           
 ##  [3] "acquisitionNum"            "passThreshold"            
 ##  [5] "rank"                      "calculatedMassToCharge"   
@@ -1547,8 +1548,8 @@ package’s vignette for more details:</p>
 missing cleavage site within the peptide sequences. The following two
 function call create the new <code>numMisCleavages</code> and <code>numIrregCleavages</code>
 columns in the <code>MSnID</code> object</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sec-id.html#cb271-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_termini</span>(msnid, <span class="at">validCleavagePattern=</span><span class="st">"[KR]</span><span class="sc">\\</span><span class="st">.[^P]"</span>)</span>
-<span id="cb271-2"><a href="sec-id.html#cb271-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_missed_cleavages</span>(msnid, <span class="at">missedCleavagePattern=</span><span class="st">"[KR](?=[^P$])"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="sec-id.html#cb272-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_termini</span>(msnid, <span class="at">validCleavagePattern=</span><span class="st">"[KR]</span><span class="sc">\\</span><span class="st">.[^P]"</span>)</span>
+<span id="cb272-2"><a href="sec-id.html#cb272-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_missed_cleavages</span>(msnid, <span class="at">missedCleavagePattern=</span><span class="st">"[KR](?=[^P$])"</span>)</span></code></pre></div>
 </div>
 <div id="trimming-the-data" class="section level3" number="4.9.3">
 <h3>
@@ -1558,9 +1559,9 @@ columns in the <code>MSnID</code> object</p>
 filters. The strings passed to the function represent expressions that
 will be evaluated, thus keeping only PSMs that have 0 irregular
 cleavages and 2 or less missed cleavages.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="sec-id.html#cb272-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numIrregCleavages == 0"</span>)</span>
-<span id="cb272-2"><a href="sec-id.html#cb272-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numMissCleavages &lt;= 2"</span>)</span>
-<span id="cb272-3"><a href="sec-id.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="sec-id.html#cb273-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numIrregCleavages == 0"</span>)</span>
+<span id="cb273-2"><a href="sec-id.html#cb273-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"numMissCleavages &lt;= 2"</span>)</span>
+<span id="cb273-3"><a href="sec-id.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1575,12 +1576,12 @@ cleavages and 2 or less missed cleavages.</p>
 <p>Using <code>"calculatedMassToCharge"</code> and <code>"experimentalMassToCharge"</code>, the
 <code>mass_measurement_error</code> function calculates the parent ion mass
 measurement error in parts per million.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sec-id.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="sec-id.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -2184.0640    -0.6992     0.0000    17.6146     0.7512  2012.5178</code></pre>
 <p>We then filter any matches that do not fit the +/- 20 ppm tolerance</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-id.html#cb276-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"abs(mass_measurement_error(msnid)) &lt; 20"</span>)</span>
-<span id="cb276-2"><a href="sec-id.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="sec-id.html#cb277-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"abs(mass_measurement_error(msnid)) &lt; 20"</span>)</span>
+<span id="cb277-2"><a href="sec-id.html#cb277-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ## -19.7797  -0.5866   0.0000  -0.2970   0.5713  19.6758</code></pre>
 </div>
@@ -1593,11 +1594,11 @@ measurement error in parts per million.</p>
 <li>-log10 transformed MS-GF+ Spectrum E-value, reflecting the goodness
 of match experimental and theoretical fragmentation patterns</li>
 </ul>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-id.html#cb278-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(msnid<span class="sc">$</span><span class="st">`</span><span class="at">MS-GF:SpecEValue</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="sec-id.html#cb279-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(msnid<span class="sc">$</span><span class="st">`</span><span class="at">MS-GF:SpecEValue</span><span class="st">`</span>)</span></code></pre></div>
 <ul>
 <li>the absolute mass measurement error (in ppm units) of the parent ion</li>
 </ul>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="sec-id.html#cb279-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-id.html#cb280-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">mass_measurement_error</span>(msnid))</span></code></pre></div>
 </div>
 <div id="setting-filters" class="section level3" number="4.9.6">
 <h3>
@@ -1608,16 +1609,16 @@ individual filters are set by name (that is present in <code>names(msnid)</code>
 and comparison operator (&gt;, &lt;, = , …) defining if we should retain
 hits with higher or lower given the threshold and finally the
 threshold value itself.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-id.html#cb280-1" aria-hidden="true" tabindex="-1"></a>filtObj <span class="ot">&lt;-</span> <span class="fu">MSnIDFilter</span>(msnid)</span>
-<span id="cb280-2"><a href="sec-id.html#cb280-2" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&lt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
-<span id="cb280-3"><a href="sec-id.html#cb280-3" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&gt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
-<span id="cb280-4"><a href="sec-id.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="sec-id.html#cb281-1" aria-hidden="true" tabindex="-1"></a>filtObj <span class="ot">&lt;-</span> <span class="fu">MSnIDFilter</span>(msnid)</span>
+<span id="cb281-2"><a href="sec-id.html#cb281-2" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>absParentMassErrorPPM <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&lt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
+<span id="cb281-3"><a href="sec-id.html#cb281-3" aria-hidden="true" tabindex="-1"></a>filtObj<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">comparison=</span><span class="st">"&gt;"</span>, <span class="at">threshold=</span><span class="fl">10.0</span>)</span>
+<span id="cb281-4"><a href="sec-id.html#cb281-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj)</span></code></pre></div>
 <pre><code>## MSnIDFilter object
 ## (absParentMassErrorPPM &lt; 10) &amp; (msmsScore &gt; 10)</code></pre>
 <p>We can then evaluate the filter on the identification data object,
 which return the false discovery rate and number of retained
 identifications for the filtering criteria at hand.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-id.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="sec-id.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj)</span></code></pre></div>
 <pre><code>##           fdr    n
 ## PSM         0 3807
 ## peptide     0 2455
@@ -1629,21 +1630,21 @@ identifications for the filtering criteria at hand.</p>
 </h3>
 <p>Rather than setting filtering values by hand, as shown above, these
 can be set automatically to meet a specific false discovery rate.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sec-id.html#cb284-1" aria-hidden="true" tabindex="-1"></a>filtObj.grid <span class="ot">&lt;-</span> <span class="fu">optimize_filter</span>(filtObj, msnid, <span class="at">fdr.max=</span><span class="fl">0.01</span>,</span>
-<span id="cb284-2"><a href="sec-id.html#cb284-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">method=</span><span class="st">"Grid"</span>, <span class="at">level=</span><span class="st">"peptide"</span>,</span>
-<span id="cb284-3"><a href="sec-id.html#cb284-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">n.iter=</span><span class="dv">500</span>)</span>
-<span id="cb284-4"><a href="sec-id.html#cb284-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj.grid)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="sec-id.html#cb285-1" aria-hidden="true" tabindex="-1"></a>filtObj.grid <span class="ot">&lt;-</span> <span class="fu">optimize_filter</span>(filtObj, msnid, <span class="at">fdr.max=</span><span class="fl">0.01</span>,</span>
+<span id="cb285-2"><a href="sec-id.html#cb285-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">method=</span><span class="st">"Grid"</span>, <span class="at">level=</span><span class="st">"peptide"</span>,</span>
+<span id="cb285-3"><a href="sec-id.html#cb285-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">n.iter=</span><span class="dv">500</span>)</span>
+<span id="cb285-4"><a href="sec-id.html#cb285-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(filtObj.grid)</span></code></pre></div>
 <pre><code>## MSnIDFilter object
 ## (absParentMassErrorPPM &lt; 3) &amp; (msmsScore &gt; 7.4)</code></pre>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-id.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj.grid)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="sec-id.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj.grid)</span></code></pre></div>
 <pre><code>##                   fdr    n
 ## PSM       0.004097561 5146
 ## peptide   0.006447651 3278
 ## accession 0.021996616 1208</code></pre>
 <p>Filters can eventually be applied (rather than just evaluated) using
 the <code>apply_filter</code> function.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-id.html#cb288-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, filtObj.grid)</span>
-<span id="cb288-2"><a href="sec-id.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="sec-id.html#cb289-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, filtObj.grid)</span>
+<span id="cb289-2"><a href="sec-id.html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1652,9 +1653,9 @@ the <code>apply_filter</code> function.</p>
 ## #accessions: 1208 at 2.2 % FDR</code></pre>
 <p>And finally, identifications that matched decoy and contaminant
 protein sequences are removed</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-id.html#cb290-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"isDecoy == FALSE"</span>)</span>
-<span id="cb290-2"><a href="sec-id.html#cb290-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"!grepl('Contaminant',accession)"</span>)</span>
-<span id="cb290-3"><a href="sec-id.html#cb290-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="sec-id.html#cb291-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"isDecoy == FALSE"</span>)</span>
+<span id="cb291-2"><a href="sec-id.html#cb291-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">apply_filter</span>(msnid, <span class="st">"!grepl('Contaminant',accession)"</span>)</span>
+<span id="cb291-3"><a href="sec-id.html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(msnid)</span></code></pre></div>
 <pre><code>## MSnID object
 ## Working directory: "."
 ## #Spectrum Files:  1 
@@ -1670,7 +1671,7 @@ protein sequences are removed</p>
 <code>data.frame</code> (or to a dedicated <code>MSnSet</code> data structure from the
 <code>MSnbase</code> package) for quantitative MS data, described below, and
 further processed and analyses using appropriate statistical tests.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-id.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(msnid))</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="sec-id.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(msnid))</span></code></pre></div>
 <pre><code>##   spectrumID scan number(s) acquisitionNum passThreshold rank
 ## 1 index=7151           8819           7151          TRUE    1
 ## 2 index=8520          10419           8520          TRUE    1
@@ -1713,14 +1714,6 @@ further processed and analyses using appropriate statistical tests.</p>
 Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBeans</span>: A Simple, Vendor-Independent, Raw-Data Quality-Control Tool.”</span> <em>Journal of Proteome Research</em>. <a href="https://doi.org/10.1021/acs.jproteome.0c00956">https://doi.org/10.1021/acs.jproteome.0c00956</a>.
 </div>
 </div>
-<div class="footnotes">
-<hr>
-<ol start="5">
-<li id="fn5"><p>Previously named <code>PSM</code>.<a href="sec-id.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>The rownames aren’t needed here are are removed to reduce
-to output in the the next code chunk display parts of <code>id2</code>.<a href="sec-id.html#fnref6" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
 </body></html>
 
 <p style="text-align: center;">
@@ -1728,9 +1721,9 @@ to output in the the next code chunk display parts of <code>id2</code>.<a href="
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-05-17
+2022-05-23
  using 
-R version 4.2.0 Patched (2022-05-13 r82357)
+R version 4.2.0 (2022-04-22)
 </p>
 </div>
 </div>
