@@ -78,8 +78,8 @@ This material uses the latest version of the R for Mass Spectrometry
 package and their dependencies. It might this be possible that even
 the latest Bioconductor stable version aren't recent enough.
 
-To install the very latest and experimental versions of all the
-package, please execute:
+To install the latest versions of all the package, please use R
+version 4.2 and execute:
 
 ```{r setup, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -89,13 +89,13 @@ BiocManager::install("msdata")
 BiocManager::install("mzR")
 BiocManager::install("rhdf5")
 BiocManager::install("rpx")
-BiocManager::install("ProtGenerics")
 BiocManager::install("MsCoreUtils")
 BiocManager::install("QFeatures")
 BiocManager::install("Spectra")
-BiocManager::install("RforMassSpectrometry/PSMatch")
-BiocManager::install("RforMassSpectrometry/SpectraVis")
+BiocManager::install("ProtGenerics")
+BiocManager::install("PSMatch")
 BiocManager::install("pheatmap")
+BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
 
 To compile and render the teaching material, you will also need the
