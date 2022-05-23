@@ -176,7 +176,7 @@ following questions:
 
 These objects and their manipulations are not limited to single files:
 
-```{r}
+```{r, sciex_mzr}
 (fls <- dir(system.file("sciex", package = "msdata"), full.names = TRUE))
 sp_sciex <- Spectra(fls)
 table(dataOrigin(sp_sciex))
@@ -193,7 +193,7 @@ base `MsBackend` class could be used instead. The default backends are:
   and relies on the `r Biocpkg("mzR")` package to read mass peaks (m/z and
   intensity values) from the original MS files on-demand.
 
-```{r}
+```{r sciex_mzr_show}
 sp_sciex
 ```
 
@@ -203,7 +203,7 @@ sp_sciex
   memory footprint.
 
 
-```{r}
+```{r sciex_dfr}
 setBackend(sp_sciex, MsBackendDataFrame())
 ```
 
@@ -212,7 +212,7 @@ setBackend(sp_sciex, MsBackendDataFrame())
   memory. The peak data are stored in Hdf5 files which guarantees scalability.
 
 
-```{r}
+```{r sciex_hdf5}
 sp_hdf5 <- setBackend(sp_sciex, MsBackendHdf5Peaks(), hdf5path = tempdir())
 sp_hdf5
 table(sp_hdf5$dataOrigin)
