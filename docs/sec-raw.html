@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-05-23" />
+<meta name="date" content="2022-06-19" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -472,7 +472,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon May 23 13:28:16 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Sun Jun 19 21:21:23 2022]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -501,7 +501,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon May 23 13:28:25 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Sun Jun 19 21:21:34 2022]</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-raw.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -510,9 +510,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-raw.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmpj1d2wS/20171016_POOL_POS_1_105-134.h5 
+## /tmp/Rtmp6NrIgP/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/Rtmpj1d2wS/20171016_POOL_POS_3_105-134.h5 
+## /tmp/Rtmp6NrIgP/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -625,7 +625,7 @@ children.</li>
 ## file(s):
 ## 5705c6a4d1eca_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Mon May 23 13:28:25 2022]</code></pre>
+##  Filter: select parent/children scans for 2807 [Sun Jun 19 21:21:35 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -905,8 +905,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon May 23 13:28:27 2022]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Mon May 23 13:28:27 2022]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Sun Jun 19 21:21:37 2022]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Sun Jun 19 21:21:37 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -987,7 +987,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon May 23 13:28:27 2022]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Sun Jun 19 21:21:38 2022]</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-raw.html#cb84-1" aria-hidden="true" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1020,7 +1020,7 @@ Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbas
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-05-23
+2022-06-19
  using 
 R version 4.2.0 (2022-04-22)
 </p>

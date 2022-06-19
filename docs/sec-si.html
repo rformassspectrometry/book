@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-05-23" />
+<meta name="date" content="2022-06-19" />
 
 
 <meta name="description" content="Chapter 7 References and session information | R for Mass Spectrometry">
@@ -173,7 +173,9 @@ div.csl-indent {
 <a href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a>
 <a href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a>
 <a id="active-page" href="sec-si.html"><span class="toc-section-number">7</span> References and session information</a><ul class="toc-sections">
-<li class="toc"><a href="#references">References</a></li>
+<li class="toc"><a href="#additional-materials"> Additional materials</a></li>
+<li class="toc"><a href="#session-information"> Session information</a></li>
+<li class="toc"><a href="#references">NA</a></li>
 </ul>
 </div>
 </li>
@@ -184,9 +186,46 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-si" class="section level1" number="7">
+<html><body>
+<div id="sec-si" class="section level1" number="7">
 <h1>
 <span class="header-section-number">Chapter 7</span> References and session information</h1>
+<div id="additional-materials" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Additional materials<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-materials')" onmouseout="reset_tooltip('additional-materials-tooltip')"><span class="tooltiptext" id="additional-materials-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li><p>The <a href="https://lgatto.github.io/QFeaturesScpWorkshop2021/">Single-cell proteomics data analysis using <code>QFeatures</code> and
+<code>scp</code></a> workshop
+is provided as two vignettes. The first one provides a general
+introduction to the <code>QFeatures</code> class in the general context of mass
+spectrometry-based proteomics data manipulation. The second vignette
+focuses on single-cell application and introduces the <code>scp</code> package
+<span class="citation">(<a href="#ref-Vanderaa:2021" role="doc-biblioref">Vanderaa and Gatto 2021</a>)</span> as an extension of <code>QFeatures</code>. This second
+vignette also provides exercises that give the attendee the
+opportunity to apply the learned concepts to reproduce a published
+analysis on a subset of a real data set.</p></li>
+<li><p>The <a href="https://jorainer.github.io/SpectraTutorials/">Seamless Integration of Mass Spectrometry Data from Different
+Sources</a> workshop
+explains the <code>Spectra</code> package and shows how this new infrastructure
+can be used to represent and analyze Mass Spectrometry (MS)
+data. The use of different data type and format specific backends
+guarantees an easy expandability of the infrastructure. This is
+illustrated in this tutorial on a simple use case, in which MS/MS
+(a.k.a. MS2) spectra, measured by an MS instrument, are compared and
+matched against a public spectral database containing public domain
+reference MS2 spectra.</p></li>
+<li><p>A tutorial presenting <a href="https://jorainer.github.io/MetaboAnnotationTutorials/">Use Cases and Examples for Annotation of
+Untargeted Metabolomics
+Data</a> using
+the <code>MetaboAnnotation</code> and <code>MetaboCoreUtils</code> packages
+<span class="citation">(<a href="#ref-Rainer:2022" role="doc-biblioref">Rainer et al. 2022</a>)</span>.</p></li>
+</ul>
+</div>
+<div id="session-information" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Session information<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('session-information')" onmouseout="reset_tooltip('session-information-tooltip')"><span class="tooltiptext" id="session-information-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
 <p>The following packages have been used to generate this document.</p>
 <div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="sec-si.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.2.0 (2022-04-22)
@@ -210,61 +249,62 @@ div.csl-indent {
 ## [8] base     
 ## 
 ## other attached packages:
-##  [1] mzID_1.33.0                 patchwork_1.1.1            
+##  [1] mzID_1.34.0                 patchwork_1.1.1            
 ##  [3] factoextra_1.0.7            gplots_3.1.3               
-##  [5] limma_3.51.8                forcats_0.5.1              
+##  [5] limma_3.52.1                forcats_0.5.1              
 ##  [7] stringr_1.4.0               purrr_0.3.4                
-##  [9] readr_2.1.2                 tibble_3.1.6               
-## [11] tidyverse_1.3.1             MSnID_1.29.0               
-## [13] tidyr_1.2.0                 ggplot2_3.3.5              
-## [15] dplyr_1.0.8                 magrittr_2.0.3             
-## [17] msdata_0.35.3               rpx_2.3.3                  
-## [19] MsCoreUtils_1.7.5           QFeatures_1.5.3            
-## [21] MultiAssayExperiment_1.21.6 SummarizedExperiment_1.25.3
-## [23] Biobase_2.55.2              GenomicRanges_1.47.6       
-## [25] GenomeInfoDb_1.31.7         IRanges_2.29.1             
-## [27] MatrixGenerics_1.7.0        matrixStats_0.62.0         
-## [29] Spectra_1.5.15              ProtGenerics_1.27.2        
-## [31] BiocParallel_1.29.20        S4Vectors_0.33.17          
-## [33] BiocGenerics_0.41.2         mzR_2.29.5                 
-## [35] Rcpp_1.0.8.3                BiocStyle_2.23.1           
+##  [9] readr_2.1.2                 tibble_3.1.7               
+## [11] tidyverse_1.3.1             MSnID_1.30.0               
+## [13] tidyr_1.2.0                 ggplot2_3.3.6              
+## [15] dplyr_1.0.9                 magrittr_2.0.3             
+## [17] msdata_0.36.0               rpx_2.4.0                  
+## [19] MsCoreUtils_1.8.0           QFeatures_1.6.0            
+## [21] MultiAssayExperiment_1.22.0 SummarizedExperiment_1.26.1
+## [23] Biobase_2.56.0              GenomicRanges_1.48.0       
+## [25] GenomeInfoDb_1.32.2         IRanges_2.30.0             
+## [27] MatrixGenerics_1.8.0        matrixStats_0.62.0         
+## [29] Spectra_1.6.0               ProtGenerics_1.28.0        
+## [31] BiocParallel_1.30.3         S4Vectors_0.34.0           
+## [33] BiocGenerics_0.42.0         mzR_2.30.0                 
+## [35] Rcpp_1.0.8.3                BiocStyle_2.24.0           
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] utf8_1.2.2              R.utils_2.11.0          gmm_1.6-6              
-##   [4] tidyselect_1.1.2        RSQLite_2.2.11          AnnotationDbi_1.57.1   
+##   [4] tidyselect_1.1.2        RSQLite_2.2.14          AnnotationDbi_1.58.0   
 ##   [7] grid_4.2.0              norm_1.0-10.0           munsell_0.5.0          
-##  [10] codetools_0.2-18        preprocessCore_1.57.1   withr_2.5.0            
+##  [10] codetools_0.2-18        preprocessCore_1.58.0   withr_2.5.0            
 ##  [13] colorspace_2.0-3        filelock_1.0.2          highr_0.9              
-##  [16] knitr_1.38              rstudioapi_0.13         ggsignif_0.6.3         
+##  [16] knitr_1.39              rstudioapi_0.13         ggsignif_0.6.3         
 ##  [19] labeling_0.4.2          GenomeInfoDbData_1.2.8  bit64_4.0.5            
-##  [22] farver_2.1.0            pheatmap_1.0.12         rhdf5_2.39.6           
-##  [25] vctrs_0.4.1             generics_0.1.2          xfun_0.30              
-##  [28] BiocFileCache_2.3.4     R6_2.5.1                doParallel_1.0.17      
-##  [31] clue_0.3-60             AnnotationFilter_1.19.0 bitops_1.0-7           
-##  [34] rhdf5filters_1.7.0      cachem_1.0.6            DelayedArray_0.21.2    
+##  [22] farver_2.1.0            pheatmap_1.0.12         rhdf5_2.40.0           
+##  [25] vctrs_0.4.1             generics_0.1.2          xfun_0.31              
+##  [28] BiocFileCache_2.4.0     R6_2.5.1                doParallel_1.0.17      
+##  [31] clue_0.3-61             AnnotationFilter_1.20.0 bitops_1.0-7           
+##  [34] rhdf5filters_1.8.0      cachem_1.0.6            DelayedArray_0.22.0    
 ##  [37] assertthat_0.2.1        promises_1.2.0.1        scales_1.2.0           
-##  [40] gtable_0.3.0            affy_1.73.0             sandwich_3.0-1         
+##  [40] gtable_0.3.0            affy_1.74.0             sandwich_3.0-1         
 ##  [43] rlang_1.0.2             rstatix_0.7.0           lazyeval_0.2.2         
-##  [46] impute_1.69.0           broom_0.8.0             abind_1.4-5            
-##  [49] BiocManager_1.30.16     yaml_2.3.5              reshape2_1.4.4         
+##  [46] impute_1.70.0           broom_0.8.0             abind_1.4-5            
+##  [49] BiocManager_1.30.18     yaml_2.3.5              reshape2_1.4.4         
 ##  [52] modelr_0.1.8            backports_1.4.1         httpuv_1.6.5           
-##  [55] tools_4.2.0             bookdown_0.26           affyio_1.65.0          
+##  [55] tools_4.2.0             bookdown_0.27           affyio_1.66.0          
 ##  [58] ellipsis_0.3.2          jquerylib_0.1.4         RColorBrewer_1.1-3     
-##  [61] MSnbase_2.21.6          plyr_1.8.7              zlibbioc_1.41.0        
-##  [64] RCurl_1.98-1.6          ggpubr_0.4.0            zoo_1.8-10             
+##  [61] MSnbase_2.22.0          plyr_1.8.7              zlibbioc_1.42.0        
+##  [64] RCurl_1.98-1.7          ggpubr_0.4.0            zoo_1.8-10             
 ##  [67] haven_2.5.0             ggrepel_0.9.1           cluster_2.1.3          
 ##  [70] fs_1.5.2                data.table_1.14.2       reprex_2.0.1           
-##  [73] pcaMethods_1.87.0       mvtnorm_1.1-3           msmbstyle_0.0.19       
+##  [73] pcaMethods_1.88.0       mvtnorm_1.1-3           msmbstyle_0.0.19       
 ##  [76] R.cache_0.15.0          hms_1.1.1               mime_0.12              
-##  [79] evaluate_0.15           xtable_1.8-4            XML_3.99-0.9           
+##  [79] evaluate_0.15           xtable_1.8-4            XML_3.99-0.10          
 ##  [82] readxl_1.4.0            compiler_4.2.0          KernSmooth_2.23-20     
-##  [85] ncdf4_1.19              crayon_1.5.1            R.oo_1.24.0            
+##  [85] ncdf4_1.19              crayon_1.5.1            R.oo_1.25.0            
 ##  [88] htmltools_0.5.2         later_1.3.0             tzdb_0.3.0             
-##  [91] lubridate_1.8.0         DBI_1.1.2               dbplyr_2.1.1           
+##  [91] lubridate_1.8.0         DBI_1.1.2               dbplyr_2.2.0           
 ##  [94] MASS_7.3-57             tmvtnorm_1.5            rappdirs_0.3.3         
-##  [97] car_3.0-12              Matrix_1.4-1            cli_3.2.0              
-## [100] vsn_3.63.0             
+##  [97] car_3.0-13              Matrix_1.4-1            cli_3.3.0              
+## [100] vsn_3.64.0             
 ##  [ reached getOption("max.print") -- omitted 40 entries ]</code></pre>
+</div>
 <div id="references" class="section level2 unnumbered">
 <h2>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('references')" onmouseout="reset_tooltip('references-tooltip')"><span class="tooltiptext" id="references-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
@@ -292,20 +332,37 @@ Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBe
 Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.
 </div>
 <div class="csl-entry">
+Rainer, Johannes, Andrea Vicini, Liesa Salzer, Jan Stanstrup, Josep M Badia, Steffen Neumann, Michael A Stravs, et al. 2022. <span>“A Modular and Expandable Ecosystem for Metabolomics Data Annotation in <span>R</span>.”</span> <em>Metabolites</em> 12 (2): 173.
+</div>
+<div class="csl-entry">
 Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.
 </div>
 <div class="csl-entry">
 Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.
 </div>
+<div class="csl-entry">
+Vanderaa, Christophe, and Laurent Gatto. 2021. <span>“Replication of Single-Cell Proteomics Data Reveals Important Computational Challenges.”</span> <em>Expert Rev. Proteomics</em>, October.
 </div>
 </div>
-</div></body></html>
+</div>
+</div>
+<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Rainer:2022" class="csl-entry">
+Rainer, Johannes, Andrea Vicini, Liesa Salzer, Jan Stanstrup, Josep M Badia, Steffen Neumann, Michael A Stravs, et al. 2022. <span>“A Modular and Expandable Ecosystem for Metabolomics Data Annotation in <span>R</span>.”</span> <em>Metabolites</em> 12 (2): 173.
+</div>
+<div id="ref-Vanderaa:2021" class="csl-entry">
+Vanderaa, Christophe, and Laurent Gatto. 2021. <span>“Replication of Single-Cell Proteomics Data Reveals Important Computational Challenges.”</span> <em>Expert Rev. Proteomics</em>, October.
+</div>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-anx.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-05-23
+2022-06-19
  using 
 R version 4.2.0 (2022-04-22)
 </p>

@@ -84,3 +84,5 @@ sec-anx
 sec-raw2
 sec-id2
 sec-si
+additional-materials
+session-information

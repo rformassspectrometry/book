@@ -260,3 +260,84 @@
    URL = {https://doi.org/10.1021/acs.jproteome.0c00956},
    eprint = {https://doi.org/10.1021/acs.jproteome.0c00956}
 }
+
+
+@ARTICLE{Vanderaa:2021,
+  title    = "Replication of single-cell proteomics data reveals important
+              computational challenges",
+  author   = "Vanderaa, Christophe and Gatto, Laurent",
+  abstract = "INTRODUCTION: Mass spectrometry-based proteomics is actively
+              embracing quantitative, single-cell level analyses. Indeed,
+              recent advances in sample preparation and mass spectrometry (MS)
+              have enabled the emergence of quantitative MS-based single-cell
+              proteomics (SCP). While exciting and promising, SCP still has
+              many rough edges. The current analysis workflows are custom and
+              built from scratch. The field is therefore craving for
+              standardized software that promotes principled and reproducible
+              SCP data analyses. AREAS COVERED: This special report is the
+              first step toward the formalization and standardization of SCP
+              data analysis. scp, the software that accompanies this work,
+              successfully replicates one of the landmark SCP studies and is
+              applicable to other experiments and designs. We created a
+              repository containing the replicated workflow with comprehensive
+              documentation in order to favor further dissemination and
+              improvements of SCP data analyses. EXPERT OPINION: Replicating
+              SCP data analyses uncovers important challenges in SCP data
+              analysis. We describe two such challenges in detail: batch
+              correction and data missingness. We provide the current
+              state-of-the-art and illustrate the associated limitations. We
+              also highlight the intimate dependence that exists between batch
+              effects and data missingness and offer avenues for dealing with
+              these exciting challenges.",
+  journal  = "Expert Rev. Proteomics",
+  month    =  oct,
+  year     =  2021,
+  keywords = "Bioconductor; R; batch correction; imputation; mass spectrometry;
+              proteomics; replication; reproducible research; single-cell;
+              software",
+  language = "en"
+}
+
+
+@ARTICLE{Rainer:2022,
+  title     = "A Modular and Expandable Ecosystem for Metabolomics Data
+               Annotation in {R}",
+  author    = "Rainer, Johannes and Vicini, Andrea and Salzer, Liesa and
+               Stanstrup, Jan and Badia, Josep M and Neumann, Steffen and
+               Stravs, Michael A and Verri Hernandes, Vinicius and Gatto,
+               Laurent and Gibb, Sebastian and Witting, Michael",
+  abstract  = "Liquid chromatography-mass spectrometry (LC-MS)-based untargeted
+               metabolomics experiments have become increasingly popular
+               because of the wide range of metabolites that can be analyzed
+               and the possibility to measure novel compounds. LC-MS
+               instrumentation and analysis conditions can differ substantially
+               among laboratories and experiments, thus resulting in
+               non-standardized datasets demanding customized annotation
+               workflows. We present an ecosystem of R packages, centered
+               around the MetaboCoreUtils, MetaboAnnotation and CompoundDb
+               packages that together provide a modular infrastructure for the
+               annotation of untargeted metabolomics data. Initial annotation
+               can be performed based on MS1 properties such as m/z and
+               retention times, followed by an MS2-based annotation in which
+               experimental fragment spectra are compared against a reference
+               library. Such reference databases can be created and managed
+               with the CompoundDb package. The ecosystem supports data from a
+               variety of formats, including, but not limited to, MSP, MGF,
+               mzML, mzXML, netCDF as well as MassBank text files and SQL
+               databases. Through its highly customizable functionality, the
+               presented infrastructure allows to build reproducible annotation
+               workflows tailored for and adapted to most untargeted
+               LC-MS-based datasets. All core functionality, which supports
+               base R data types, is exported, also facilitating its re-use in
+               other R packages. Finally, all packages are thoroughly
+               unit-tested and documented and are available on GitHub and
+               through Bioconductor.",
+  journal   = "Metabolites",
+  publisher = "Multidisciplinary Digital Publishing Institute",
+  volume    =  12,
+  number    =  2,
+  pages     = "173",
+  month     =  feb,
+  year      =  2022,
+  language  = "en"
+}

@@ -1,5 +1,38 @@
 # References and session information {#sec-si}
 
+## Additional materials
+
+- The [Single-cell proteomics data analysis using `QFeatures` and
+  `scp`](https://lgatto.github.io/QFeaturesScpWorkshop2021/) workshop
+  is provided as two vignettes. The first one provides a general
+  introduction to the `QFeatures` class in the general context of mass
+  spectrometry-based proteomics data manipulation. The second vignette
+  focuses on single-cell application and introduces the `scp` package
+  [@Vanderaa:2021] as an extension of `QFeatures`. This second
+  vignette also provides exercises that give the attendee the
+  opportunity to apply the learned concepts to reproduce a published
+  analysis on a subset of a real data set.
+
+- The [Seamless Integration of Mass Spectrometry Data from Different
+  Sources](https://jorainer.github.io/SpectraTutorials/) workshop
+  explains the `Spectra` package and shows how this new infrastructure
+  can be used to represent and analyze Mass Spectrometry (MS)
+  data. The use of different data type and format specific backends
+  guarantees an easy expandability of the infrastructure. This is
+  illustrated in this tutorial on a simple use case, in which MS/MS
+  (a.k.a. MS2) spectra, measured by an MS instrument, are compared and
+  matched against a public spectral database containing public domain
+  reference MS2 spectra.
+
+- A tutorial presenting [Use Cases and Examples for Annotation of
+  Untargeted Metabolomics
+  Data](https://jorainer.github.io/MetaboAnnotationTutorials/) using
+  the `MetaboAnnotation` and `MetaboCoreUtils` packages
+  [@Rainer:2022].
+
+
+## Session information
+
 The following packages have been used to generate this document.
 
 ```{r include=FALSE}
