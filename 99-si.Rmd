@@ -30,6 +30,12 @@
   the `MetaboAnnotation` and `MetaboCoreUtils` packages
   [@Rainer:2022].
 
+- A tutorial for [LC-MS pre-processing with
+  `xcms`](https://jorainer.github.io/metabolomics2018) with examples on how to
+  perform centroiding of profile-mode MS data in `R` and how to define data
+  set-specific parameters for chromatographic peak detection, alignment and
+  correspondence of untargeted (LC-MS-based) metabolomics data.
+
 
 ## Session information
 
