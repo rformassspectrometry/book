@@ -175,7 +175,7 @@ div.csl-indent {
 <li class="toc"><a href="#sec-qf"> QFeatures</a></li>
 <li class="toc"><a href="#creating-qfeatures-object"> Creating <code>QFeatures</code> object</a></li>
 <li class="toc"><a href="#analysis-pipeline"> Analysis pipeline</a></li>
-<li class="toc"><a href="#summary-exercice-1"> Summary exercice</a></li>
+<li class="toc"><a href="#summary-exercice"> Summary exercice</a></li>
 </ul>
 <a href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a>
 <a href="sec-si.html"><span class="toc-section-number">7</span> Additional materials and session information</a>
@@ -196,7 +196,7 @@ div.csl-indent {
 <span class="header-section-number">5.1</span> Quantitation methodologies<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('quantitation-methodologies')" onmouseout="reset_tooltip('quantitation-methodologies-tooltip')"><span class="tooltiptext" id="quantitation-methodologies-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>There are a wide range of proteomics quantitation techniques that can
-broadly be classified as labelled vs. label-free, depending whether
+broadly be classified as labelled vs. label-free, depending on whether
 the features are labelled prior the MS acquisition and the MS level at
 which quantitation is inferred, namely MS1 or MS2.</p>
 <table>
@@ -222,7 +222,7 @@ which quantitation is inferred, namely MS1 or MS2.</p>
 <h3>
 <span class="header-section-number">5.1.1</span> Label-free MS2: Spectral counting<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('label-free-ms2-spectral-counting')" onmouseout="reset_tooltip('label-free-ms2-spectral-counting-tooltip')"><span class="tooltiptext" id="label-free-ms2-spectral-counting-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>In spectral counting, on simply counts the number of quantified
+<p>In spectral counting, one simply counts the number of quantified
 peptides that are assigned to a protein.</p>
 <div class="figure">
 <span style="display:block;" id="fig:sc"></span>
@@ -238,7 +238,7 @@ Figure 5.1: Spectral counting. Figure from the <code>Pbase</code> package.
 </h3>
 <p>Isobaric tagging refers to the labelling using isobaric tags,
 i.e. chemical tags that have the same mass and hence can’t be
-distinguish by the spectrometer. The peptides of different samples (4,
+distinguished by the spectrometer. The peptides of different samples (4,
 6, 10, 11 or 16) are labelled with different tags and combined prior
 to mass spectrometry acquisition. Given that they are isobaric, all
 identical peptides, irrespective of the tag and this the sample of
@@ -260,7 +260,7 @@ Figure 5.2: iTRAQ 4-plex isobaric tagging. Tandem Mass Tags (TMT) offer up to 16
 <span class="header-section-number">5.1.3</span> Label-free MS1: extracted ion chromatograms<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('label-free-ms1-extracted-ion-chromatograms')" onmouseout="reset_tooltip('label-free-ms1-extracted-ion-chromatograms-tooltip')"><span class="tooltiptext" id="label-free-ms1-extracted-ion-chromatograms-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>In label-free quantitation, the precursor peaks that match an
-identified peptide are integrated of retention time and the area under
+identified peptide are integrated over retention time and the area under
 that <em>extracted ion chromatogram</em> is used to quantify that peptide in
 that sample.</p>
 <div class="figure">
@@ -276,7 +276,7 @@ Figure 5.3: Label-free quantitation. Figure credit <a href="https://github.com/j
 <span class="header-section-number">5.1.4</span> Labelled MS1: SILAC<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('labelled-ms1-silac')" onmouseout="reset_tooltip('labelled-ms1-silac-tooltip')"><span class="tooltiptext" id="labelled-ms1-silac-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>In SILAC quantitation, sample are grown in a medium that contains
-heavy amino acids (typically arginine and lysine). All proteins gown
+heavy amino acids (typically arginine and lysine). All proteins grown
 in this <em>heavy</em> growth medium contain the heavy form of these amino
 acids. Two samples, one grown in heavy medium, and one grown in normal
 (light) medium are then combined and analysed together. The heavy
@@ -316,7 +316,7 @@ peptide-spectrum matching confidence assessment.</li>
 <span class="header-section-number">5.2</span> QFeatures<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('sec-qf')" onmouseout="reset_tooltip('sec-qf-tooltip')"><span class="tooltiptext" id="sec-qf-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>Mass spectrometry-based quantitative proteomics data can be
-representated as a matrix of quantitative values for features (PSMs,
+represented as a matrix of quantitative values for features (PSMs,
 peptides, proteins) arranged along the rows, measured for a set of
 samples, arranged along the columns. There is a common representation
 for such quantitative data set, namely the <code>SummarizedExperiment</code> (SE)
@@ -329,16 +329,16 @@ Figure 5.5: Schematic representation of the anatomy of a <code>SummarizedExperim
 <img src="img/SE.png" alt="Schematic representation of the anatomy of a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)" width="100%">
 </div>
 <ul>
-<li>The sample (columns) metadata can be access with the <code>colData()</code>
+<li>The sample (columns) metadata can be accessed with the <code>colData()</code>
 function.</li>
-<li>The features (rows) metadata can be access with the <code>rowData()</code>
+<li>The features (rows) metadata can be accessed with the <code>rowData()</code>
 column.</li>
 <li>If the features represent ranges along genomic coordinates, these
 can be accessed with <code>rowRanges()</code>
 </li>
 <li>Additional metadata describing the overall experiment can be
 accessed with <code>metadata()</code>.</li>
-<li>The quantiative data can be accessed with <code>assay()</code>.</li>
+<li>The quantitative data can be accessed with <code>assay()</code>.</li>
 <li>
 <code>assays()</code> returns a list of matrix-like assays.</li>
 </ul>
@@ -393,7 +393,7 @@ have previously done with <code>SummarizedExperiment</code> objects).</li>
 ## S1         1          X1          Y1
 ## S2         2          X2          Y2</code></pre>
 <ul>
-<li>Extract the first (and only) assay composing this <code>QFeaures</code> data
+<li>Extract the first (and only) assay composing this <code>QFeatures</code> data
 using the <code>[[</code> operator (as you have done to extract elements of a
 list) by using the assay’s index or name.</li>
 </ul>
@@ -456,7 +456,7 @@ link between the different levels. This can be done with the
 <p>The call below will</p>
 <ul>
 <li>operate on the <code>psms</code> assay of the <code>feat1</code> objects;</li>
-<li>aggregate the rows the assay following the grouping defined in the
+<li>aggregate the rows of the assay following the grouping defined in the
 <code>peptides</code> row data variables;</li>
 <li>perform aggregation using the <code>colMeans()</code> function;</li>
 <li>create a new assay named <code>peptides</code> and add it to the <code>feat1</code>
@@ -471,7 +471,7 @@ object.</li>
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns</code></pre>
 <ul>
-<li>Let’s convince yourself that we understand the effect of feature
+<li>Let’s convince ourselves that we understand the effect of feature
 aggregation and repeat the calculations manually and check the
 content of the new assay’s row data.</li>
 </ul>
@@ -559,7 +559,7 @@ mitochondrion.</p>
 ##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
 <p>You can refer to the <a href="https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html"><em>Quantitative features for mass spectrometry
 data</em></a>
-vignette and the <code>QFeature</code> <a href="https://rformassspectrometry.github.io/QFeatures/reference/QFeatures-class.html">manual
+vignette and the <code>QFeatures</code> <a href="https://rformassspectrometry.github.io/QFeatures/reference/QFeatures-class.html">manual
 page</a>
 for more details about the class.</p>
 </div>
@@ -584,9 +584,9 @@ reflect the nature of the data.</p>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psms: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>Below, we see that we can extract an assay using its index or its
-name. The individual assays are stored as <em>SummerizedExperiment</em>
+name. The individual assays are stored as <em>SummarizedExperiment</em>
 object and further access its quantitative data and metadata using
-the <code>assay</code> and <code>rowData</code> functions</p>
+the <code>assay</code> and <code>rowData</code> functions.</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sec-quant.html#cb339-1" aria-hidden="true" tabindex="-1"></a>hl[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 3010 10 
@@ -649,8 +649,8 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 ##  [ reached getOption("max.print") -- omitted 2 rows ]</code></pre>
 <p>For further details on how to manipulate such objects, refer to the
 <em><a href="https://bioconductor.org/packages/3.15/MultiAssayExperiment">MultiAssayExperiment</a></em> <span class="citation">(<label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">Ramos et al. 2017<span class="marginnote">Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.</span>)</span> and
-<em><a href="https://bioconductor.org/packages/3.15/SummerizedExperiment">SummerizedExperiment</a></em> <span class="citation">(<label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">Morgan et al. 2020<span class="marginnote">Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.</span>)</span> packages.</p>
-<p>It is also possible to first create a <code>SummerizedExperiment</code>, and then
+<em><a href="https://bioconductor.org/packages/3.15/SummarizedExperiment">SummarizedExperiment</a></em> <span class="citation">(<label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">Morgan et al. 2020<span class="marginnote">Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.</span>)</span> packages.</p>
+<p>It is also possible to first create a <code>SummarizedExperiment</code>, and then
 only include it into a <code>QFeatures</code> object.</p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-quant.html#cb347-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
 <span id="cb347-2"><a href="sec-quant.html#cb347-2" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
@@ -666,11 +666,11 @@ only include it into a <code>QFeatures</code> object.</p>
 <pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psm: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>At this stage, i.e. at the beginning of the analysis, and respectively
-whether you have a <code>SummerizedExperiment</code> or a <code>QFeatures</code> object, it
+whether you have a <code>SummarizedExperiment</code> or a <code>QFeatures</code> object, it
 is a good time to define the experimental design in the <code>colData</code>
 slot.</p>
-<div id="exercice" class="section level3 unnumbered">
-<h3>Exercice<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('exercice')" onmouseout="reset_tooltip('exercice-tooltip')"><span class="tooltiptext" id="exercice-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<div id="exercise-4" class="section level3 unnumbered">
+<h3>Exercise<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('exercise-4')" onmouseout="reset_tooltip('exercise-4-tooltip')"><span class="tooltiptext" id="exercise-4-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>The CPTAC spike-in study 6 <span class="citation">(<label for="tufte-mn-10" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">Paulovich et al. 2010<span class="marginnote">Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.</span>)</span> combines the Sigma UPS1
 standard containing 48 different human proteins that are spiked in at
@@ -695,7 +695,7 @@ available in the <code>msdata</code> package:</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Read these data in as either a <code>SummerizedExperiment</code> or a <code>QFeatures</code>
+<p>Read these data in as either a <code>SummarizedExperiment</code> or a <code>QFeatures</code>
 object and annotated the experiment.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -840,25 +840,25 @@ above.</p>
 <h3>
 <span class="header-section-number">5.4.1</span> Missing values<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('missing-values')" onmouseout="reset_tooltip('missing-values-tooltip')"><span class="tooltiptext" id="missing-values-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>Missing values can be highly frequent in proteomics. These exist two
+<p>Missing values can be highly frequent in proteomics. There are two
 reasons supporting the existence of missing values, namely biological
 or technical.</p>
 <ol style="list-style-type: decimal">
 <li><p>Values that are missing due to the absence (or extremely low
-contentration) of a protein are observed for biological reasons,
-and their pattern <strong>aren’t random</strong> (MNAR). A protein missing in
+concentration) of a protein are observed for biological reasons,
+and their pattern <strong>aren’t random</strong> (MNAR). A protein missing
 due to the suppression of its expression will not be missing at
 random: it will be missing in the condition in which it was
 suppressed, and be present in the condition where it is expressed.</p></li>
-<li><p>Due to it’s data-dependent acquisition, mass spectrometry isn’t
-capable to assaying all peptides in a sample. Peptides that are
+<li><p>Due to its data-dependent acquisition, mass spectrometry isn’t
+capable of assaying all peptides in a sample. Peptides that are
 less abundant than some of their co-eluting ions, peptides that do
 not ionise well or peptides that do not get identified might be
 sporadically missing in the final quantitation table, despite their
 presence in the biological samples. Their absence patterns are
 (completely) <strong>random</strong> (MAR or MCAR) in such cases.</p></li>
 </ol>
-<p>Often, third party software that produce quantiative data use zeros
+<p>Often, third party software that produce quantitative data use zeros
 instead of properly reporting missing values. We can use the
 <code>zeroIsNA()</code> function to replace the <code>0</code> by <code>NA</code> values in our
 <code>cptac_se</code> object and then explore the missing data patterns across
@@ -916,7 +916,7 @@ and samples of the <code>cptac_se</code> data.</li>
 ##    0    1    2    3    4    5    6 
 ## 4059  990  884  717  934  807 3075</code></pre>
 <ul>
-<li>Remove row that have <em>too many</em> missing values. You can do this by
+<li>Remove rows that have <em>too many</em> missing values. You can do this by
 hand or using the <code>filterNA()</code> function.</li>
 </ul>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="sec-quant.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="do">## remove rows that have 4 or more NAs out of 6</span></span>
@@ -1089,7 +1089,7 @@ Figure 5.11: Intensity disctribution of the <code>naset</code> data.
 </div>
 <p><strong>Tip</strong>: When downstream analyses permit, it might be safer not to
 impute data and deal explicitly with missing values. Indeed missing
-data impuration is however not a straightforward thing, as is likely
+data imputation is not a straightforward thing, and is likely
 to dramatically fail when a high proportion of data is missing (10s of
 %). It is possible to keep NAs when performing hypothesis
 tests<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Still, it is recommended to explore missingness as part of the
@@ -1101,7 +1101,7 @@ analysis.</p>
 <span class="header-section-number">5.4.3</span> Identification quality control<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('identification-quality-control')" onmouseout="reset_tooltip('identification-quality-control-tooltip')"><span class="tooltiptext" id="identification-quality-control-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>As discussed in the previous chapter, PSMs are deemed relevant after
-comparison against hist from a decoy database. The origin of these
+comparison against hits from a decoy database. The origin of these
 hits is recorded with <code>+</code> in the <code>Reverse</code> variable:</p>
 <div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="sec-quant.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac_se)<span class="sc">$</span>Reverse)</span></code></pre></div>
 <pre><code>## 
@@ -1154,7 +1154,7 @@ interpret the figure.</p>
 <span class="header-section-number">5.4.4</span> Creating the QFeatures data<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('creating-the-qfeatures-data')" onmouseout="reset_tooltip('creating-the-qfeatures-data-tooltip')"><span class="tooltiptext" id="creating-the-qfeatures-data-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>We can now create our <code>QFeatures</code> object using the
-<code>SummarizedExperiment</code> as show below.</p>
+<code>SummarizedExperiment</code> as shown below.</p>
 <div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="sec-quant.html#cb390-1" aria-hidden="true" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">peptides =</span> cptac_se))</span>
 <span id="cb390-2"><a href="sec-quant.html#cb390-2" aria-hidden="true" tabindex="-1"></a>cptac</span></code></pre></div>
 <pre><code>## An instance of class QFeatures containing 1 assays:
@@ -1178,7 +1178,7 @@ assays within a <code>QFeatures</code> object.</p>
 </p>
 <div class="question-body">
 <p>Using the <code>filterFeatures()</code> function, filter out the reverse and
-contaminant hits, and also retein those that have a posterior error
+contaminant hits, and also retain those that have a posterior error
 probability smaller than 0.05.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1215,7 +1215,7 @@ probability smaller than 0.05.</p>
 </p>
 <div class="question-body">
 <p>Use the <code>normalize()</code> method to normalise the data. The syntax is the
-same as <code>logTransform()</code>. Use the <code>centre.median</code> method.</p>
+same as <code>logTransform()</code>. Use the <code>center.median</code> method.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1280,8 +1280,8 @@ Figure 5.12: Three peptide level assays: raw data, log transformed and normalise
 </p>
 <div class="question-body">
 <p>Use median aggregation to aggregation peptides into protein
-values. This is not necessarily not the best choice, as we will see
-later, but a good star.</p>
+values. This is not necessarily the best choice, as we will see
+later, but a good start.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1305,7 +1305,7 @@ later, but a good star.</p>
 </div>
 </div>
 <p>Looking at the <code>.n</code> row variable computed during the aggregation, we
-see that most proteins result of the aggregation of 5 peptides or
+see that most proteins result from the aggregation of 5 peptides or
 less, while very few proteins are accounted for by tens of peptides.</p>
 <div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="sec-quant.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">rowData</span>(cptac[[<span class="st">"proteins_med"</span>]])<span class="sc">$</span>.n)</span></code></pre></div>
 <pre><code>## 
@@ -1375,11 +1375,11 @@ Figure 5.14: Peptide and protein expression profile.
 <span class="header-section-number">5.4.10</span> Statistical analysis<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('statistical-analysis')" onmouseout="reset_tooltip('statistical-analysis-tooltip')"><span class="tooltiptext" id="statistical-analysis-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>R in general and Bioconductor in particular are well suited for the
-statistical analysis of data of quantitative proteomics data. Several
+statistical analysis of quantitative proteomics data. Several
 packages provide dedicated resources for proteomics data:</p>
 <ul>
 <li><p><em><a href="https://bioconductor.org/packages/3.15/MSstats">MSstats</a></em> and <em><a href="https://bioconductor.org/packages/3.15/MSstatsTMT">MSstatsTMT</a></em>: A set of tools
-for statistical relative protein significanc eanalysis in Data
+for statistical relative protein significance analysis in Data
 dependent (DDA), SRM, Data independent acquisition (DIA) and TMT
 experiments.</p></li>
 <li><p><em><a href="https://bioconductor.org/packages/3.15/msmsTests">msmsTests</a></em>: Statistical tests for label-free LC-MS/MS
@@ -1424,13 +1424,13 @@ data using <code>limma</code>.</p>
 <p>The <em><a href="https://bioconductor.org/packages/3.15/limma">limma</a></em> package is the precursor package
 that enables the consistent application of linear models to normalliy
 distributed omics data in general, and microarrays in
-particuar.</p>
-<p>The <code>limma</code> package implements an empirical Bayes method that provides
+particular.</p>
+<p>The <code>limma</code> package implements an empirical Bayes method that
 borrows information across features to estimate the standard error and
-calculate (so called moderate) t statistics. This approach is
+calculate (so called moderated) t statistics. This approach is
 demonstrably more powerful that a standard t-tests when the number of
-samples is lot.</p>
-<p>The code chunk below illstrated how to set up the model, fit it, and
+samples is low.</p>
+<p>The code chunk below illustrates how to set up the model, fit it, and
 apply the empirical Bayes moderation.</p>
 <div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="sec-quant.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"limma"</span>)</span>
 <span id="cb404-2"><a href="sec-quant.html#cb404-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> prots<span class="sc">$</span>condition)</span>
@@ -1511,9 +1511,9 @@ other 36 expected spike-in proteins.</p>
 </ul>
 </div>
 </div>
-<div id="summary-exercice-1" class="section level2" number="5.5">
+<div id="summary-exercice" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.5</span> Summary exercice<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('summary-exercice-1')" onmouseout="reset_tooltip('summary-exercice-1-tooltip')"><span class="tooltiptext" id="summary-exercice-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<span class="header-section-number">5.5</span> Summary exercice<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('summary-exercice')" onmouseout="reset_tooltip('summary-exercice-tooltip')"><span class="tooltiptext" id="summary-exercice-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>As shown below, it is possible to substantially improve these results
 by aggregating features using a robust summarisation (available as

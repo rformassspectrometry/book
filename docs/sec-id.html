@@ -177,7 +177,7 @@ div.csl-indent {
 <li class="toc"><a href="#an-identification-annotated-chromatogram"> An identification-annotated chromatogram</a></li>
 <li class="toc"><a href="#visualising-peptide-spectrum-matches"> Visualising peptide-spectrum matches</a></li>
 <li class="toc"><a href="#comparing-spectra"> Comparing spectra</a></li>
-<li class="toc"><a href="#summary-exercice"> Summary exercice</a></li>
+<li class="toc"><a href="#summary-exercise"> Summary exercise</a></li>
 <li class="toc"><a href="#exploration-and-assessment-of-identifications-using-msnid"> Exploration and Assessment of Identifications using <code>MSnID</code></a></li>
 </ul>
 <a href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a>
@@ -222,12 +222,12 @@ using <code>MSGFplus</code>:</p>
 <h2>
 <span class="header-section-number">4.1</span> Identification data.frame<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('identification-data.frame')" onmouseout="reset_tooltip('identification-data.frame-tooltip')"><span class="tooltiptext" id="identification-data.frame-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>Let’s use the identification from from <code>msdata</code>:</p>
+<p>Let’s use the identification from <code>msdata</code>:</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sec-id.html#cb95-1" aria-hidden="true" tabindex="-1"></a>idf <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">ident</span>(<span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb95-2"><a href="sec-id.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(idf)</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
 <p>The easiest way to read identification data in <code>mzIdentML</code> (often
-abbreviated with <code>mzid</code>) into R is to read it with <code>readPSMs()</code>
+abbreviated with <code>mzid</code>) into R is to read it with the <code>readPSMs()</code>
 function from the
 <a href="https://rformassspectrometry.github.io/PSMatch/"><code>PSMatch</code></a>
 package<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> Previously named <code>PSM</code>.</span>. The function will parse the file and return a
@@ -283,7 +283,7 @@ scans and 4938 peptides sequences.</p>
 </p>
 </div>
 </div>
-<p>The PSM data are read as is, without and filtering. As we can see
+<p>The PSM data are read as is, without any filtering. As we can see
 below, we still have all the hits from the forward and reverse (decoy)
 databases.</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="sec-id.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(id<span class="sc">$</span>isDecoy)</span></code></pre></div>
@@ -325,7 +325,7 @@ to output in the the next code chunk display parts of <code>id2</code>.</span>:<
 <span id="cb113-2"><a href="sec-id.html#cb113-2" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
 <pre><code>## Reduced PSM with 5343 rows and 35 columns.
 ## names(35): sequence spectrumID ... subReplacementResidue subLocation</code></pre>
-<p>The resulting object contains a single entrie for scan 1774 with
+<p>The resulting object contains a single entry for scan 1774 with
 information for the multiple matches stored as lists within the cells.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="sec-id.html#cb115-1" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="fu">which</span>(id2<span class="sc">$</span>spectrumID <span class="sc">==</span> <span class="st">"controllerType=0 controllerNumber=1 scan=1774"</span>)</span>
 <span id="cb115-2"><a href="sec-id.html#cb115-2" aria-hidden="true" tabindex="-1"></a>id2[j, ]</span></code></pre></div>
@@ -346,7 +346,7 @@ annotate an raw mass spectrometry <code>Spectra</code> object, as shown below.</
 PSM, peptide or protein-level FDRs. Here, we will simply filter out
 wrong identification manually.</p>
 <p>Here, the <code>filter()</code> from the <code>dplyr</code> package comes very handy. We
-will thus start by convering the <code>DataFrame</code> to a <code>tibble</code>.</p>
+will thus start by converting the <code>DataFrame</code> to a <code>tibble</code>.</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="sec-id.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb119-2"><a href="sec-id.html#cb119-2" aria-hidden="true" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id)</span>
 <span id="cb119-3"><a href="sec-id.html#cb119-3" aria-hidden="true" tabindex="-1"></a>id_tbl</span></code></pre></div>
@@ -561,7 +561,7 @@ and for the latter, the size of their protein groups:</li>
 <pre><code>##   ()</code></pre>
 <ul>
 <li>
-<code>describeProteins()</code> gives the number of protein defined by only
+<code>describeProteins()</code> gives the number of proteins defined by only
 unique, only shared, or a mixture of unique/shared peptides:</li>
 </ul>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sec-id.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeProteins</span>(id_filtered)</span></code></pre></div>
@@ -569,7 +569,7 @@ unique, only shared, or a mixture of unique/shared peptides:</li>
 <pre><code>##  only unique peptides: 1466</code></pre>
 <pre><code>##  only shared peptides: 0</code></pre>
 <pre><code>##  unique and shared peptides: 0</code></pre>
-<p>See <a href="https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html">Understanding protein groups with adjacency
+<p>The <a href="https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html">Understanding protein groups with adjacency
 matrices</a>
 <code>PSMatch</code> vignette provides additional tools to explore how proteins
 were inferred from peptides.</p>
@@ -578,7 +578,7 @@ were inferred from peptides.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Compare the distribution of raw idenfication scores of the decoy and
+<p>Compare the distribution of raw identification scores of the decoy and
 non-decoy hits. Interpret the figure.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -647,7 +647,7 @@ Figure 4.1: Identifcation data wrangling.
 </div>
 <p>If you would like to learn more about how the mzid data are handled by
 <code>PSMatch</code> via the <em><a href="https://bioconductor.org/packages/3.15/mzR">mzR</a></em> and <em><a href="https://bioconductor.org/packages/3.15/mzID">mzID</a></em>
-packages, check out the <a href="sec-anx.html#sec-id2">6.2</a> section in the annexe.</p>
+packages, check out the <a href="sec-anx.html#sec-id2">6.2</a> section in the annex.</p>
 </div>
 <div id="adding-identification-data-to-raw-data" class="section level2" number="4.4">
 <h2>
@@ -859,19 +859,19 @@ MS1 scans.</p>
 <span class="header-section-number">4.5</span> An identification-annotated chromatogram<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('an-identification-annotated-chromatogram')" onmouseout="reset_tooltip('an-identification-annotated-chromatogram-tooltip')"><span class="tooltiptext" id="an-identification-annotated-chromatogram-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>Now that we have combined raw data and their associated
-peptide-spectrum matches, we can produced an improved total ion
+peptide-spectrum matches, we can produce an improved total ion
 chromatogram, identifying MS1 scans that lead to successful
 identifications.</p>
 <p>The <code>countIdentifications()</code> function is going to tally the number of
 identifications (i.e non-missing characters in the <code>sequence</code> spectra
 variable) for each scan. In the case of MS2 scans, these will be
-either 1 or 0, depending the presence of a sequence. For MS1 scans,
+either 1 or 0, depending on the presence of a sequence. For MS1 scans,
 the function will count the number of sequences for the descendant MS2
 scans, i.e. those produced from precursor ions from each MS1 scan.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-id.html#cb173-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">countIdentifications</span>(sp)</span></code></pre></div>
 <pre><code>## </code></pre>
 <p>Below, we see on the second line that 3457 MS2 scans lead to no PSM,
-while 2546 lead to an identifcation. Among all MS1 scans, 833 lead to
+while 2546 lead to an identification. Among all MS1 scans, 833 lead to
 no MS2 scans with PSMs. 30 MS1 scans generated one MS2 scan that lead
 to a PSM, 45 lead to two PSMs, …</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-id.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">msLevel</span>(sp), sp<span class="sc">$</span>countIdentifications)</span></code></pre></div>
@@ -901,7 +901,7 @@ to a PSM, 45 lead to two PSMs, …</p>
 <h2>
 <span class="header-section-number">4.6</span> Visualising peptide-spectrum matches<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visualising-peptide-spectrum-matches')" onmouseout="reset_tooltip('visualising-peptide-spectrum-matches-tooltip')"><span class="tooltiptext" id="visualising-peptide-spectrum-matches-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>Let’s choose a MS2 spectrum with a high identication score and plot
+<p>Let’s choose a MS2 spectrum with a high identification score and plot
 it.</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-id.html#cb178-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(sp<span class="sc">$</span>MS.GF.RawScore <span class="sc">&gt;</span> <span class="dv">100</span>)[<span class="dv">1</span>]</span>
 <span id="cb178-2"><a href="sec-id.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[i])</span></code></pre></div>
@@ -963,7 +963,7 @@ peptide and matching observed peaks to fragments:</p>
 <h2>
 <span class="header-section-number">4.7</span> Comparing spectra<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('comparing-spectra')" onmouseout="reset_tooltip('comparing-spectra-tooltip')"><span class="tooltiptext" id="comparing-spectra-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>The <code>compareSpectra()</code> can be used to compare spectra (by default,
+<p>The <code>compareSpectra()</code> function can be used to compare spectra (by default,
 computing the normalised dot product).</p>
 <div class="question">
 <p class="question-begin">
@@ -1072,9 +1072,9 @@ page for details. Draw a heatmap of that distance matrix</li>
 </div>
 </div>
 </div>
-<div id="summary-exercice" class="section level2" number="4.8">
+<div id="summary-exercise" class="section level2" number="4.8">
 <h2>
-<span class="header-section-number">4.8</span> Summary exercice<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('summary-exercice')" onmouseout="reset_tooltip('summary-exercice-tooltip')"><span class="tooltiptext" id="summary-exercice-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<span class="header-section-number">4.8</span> Summary exercise<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('summary-exercise')" onmouseout="reset_tooltip('summary-exercise-tooltip')"><span class="tooltiptext" id="summary-exercise-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <div class="question">
 <p class="question-begin">
@@ -1367,7 +1367,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Jun 23 13:55:01 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Jun 23 16:36:42 2022]</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-id.html#cb242-1" aria-hidden="true" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb242-2"><a href="sec-id.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb242-3"><a href="sec-id.html#cb242-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1474,7 +1474,7 @@ will use the example identification data provided with the package.</p>
 <pre><code>## [1] "c_elegans.mzid.gz"</code></pre>
 <p>We start by loading the package, initialising the <code>MSnID</code> object, and
 add the identification result from our <code>mzid</code> file (there could of
-course be more that one).</p>
+course be more than one).</p>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="sec-id.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnID"</span>)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'MSnID'</code></pre>
@@ -1545,7 +1545,7 @@ package’s vignette for more details:</p>
 </h3>
 <p>Cleaning irregular cleavages at the termini of the peptides and
 missing cleavage site within the peptide sequences. The following two
-function call create the new <code>numMisCleavages</code> and <code>numIrregCleavages</code>
+function calls create the new <code>numMisCleavages</code> and <code>numIrregCleavages</code>
 columns in the <code>MSnID</code> object</p>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sec-id.html#cb271-1" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_termini</span>(msnid, <span class="at">validCleavagePattern=</span><span class="st">"[KR]</span><span class="sc">\\</span><span class="st">.[^P]"</span>)</span>
 <span id="cb271-2"><a href="sec-id.html#cb271-2" aria-hidden="true" tabindex="-1"></a>msnid <span class="ot">&lt;-</span> <span class="fu">assess_missed_cleavages</span>(msnid, <span class="at">missedCleavagePattern=</span><span class="st">"[KR](?=[^P$])"</span>)</span></code></pre></div>
@@ -1591,7 +1591,7 @@ measurement error in parts per million.</p>
 <p>Filtering of the identification data will rely on</p>
 <ul>
 <li>-log10 transformed MS-GF+ Spectrum E-value, reflecting the goodness
-of match experimental and theoretical fragmentation patterns</li>
+of match between experimental and theoretical fragmentation patterns</li>
 </ul>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-id.html#cb278-1" aria-hidden="true" tabindex="-1"></a>msnid<span class="sc">$</span>msmsScore <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(msnid<span class="sc">$</span><span class="st">`</span><span class="at">MS-GF:SpecEValue</span><span class="st">`</span>)</span></code></pre></div>
 <ul>
@@ -1615,7 +1615,7 @@ threshold value itself.</p>
 <pre><code>## MSnIDFilter object
 ## (absParentMassErrorPPM &lt; 10) &amp; (msmsScore &gt; 10)</code></pre>
 <p>We can then evaluate the filter on the identification data object,
-which return the false discovery rate and number of retained
+which returns the false discovery rate and number of retained
 identifications for the filtering criteria at hand.</p>
 <div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-id.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate_filter</span>(msnid, filtObj)</span></code></pre></div>
 <pre><code>##           fdr    n
@@ -1669,7 +1669,7 @@ protein sequences are removed</p>
 <p>The resulting filtered identification data can be exported to a
 <code>data.frame</code> (or to a dedicated <code>MSnSet</code> data structure from the
 <code>MSnbase</code> package) for quantitative MS data, described below, and
-further processed and analyses using appropriate statistical tests.</p>
+further processed and analysed using appropriate statistical tests.</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-id.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(msnid))</span></code></pre></div>
 <pre><code>##   spectrumID scan number(s) acquisitionNum passThreshold rank
 ## 1 index=7151           8819           7151          TRUE    1

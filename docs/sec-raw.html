@@ -190,7 +190,7 @@ div.csl-indent {
 <html><body><div id="sec-raw" class="section level1" number="3">
 <h1>
 <span class="header-section-number">Chapter 3</span> Raw MS data</h1>
-<p>In this section, we will learn how to read raw data from in one of the
+<p>In this section, we will learn how to read raw data in one of the
 commonly used open formats (<code>mzML</code>, <code>mzXML</code> and <code>netCDF</code>) into R.</p>
 <pre><code>|Data type  |File format   |Data structure               |Package           |
 |:----------|:-------------|:----------------------------|:-----------------|
@@ -204,13 +204,13 @@ commonly used open formats (<code>mzML</code>, <code>mzXML</code> and <code>netC
 <span class="header-section-number">3.1</span> What is raw data in R<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('what-is-raw-data-in-r')" onmouseout="reset_tooltip('what-is-raw-data-in-r-tooltip')"><span class="tooltiptext" id="what-is-raw-data-in-r-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>When we manipulate complex data, we need a way to abstract it.</p>
-<p>The need for and abstraction saves us from having to know about all
+<p>The abstraction saves us from having to know about all
 the details of that data <strong>and</strong> its associated metadata. In R, we
 think of MS data as illustrated on the figure below (taken from
 <span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">Gatto, Gibb, and Rainer 2020<span class="marginnote">Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.</span>)</span>): a metadata table and a set of raw spectra. This allows
 to rely on a few easy-to-remember conventions to make mundane and
 repetitive tasks trivial and be able to complete more complex things
-easily. Abstractions provide a smoother approaches to handle complex
+easily. Abstractions provide a smoother approach to handle complex
 data using common patterns.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-8"></span>
@@ -228,9 +228,9 @@ Figure 3.1: Schematic representation of what is referred to by <em>raw data</em>
 as an abstraction to raw mass spectrometry data.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sec-raw.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Spectra)</span></code></pre></div>
 <p><code>Spectra</code> is part of the <a href="https://www.rformassspectrometry.org/">R for Mass Spectrometry
-initiative</a> initiative. It
-defines the <code>Spectra</code> class that is used as a raw data abstration, to
-maniputate MS data and metadata. The best way to learn about a data
+initiative</a>. It
+defines the <code>Spectra</code> class that is used as a raw data abstraction, to
+manipulate MS data and metadata. The best way to learn about a data
 structure is to create one by hand.</p>
 <p>Let’s create a <code>DataFrame</code><label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> As defined in the Bioconductor <code>S4Vectors</code>
 package.</span> containing MS levels, retention time, m/z and intensities
@@ -262,7 +262,7 @@ for 2 spectra:</p>
 <li>
 <code>spectraData</code> to extract all the metadata.</li>
 <li>
-<code>peaksData</code> to extract a list containing thet raw data.</li>
+<code>peaksData</code> to extract a list containing the raw data.</li>
 <li>
 <code>[</code> to create subsets.</li>
 </ul>
@@ -473,7 +473,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Jun 23 13:53:54 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Jun 23 16:35:44 2022]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -502,7 +502,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Thu Jun 23 13:54:07 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Thu Jun 23 16:35:55 2022]</code></pre>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-raw.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -511,9 +511,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-raw.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmp7ITI1w/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpCTeWO5/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/Rtmp7ITI1w/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpCTeWO5/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -526,7 +526,7 @@ us to specify the storage location of the HDF5 file.</p>
 that will store all data, i.e. raw and metadata, on disk.</p>
 <p>If you would like to learn more about how the raw MS formats are
 handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.15/mzR">mzR</a></em> package,
-check out the <a href="sec-anx.html#sec-raw2">6.1</a> section in the annexe..</p>
+check out the <a href="sec-anx.html#sec-raw2">6.1</a> section in the annex.</p>
 </div>
 </div>
 <div id="visualisation-of-raw-ms-data" class="section level2" number="3.2">
@@ -537,12 +537,12 @@ check out the <a href="sec-anx.html#sec-raw2">6.1</a> section in the annexe..</p
 in the figure below (taken from the <code>RforProteomics</code> <a href="http://bioconductor.org/packages/release/data/experiment/vignettes/RforProteomics/inst/doc/RProtVis.html">visualisation
 vignette</a>).
 Not only can we access specific data and understand/visualise them,
-but we can transverse all the data and extracted/visualise/understand
+but we can transverse all the data and extract/visualise/understand
 structured slices of data.</p>
-<p>The figure below show is an illustration of how mass spectrometry
+<p>The figure below shows an illustration of how mass spectrometry
 works:</p>
 <ol style="list-style-type: decimal">
-<li><p>The chromatogram at the top display to total ion current along the
+<li><p>The chromatogram at the top displays the total ion current along the
 retention time. The vertical line identifies one scan in particular
 at retention time 1800.68 seconds (the 2807th scan).</p></li>
 <li><p>The spectra on the second line represent the full MS1 spectrum
@@ -554,7 +554,7 @@ those resulting from the fragmentation of the 10 precursor peaks
 identified by the vertical bars above.</p></li>
 </ol>
 <p><img src="img/msvisfig.png" width="100%" style="display: block; margin: auto;"></p>
-<p>We are going to reproduce the figure above trought a set of exercices.</p>
+<p>We are going to reproduce the figure above through a set of exercices.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -626,7 +626,7 @@ children.</li>
 ## file(s):
 ## 5705c6a4d1eca_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Thu Jun 23 13:54:07 2022]</code></pre>
+##  Filter: select parent/children scans for 2807 [Thu Jun 23 16:35:55 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -792,7 +792,7 @@ package</a>:</p>
 <li><p>The
 <a href="https://rformassspectrometry.github.io/SpectraVis/reference/browseSpectra.html"><code>browseSpectra()</code></a>
 function opens a simple shiny application that allows to browse
-trough the individual scans of a Spectra object.</p></li>
+through the individual scans of a Spectra object.</p></li>
 <li><p>The
 <a href="https://rformassspectrometry.github.io/SpectraVis/reference/plotlySpectra.html"><code>plotlySpectra()</code></a>
 function displays a single spectrum using
@@ -906,8 +906,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Thu Jun 23 13:54:09 2022]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Thu Jun 23 13:54:09 2022]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Thu Jun 23 16:35:58 2022]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Thu Jun 23 16:35:58 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -933,7 +933,7 @@ function to pick peaks:</p>
 </h3>
 <p>The figure below (taken from <span class="citation">(<label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle">Gatto, Gibb, and Rainer 2020<span class="marginnote">Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.</span>)</span>) illustrates the respective
 advantages of storing data in memory or on disk. The benchmarking was
-done for the <code>MSnbase</code> package also applies to the <code>Spectra</code> backends.</p>
+done for the <code>MSnbase</code> package but also applies to the <code>Spectra</code> backends.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <p class="caption marginnote shownote">
@@ -991,7 +991,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Thu Jun 23 13:54:10 2022]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Thu Jun 23 16:35:59 2022]</code></pre>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sec-raw.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sec-raw.html#cb83-1" aria-hidden="true" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>

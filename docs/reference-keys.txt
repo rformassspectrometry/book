@@ -47,7 +47,7 @@ adding-identification-data-to-raw-data
 an-identification-annotated-chromatogram
 visualising-peptide-spectrum-matches
 comparing-spectra
-summary-exercice
+summary-exercise
 exploration-and-assessment-of-identifications-using-msnid
 step-by-step-work-flow
 analysis-of-peptide-sequences
@@ -79,7 +79,7 @@ aggregation
 principal-component-analysis
 visualisation
 statistical-analysis
-summary-exercice-1
+summary-exercice
 sec-anx
 sec-raw2
 sec-id2

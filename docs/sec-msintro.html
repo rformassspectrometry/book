@@ -195,7 +195,7 @@ div.csl-indent {
 <p>Mass spectrometry (MS) is a technology that <em>separates</em> charged
 molecules (ions) based on their mass to charge ratio (M/Z). It is
 often coupled to chromatography (liquid LC, but can also be gas-based
-GC). The time an analytes takes to elute from the chromatography
+GC). The time an analyte takes to elute from the chromatography
 column is the <em>retention time</em>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-2"></span>
@@ -219,14 +219,14 @@ the analytes assayed in the mass spectrometer are peptides.</p>
 first round of separation, the peaks in the spectra, called MS1
 spectra, represent peptides. At this stage, the only information we
 possess about these peptides are their retention time and their
-mass-to-charge (we can also infer their charge be inspecting their
+mass-to-charge (we can also infer their charge by inspecting their
 isotopic envelope, i.e the peaks of the individual isotopes, see
 below), which is not enough to infer their identify (i.e. their
 sequence).</p>
 <p>In MSMS (or MS2), the settings of the mass spectrometer are set
 automatically to select a certain number of MS1 peaks (for example
-20)<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Here, we will focus in data dependent acquisition (DDA), where
-MS1 peaks a selected. In data independent acquisition (DIA), all peaks
+20)<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Here, we will focus on data dependent acquisition (DDA), where
+MS1 peaks are selected. In data independent acquisition (DIA), all peaks
 in the MS1 spectrum are fragmented.</span>. Once a narrow M/Z range has been
 selected (corresponding to one high-intensity peak, a peptide, and
 some background noise), it is fragmented (using for example
@@ -235,9 +235,9 @@ dissociation (HCD) or electron-transfer dissociation (ETD)). The
 fragment ions are then themselves separated in the analyser to produce
 a MS2 spectrum. The unique fragment ion pattern can then be used to
 infer the peptide sequence using de novo sequencing (when the spectrum
-is of high enough quality) of using a search engine such as, for
+is of high enough quality) or using a search engine such as, for
 example Mascot, MSGF+, …, that will match the observed, experimental
-spectrum to theoratical spectra (see details below).</p>
+spectrum to theoretical spectra (see details below).</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <p class="caption marginnote shownote">
@@ -284,9 +284,9 @@ Figure 2.5: MS1 spectra over retention time.
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <p class="caption marginnote shownote">
-Figure 2.6: MS2 spectra interleaved between two MS1 spectra..
+Figure 2.6: MS2 spectra interleaved between two MS1 spectra.
 </p>
-<img src="img/F02-3D-MS1-MS2-scans-100-1200-lattice.png" alt="MS2 spectra interleaved between two MS1 spectra.." width="100%">
+<img src="img/F02-3D-MS1-MS2-scans-100-1200-lattice.png" alt="MS2 spectra interleaved between two MS1 spectra." width="100%">
 </div>
 </div>
 <div id="accessing-data" class="section level2" number="2.2">
