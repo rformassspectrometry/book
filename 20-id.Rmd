@@ -26,7 +26,7 @@ paste0("java -jar /path/to/MSGFPlus.jar",
 
 ## Identification data.frame
 
-Let's use the identification from from `msdata`:
+Let's use the identification from `msdata`:
 
 ```{r mzrvsid, eval = TRUE}
 idf <- msdata::ident(full.names = TRUE)
@@ -34,7 +34,7 @@ basename(idf)
 ```
 
 The easiest way to read identification data in `mzIdentML` (often
-abbreviated with `mzid`) into R is to read it with `readPSMs()`
+abbreviated with `mzid`) into R is to read it with the `readPSMs()`
 function from the
 [`PSMatch`](https://rformassspectrometry.github.io/PSMatch/)
 package[^oldname]. The function will parse the file and return a
@@ -72,7 +72,7 @@ length(unique(id$sequence))   ## number of peptide sequences
 
 `r msmbstyle::solution_end()`
 
-The PSM data are read as is, without and filtering. As we can see
+The PSM data are read as is, without any filtering. As we can see
 below, we still have all the hits from the forward and reverse (decoy)
 databases.
 
@@ -112,7 +112,7 @@ id2 <- reducePSMs(id, id$spectrumID)
 id2
 ```
 
-The resulting object contains a single entrie for scan 1774 with
+The resulting object contains a single entry for scan 1774 with
 information for the multiple matches stored as lists within the cells.
 
 ```{r}
@@ -135,7 +135,7 @@ PSM, peptide or protein-level FDRs. Here, we will simply filter out
 wrong identification manually.
 
 Here, the `filter()` from the `dplyr` package comes very handy. We
-will thus start by convering the `DataFrame` to a `tibble`.
+will thus start by converting the `DataFrame` to a `tibble`.
 
 ```{r, message = FALSE}
 library("dplyr")
@@ -227,21 +227,21 @@ in a PSM search result.
 describePeptides(id_filtered)
 ```
 
-- `describeProteins()` gives the number of protein defined by only
+- `describeProteins()` gives the number of proteins defined by only
   unique, only shared, or a mixture of unique/shared peptides:
 
 ```{r}
 describeProteins(id_filtered)
 ```
 
-See [Understanding protein groups with adjacency
+The [Understanding protein groups with adjacency
 matrices](https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html)
 `PSMatch` vignette provides additional tools to explore how proteins
 were inferred from peptides.
 
 `r msmbstyle::question_begin()`
 
-Compare the distribution of raw idenfication scores of the decoy and
+Compare the distribution of raw identification scores of the decoy and
 non-decoy hits. Interpret the figure.
 
 `r msmbstyle::question_end()`
@@ -292,7 +292,7 @@ ggplot(iddf, aes(x = n, y = DBseqLength)) + geom_point()
 
 If you would like to learn more about how the mzid data are handled by
 `PSMatch` via the `r BiocStyle::Biocpkg("mzR")` and `r BiocStyle::Biocpkg("mzID")`
-packages, check out the \@ref(sec-id2) section in the annexe.
+packages, check out the \@ref(sec-id2) section in the annex.
 
 
 ## Adding identification data to raw data
@@ -406,14 +406,14 @@ summary(sp_2$precursorMz - sp_2$experimentalMassToCharge)
 ## An identification-annotated chromatogram
 
 Now that we have combined raw data and their associated
-peptide-spectrum matches, we can produced an improved total ion
+peptide-spectrum matches, we can produce an improved total ion
 chromatogram, identifying MS1 scans that lead to successful
 identifications.
 
 The `countIdentifications()` function is going to tally the number of
 identifications (i.e non-missing characters in the `sequence` spectra
 variable) for each scan. In the case of MS2 scans, these will be
-either 1 or 0, depending the presence of a sequence. For MS1 scans,
+either 1 or 0, depending on the presence of a sequence. For MS1 scans,
 the function will count the number of sequences for the descendant MS2
 scans, i.e. those produced from precursor ions from each MS1 scan.
 
@@ -423,7 +423,7 @@ sp <- countIdentifications(sp)
 ```
 
 Below, we see on the second line that 3457 MS2 scans lead to no PSM,
-while 2546 lead to an identifcation. Among all MS1 scans, 833 lead to
+while 2546 lead to an identification. Among all MS1 scans, 833 lead to
 no MS2 scans with PSMs. 30 MS1 scans generated one MS2 scan that lead
 to a PSM, 45 lead to two PSMs, ...
 
@@ -450,7 +450,7 @@ ggplot(aes(x = rtime,
 
 ## Visualising peptide-spectrum matches
 
-Let's choose a MS2 spectrum with a high identication score and plot
+Let's choose a MS2 spectrum with a high identification score and plot
 it.
 
 ```{r}
@@ -494,7 +494,7 @@ calculateFragments(sp[i]$sequence)
 
 ## Comparing spectra
 
-The `compareSpectra()` can be used to compare spectra (by default,
+The `compareSpectra()` function can be used to compare spectra (by default,
 computing the normalised dot product).
 
 `r msmbstyle::question_begin()`
@@ -557,7 +557,7 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 `r msmbstyle::solution_end()`
 
 
-## Summary exercice
+## Summary exercise
 
 `r msmbstyle::question_begin()`
 
@@ -800,7 +800,7 @@ basename(mzids)
 
 We start by loading the package, initialising the `MSnID` object, and
 add the identification result from our `mzid` file (there could of
-course be more that one).
+course be more than one).
 
 ```{r msnid1, warning = FALSE}
 library("MSnID")
@@ -841,7 +841,7 @@ package's vignette for more details:
 
 Cleaning irregular cleavages at the termini of the peptides and
 missing cleavage site within the peptide sequences. The following two
-function call create the new `numMisCleavages` and `numIrregCleavages`
+function calls create the new `numMisCleavages` and `numIrregCleavages`
 columns in the `MSnID` object
 
 ```{r msnidtermini}
@@ -884,7 +884,7 @@ summary(mass_measurement_error(msnid))
 Filtering of the identification data will rely on
 
 * -log10 transformed MS-GF+ Spectrum E-value, reflecting the goodness
-  of match experimental and theoretical fragmentation patterns
+  of match between experimental and theoretical fragmentation patterns
 
 ```{r filt1}
 msnid$msmsScore <- -log10(msnid$`MS-GF:SpecEValue`)
@@ -912,7 +912,7 @@ show(filtObj)
 ```
 
 We can then evaluate the filter on the identification data object,
-which return the false discovery rate and number of retained
+which returns the false discovery rate and number of retained
 identifications for the filtering criteria at hand.
 
 ```{r filt4}
@@ -957,7 +957,7 @@ show(msnid)
 The resulting filtered identification data can be exported to a
 `data.frame` (or to a dedicated `MSnSet` data structure from the
 `MSnbase` package) for quantitative MS data, described below, and
-further processed and analyses using appropriate statistical tests.
+further processed and analysed using appropriate statistical tests.
 
 ```{r}
 head(psms(msnid))

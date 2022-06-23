@@ -78,8 +78,8 @@ suppressPackageStartupMessages(library("MsCoreUtils"))
 ## Setup {-}
 
 This material uses the latest version of the R for Mass Spectrometry
-package and their dependencies. It might this be possible that even
-the latest Bioconductor stable version aren't recent enough.
+package and their dependencies. It might thus be possible that even
+the latest Bioconductor stable version isn't recent enough.
 
 To install the latest versions of all the package, please use R
 version 4.2 and execute:
