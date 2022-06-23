@@ -3,7 +3,7 @@
 
 ## Raw MS data under the hood: the `mzR` package {#sec-raw2}
 
-The `mzR` package in a direct interface to the
+The `mzR` package is a direct interface to the
 [proteowizard](http://proteowizard.sourceforge.net/) code base. It
 includes a substantial proportion of *pwiz*'s C/C++ code for fast and
 efficient parsing of these large raw data files.
@@ -127,7 +127,7 @@ id <- mzID(idf)
 id
 ```
 
-Various data can be extracted from the `mzID` object, using one the
+Various data can be extracted from the `mzID` object, using one of the
 accessor functions such as `database`, `software`, `scans`, `peptides`,
 ... The object can also be converted into a `data.frame` using the
 `flatten` function.

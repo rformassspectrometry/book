@@ -3,7 +3,7 @@
 ## Quantitation methodologies
 
 There are a wide range of proteomics quantitation techniques that can
-broadly be classified as labelled vs. label-free, depending whether
+broadly be classified as labelled vs. label-free, depending on whether
 the features are labelled prior the MS acquisition and the MS level at
 which quantitation is inferred, namely MS1 or MS2.
 
@@ -19,7 +19,7 @@ knitr::kable(qtb)
 
 ### Label-free MS2: Spectral counting
 
-In spectral counting, on simply counts the number of quantified
+In spectral counting, one simply counts the number of quantified
 peptides that are assigned to a protein.
 
 ```{r sc, echo=FALSE, out.width = "75%", fig.cap = "Spectral counting. Figure from the `Pbase` package."}
@@ -30,7 +30,7 @@ knitr::include_graphics("./img/pbase.png")
 
 Isobaric tagging refers to the labelling using isobaric tags,
 i.e. chemical tags that have the same mass and hence can't be
-distinguish by the spectrometer. The peptides of different samples (4,
+distinguished by the spectrometer. The peptides of different samples (4,
 6, 10, 11 or 16) are labelled with different tags and combined prior
 to mass spectrometry acquisition. Given that they are isobaric, all
 identical peptides, irrespective of the tag and this the sample of
@@ -47,7 +47,7 @@ knitr::include_graphics("./img/itraq.png")
 ### Label-free MS1: extracted ion chromatograms
 
 In label-free quantitation, the precursor peaks that match an
-identified peptide are integrated of retention time and the area under
+identified peptide are integrated over retention time and the area under
 that *extracted ion chromatogram* is used to quantify that peptide in
 that sample.
 
@@ -59,7 +59,7 @@ knitr::include_graphics("./img/chrompeaks.png")
 ### Labelled MS1: SILAC
 
 In SILAC quantitation, sample are grown in a medium that contains
-heavy amino acids (typically arginine and lysine). All proteins gown
+heavy amino acids (typically arginine and lysine). All proteins grown
 in this *heavy* growth medium contain the heavy form of these amino
 acids. Two samples, one grown in heavy medium, and one grown in normal
 (light) medium are then combined and analysed together. The heavy
@@ -96,7 +96,7 @@ quantitation technologies:
 ## QFeatures {#sec-qf}
 
 Mass spectrometry-based quantitative proteomics data can be
-representated as a matrix of quantitative values for features (PSMs,
+represented as a matrix of quantitative values for features (PSMs,
 peptides, proteins) arranged along the rows, measured for a set of
 samples, arranged along the columns. There is a common representation
 for such quantitative data set, namely the `SummarizedExperiment` (SE)
@@ -106,15 +106,15 @@ for such quantitative data set, namely the `SummarizedExperiment` (SE)
 knitr::include_graphics("./img/SE.png")
 ```
 
-- The sample (columns) metadata can be access with the `colData()`
+- The sample (columns) metadata can be accessed with the `colData()`
   function.
-- The features (rows) metadata can be access with the `rowData()`
+- The features (rows) metadata can be accessed with the `rowData()`
   column.
 - If the features represent ranges along genomic coordinates, these
   can be accessed with `rowRanges()`
 - Additional metadata describing the overall experiment can be
   accessed with `metadata()`.
-- The quantiative data can be accessed with `assay()`.
+- The quantitative data can be accessed with `assay()`.
 - `assays()` returns a list of matrix-like assays.
 
 ### The QFeatures class
@@ -223,7 +223,7 @@ feat1$Y <- c("Y1", "Y2")
 colData(feat1)
 ```
 
-- Extract the first (and only) assay composing this `QFeaures` data
+- Extract the first (and only) assay composing this `QFeatures` data
   using the `[[` operator (as you have done to extract elements of a
   list) by using the assay's index or name.
 
@@ -249,7 +249,7 @@ link between the different levels. This can be done with the
 The call below will
 
 - operate on the `psms` assay of the `feat1` objects;
-- aggregate the rows the assay following the grouping defined in the
+- aggregate the rows of the assay following the grouping defined in the
   `peptides` row data variables;
 - perform aggregation using the `colMeans()` function;
 - create a new assay named `peptides` and add it to the `feat1`
@@ -263,7 +263,7 @@ feat1 <- aggregateFeatures(feat1, i = "psms",
 feat1
 ```
 
-- Let's convince yourself that we understand the effect of feature
+- Let's convince ourselves that we understand the effect of feature
   aggregation and repeat the calculations manually and check the
   content of the new assay's row data.
 
@@ -340,7 +340,7 @@ filterFeatures(feat1, ~ location != "Mitochondrion")
 
 You can refer to the [*Quantitative features for mass spectrometry
 data*](https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html)
-vignette and the `QFeature` [manual
+vignette and the `QFeatures` [manual
 page](https://rformassspectrometry.github.io/QFeatures/reference/QFeatures-class.html)
 for more details about the class.
 
@@ -370,9 +370,9 @@ hl
 ```
 
 Below, we see that we can extract an assay using its index or its
-name. The individual assays are stored as *SummerizedExperiment*
+name. The individual assays are stored as *SummarizedExperiment*
 object and further access its quantitative data and metadata using
-the `assay` and `rowData` functions
+the `assay` and `rowData` functions.
 
 
 
@@ -385,9 +385,9 @@ head(rowData(hl[["psms"]]))
 
 For further details on how to manipulate such objects, refer to the
 `r BiocStyle::Biocpkg("MultiAssayExperiment")` [@MAE] and
-`r BiocStyle::Biocpkg("SummerizedExperiment")` [@SE] packages.
+`r BiocStyle::Biocpkg("SummarizedExperiment")` [@SE] packages.
 
-It is also possible to first create a `SummerizedExperiment`, and then
+It is also possible to first create a `SummarizedExperiment`, and then
 only include it into a `QFeatures` object.
 
 ```{r}
@@ -400,11 +400,11 @@ QFeatures(list(psm = se))
 ```
 
 At this stage, i.e. at the beginning of the analysis, and respectively
-whether you have a `SummerizedExperiment` or a `QFeatures` object, it
+whether you have a `SummarizedExperiment` or a `QFeatures` object, it
 is a good time to define the experimental design in the `colData`
 slot.
 
-### Exercice {-}
+### Exercise {-}
 
 The CPTAC spike-in study 6 [@Paulovich:2010] combines the Sigma UPS1
 standard containing 48 different human proteins that are spiked in at
@@ -428,7 +428,7 @@ basename(f <- msdata::quant(pattern = "cptac", full.names = TRUE))
 
 `r msmbstyle::question_begin()`
 
-Read these data in as either a `SummerizedExperiment` or a `QFeatures`
+Read these data in as either a `SummarizedExperiment` or a `QFeatures`
 object and annotated the experiment.
 
 `r msmbstyle::question_end()`
@@ -510,26 +510,26 @@ library("limma")
 
 ### Missing values
 
-Missing values can be highly frequent in proteomics. These exist two
+Missing values can be highly frequent in proteomics. There are two
 reasons supporting the existence of missing values, namely biological
 or technical.
 
 1. Values that are missing due to the absence (or extremely low
-   contentration) of a protein are observed for biological reasons,
-   and their pattern **aren't random** (MNAR). A protein missing in
+   concentration) of a protein are observed for biological reasons,
+   and their pattern **aren't random** (MNAR). A protein missing
    due to the suppression of its expression will not be missing at
    random: it will be missing in the condition in which it was
    suppressed, and be present in the condition where it is expressed.
 
-2. Due to it's data-dependent acquisition, mass spectrometry isn't
-   capable to assaying all peptides in a sample. Peptides that are
+2. Due to its data-dependent acquisition, mass spectrometry isn't
+   capable of assaying all peptides in a sample. Peptides that are
    less abundant than some of their co-eluting ions, peptides that do
    not ionise well or peptides that do not get identified might be
    sporadically missing in the final quantitation table, despite their
    presence in the biological samples. Their absence patterns are
    (completely) **random** (MAR or MCAR) in such cases.
 
-Often, third party software that produce quantiative data use zeros
+Often, third party software that produce quantitative data use zeros
 instead of properly reporting missing values. We can use the
 `zeroIsNA()` function to replace the `0` by `NA` values in our
 `cptac_se` object and then explore the missing data patterns across
@@ -580,7 +580,7 @@ barplot(nNA(cptac_se)$nNAcols$pNA)
 table(nNA(cptac_se)$nNArows$nNA)
 ```
 
-- Remove row that have *too many* missing values. You can do this by
+- Remove rows that have *too many* missing values. You can do this by
   hand or using the `filterNA()` function.
 
 ```{r filterna}
@@ -714,7 +714,7 @@ legend("topright", legend = c("orig", "knn", "zero", "MinDet", "bpca"),
 
 **Tip**: When downstream analyses permit, it might be safer not to
 impute data and deal explicitly with missing values. Indeed missing
-data impuration is however not a straightforward thing, as is likely
+data imputation is not a straightforward thing, and is likely
 to dramatically fail when a high proportion of data is missing (10s of
 %). It is possible to keep NAs when performing hypothesis
 tests^[Still, it is recommended to explore missingness as part of the
@@ -725,7 +725,7 @@ analysis.
 ### Identification quality control
 
 As discussed in the previous chapter, PSMs are deemed relevant after
-comparison against hist from a decoy database. The origin of these
+comparison against hits from a decoy database. The origin of these
 hits is recorded with `+` in the `Reverse` variable:
 
 ```{r revervetab}
@@ -776,7 +776,7 @@ rowData(cptac_se) %>%
 ### Creating the QFeatures data
 
 We can now create our `QFeatures` object using the
-`SummarizedExperiment` as show below.
+`SummarizedExperiment` as shown below.
 
 ```{r qf}
 cptac <- QFeatures(list(peptides = cptac_se))
@@ -802,7 +802,7 @@ assays within a `QFeatures` object.
 `r msmbstyle::question_begin()`
 
 Using the `filterFeatures()` function, filter out the reverse and
-contaminant hits, and also retein those that have a posterior error
+contaminant hits, and also retain those that have a posterior error
 probability smaller than 0.05.
 
 `r msmbstyle::question_end()`
@@ -834,7 +834,7 @@ cptac <- logTransform(cptac, i = "peptides",
 `r msmbstyle::question_begin()`
 
 Use the `normalize()` method to normalise the data. The syntax is the
-same as `logTransform()`. Use the `centre.median` method.
+same as `logTransform()`. Use the `center.median` method.
 
 `r msmbstyle::question_end()`
 
@@ -873,8 +873,8 @@ limma::plotDensities(assay(cptac[["lognorm_peptides"]]))
 `r msmbstyle::question_begin()`
 
 Use median aggregation to aggregation peptides into protein
-values. This is not necessarily not the best choice, as we will see
-later, but a good star.
+values. This is not necessarily the best choice, as we will see
+later, but a good start.
 
 `r msmbstyle::question_end()`
 
@@ -893,7 +893,7 @@ cptac <-
 `r msmbstyle::solution_end()`
 
 Looking at the `.n` row variable computed during the aggregation, we
-see that most proteins result of the aggregation of 5 peptides or
+see that most proteins result from the aggregation of 5 peptides or
 less, while very few proteins are accounted for by tens of peptides.
 
 ```{r}
@@ -951,11 +951,11 @@ longFormat(cptac["P02787ups|TRFE_HUMAN_UPS", ,
 ### Statistical analysis
 
 R in general and Bioconductor in particular are well suited for the
-statistical analysis of data of quantitative proteomics data. Several
+statistical analysis of quantitative proteomics data. Several
 packages provide dedicated resources for proteomics data:
 
 - `r Biocpkg("MSstats")` and `r Biocpkg("MSstatsTMT")`: A set of tools
-  for statistical relative protein significanc eanalysis in Data
+  for statistical relative protein significance analysis in Data
   dependent (DDA), SRM, Data independent acquisition (DIA) and TMT
   experiments.
 
@@ -1012,15 +1012,15 @@ colData(prots) <- colData(cptac)
 The `r BiocStyle::Biocpkg("limma")` package is the precursor package
 that enables the consistent application of linear models to normalliy
 distributed omics data in general, and microarrays in
-particuar.
+particular.
 
-The `limma` package implements an empirical Bayes method that provides
+The `limma` package implements an empirical Bayes method that
 borrows information across features to estimate the standard error and
-calculate (so called moderate) t statistics. This approach is
+calculate (so called moderated) t statistics. This approach is
 demonstrably more powerful that a standard t-tests when the number of
-samples is lot.
+samples is low.
 
-The code chunk below illstrated how to set up the model, fit it, and
+The code chunk below illustrates how to set up the model, fit it, and
 apply the empirical Bayes moderation.
 
 ```{r limma, message = FALSE}
