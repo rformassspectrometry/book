@@ -9,7 +9,7 @@ output:
     toc: TRUE
     toc_depth: 1
     split_by: chapter
-    margin_references: FALSE
+    margin_references: TRUE
     css: style.css
 bibliography: [refs.bib, packages.bib]
 link-citations: yes
@@ -52,11 +52,14 @@ data analysts/bioinformaticians that would like to learn how to use R
 and Bioconductor to analyse proteomics data. Familiarity with MS or
 proteomics in general is desirable, but not essential as we will walk
 through and describe a typical MS data as part of learning about the
-tools. A working knowledge of R (R syntax, commonly used functions,
-basic data structures such as data frames, vectors, matrices, ... and
-their manipulation) is required. Familiarity with other Bioconductor
-omics data classes and the tidyverse syntax is useful, but not
-necessary.
+tools. *A beginner's guide to mass spectrometry–based proteomics*
+[@Sinha:2020] is an approachable introduction to sample preparation,
+mass spectrometry and data analysis.
+
+A working knowledge of R (R syntax, commonly used functions, basic
+data structures such as data frames, vectors, matrices, ... and their
+manipulation) is required. Familiarity with other Bioconductor omics
+data classes and the tidyverse syntax is useful, but not necessary.
 
 
 ```{r bib, include=FALSE}

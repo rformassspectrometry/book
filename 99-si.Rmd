@@ -1,4 +1,4 @@
-# References and session information {#sec-si}
+# Additional materials and session information {#sec-si}
 
 ## Additional materials
 
@@ -52,5 +52,3 @@ knitr::write_bib(c(
 ```{r si}
 sessionInfo()
 ```
-
-## References {-}

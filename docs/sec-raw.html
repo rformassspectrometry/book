@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-06-20" />
+<meta name="date" content="2022-06-23" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -177,7 +177,7 @@ div.csl-indent {
 <a href="sec-id.html"><span class="toc-section-number">4</span> Identification data</a>
 <a href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a>
 <a href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a>
-<a href="sec-si.html"><span class="toc-section-number">7</span> References and session information</a>
+<a href="sec-si.html"><span class="toc-section-number">7</span> Additional materials and session information</a>
 </div>
 </li>
 </ul>
@@ -187,8 +187,7 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div id="sec-raw" class="section level1" number="3">
+<html><body><div id="sec-raw" class="section level1" number="3">
 <h1>
 <span class="header-section-number">Chapter 3</span> Raw MS data</h1>
 <p>In this section, we will learn how to read raw data from in one of the
@@ -206,7 +205,9 @@ commonly used open formats (<code>mzML</code>, <code>mzXML</code> and <code>netC
 </h2>
 <p>When we manipulate complex data, we need a way to abstract it.</p>
 <p>The need for and abstraction saves us from having to know about all
-the details of that data <strong>and</strong> its associated metadata. This allows
+the details of that data <strong>and</strong> its associated metadata. In R, we
+think of MS data as illustrated on the figure below (taken from
+<span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">Gatto, Gibb, and Rainer 2020<span class="marginnote">Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.</span>)</span>): a metadata table and a set of raw spectra. This allows
 to rely on a few easy-to-remember conventions to make mundane and
 repetitive tasks trivial and be able to complete more complex things
 easily. Abstractions provide a smoother approaches to handle complex
@@ -214,9 +215,9 @@ data using common patterns.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <p class="caption marginnote shownote">
-Figure 3.1: Schematic representation of what is referred to by <em>raw data</em>: a collection of mass spectra and a table containing spectrum-level annotations along the lines. Raw data are imported from one of the many community-maintained open standards formats (mzML, mzXML, mzData or ANDI-MS/netCDF) (Figure taken from <span class="citation">(<a href="#ref-Gatto:2020" role="doc-biblioref">Gatto, Gibb, and Rainer 2020</a>)</span>).
+Figure 3.1: Schematic representation of what is referred to by <em>raw data</em>: a collection of mass spectra and a table containing spectrum-level annotations along the lines. Raw data are imported from one of the many community-maintained open standards formats (mzML, mzXML, mzData or ANDI-MS/netCDF).
 </p>
-<img src="img/raw.png" alt="Schematic representation of what is referred to by *raw data*: a collection of mass spectra and a table containing spectrum-level annotations along the lines. Raw data are imported from one of the many community-maintained open standards formats (mzML, mzXML, mzData or ANDI-MS/netCDF) (Figure taken from [@Gatto:2020])." width="100%">
+<img src="img/raw.png" alt="Schematic representation of what is referred to by *raw data*: a collection of mass spectra and a table containing spectrum-level annotations along the lines. Raw data are imported from one of the many community-maintained open standards formats (mzML, mzXML, mzData or ANDI-MS/netCDF)." width="100%">
 </div>
 <div id="the-spectra-class" class="section level3" number="3.1.1">
 <h3>
@@ -472,7 +473,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Jun 20 09:05:37 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Thu Jun 23 12:06:46 2022]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -501,7 +502,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon Jun 20 09:05:46 2022]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Thu Jun 23 12:06:57 2022]</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-raw.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -510,9 +511,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-raw.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmp20zNLm/20171016_POOL_POS_1_105-134.h5 
+## /tmp/Rtmp7HpX31/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/Rtmp20zNLm/20171016_POOL_POS_3_105-134.h5 
+## /tmp/Rtmp7HpX31/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -625,7 +626,7 @@ children.</li>
 ## file(s):
 ## 5705c6a4d1eca_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Mon Jun 20 09:05:47 2022]</code></pre>
+##  Filter: select parent/children scans for 2807 [Thu Jun 23 12:06:57 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -905,8 +906,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon Jun 20 09:05:49 2022]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Mon Jun 20 09:05:49 2022]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Thu Jun 23 12:06:59 2022]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Thu Jun 23 12:06:59 2022]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -930,12 +931,15 @@ function to pick peaks:</p>
 <h3>
 <span class="header-section-number">3.4.1</span> Backends<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('backends-1')" onmouseout="reset_tooltip('backends-1-tooltip')"><span class="tooltiptext" id="backends-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
+<p>The figure below (taken from <span class="citation">(<label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle">Gatto, Gibb, and Rainer 2020<span class="marginnote">Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.</span>)</span>) illustrates the respective
+advantages of storing data in memory or on disk. The benchmarking was
+done for the <code>MSnbase</code> package also applies to the <code>Spectra</code> backends.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <p class="caption marginnote shownote">
-Figure 3.2: (a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package . (Figure taken from <span class="citation">(<a href="#ref-Gatto:2020" role="doc-biblioref">Gatto, Gibb, and Rainer 2020</a>)</span>.
+Figure 3.2: (a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package.
 </p>
-<img src="img/pr0c00313_0002.gif" alt="(a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package . (Figure taken from [@Gatto:2020]." width="70%">
+<img src="img/pr0c00313_0002.gif" alt="(a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package." width="70%">
 </div>
 </div>
 <div id="parallel-processing" class="section level3" number="3.4.2">
@@ -987,7 +991,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon Jun 20 09:05:50 2022]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Thu Jun 23 12:07:00 2022]</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-raw.html#cb84-1" aria-hidden="true" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1005,22 +1009,14 @@ below (next to Lazy evaluation queue).</p>
 
 </div>
 </div>
-</div>
-<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Gatto:2020" class="csl-entry">
-Gatto, Laurent, Sebastian Gibb, and Johannes Rainer. 2020. <span>“<span>MSnbase</span>, Efficient and Elegant r-Based Processing and Visualisation of Raw Mass Spectrometry Data.”</span> <em>J. Proteome Res.</em>, September.
-</div>
-</div>
-</body></html>
+</div></body></html>
 
 <p style="text-align: center;">
 <a href="sec-msintro.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-06-20
+2022-06-23
  using 
 R version 4.2.0 (2022-04-22)
 </p>

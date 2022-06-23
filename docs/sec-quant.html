@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-06-20" />
+<meta name="date" content="2022-06-23" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -178,7 +178,7 @@ div.csl-indent {
 <li class="toc"><a href="#summary-exercice-1"> Summary exercice</a></li>
 </ul>
 <a href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a>
-<a href="sec-si.html"><span class="toc-section-number">7</span> References and session information</a>
+<a href="sec-si.html"><span class="toc-section-number">7</span> Additional materials and session information</a>
 </div>
 </li>
 </ul>
@@ -188,8 +188,7 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div id="sec-quant" class="section level1" number="5">
+<html><body><div id="sec-quant" class="section level1" number="5">
 <h1>
 <span class="header-section-number">Chapter 5</span> Quantitative data</h1>
 <div id="quantitation-methodologies" class="section level2" number="5.1">
@@ -321,7 +320,7 @@ representated as a matrix of quantitative values for features (PSMs,
 peptides, proteins) arranged along the rows, measured for a set of
 samples, arranged along the columns. There is a common representation
 for such quantitative data set, namely the <code>SummarizedExperiment</code> (SE)
-<span class="citation">(<a href="#ref-SE" role="doc-biblioref">Morgan et al. 2020</a>)</span> class:</p>
+<span class="citation">(<label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">Morgan et al. 2020<span class="marginnote">Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.</span>)</span> class:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:sefig"></span>
 <p class="caption marginnote shownote">
@@ -362,7 +361,7 @@ Figure 5.6: Conceptual representation of a <code>QFeatures</code> object and the
 class implemented in the
 <a href="https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html"><code>QFeatures</code></a>
 package. The class is derived from the Bioconductor
-<code>MultiAssayExperiment</code> <span class="citation">(<a href="#ref-MAE" role="doc-biblioref">Ramos et al. 2017</a>)</span> (MAE) class. Let’s start by loading the
+<code>MultiAssayExperiment</code> <span class="citation">(<label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">Ramos et al. 2017<span class="marginnote">Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.</span>)</span> (MAE) class. Let’s start by loading the
 <code>QFeatures</code> package.</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="sec-quant.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span></code></pre></div>
 <p>Next, we load the <code>feat1</code> test data, which is composed of single
@@ -575,7 +574,7 @@ spreadsheet or a dataframe. In such cases, the easiest is to use the
 <code>readQFeatures</code> function to extract the quantitative data and metadata
 columns. Below, we load the <code>hlpsms</code> dataframe that contains data for
 28 PSMs from the TMT-10plex <em>hyper</em>LOPIT spatial
-proteomics experiment from <span class="citation">(<a href="#ref-Christoforou:2016" role="doc-biblioref">Christoforou et al. 2016</a>)</span>. The <code>ecol</code> argument
+proteomics experiment from <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, Andy, Claire M Mulvey, Lisa M Breckels, Aikaterini Geladaki, Tracey Hurrell, Penelope C Hayward, Thomas Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>. The <code>ecol</code> argument
 specifies that columns 1 to 10 contain quantitation data, and that the
 assay should be named <code>psms</code> in the returned <code>QFeatures</code> object, to
 reflect the nature of the data.</p>
@@ -649,8 +648,8 @@ the <code>assay</code> and <code>rowData</code> functions</p>
 ## 4         0.35     29.18       unknown
 ##  [ reached getOption("max.print") -- omitted 2 rows ]</code></pre>
 <p>For further details on how to manipulate such objects, refer to the
-<em><a href="https://bioconductor.org/packages/3.15/MultiAssayExperiment">MultiAssayExperiment</a></em> <span class="citation">(<a href="#ref-MAE" role="doc-biblioref">Ramos et al. 2017</a>)</span> and
-<em><a href="https://bioconductor.org/packages/3.15/SummerizedExperiment">SummerizedExperiment</a></em> <span class="citation">(<a href="#ref-SE" role="doc-biblioref">Morgan et al. 2020</a>)</span> packages.</p>
+<em><a href="https://bioconductor.org/packages/3.15/MultiAssayExperiment">MultiAssayExperiment</a></em> <span class="citation">(<label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">Ramos et al. 2017<span class="marginnote">Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.</span>)</span> and
+<em><a href="https://bioconductor.org/packages/3.15/SummerizedExperiment">SummerizedExperiment</a></em> <span class="citation">(<label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">Morgan et al. 2020<span class="marginnote">Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.</span>)</span> packages.</p>
 <p>It is also possible to first create a <code>SummerizedExperiment</code>, and then
 only include it into a <code>QFeatures</code> object.</p>
 <div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-quant.html#cb348-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readSummarizedExperiment</span>(hlpsms, <span class="at">ecol =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -673,7 +672,7 @@ slot.</p>
 <div id="exercice" class="section level3 unnumbered">
 <h3>Exercice<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('exercice')" onmouseout="reset_tooltip('exercice-tooltip')"><span class="tooltiptext" id="exercice-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>The CPTAC spike-in study 6 <span class="citation">(<a href="#ref-Paulovich:2010" role="doc-biblioref">Paulovich et al. 2010</a>)</span> combines the Sigma UPS1
+<p>The CPTAC spike-in study 6 <span class="citation">(<label for="tufte-mn-10" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">Paulovich et al. 2010<span class="marginnote">Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.</span>)</span> combines the Sigma UPS1
 standard containing 48 different human proteins that are spiked in at
 5 different concentrations (conditions A to E) into a constant yeast
 protein background. The sample were acquired in triplicate on
@@ -687,7 +686,7 @@ Figure 5.7: The CPTAC spike-in study design (credit Lieven Clement, statOmics, G
 </p>
 <img src="img/cptac.png" alt="The CPTAC spike-in study design (credit Lieven Clement, statOmics, Ghent University)." width="70%">
 </div>
-<p>The peptide-level data, as processed by MaxQuant <span class="citation">(<a href="#ref-Cox:2008" role="doc-biblioref">Cox and Mann 2008</a>)</span> is
+<p>The peptide-level data, as processed by MaxQuant <span class="citation">(<label for="tufte-mn-11" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-11" class="margin-toggle">Cox and Mann 2008<span class="marginnote">Cox, J, and M Mann. 2008. <span>“MaxQuant Enables High Peptide Identification Rates, Individualized p.p.b.-Range Mass Accuracies and Proteome-Wide Protein Quantification.”</span> <em>Nat Biotechnol</em> 26 (12): 1367–72. <a href="https://doi.org/10.1038/nbt.1511">https://doi.org/10.1038/nbt.1511</a>.</span>)</span> is
 available in the <code>msdata</code> package:</p>
 <div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="sec-quant.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">quant</span>(<span class="at">pattern =</span> <span class="st">"cptac"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
@@ -935,7 +934,7 @@ and data missing not at random (MNAR). These two types of missing
 data, those missing at random, and those missing not at random, need
 to be imputed with <a href="https://rformassspectrometry.github.io/QFeatures/articles/Processing.html#imputation-1">different types of imputation
 methods</a>
-<span class="citation">(<a href="#ref-Lazar:2016" role="doc-biblioref">Lazar et al. 2016</a>)</span>.</p>
+<span class="citation">(<label for="tufte-mn-12" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">Lazar et al. 2016<span class="marginnote">Lazar, C, L Gatto, M Ferro, C Bruley, and T Burger. 2016. <span>“Accounting for the Multiple Natures of Missing Values in Label-Free Quantitative Proteomics Data Sets to Compare Imputation Strategies.”</span> <em>J Proteome Res</em> 15 (4): 1116–25. <a href="https://doi.org/10.1021/acs.jproteome.5b00981">https://doi.org/10.1021/acs.jproteome.5b00981</a>.</span>)</span>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:miximp"></span>
 <p class="caption marginnote shownote">
@@ -1520,7 +1519,7 @@ other 36 expected spike-in proteins.</p>
 by aggregating features using a robust summarisation (available as
 <code>MsCoreUtils::robustSummary()</code>), i.e robust regression with
 M-estimation using Huber weights, as described in section 2.7 in
-<span class="citation">(<a href="#ref-Sticker:2019" role="doc-biblioref">Sticker et al. 2019</a>)</span>.</p>
+<span class="citation">(<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Sticker et al. 2019<span class="marginnote">Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.</span>)</span>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-75"></span>
 <p class="caption marginnote shownote">
@@ -1538,40 +1537,14 @@ Figure 5.16: Aggregation using robust summarisation.
 <code>robustSummary()</code> function.</p>
 
 </div>
-</div>
-<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Christoforou:2016" class="csl-entry">
-Christoforou, Andy, Claire M Mulvey, Lisa M Breckels, Aikaterini Geladaki, Tracey Hurrell, Penelope C Hayward, Thomas Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.
-</div>
-<div id="ref-Cox:2008" class="csl-entry">
-Cox, J, and M Mann. 2008. <span>“MaxQuant Enables High Peptide Identification Rates, Individualized p.p.b.-Range Mass Accuracies and Proteome-Wide Protein Quantification.”</span> <em>Nat Biotechnol</em> 26 (12): 1367–72. <a href="https://doi.org/10.1038/nbt.1511">https://doi.org/10.1038/nbt.1511</a>.
-</div>
-<div id="ref-Lazar:2016" class="csl-entry">
-Lazar, C, L Gatto, M Ferro, C Bruley, and T Burger. 2016. <span>“Accounting for the Multiple Natures of Missing Values in Label-Free Quantitative Proteomics Data Sets to Compare Imputation Strategies.”</span> <em>J Proteome Res</em> 15 (4): 1116–25. <a href="https://doi.org/10.1021/acs.jproteome.5b00981">https://doi.org/10.1021/acs.jproteome.5b00981</a>.
-</div>
-<div id="ref-SE" class="csl-entry">
-Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.
-</div>
-<div id="ref-Paulovich:2010" class="csl-entry">
-Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.
-</div>
-<div id="ref-MAE" class="csl-entry">
-Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multi-Omics Experiments in Bioconductor.”</span> <em>Cancer Research</em> 77(21); e39-42.
-</div>
-<div id="ref-Sticker:2019" class="csl-entry">
-Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.
-</div>
-</div>
-</body></html>
+</div></body></html>
 
 <p style="text-align: center;">
 <a href="sec-id.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-06-20
+2022-06-23
  using 
 R version 4.2.0 (2022-04-22)
 </p>
