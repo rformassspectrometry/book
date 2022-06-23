@@ -112,7 +112,6 @@ resource. These data can be downloaded within R using the
 
 ```{r rpx}
 library("rpx")
-pxannounced()
 ```
 
 Using the unique `PXD000001` identifier, we can retrieve the relevant
