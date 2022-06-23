@@ -110,6 +110,10 @@ Smith:
 BiocManager::install("lgatto/msmbstyle")
 ```
 
+## Acknowledgments {-}
+
+Thank you to [Charlotte Soneson](https://github.com/csoneson) for
+fixing many typos in a previous version of this book.
 
 ## License {-}
 
