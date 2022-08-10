@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-06-23" />
+<meta name="date" content="2022-08-10" />
 
 
 <meta name="description" content="Chapter 6 Annex | R for Mass Spectrometry">
@@ -66,6 +66,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -166,16 +167,16 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html"><span class="toc-section-number">1</span> Preamble</a>
-<a href="sec-msintro.html"><span class="toc-section-number">2</span> Introduction</a>
-<a href="sec-raw.html"><span class="toc-section-number">3</span> Raw MS data</a>
-<a href="sec-id.html"><span class="toc-section-number">4</span> Identification data</a>
-<a href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a>
-<a id="active-page" href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble"><span class="toc-section-number">1</span> Preamble</a>
+<a href="sec-msintro.html" id="toc-sec-msintro"><span class="toc-section-number">2</span> Introduction</a>
+<a href="sec-raw.html" id="toc-sec-raw"><span class="toc-section-number">3</span> Raw MS data</a>
+<a href="sec-id.html" id="toc-sec-id"><span class="toc-section-number">4</span> Identification data</a>
+<a href="sec-quant.html" id="toc-sec-quant"><span class="toc-section-number">5</span> Quantitative data</a>
+<a id="active-page" href="sec-anx.html" id="toc-sec-anx"><span class="toc-section-number">6</span> Annex</a><ul class="toc-sections">
 <li class="toc"><a href="#sec-raw2"> Raw MS data under the hood: the <code>mzR</code> package</a></li>
 <li class="toc"><a href="#sec-id2"> PSM data under the hood</a></li>
 </ul>
-<a href="sec-si.html"><span class="toc-section-number">7</span> Additional materials and session information</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">7</span> Additional materials and session information</a>
 </div>
 </li>
 </ul>
@@ -202,13 +203,13 @@ return the full file names for two raw data files. We will start by
 focusing on the second one.</p>
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="sec-anx.html#cb412-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">proteomics</span>(<span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb412-2"><a href="sec-anx.html#cb412-2" aria-hidden="true" tabindex="-1"></a>f</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MRM-standmix-5.mzML.gz"                                                
-## [2] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT10_01022016_32917-33481.mzML.gz"                                 
-## [3] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT11.mzML"                                                         
-## [4] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
-## [5] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
+<pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MRM-standmix-5.mzML.gz"                                                
+## [2] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT10_01022016_32917-33481.mzML.gz"                                 
+## [3] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT11.mzML"                                                         
+## [4] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
+## [5] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="sec-anx.html#cb414-1" aria-hidden="true" tabindex="-1"></a>(f2 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"20141210"</span>, f, <span class="at">value =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"</code></pre>
+<pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"</code></pre>
 <p>The three main functions of <code>mzR</code> are</p>
 <ul>
 <li>
@@ -379,7 +380,7 @@ major difference is that the former leverages C++ code from
 <p>The main functions are <code>mzID</code> to read the data into a dedicated data
 class and <code>flatten</code> to transform it into a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-anx.html#cb433-1" aria-hidden="true" tabindex="-1"></a>idf</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/ident/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
+<pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/ident/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-anx.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'mzID'</code></pre>
@@ -517,9 +518,9 @@ to see all available methods.</p>
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-06-23
+2022-08-10
  using 
-R version 4.2.0 (2022-04-22)
+R version 4.2.0 Patched (2022-05-13 r82357)
 </p>
 </div>
 </div>

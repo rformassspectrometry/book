@@ -112,7 +112,7 @@ Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
 Smith:
 
 ```{r setup2, eval = FALSE}
-BiocManager::install(c("BiocStyle", "lgatto/msmbstyle"))
+BiocManager::install(c("bookdown", "BiocStyle", "lgatto/msmbstyle"))
 ```
 
 Run the [installation

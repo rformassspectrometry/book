@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-06-23" />
+<meta name="date" content="2022-08-10" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -66,6 +66,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -166,19 +167,19 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html"><span class="toc-section-number">1</span> Preamble</a>
-<a href="sec-msintro.html"><span class="toc-section-number">2</span> Introduction</a>
-<a href="sec-raw.html"><span class="toc-section-number">3</span> Raw MS data</a>
-<a href="sec-id.html"><span class="toc-section-number">4</span> Identification data</a>
-<a id="active-page" href="sec-quant.html"><span class="toc-section-number">5</span> Quantitative data</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble"><span class="toc-section-number">1</span> Preamble</a>
+<a href="sec-msintro.html" id="toc-sec-msintro"><span class="toc-section-number">2</span> Introduction</a>
+<a href="sec-raw.html" id="toc-sec-raw"><span class="toc-section-number">3</span> Raw MS data</a>
+<a href="sec-id.html" id="toc-sec-id"><span class="toc-section-number">4</span> Identification data</a>
+<a id="active-page" href="sec-quant.html" id="toc-sec-quant"><span class="toc-section-number">5</span> Quantitative data</a><ul class="toc-sections">
 <li class="toc"><a href="#quantitation-methodologies"> Quantitation methodologies</a></li>
 <li class="toc"><a href="#sec-qf"> QFeatures</a></li>
 <li class="toc"><a href="#creating-qfeatures-object"> Creating <code>QFeatures</code> object</a></li>
 <li class="toc"><a href="#analysis-pipeline"> Analysis pipeline</a></li>
 <li class="toc"><a href="#summary-exercice"> Summary exercice</a></li>
 </ul>
-<a href="sec-anx.html"><span class="toc-section-number">6</span> Annex</a>
-<a href="sec-si.html"><span class="toc-section-number">7</span> Additional materials and session information</a>
+<a href="sec-anx.html" id="toc-sec-anx"><span class="toc-section-number">6</span> Annex</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">7</span> Additional materials and session information</a>
 </div>
 </li>
 </ul>
@@ -188,7 +189,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-quant" class="section level1" number="5">
+<html><body>
+<div id="sec-quant" class="section level1" number="5">
 <h1>
 <span class="header-section-number">Chapter 5</span> Quantitative data</h1>
 <div id="quantitation-methodologies" class="section level2" number="5.1">
@@ -1092,8 +1094,7 @@ impute data and deal explicitly with missing values. Indeed missing
 data imputation is not a straightforward thing, and is likely
 to dramatically fail when a high proportion of data is missing (10s of
 %). It is possible to keep NAs when performing hypothesis
-tests<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Still, it is recommended to explore missingness as part of the
-exploratory data analysis.</span>, but not to perform a principal component
+tests<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, but not to perform a principal component
 analysis.</p>
 </div>
 <div id="identification-quality-control" class="section level3" number="5.4.3">
@@ -1537,16 +1538,24 @@ Figure 5.16: Aggregation using robust summarisation.
 <code>robustSummary()</code> function.</p>
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="7">
+<li id="fn7"><p>Still, it is recommended to explore missingness as part of the
+exploratory data analysis.<a href="sec-quant.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-id.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-06-23
+2022-08-10
  using 
-R version 4.2.0 (2022-04-22)
+R version 4.2.0 Patched (2022-05-13 r82357)
 </p>
 </div>
 </div>
