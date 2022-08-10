@@ -88,6 +88,8 @@ version 4.2 and execute:
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
+BiocManager::install("tidyverse")
+BiocManager::install("factoextra")
 BiocManager::install("msdata")
 BiocManager::install("mzR")
 BiocManager::install("rhdf5")
@@ -98,16 +100,28 @@ BiocManager::install("Spectra")
 BiocManager::install("ProtGenerics")
 BiocManager::install("PSMatch")
 BiocManager::install("pheatmap")
+BiocManager::install("limma")
+BiocManager::install("MSnID")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
 
-To compile and render the teaching material, you will also need the
-(slighly modified) [Modern Statistics for Model Biology (msmb) HTML
-Book Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
+To compile and render the teaching material, you will also need
+the `r BiocStyle::Biocpkg("BiocStyle")` package and the (slighly
+modified) [Modern Statistics for Model Biology (msmb) HTML Book
+Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
 Smith:
 
 ```{r setup2, eval = FALSE}
-BiocManager::install("lgatto/msmbstyle")
+BiocManager::install(c("BiocStyle", "lgatto/msmbstyle"))
+```
+
+Run the [installation
+script](https://github.com/rformassspectrometry/docs/blob/main/install_docs_deps.R)
+by executing the line below to install all requirements to compile the
+book:
+
+```{r source, eval = FALSE}
+source("https://raw.githubusercontent.com/rformassspectrometry/docs/main/install_docs_deps.R")
 ```
 
 ## Acknowledgments {-}
