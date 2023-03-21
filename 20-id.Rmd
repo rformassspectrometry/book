@@ -418,7 +418,7 @@ the function will count the number of sequences for the descendant MS2
 scans, i.e. those produced from precursor ions from each MS1 scan.
 
 
-```{r nSequence, cache = TRUE}
+```{r nSequence, cache = FALSE}
 sp <- countIdentifications(sp)
 ```
 

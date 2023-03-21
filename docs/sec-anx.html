@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2022-08-10" />
+<meta name="date" content="2023-03-21" />
 
 
 <meta name="description" content="Chapter 6 Annex | R for Mass Spectrometry">
@@ -99,11 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -112,14 +112,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -201,14 +201,14 @@ efficient parsing of these large raw data files.</p>
 package. After loading it, we use the <code>proteomics()</code> function to
 return the full file names for two raw data files. We will start by
 focusing on the second one.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="sec-anx.html#cb412-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">proteomics</span>(<span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb412-2"><a href="sec-anx.html#cb412-2" aria-hidden="true" tabindex="-1"></a>f</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="sec-anx.html#cb419-1" tabindex="-1"></a>f <span class="ot">&lt;-</span> msdata<span class="sc">::</span><span class="fu">proteomics</span>(<span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb419-2"><a href="sec-anx.html#cb419-2" tabindex="-1"></a>f</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MRM-standmix-5.mzML.gz"                                                
 ## [2] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/MS3TMT11.mzML"                                                         
 ## [4] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="sec-anx.html#cb414-1" aria-hidden="true" tabindex="-1"></a>(f2 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"20141210"</span>, f, <span class="at">value =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="sec-anx.html#cb421-1" tabindex="-1"></a>(f2 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"20141210"</span>, f, <span class="at">value =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/proteomics/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"</code></pre>
 <p>The three main functions of <code>mzR</code> are</p>
 <ul>
@@ -221,16 +221,16 @@ focusing on the second one.</p>
 </ul>
 <p>Other functions such as <code>instrumentInfo</code>, or <code>runInfo</code> can be used to
 gather general information about a run.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="sec-anx.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
-<span id="cb416-2"><a href="sec-anx.html#cb416-2" aria-hidden="true" tabindex="-1"></a>ms <span class="ot">&lt;-</span> <span class="fu">openMSfile</span>(f2)</span>
-<span id="cb416-3"><a href="sec-anx.html#cb416-3" aria-hidden="true" tabindex="-1"></a>ms</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sec-anx.html#cb423-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
+<span id="cb423-2"><a href="sec-anx.html#cb423-2" tabindex="-1"></a>ms <span class="ot">&lt;-</span> <span class="fu">openMSfile</span>(f2)</span>
+<span id="cb423-3"><a href="sec-anx.html#cb423-3" tabindex="-1"></a>ms</span></code></pre></div>
 <pre><code>## Mass Spectrometry file handle.
 ## Filename:  TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz 
 ## Number of scans:  7534</code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-anx.html#cb418-1" aria-hidden="true" tabindex="-1"></a>hd <span class="ot">&lt;-</span> <span class="fu">header</span>(ms)</span>
-<span id="cb418-2"><a href="sec-anx.html#cb418-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(hd)</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="sec-anx.html#cb425-1" tabindex="-1"></a>hd <span class="ot">&lt;-</span> <span class="fu">header</span>(ms)</span>
+<span id="cb425-2"><a href="sec-anx.html#cb425-2" tabindex="-1"></a><span class="fu">dim</span>(hd)</span></code></pre></div>
 <pre><code>## [1] 7534   31</code></pre>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="sec-anx.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(hd)</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="sec-anx.html#cb427-1" tabindex="-1"></a><span class="fu">names</span>(hd)</span></code></pre></div>
 <pre><code>##  [1] "seqNum"                     "acquisitionNum"            
 ##  [3] "msLevel"                    "polarity"                  
 ##  [5] "peaksCount"                 "totIonCurrent"             
@@ -247,7 +247,7 @@ gather general information about a run.</p>
 ## [27] "isolationWindowTargetMZ"    "isolationWindowLowerOffset"
 ## [29] "isolationWindowUpperOffset" "scanWindowLowerLimit"      
 ## [31] "scanWindowUpperLimit"</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="sec-anx.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">peaks</span>(ms, <span class="dv">117</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-anx.html#cb429-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">peaks</span>(ms, <span class="dv">117</span>))</span></code></pre></div>
 <pre><code>##            mz intensity
 ## [1,] 399.9976         0
 ## [2,] 399.9991         0
@@ -255,7 +255,7 @@ gather general information about a run.</p>
 ## [4,] 400.0021         0
 ## [5,] 400.2955         0
 ## [6,] 400.2970         0</code></pre>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="sec-anx.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">peaks</span>(ms, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-anx.html#cb431-1" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">peaks</span>(ms, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## List of 5
 ##  $ : num [1:25800, 1:2] 400 400 400 400 400 ...
 ##   ..- attr(*, "dimnames")=List of 2
@@ -295,9 +295,9 @@ mode?</p>
 ► Solution<span id="sol-start-35" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-35', 'sol-start-35')"></span>
 </p>
 <div id="sol-body-35" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="sec-anx.html#cb426-1" aria-hidden="true" tabindex="-1"></a>hd2 <span class="ot">&lt;-</span> hd[hd<span class="sc">$</span>msLevel <span class="sc">==</span> <span class="dv">2</span>, ]</span>
-<span id="cb426-2"><a href="sec-anx.html#cb426-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which.max</span>(hd2<span class="sc">$</span>basePeakIntensity)</span>
-<span id="cb426-3"><a href="sec-anx.html#cb426-3" aria-hidden="true" tabindex="-1"></a>hd2[i, ]</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-anx.html#cb433-1" tabindex="-1"></a>hd2 <span class="ot">&lt;-</span> hd[hd<span class="sc">$</span>msLevel <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb433-2"><a href="sec-anx.html#cb433-2" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which.max</span>(hd2<span class="sc">$</span>basePeakIntensity)</span>
+<span id="cb433-3"><a href="sec-anx.html#cb433-3" tabindex="-1"></a>hd2[i, ]</span></code></pre></div>
 <pre><code>##      seqNum acquisitionNum msLevel polarity peaksCount totIonCurrent
 ## 5404   5404           5404       2        1        275    2283283712
 ##      retentionTime basePeakMZ basePeakIntensity collisionEnergy
@@ -316,11 +316,11 @@ mode?</p>
 ## 5404                   NA                   859.5                          1
 ##      isolationWindowUpperOffset scanWindowLowerLimit scanWindowUpperLimit
 ## 5404                          1                  100                 2000</code></pre>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="sec-anx.html#cb428-1" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="fu">peaks</span>(ms, hd2[i, <span class="dv">1</span>])</span>
-<span id="cb428-2"><a href="sec-anx.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pi, <span class="at">type =</span> <span class="st">"h"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-anx.html#cb435-1" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="fu">peaks</span>(ms, hd2[i, <span class="dv">1</span>])</span>
+<span id="cb435-2"><a href="sec-anx.html#cb435-2" tabindex="-1"></a><span class="fu">plot</span>(pi, <span class="at">type =</span> <span class="st">"h"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/ex_raw-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-anx.html#cb429-1" aria-hidden="true" tabindex="-1"></a>mz <span class="ot">&lt;-</span> hd2[i, <span class="st">"basePeakMZ"</span>]</span>
-<span id="cb429-2"><a href="sec-anx.html#cb429-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pi, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(mz <span class="sc">-</span> <span class="fl">0.5</span>, mz <span class="sc">+</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="sec-anx.html#cb436-1" tabindex="-1"></a>mz <span class="ot">&lt;-</span> hd2[i, <span class="st">"basePeakMZ"</span>]</span>
+<span id="cb436-2"><a href="sec-anx.html#cb436-2" tabindex="-1"></a><span class="fu">plot</span>(pi, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(mz <span class="sc">-</span> <span class="fl">0.5</span>, mz <span class="sc">+</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/ex_raw-2.png" width="672" style="display: block; margin: auto;"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -344,13 +344,13 @@ profile mode.</p>
 ► Solution<span id="sol-start-36" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-36', 'sol-start-36')"></span>
 </p>
 <div id="sol-body-36" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-anx.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Zooming into spectrum 300 (an MS1 spectrum).</span></span>
-<span id="cb430-2"><a href="sec-anx.html#cb430-2" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb430-3"><a href="sec-anx.html#cb430-3" aria-hidden="true" tabindex="-1"></a>pj <span class="ot">&lt;-</span> <span class="fu">peaks</span>(ms, j)</span>
-<span id="cb430-4"><a href="sec-anx.html#cb430-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pj, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="sec-anx.html#cb437-1" tabindex="-1"></a><span class="do">## Zooming into spectrum 300 (an MS1 spectrum).</span></span>
+<span id="cb437-2"><a href="sec-anx.html#cb437-2" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb437-3"><a href="sec-anx.html#cb437-3" tabindex="-1"></a>pj <span class="ot">&lt;-</span> <span class="fu">peaks</span>(ms, j)</span>
+<span id="cb437-4"><a href="sec-anx.html#cb437-4" tabindex="-1"></a><span class="fu">plot</span>(pj, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/ex_raw2-1.png" width="672"></p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-anx.html#cb431-1" aria-hidden="true" tabindex="-1"></a>mz <span class="ot">&lt;-</span> hd[j, <span class="st">"basePeakMZ"</span>]</span>
-<span id="cb431-2"><a href="sec-anx.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pj, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(mz <span class="sc">-</span> <span class="fl">0.5</span>, mz <span class="sc">+</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="sec-anx.html#cb438-1" tabindex="-1"></a>mz <span class="ot">&lt;-</span> hd[j, <span class="st">"basePeakMZ"</span>]</span>
+<span id="cb438-2"><a href="sec-anx.html#cb438-2" tabindex="-1"></a><span class="fu">plot</span>(pj, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(mz <span class="sc">-</span> <span class="fl">0.5</span>, mz <span class="sc">+</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/ex_raw2-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -379,9 +379,9 @@ major difference is that the former leverages C++ code from
 </h3>
 <p>The main functions are <code>mzID</code> to read the data into a dedicated data
 class and <code>flatten</code> to transform it into a <code>data.frame</code>.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-anx.html#cb433-1" aria-hidden="true" tabindex="-1"></a>idf</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="sec-anx.html#cb440-1" tabindex="-1"></a>idf</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/ident/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-anx.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="sec-anx.html#cb442-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'mzID'</code></pre>
 <pre><code>## The following object is masked from 'package:purrr':
@@ -390,9 +390,9 @@ class and <code>flatten</code> to transform it into a <code>data.frame</code>.</
 <pre><code>## The following object is masked from 'package:dplyr':
 ## 
 ##     id</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="sec-anx.html#cb439-1" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">mzID</span>(idf)</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="sec-anx.html#cb446-1" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">mzID</span>(idf)</span></code></pre></div>
 <pre><code>## reading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid... DONE!</code></pre>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sec-anx.html#cb441-1" aria-hidden="true" tabindex="-1"></a>id</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="sec-anx.html#cb448-1" tabindex="-1"></a>id</span></code></pre></div>
 <pre><code>## An mzID object
 ## 
 ## Software used:   MS-GF+ (version: Beta (v10072))
@@ -407,7 +407,7 @@ class and <code>flatten</code> to transform it into a <code>data.frame</code>.</
 accessor functions such as <code>database</code>, <code>software</code>, <code>scans</code>, <code>peptides</code>,
 … The object can also be converted into a <code>data.frame</code> using the
 <code>flatten</code> function.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="sec-anx.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">flatten</span>(id))</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="sec-anx.html#cb450-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">flatten</span>(id))</span></code></pre></div>
 <pre><code>##                                      spectrumid scan number(s) acquisitionnum
 ## 1 controllerType=0 controllerNumber=1 scan=5782           5782           5782
 ## 2 controllerType=0 controllerNumber=1 scan=6037           6037           6037
@@ -459,18 +459,18 @@ faster as it does not read all the data into memory and only extracts
 relevant data on demand. It has also accessor functions such as
 <code>softwareInfo</code>, <code>mzidInfo</code>, … (use <code>showMethods(classes = "mzRident", where = "package:mzR")</code>)
 to see all available methods.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="sec-anx.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
-<span id="cb445-2"><a href="sec-anx.html#cb445-2" aria-hidden="true" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">openIDfile</span>(idf)</span>
-<span id="cb445-3"><a href="sec-anx.html#cb445-3" aria-hidden="true" tabindex="-1"></a>id2</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="sec-anx.html#cb452-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzR"</span>)</span>
+<span id="cb452-2"><a href="sec-anx.html#cb452-2" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">openIDfile</span>(idf)</span>
+<span id="cb452-3"><a href="sec-anx.html#cb452-3" tabindex="-1"></a>id2</span></code></pre></div>
 <pre><code>## Identification file handle.
 ## Filename:  TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid 
 ## Number of psms:  5759</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="sec-anx.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">softwareInfo</span>(id2)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="sec-anx.html#cb454-1" tabindex="-1"></a><span class="fu">softwareInfo</span>(id2)</span></code></pre></div>
 <pre><code>## [1] "MS-GF+ Beta (v10072) "                        
 ## [2] "ProteoWizard MzIdentML 3.0.21263 ProteoWizard"</code></pre>
 <p>The identification data can be accessed as a <code>data.frame</code> with the
 <code>psms</code> accessor.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="sec-anx.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(id2))</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="sec-anx.html#cb456-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">psms</span>(id2))</span></code></pre></div>
 <pre><code>##                                      spectrumID chargeState rank passThreshold
 ## 1 controllerType=0 controllerNumber=1 scan=5782           3    1          TRUE
 ## 2 controllerType=0 controllerNumber=1 scan=6037           3    1          TRUE
@@ -518,9 +518,9 @@ to see all available methods.</p>
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-08-10
+2023-03-21
  using 
-R version 4.2.0 Patched (2022-05-13 r82357)
+R version 4.2.2 Patched (2022-11-02 r83238)
 </p>
 </div>
 </div>

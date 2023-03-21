@@ -93,7 +93,7 @@ BiocManager::install("factoextra")
 BiocManager::install("msdata")
 BiocManager::install("mzR")
 BiocManager::install("rhdf5")
-BiocManager::install("rpx")
+BiocManager::install("lgatto/rpx")
 BiocManager::install("MsCoreUtils")
 BiocManager::install("QFeatures")
 BiocManager::install("Spectra")
@@ -104,6 +104,11 @@ BiocManager::install("limma")
 BiocManager::install("MSnID")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
+
+Follow the instructions in [this
+script](https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e)
+to install the packages and download some of the data used in the
+following chapters.
 
 To compile and render the teaching material, you will also need
 the `r BiocStyle::Biocpkg("BiocStyle")` package and the (slighly

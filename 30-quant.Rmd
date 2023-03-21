@@ -650,7 +650,7 @@ imputation for data missing no at random.
 ```{r naex1, message = FALSE}
 impute(se_na2, "mixed",
        randna = rowData(se_na2)$randna,
-       mar = "knn", mnar = "MinDet")
+       mar = "knn", mnar = "zero")
 ```
 
 `r msmbstyle::solution_end()`
