@@ -230,7 +230,7 @@ With the example below we load the data from a single mzML file and use a
 us to specify the storage location of the HDF5 file.
 
 There is also an (under development) SQLite-based backend called
-[`MsBackendSqlDb`](https://rformassspectrometry.github.io/MsBackendSql/articles/MsBackendSqlDb.html)
+[`MsBackendSqlDb`](https://rformassspectrometry.github.io/MsBackendSql)
 that will store all data, i.e. raw and metadata, on disk.
 
 

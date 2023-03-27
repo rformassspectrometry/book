@@ -474,7 +474,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Mar 27 13:10:21 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Mar 27 16:24:38 2023]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -503,7 +503,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon Mar 27 13:10:27 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon Mar 27 16:24:45 2023]</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-raw.html#cb49-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -512,9 +512,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                               931</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-raw.html#cb51-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpUAZqy2/20171016_POOL_POS_1_105-134.h5 
+## /tmp/Rtmp2u2n7e/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmpUAZqy2/20171016_POOL_POS_3_105-134.h5 
+## /tmp/Rtmp2u2n7e/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -523,7 +523,7 @@ intensity values for the mass peaks.</p>
 <code>MsBackendHdf5Peaks</code> backend for data storage. The <code>hdf5path</code> parameter allows
 us to specify the storage location of the HDF5 file.</p>
 <p>There is also an (under development) SQLite-based backend called
-<a href="https://rformassspectrometry.github.io/MsBackendSql/articles/MsBackendSqlDb.html"><code>MsBackendSqlDb</code></a>
+<a href="https://rformassspectrometry.github.io/MsBackendSql"><code>MsBackendSqlDb</code></a>
 that will store all data, i.e. raw and metadata, on disk.</p>
 <p>If you would like to learn more about how the raw MS formats are
 handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.16/mzR">mzR</a></em> package,
@@ -627,7 +627,7 @@ children.</li>
 ## file(s):
 ## 3310d24ed81e1f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Mon Mar 27 13:10:27 2023]</code></pre>
+##  Filter: select parent/children scans for 2807 [Mon Mar 27 16:24:46 2023]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -907,8 +907,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon Mar 27 13:10:29 2023]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Mon Mar 27 13:10:29 2023]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon Mar 27 16:24:47 2023]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Mon Mar 27 16:24:47 2023]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -992,7 +992,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon Mar 27 13:10:29 2023]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon Mar 27 16:24:48 2023]</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-raw.html#cb84-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
