@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2023-03-21" />
+<meta name="date" content="2023-03-27" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -352,25 +352,25 @@ will thus start by converting the <code>DataFrame</code> to a <code>tibble</code
 <span id="cb120-2"><a href="sec-id.html#cb120-2" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id)</span>
 <span id="cb120-3"><a href="sec-id.html#cb120-3" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 5,802 × 35
-##    sequence spect…¹ charg…²  rank passT…³ exper…⁴ calcu…⁵ pepti…⁶ modNum isDecoy
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt;  
-##  1 RQCRTDF… contro…       3     1 TRUE       548.    548. Pep77        1 FALSE  
-##  2 ESVALAD… contro…       2     1 TRUE      1288.   1288. Pep108       1 FALSE  
-##  3 KELLCLA… contro…       2     1 TRUE       744.    744. Pep136       1 TRUE   
-##  4 QRMARTS… contro…       3     1 TRUE       913.    913. Pep163       1 FALSE  
-##  5 KDEGSTE… contro…       3     1 TRUE       927.    926. Pep169       1 TRUE   
-##  6 DGGPAIY… contro…       3     1 TRUE       969.    969. Pep206       1 FALSE  
-##  7 QRMARTS… contro…       2     1 TRUE      1369.   1369. Pep163       1 FALSE  
-##  8 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  9 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-## 10 VGRCRPI… contro…       2     1 TRUE      1102.   1102. Pep223       1 FALSE  
-## # … with 5,792 more rows, 25 more variables: post &lt;chr&gt;, pre &lt;chr&gt;,
-## #   start &lt;int&gt;, end &lt;int&gt;, DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;,
-## #   DatabaseSeq &lt;chr&gt;, DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;,
-## #   acquisitionNum &lt;dbl&gt;, spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;,
-## #   MS.GF.RawScore &lt;dbl&gt;, MS.GF.DeNovoScore &lt;dbl&gt;, MS.GF.SpecEValue &lt;dbl&gt;,
-## #   MS.GF.EValue &lt;dbl&gt;, MS.GF.QValue &lt;dbl&gt;, MS.GF.PepQValue &lt;dbl&gt;,
-## #   modPeptideRef &lt;chr&gt;, modName &lt;chr&gt;, modMass &lt;dbl&gt;, modLocation &lt;int&gt;, …</code></pre>
+##    sequence    spectrumID chargeState  rank passThreshold experimentalMassToCh…¹
+##    &lt;chr&gt;       &lt;chr&gt;            &lt;int&gt; &lt;int&gt; &lt;lgl&gt;                          &lt;dbl&gt;
+##  1 RQCRTDFLNY… controlle…           3     1 TRUE                            548.
+##  2 ESVALADQVT… controlle…           2     1 TRUE                           1288.
+##  3 KELLCLAMQI… controlle…           2     1 TRUE                            744.
+##  4 QRMARTSDKQ… controlle…           3     1 TRUE                            913.
+##  5 KDEGSTEPLK… controlle…           3     1 TRUE                            927.
+##  6 DGGPAIYGHE… controlle…           3     1 TRUE                            969.
+##  7 QRMARTSDKQ… controlle…           2     1 TRUE                           1369.
+##  8 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  9 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+## 10 VGRCRPIINY… controlle…           2     1 TRUE                           1102.
+## # ℹ 5,792 more rows
+## # ℹ abbreviated name: ¹​experimentalMassToCharge
+## # ℹ 29 more variables: calculatedMassToCharge &lt;dbl&gt;, peptideRef &lt;chr&gt;,
+## #   modNum &lt;int&gt;, isDecoy &lt;lgl&gt;, post &lt;chr&gt;, pre &lt;chr&gt;, start &lt;int&gt;, end &lt;int&gt;,
+## #   DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;, DatabaseSeq &lt;chr&gt;,
+## #   DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;, acquisitionNum &lt;dbl&gt;,
+## #   spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;, MS.GF.RawScore &lt;dbl&gt;, …</code></pre>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -393,25 +393,25 @@ will thus start by converting the <code>DataFrame</code> to a <code>tibble</code
 <span id="cb122-2"><a href="sec-id.html#cb122-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>isDecoy)</span>
 <span id="cb122-3"><a href="sec-id.html#cb122-3" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,906 × 35
-##    sequence spect…¹ charg…²  rank passT…³ exper…⁴ calcu…⁵ pepti…⁶ modNum isDecoy
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt;  
-##  1 RQCRTDF… contro…       3     1 TRUE       548.    548. Pep77        1 FALSE  
-##  2 ESVALAD… contro…       2     1 TRUE      1288.   1288. Pep108       1 FALSE  
-##  3 QRMARTS… contro…       3     1 TRUE       913.    913. Pep163       1 FALSE  
-##  4 DGGPAIY… contro…       3     1 TRUE       969.    969. Pep206       1 FALSE  
-##  5 QRMARTS… contro…       2     1 TRUE      1369.   1369. Pep163       1 FALSE  
-##  6 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  7 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  8 VGRCRPI… contro…       2     1 TRUE      1102.   1102. Pep223       1 FALSE  
-##  9 QRLDEHC… contro…       3     1 TRUE       713.    712. Pep319       1 FALSE  
-## 10 VDYQGKK… contro…       4     1 TRUE       870.    870. Pep321       1 FALSE  
-## # … with 2,896 more rows, 25 more variables: post &lt;chr&gt;, pre &lt;chr&gt;,
-## #   start &lt;int&gt;, end &lt;int&gt;, DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;,
-## #   DatabaseSeq &lt;chr&gt;, DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;,
-## #   acquisitionNum &lt;dbl&gt;, spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;,
-## #   MS.GF.RawScore &lt;dbl&gt;, MS.GF.DeNovoScore &lt;dbl&gt;, MS.GF.SpecEValue &lt;dbl&gt;,
-## #   MS.GF.EValue &lt;dbl&gt;, MS.GF.QValue &lt;dbl&gt;, MS.GF.PepQValue &lt;dbl&gt;,
-## #   modPeptideRef &lt;chr&gt;, modName &lt;chr&gt;, modMass &lt;dbl&gt;, modLocation &lt;int&gt;, …</code></pre>
+##    sequence    spectrumID chargeState  rank passThreshold experimentalMassToCh…¹
+##    &lt;chr&gt;       &lt;chr&gt;            &lt;int&gt; &lt;int&gt; &lt;lgl&gt;                          &lt;dbl&gt;
+##  1 RQCRTDFLNY… controlle…           3     1 TRUE                            548.
+##  2 ESVALADQVT… controlle…           2     1 TRUE                           1288.
+##  3 QRMARTSDKQ… controlle…           3     1 TRUE                            913.
+##  4 DGGPAIYGHE… controlle…           3     1 TRUE                            969.
+##  5 QRMARTSDKQ… controlle…           2     1 TRUE                           1369.
+##  6 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  7 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  8 VGRCRPIINY… controlle…           2     1 TRUE                           1102.
+##  9 QRLDEHCVGV… controlle…           3     1 TRUE                            713.
+## 10 VDYQGKKVVI… controlle…           4     1 TRUE                            870.
+## # ℹ 2,896 more rows
+## # ℹ abbreviated name: ¹​experimentalMassToCharge
+## # ℹ 29 more variables: calculatedMassToCharge &lt;dbl&gt;, peptideRef &lt;chr&gt;,
+## #   modNum &lt;int&gt;, isDecoy &lt;lgl&gt;, post &lt;chr&gt;, pre &lt;chr&gt;, start &lt;int&gt;, end &lt;int&gt;,
+## #   DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;, DatabaseSeq &lt;chr&gt;,
+## #   DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;, acquisitionNum &lt;dbl&gt;,
+## #   spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;, MS.GF.RawScore &lt;dbl&gt;, …</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -439,25 +439,25 @@ will thus start by converting the <code>DataFrame</code> to a <code>tibble</code
 <span id="cb124-2"><a href="sec-id.html#cb124-2" tabindex="-1"></a>    <span class="fu">filter</span>(rank <span class="sc">==</span> <span class="dv">1</span>)</span>
 <span id="cb124-3"><a href="sec-id.html#cb124-3" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,751 × 35
-##    sequence spect…¹ charg…²  rank passT…³ exper…⁴ calcu…⁵ pepti…⁶ modNum isDecoy
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt;  
-##  1 RQCRTDF… contro…       3     1 TRUE       548.    548. Pep77        1 FALSE  
-##  2 ESVALAD… contro…       2     1 TRUE      1288.   1288. Pep108       1 FALSE  
-##  3 QRMARTS… contro…       3     1 TRUE       913.    913. Pep163       1 FALSE  
-##  4 DGGPAIY… contro…       3     1 TRUE       969.    969. Pep206       1 FALSE  
-##  5 QRMARTS… contro…       2     1 TRUE      1369.   1369. Pep163       1 FALSE  
-##  6 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  7 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  8 VGRCRPI… contro…       2     1 TRUE      1102.   1102. Pep223       1 FALSE  
-##  9 QRLDEHC… contro…       3     1 TRUE       713.    712. Pep319       1 FALSE  
-## 10 VDYQGKK… contro…       4     1 TRUE       870.    870. Pep321       1 FALSE  
-## # … with 2,741 more rows, 25 more variables: post &lt;chr&gt;, pre &lt;chr&gt;,
-## #   start &lt;int&gt;, end &lt;int&gt;, DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;,
-## #   DatabaseSeq &lt;chr&gt;, DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;,
-## #   acquisitionNum &lt;dbl&gt;, spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;,
-## #   MS.GF.RawScore &lt;dbl&gt;, MS.GF.DeNovoScore &lt;dbl&gt;, MS.GF.SpecEValue &lt;dbl&gt;,
-## #   MS.GF.EValue &lt;dbl&gt;, MS.GF.QValue &lt;dbl&gt;, MS.GF.PepQValue &lt;dbl&gt;,
-## #   modPeptideRef &lt;chr&gt;, modName &lt;chr&gt;, modMass &lt;dbl&gt;, modLocation &lt;int&gt;, …</code></pre>
+##    sequence    spectrumID chargeState  rank passThreshold experimentalMassToCh…¹
+##    &lt;chr&gt;       &lt;chr&gt;            &lt;int&gt; &lt;int&gt; &lt;lgl&gt;                          &lt;dbl&gt;
+##  1 RQCRTDFLNY… controlle…           3     1 TRUE                            548.
+##  2 ESVALADQVT… controlle…           2     1 TRUE                           1288.
+##  3 QRMARTSDKQ… controlle…           3     1 TRUE                            913.
+##  4 DGGPAIYGHE… controlle…           3     1 TRUE                            969.
+##  5 QRMARTSDKQ… controlle…           2     1 TRUE                           1369.
+##  6 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  7 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  8 VGRCRPIINY… controlle…           2     1 TRUE                           1102.
+##  9 QRLDEHCVGV… controlle…           3     1 TRUE                            713.
+## 10 VDYQGKKVVI… controlle…           4     1 TRUE                            870.
+## # ℹ 2,741 more rows
+## # ℹ abbreviated name: ¹​experimentalMassToCharge
+## # ℹ 29 more variables: calculatedMassToCharge &lt;dbl&gt;, peptideRef &lt;chr&gt;,
+## #   modNum &lt;int&gt;, isDecoy &lt;lgl&gt;, post &lt;chr&gt;, pre &lt;chr&gt;, start &lt;int&gt;, end &lt;int&gt;,
+## #   DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;, DatabaseSeq &lt;chr&gt;,
+## #   DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;, acquisitionNum &lt;dbl&gt;,
+## #   spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;, MS.GF.RawScore &lt;dbl&gt;, …</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -507,31 +507,31 @@ match any of these proteins.</li>
 ##  8 controllerType=0 controllerNumber=1 scan=3926 ECA4035             2
 ##  9 controllerType=0 controllerNumber=1 scan=4784 ECA0216             2
 ## 10 controllerType=0 controllerNumber=1 scan=4784 ECA4035             2
-## # … with 75 more rows</code></pre>
+## # ℹ 75 more rows</code></pre>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="sec-id.html#cb130-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span></span>
 <span id="cb130-2"><a href="sec-id.html#cb130-2" tabindex="-1"></a>    id_tbl <span class="sc">%&gt;%</span></span>
 <span id="cb130-3"><a href="sec-id.html#cb130-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>spectrumID <span class="sc">%in%</span> mltm<span class="sc">$</span>spectrumID)</span>
 <span id="cb130-4"><a href="sec-id.html#cb130-4" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,666 × 35
-##    sequence spect…¹ charg…²  rank passT…³ exper…⁴ calcu…⁵ pepti…⁶ modNum isDecoy
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;lgl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt;  
-##  1 RQCRTDF… contro…       3     1 TRUE       548.    548. Pep77        1 FALSE  
-##  2 ESVALAD… contro…       2     1 TRUE      1288.   1288. Pep108       1 FALSE  
-##  3 QRMARTS… contro…       3     1 TRUE       913.    913. Pep163       1 FALSE  
-##  4 DGGPAIY… contro…       3     1 TRUE       969.    969. Pep206       1 FALSE  
-##  5 QRMARTS… contro…       2     1 TRUE      1369.   1369. Pep163       1 FALSE  
-##  6 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  7 CIDRARH… contro…       3     1 TRUE      1285.   1285. Pep216       2 FALSE  
-##  8 VGRCRPI… contro…       2     1 TRUE      1102.   1102. Pep223       1 FALSE  
-##  9 QRLDEHC… contro…       3     1 TRUE       713.    712. Pep319       1 FALSE  
-## 10 VDYQGKK… contro…       4     1 TRUE       870.    870. Pep321       1 FALSE  
-## # … with 2,656 more rows, 25 more variables: post &lt;chr&gt;, pre &lt;chr&gt;,
-## #   start &lt;int&gt;, end &lt;int&gt;, DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;,
-## #   DatabaseSeq &lt;chr&gt;, DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;,
-## #   acquisitionNum &lt;dbl&gt;, spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;,
-## #   MS.GF.RawScore &lt;dbl&gt;, MS.GF.DeNovoScore &lt;dbl&gt;, MS.GF.SpecEValue &lt;dbl&gt;,
-## #   MS.GF.EValue &lt;dbl&gt;, MS.GF.QValue &lt;dbl&gt;, MS.GF.PepQValue &lt;dbl&gt;,
-## #   modPeptideRef &lt;chr&gt;, modName &lt;chr&gt;, modMass &lt;dbl&gt;, modLocation &lt;int&gt;, …</code></pre>
+##    sequence    spectrumID chargeState  rank passThreshold experimentalMassToCh…¹
+##    &lt;chr&gt;       &lt;chr&gt;            &lt;int&gt; &lt;int&gt; &lt;lgl&gt;                          &lt;dbl&gt;
+##  1 RQCRTDFLNY… controlle…           3     1 TRUE                            548.
+##  2 ESVALADQVT… controlle…           2     1 TRUE                           1288.
+##  3 QRMARTSDKQ… controlle…           3     1 TRUE                            913.
+##  4 DGGPAIYGHE… controlle…           3     1 TRUE                            969.
+##  5 QRMARTSDKQ… controlle…           2     1 TRUE                           1369.
+##  6 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  7 CIDRARHVEV… controlle…           3     1 TRUE                           1285.
+##  8 VGRCRPIINY… controlle…           2     1 TRUE                           1102.
+##  9 QRLDEHCVGV… controlle…           3     1 TRUE                            713.
+## 10 VDYQGKKVVI… controlle…           4     1 TRUE                            870.
+## # ℹ 2,656 more rows
+## # ℹ abbreviated name: ¹​experimentalMassToCharge
+## # ℹ 29 more variables: calculatedMassToCharge &lt;dbl&gt;, peptideRef &lt;chr&gt;,
+## #   modNum &lt;int&gt;, isDecoy &lt;lgl&gt;, post &lt;chr&gt;, pre &lt;chr&gt;, start &lt;int&gt;, end &lt;int&gt;,
+## #   DatabaseAccess &lt;chr&gt;, DBseqLength &lt;int&gt;, DatabaseSeq &lt;chr&gt;,
+## #   DatabaseDescription &lt;chr&gt;, scan.number.s. &lt;dbl&gt;, acquisitionNum &lt;dbl&gt;,
+## #   spectrumFile &lt;chr&gt;, idFile &lt;chr&gt;, MS.GF.RawScore &lt;dbl&gt;, …</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1367,7 +1367,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 21 17:51:48 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Mar 27 13:11:03 2023]</code></pre>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-id.html#cb242-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb242-2"><a href="sec-id.html#cb242-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb242-3"><a href="sec-id.html#cb242-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1721,7 +1721,7 @@ to output in the the next code chunk display parts of <code>id2</code>.<a href="
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-03-21
+2023-03-27
  using 
 R version 4.2.2 Patched (2022-11-02 r83238)
 </p>
