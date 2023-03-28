@@ -193,7 +193,7 @@ mltm <-
     group_by(spectrumID) %>%
     mutate(nProts = length(unique(DatabaseAccess))) %>%
     filter(nProts > 1) %>%
-    select(DatabaseAccess, nProts)
+    select(spectrumID, nProts)
 mltm
 ```
 ```{r}
