@@ -517,9 +517,9 @@ sp_k
 
 `r msmbstyle::question_begin()`
 
-2. Calculate the `r length(sp_k)` by `r length(sp_k)` distance matrix
-   between all spectra using `compareSpectra`. See the `?Spectra` man
-   page for details. Draw a heatmap of that distance matrix
+2. Calculate the `r length(sp_k)` by `r length(sp_k)` similarity
+   matrix between all spectra using `compareSpectra`. See the
+   `?Spectra` man page for details. Draw a heatmap of that matrix.
 
 `r msmbstyle::question_end()`
 
@@ -527,10 +527,10 @@ sp_k
 
 
 ```{r}
-distmat <- compareSpectra(sp_k)
-rownames(distmat) <- colnames(distmat) <- strtrim(sp_k$sequence, 2)
-distmat
-pheatmap::pheatmap(distmat)
+mat <- compareSpectra(sp_k)
+rownames(mat) <- colnames(mat) <- strtrim(sp_k$sequence, 2)
+mat
+pheatmap::pheatmap(mat)
 ```
 
 `r msmbstyle::solution_end()`
