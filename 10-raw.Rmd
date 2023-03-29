@@ -225,9 +225,9 @@ There is also an SQL-based backend called
 that will store all data, i.e. raw and metadata, on disk.
 
 Other backends focused on specific files format such as
-[`MsBackendMgf`](https://github.com/RforMassSpectrometry/MsBackendMgf)
+[`MsBackendMgf`](https://rformassspectrometry.github.io/MsBackendMgf/)
 of `mgf` peak lists or on specific acquisitions such as
-[`MsBackendTimsTof`](https://github.com/RforMassSpectrometry/MsBackendTimsTof)
+[`MsBackendTimsTof`](https://rformassspectrometry.github.io/MsBackendTimsTof/)
 are also available, and over time, more are developed to address
 specific needs or technologies, while remaining compliant with the
 `Spectra` interface.
