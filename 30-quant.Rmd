@@ -659,7 +659,8 @@ There are various methods to perform data imputation, as described in
 functionality, including some to estimate the randomness of missing
 data.
 
-The general syntax for imputation is
+The general syntax for imputation is shown below, using the `se_na2`
+object as an example:
 
 ```{r impute}
 data(se_na2)
@@ -670,8 +671,9 @@ impute(se_na2, method = "knn")
 `r msmbstyle::question_begin()`
 
 Following the example above, apply a mixed imputation, using knn for
-data missing at random and the zero imputation for data missing no at
-random.
+data missing at random and the zero imputation for data missing not at
+random. Hint: the `randna` variable defines which features are assumed
+to be missing at random.
 
 `r msmbstyle::question_end()`
 
