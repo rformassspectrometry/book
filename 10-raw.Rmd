@@ -2,22 +2,13 @@
 
 
 In this section, we will learn how to read raw data in one of the
-commonly used open formats (`mzML`, `mzXML` and `netCDF`) into R.
+commonly used open formats (`mzML`, `mzXML`, `netCDF` or `mgf`) into
+R.
 
 ```{r rwpkgs, echo = FALSE, message = FALSE, warning = FALSE}
 ## x <- RforProteomics:::msDataTab()
 ## sel <- x[, 1] %in% c("Raw", "Peak lists")
 ## knitr::kable(x[sel, ])
-```
-
-```
-|Data type  |File format   |Data structure               |Package           |
-|:----------|:-------------|:----------------------------|:-----------------|
-|Raw        |mzXML or mzML |mzRpwiz or mzRramp           |mzR               |
-|Raw        |mzXML or mzML |list of MassSpectrum objects |MALDIquantForeign |
-|Raw        |mzXML or mzML |MSnExp                       |MSnbase           |
-|Peak lists |mgf           |MSnExp                       |MSnbase           |
-|Raw        |several       |Spectra                      |Spectra           |
 ```
 
 ## What is raw data in R
@@ -229,10 +220,17 @@ With the example below we load the data from a single mzML file and use a
 `MsBackendHdf5Peaks` backend for data storage. The `hdf5path` parameter allows
 us to specify the storage location of the HDF5 file.
 
-There is also an (under development) SQLite-based backend called
+There is also an SQL-based backend called
 [`MsBackendSqlDb`](https://rformassspectrometry.github.io/MsBackendSql)
 that will store all data, i.e. raw and metadata, on disk.
 
+Other backends focused on specific files format such as
+[`MsBackendMgf`](https://github.com/RforMassSpectrometry/MsBackendMgf)
+of `mgf` peak lists or on specific acquisitions such as
+[`MsBackendTimsTof`](https://github.com/RforMassSpectrometry/MsBackendTimsTof)
+are also available, and over time, more are developed to address
+specific needs or technologies, while remaining compliant with the
+`Spectra` interface.
 
 If you would like to learn more about how the raw MS formats are
 handled by `Spectra` via the `r BiocStyle::Biocpkg("mzR")` package,
