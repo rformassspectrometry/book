@@ -99,7 +99,7 @@ Mass spectrometry-based quantitative proteomics data can be
 represented as a matrix of quantitative values for features (PSMs,
 peptides, proteins) arranged along the rows, measured for a set of
 samples, arranged along the columns. There is a common representation
-for such quantitative data set, namely the `SummarizedExperiment` (SE)
+for such quantitative data set, namely the `SummarizedExperiment`
 [@SE] class:
 
 ```{r sefig, echo = FALSE, fig.cap = "Schematic representation of the anatomy of a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)", out.width='100%', fig.align='center'}
@@ -804,6 +804,13 @@ rowData(cptac_se) %>%
 
 `r msmbstyle::solution_end()`
 
+
+**Note**: it is also possible to compute and visualise protein groups
+as connected components starting from a quantitative dataset such as a
+`SummarizedExperiment`. See the [*Using quantitative
+data*](https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html#using-quantitative-data)
+section in the *Understanding protein groups with adjacency matrices*
+vignette.
 
 ### Creating the QFeatures data
 
