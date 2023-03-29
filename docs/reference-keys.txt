@@ -74,7 +74,7 @@ imputation
 identification-quality-control
 creating-the-qfeatures-data
 filtering-out-contaminants-and-reverse-hits
-log-transformation-and-normaliation
+log-transformation-and-normalisation
 aggregation
 principal-component-analysis
 visualisation

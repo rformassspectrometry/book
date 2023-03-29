@@ -858,7 +858,7 @@ cptac <-
 
 `r msmbstyle::solution_end()`
 
-### Log-transformation and normaliation
+### Log-transformation and normalisation
 
 
 The two code chunks below log-transform and normalise using the assay
