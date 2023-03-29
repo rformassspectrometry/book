@@ -446,7 +446,7 @@ memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Wed Mar 29 07:50:30 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Wed Mar 29 08:33:23 2023]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -475,7 +475,7 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Mar 29 07:50:44 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Mar 29 08:33:33 2023]</code></pre>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-raw.html#cb48-1" aria-hidden="true"></a><span class="kw">table</span>(sp_hdf5<span class="op">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -484,9 +484,9 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-raw.html#cb50-1" aria-hidden="true"></a><span class="kw">table</span>(sp_hdf5<span class="op">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmpzs7nU6/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpKuQ1iG/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/Rtmpzs7nU6/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpKuQ1iG/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -498,9 +498,9 @@ us to specify the storage location of the HDF5 file.</p>
 <a href="https://rformassspectrometry.github.io/MsBackendSql"><code>MsBackendSqlDb</code></a>
 that will store all data, i.e. raw and metadata, on disk.</p>
 <p>Other backends focused on specific files format such as
-<a href="https://github.com/RforMassSpectrometry/MsBackendMgf"><code>MsBackendMgf</code></a>
+<a href="https://rformassspectrometry.github.io/MsBackendMgf/"><code>MsBackendMgf</code></a>
 of <code>mgf</code> peak lists or on specific acquisitions such as
-<a href="https://github.com/RforMassSpectrometry/MsBackendTimsTof"><code>MsBackendTimsTof</code></a>
+<a href="https://rformassspectrometry.github.io/MsBackendTimsTof/"><code>MsBackendTimsTof</code></a>
 are also available, and over time, more are developed to address
 specific needs or technologies, while remaining compliant with the
 <code>Spectra</code> interface.</p>
@@ -606,7 +606,7 @@ children.</li>
 ## file(s):
 ## 53fd9a5bb5f5_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Wed Mar 29 07:50:45 2023]</code></pre>
+##  Filter: select parent/children scans for 2807 [Wed Mar 29 08:33:33 2023]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -886,8 +886,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Mar 29 07:50:48 2023]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Mar 29 07:50:48 2023]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.2/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Mar 29 08:33:35 2023]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Mar 29 08:33:35 2023]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -971,7 +971,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Mar 29 07:50:49 2023]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Mar 29 08:33:36 2023]</code></pre>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sec-raw.html#cb81-1" aria-hidden="true"></a><span class="kw">min</span>(<span class="kw">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sec-raw.html#cb83-1" aria-hidden="true"></a>sp_sciex<span class="op">@</span>processingQueue</span></code></pre></div>

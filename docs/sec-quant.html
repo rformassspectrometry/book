@@ -295,7 +295,7 @@ has been addressed in the frame of metabolomics data processing by the
 represented as a matrix of quantitative values for features (PSMs,
 peptides, proteins) arranged along the rows, measured for a set of
 samples, arranged along the columns. There is a common representation
-for such quantitative data set, namely the <code>SummarizedExperiment</code> (SE)
+for such quantitative data set, namely the <code>SummarizedExperiment</code>
 <span class="citation">(Morgan et al. <label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">2020<span class="marginnote">Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2020. <em>SummarizedExperiment: SummarizedExperiment Container</em>. <a href="https://bioconductor.org/packages/SummarizedExperiment">https://bioconductor.org/packages/SummarizedExperiment</a>.</span>)</span> class:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:sefig"></span>
@@ -1011,7 +1011,8 @@ at random.Conversely, MNAR features should ideally be imputed with a
 <code>?impute</code>. The <em><a href="https://CRAN.R-project.org/package=imp4p">imp4p</a></em> package contains additional
 functionality, including some to estimate the randomness of missing
 data.</p>
-<p>The general syntax for imputation is</p>
+<p>The general syntax for imputation is shown below, using the <code>se_na2</code>
+object as an example:</p>
 <div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="sec-quant.html#cb372-1" aria-hidden="true"></a><span class="kw">data</span>(se_na2)</span>
 <span id="cb372-2"><a href="sec-quant.html#cb372-2" aria-hidden="true"></a><span class="co">## impute missing values using knn imputation</span></span>
 <span id="cb372-3"><a href="sec-quant.html#cb372-3" aria-hidden="true"></a><span class="kw">impute</span>(se_na2, <span class="dt">method =</span> <span class="st">"knn"</span>)</span></code></pre></div>
@@ -1032,8 +1033,9 @@ data.</p>
 </p>
 <div class="question-body">
 <p>Following the example above, apply a mixed imputation, using knn for
-data missing at random and the zero imputation for data missing no at
-random.</p>
+data missing at random and the zero imputation for data missing not at
+random. Hint: the <code>randna</code> variable defines which features are assumed
+to be missing at random.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1144,11 +1146,11 @@ Figure 5.11: Intensity disctribution of the <code>naset</code> data.
 </div>
 <p><strong>Tip</strong>: When downstream analyses permit, it might be safer not to
 impute data and deal explicitly with missing values. Indeed missing
-data imputation is not a straightforward thing, and is likely
-to dramatically fail when a high proportion of data is missing (10s of
-%). It is possible to keep NAs when performing hypothesis
-tests<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Still, it is recommended to explore missingness as part of the
-exploratory data analysis.</span>, but not to perform a principal component
+data imputation is not straightforward, and is likely to dramatically
+fail when a high proportion of data is missing (10s of %). It is
+possible to keep NAs when performing hypothesis tests<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Still, it is
+recommended to explore missingness as part of the exploratory data
+analysis.</span>, but (generally) not to perform a principal component
 analysis.</p>
 </div>
 <div id="identification-quality-control" class="section level3" number="5.4.3">
@@ -1203,6 +1205,12 @@ interpret the figure.</p>
 </p>
 </div>
 </div>
+<p><strong>Note</strong>: it is also possible to compute and visualise protein groups
+as connected components starting from a quantitative dataset such as a
+<code>SummarizedExperiment</code>. See the <a href="https://rformassspectrometry.github.io/PSMatch/articles/AdjacencyMatrix.html#using-quantitative-data"><em>Using quantitative
+data</em></a>
+section in the <em>Understanding protein groups with adjacency matrices</em>
+vignette.</p>
 </div>
 <div id="creating-the-qfeatures-data" class="section level3" number="5.4.4">
 <h3>
