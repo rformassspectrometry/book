@@ -84,14 +84,14 @@ been devoted to MS2-level quantitation. Label-free XIC quantitation
 has been addressed in the frame of metabolomics data processing by the
 `r Biocpkg("xcms")` infrastructure.
 
-Below is a list of suggested packages for some common proteomics
-quantitation technologies:
+<!-- Below is a list of suggested packages for some common proteomics -->
+<!-- quantitation technologies: -->
 
-* Isobaric tagging (iTRAQ and TMT): `r Biocpkg("MSnbase")` and `r Biocpkg("isobar")`.
-* Label-free: `r Biocpkg("xcms")` (metabolomics).
-* Counting: `r Biocpkg("MSnbase")` and `r Biocpkg("MSnID")` for
-  peptide-spectrum matching confidence assessment.
-* `r Githubpkg("vladpetyuk/N14N15")` for heavy Nitrogen-labelled data.
+<!-- * Isobaric tagging (iTRAQ and TMT): `r Biocpkg("MSnbase")` and `r Biocpkg("isobar")`. -->
+<!-- * Label-free: `r Biocpkg("xcms")` (metabolomics). -->
+<!-- * Counting: `r Biocpkg("MSnbase")` and `r Biocpkg("MSnID")` for -->
+<!--   peptide-spectrum matching confidence assessment. -->
+<!-- * `r Githubpkg("vladpetyuk/N14N15")` for heavy Nitrogen-labelled data. -->
 
 ## QFeatures {#sec-qf}
 
@@ -322,6 +322,21 @@ that assay.
 filterFeatures(feat1, ~ pval < 0.05)
 ```
 
+`r msmbstyle::question_begin()`
+
+As the message above implies, it is also possible to apply a filter to
+only the assays that have a filtering variables by setting the `keep`
+variables.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r ff1b}
+filterFeatures(feat1, ~ pval < 0.05, keep = TRUE)
+```
+`r msmbstyle::solution_end()`
+
 On the other hand, if we filter assay rows for those that localise to
 the mitochondrion, we retain the relevant protein, peptides and PSMs.
 
@@ -329,14 +344,20 @@ the mitochondrion, we retain the relevant protein, peptides and PSMs.
 filterFeatures(feat1, ~ location == "Mitochondrion")
 ```
 
+`r msmbstyle::question_begin()`
+
 As an exercise, let's filter rows that do not localise to the
 mitochondrion.
 
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r ff3}
 filterFeatures(feat1, ~ location != "Mitochondrion")
 ```
 
+`r msmbstyle::solution_end()`
 
 You can refer to the [*Quantitative features for mass spectrometry
 data*](https://rformassspectrometry.github.io/QFeatures/articles/QFeatures.html)
@@ -352,15 +373,15 @@ data(hlpsms)
 ```
 
 While `QFeatures` objects can be created manually (see `?QFeatures`
-for details), most users will probably possess quantitative data in a
-spreadsheet or a dataframe. In such cases, the easiest is to use the
-`readQFeatures` function to extract the quantitative data and metadata
-columns. Below, we load the `hlpsms` dataframe that contains data for
-`r ncol(hlpsms)` PSMs from the TMT-10plex *hyper*LOPIT spatial
-proteomics experiment from [@Christoforou:2016]. The `ecol` argument
-specifies that columns 1 to 10 contain quantitation data, and that the
-assay should be named `psms` in the returned `QFeatures` object, to
-reflect the nature of the data.
+for details), most users have a quantitative data in a spreadsheet or
+a data.frame. In such cases, the easiest is to use the `readQFeatures`
+function to extract the quantitative data and metadata columns. Below,
+we load the `hlpsms` dataframe that contains data for `r ncol(hlpsms)`
+PSMs from the TMT-10plex *hyper*LOPIT spatial proteomics experiment
+from [@Christoforou:2016]. The `ecol` argument specifies that columns
+1 to 10 contain quantitation data, and that the assay should be named
+`psms` in the returned `QFeatures` object, to reflect the nature of
+the data.
 
 
 ```{r readQFeatures}
@@ -399,10 +420,9 @@ se
 QFeatures(list(psm = se))
 ```
 
-At this stage, i.e. at the beginning of the analysis, and respectively
-whether you have a `SummarizedExperiment` or a `QFeatures` object, it
-is a good time to define the experimental design in the `colData`
-slot.
+At this stage, i.e. at the beginning of the analysis, whether you have
+a `SummarizedExperiment` or a `QFeatures` object, it is a good time to
+define the experimental design in the `colData` slot.
 
 ### Exercise {-}
 
@@ -429,7 +449,7 @@ basename(f <- msdata::quant(pattern = "cptac", full.names = TRUE))
 `r msmbstyle::question_begin()`
 
 Read these data in as either a `SummarizedExperiment` or a `QFeatures`
-object and annotated the experiment.
+object.
 
 `r msmbstyle::question_end()`
 
@@ -451,12 +471,23 @@ as an instance of class `SummarizedExperiment`. We also use the
 peptide sequences and specify that the file is a tab-separated table.
 
 ```{r readse}
-cptac_se <- readSummarizedExperiment(f, ecol = i, fnames = "Sequence", sep = "\t")
+cptac_se <- readSummarizedExperiment(f, ecol = i,
+                                     fnames = "Sequence",
+                                     sep = "\t")
 cptac_se
 ```
 
-Before proceeding, we are going to clean up the sample names and
-annotate the experiment:
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+Before proceeding, we are going to clean up the sample names by
+removing the unnecessary *Intensity* prefix and annotate the
+experiment in the object's `colData`.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r cptac_names}
 colnames(cptac_se) <- sub("I.+\\.", "", colnames(cptac_se))
@@ -464,7 +495,6 @@ cptac_se$condition <- sub("_[7-9]", "", colnames(cptac_se))
 cptac_se$id <- sub("^.+_", "", colnames(cptac_se))
 colData(cptac_se)
 ```
-
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
