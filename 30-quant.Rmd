@@ -1020,8 +1020,9 @@ packages provide dedicated resources for proteomics data:
   peptide-level input to protein-level values. Model estimates are
   stabilized by ridge regression, empirical Bayes variance estimation
   and downweighing of outliers. Currently, only label-free proteomics
-  data types are supported. `msqrob2` is currently under development
-  and will be using `QFeatures` objects.
+  data types are
+  supported. [`msqrob2`](https://github.com/statOmics/msqrob2/) is now
+  available and makes use of the `QFeatures` infrastructure.
 
 - `r BiocStyle::Githubpkg("const-ae/proDA")` accounts for missing
   values in label-free mass spectrometry data without imputation. The
