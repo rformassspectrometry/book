@@ -987,6 +987,42 @@ longFormat(cptac["P02787ups|TRFE_HUMAN_UPS", ,
     ggtitle("P02787ups|TRFE_HUMAN_UPS")
 ```
 
+We can also visualise the assays withing a `QFeatures` object and
+their relation.
+
+```{r plotqf}
+plot(cptac)
+```
+
+`r msmbstyle::question_begin()`
+
+The example above shows a simple linear relationship between
+assays. Create a more interesting one by applying a different
+normalisation method on the *log_peptides* assay and aggreate that new
+normalised peptide assay. Visualise the relationship with `plot()`, as
+above.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r plotqf2, message = FALSE}
+normalize(cptac, "log_peptides",
+          name = "logquantiles_peptides",
+          method = "quantiles") |>
+    aggregateFeatures(
+        "logquantiles_peptides",
+        name = "proteins_med2",
+        fcol = "Leading.razor.protein",
+        fun = colMedians,
+        na.rm = TRUE) |>
+    plot()
+```
+
+`r msmbstyle::solution_end()`
+
+
 ### Statistical analysis
 
 R in general and Bioconductor in particular are well suited for the
@@ -1039,14 +1075,12 @@ to count data using the `msms.edgeR` function from the `msmsTests`
 package.
 
 
-
 Below, we are going to perform our statistical analysis on the protein
 data using `limma`.
 
 
 ```{r protse}
-prots <- cptac[["proteins_med"]]
-colData(prots) <- colData(cptac)
+prots <- getWithColData(cptac, "proteins_med")
 ```
 
 The `r BiocStyle::Biocpkg("limma")` package is the precursor package
