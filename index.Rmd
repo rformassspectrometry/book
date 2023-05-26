@@ -81,8 +81,8 @@ This material uses the latest version of the R for Mass Spectrometry
 package and their dependencies. It might thus be possible that even
 the latest Bioconductor stable version isn't recent enough.
 
-To install the latest versions of all the package, please use R
-version 4.2 and execute:
+To install all the necessary package, please use the latest release of
+R and execute:
 
 ```{r setup, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -108,7 +108,8 @@ BiocManager::install("RforMassSpectrometry/SpectraVis")
 Follow the instructions in [this
 script](https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e)
 to install the packages and download some of the data used in the
-following chapters.
+following chapters. All software versions used to generate this
+document are recoded at the end of the book in \@ref(sec-se).
 
 To compile and render the teaching material, you will also need
 the `r BiocStyle::Biocpkg("BiocStyle")` package and the (slighly
