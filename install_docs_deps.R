@@ -4,7 +4,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 deps <- c("dplyr", "factoextra", "ggplot2", "gplots", "limma",
           "magrittr", "MsCoreUtils", "msdata", "MSnID", "mzID", "mzR",
           "patchwork", "PSMatch", "QFeatures", "rpx", "Spectra",
-          "tidyr", "tidyverse")
+          "tidyr", "tidyverse", "impute", "MSnID")
 BiocManager::install(deps, ask = FALSE, udpate = TRUE)
 
 deps2 <- c("lgatto/msmbstyle", "BiocStyle", "bookdown")
