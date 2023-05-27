@@ -101,6 +101,7 @@ BiocManager::install("ProtGenerics")
 BiocManager::install("PSMatch")
 BiocManager::install("pheatmap")
 BiocManager::install("limma")
+BiocManager::install("impute")
 BiocManager::install("MSnID")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
