@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2023-05-27" />
+<meta name="date" content="2023-06-01" />
 
 
 <meta name="description" content="Chapter 1 Preamble | R for Mass Spectrometry">
@@ -202,9 +202,23 @@ data analysts/bioinformaticians that would like to learn how to use R
 and Bioconductor to analyse proteomics data. Familiarity with MS or
 proteomics in general is desirable, but not essential as we will walk
 through and describe a typical MS data as part of learning about the
-tools. <em>A beginner’s guide to mass spectrometry–based proteomics</em>
-<span class="citation">(Sinha and Mann <label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">2020<span class="marginnote">Sinha, Ankit, and Matthias Mann. 2020. “A beginner’s guide to mass spectrometry–based proteomics.” <em>The Biochemist</em>, September. <a href="https://doi.org/10.1042/BIO20200057">https://doi.org/10.1042/BIO20200057</a>.</span>)</span> is an approachable introduction to sample preparation,
-mass spectrometry and data analysis.</p>
+tools. For approachable introductions to sample preparation, mass
+spectrometry, data interpretation and analysis, readers are redirected
+to:</p>
+<ul>
+<li>
+<em>A beginner’s guide to mass spectrometry–based proteomics</em> <span class="citation">(Sinha and Mann <label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">2020<span class="marginnote">Sinha, Ankit, and Matthias Mann. 2020. “A beginner’s guide to mass spectrometry–based proteomics.” <em>The Biochemist</em>, September. <a href="https://doi.org/10.1042/BIO20200057">https://doi.org/10.1042/BIO20200057</a>.</span>)</span>
+</li>
+<li>
+<em>The ABC’s (and XYZ’s) of peptide sequencing</em> <span class="citation">(<span class="citeproc-not-found" data-reference-id="Steen:2004"><strong>???</strong></span>)</span>
+</li>
+<li>
+<em>How do shotgun proteomics algorithms identify proteins?</em> <span class="citation">(<span class="citeproc-not-found" data-reference-id="Marcotte:2007"><strong>???</strong></span>)</span>
+</li>
+<li>
+<em>An Introduction to Mass Spectrometry-Based Proteomics</em> <span class="citation">(<span class="citeproc-not-found" data-reference-id="Shuken:2023"><strong>???</strong></span>)</span>
+</li>
+</ul>
 <p>A working knowledge of R (R syntax, commonly used functions, basic
 data structures such as data frames, vectors, matrices, … and their
 manipulation) is required. Familiarity with other Bioconductor omics
@@ -234,9 +248,8 @@ R and execute:</p>
 <span id="cb1-14"><a href="index.html#cb1-14" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"PSMatch"</span>)</span>
 <span id="cb1-15"><a href="index.html#cb1-15" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"pheatmap"</span>)</span>
 <span id="cb1-16"><a href="index.html#cb1-16" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"limma"</span>)</span>
-<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"impute"</span>)</span>
-<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"MSnID"</span>)</span>
-<span id="cb1-19"><a href="index.html#cb1-19" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"RforMassSpectrometry/SpectraVis"</span>)</span></code></pre></div>
+<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"MSnID"</span>)</span>
+<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"RforMassSpectrometry/SpectraVis"</span>)</span></code></pre></div>
 <p>Follow the instructions in <a href="https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e">this
 script</a>
 to install the packages and download some of the data used in the
@@ -277,7 +290,7 @@ distribute your contributions under the same license as the original.</p>
 <a href="sec-msintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-05-27
+2023-06-01
  using 
 R version 4.3.0 (2023-04-21)
 </p>
