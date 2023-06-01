@@ -52,9 +52,14 @@ data analysts/bioinformaticians that would like to learn how to use R
 and Bioconductor to analyse proteomics data. Familiarity with MS or
 proteomics in general is desirable, but not essential as we will walk
 through and describe a typical MS data as part of learning about the
-tools. *A beginner's guide to mass spectrometry–based proteomics*
-[@Sinha:2020] is an approachable introduction to sample preparation,
-mass spectrometry and data analysis.
+tools. For approachable introductions to sample preparation, mass
+spectrometry, data interpretation and analysis, readers are redirected
+to:
+
+- *A beginner's guide to mass spectrometry–based proteomics* [@Sinha:2020]
+- *The ABC's (and XYZ's) of peptide sequencing* [@Steen:2004]
+- *How do shotgun proteomics algorithms identify proteins?* [@Marcotte:2007]
+- *An Introduction to Mass Spectrometry-Based Proteomics* [@Shuken:2023]
 
 A working knowledge of R (R syntax, commonly used functions, basic
 data structures such as data frames, vectors, matrices, ... and their
@@ -101,7 +106,6 @@ BiocManager::install("ProtGenerics")
 BiocManager::install("PSMatch")
 BiocManager::install("pheatmap")
 BiocManager::install("limma")
-BiocManager::install("impute")
 BiocManager::install("MSnID")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
