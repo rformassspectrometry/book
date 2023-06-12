@@ -37,6 +37,19 @@
   chromatographic peak detection, alignment and correspondence of
   untargeted (LC-MS-based) metabolomics data.
 
+- [Exploring and analyzing LC-MS data with Spectra and
+  xcms](https://jorainer.github.io/xcmsTutorials/) provides an
+  overview of recent developments in Bioconductor to work with mass
+  spectrometry
+  ([MsExperiment](https://github.com/RforMassSpectrometry/MsExperiment),
+  [Spectra](https://github.com/RforMassSpectrometry/Spectra)) and
+  specifically LC-MS data ([xcms](https://github.com/sneumann/xcms))
+  and walks through the preprocessing of a small data set emphasizing
+  on selection of data-dependent settings for the individual
+  pre-processing steps. This workshop is an update (using new
+  packages) to [LC-MS pre-processing with
+  `xcms`](https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html)
+  above.
 
 ## Session information
 
