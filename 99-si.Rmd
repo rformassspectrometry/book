@@ -51,6 +51,13 @@
   `xcms`](https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html)
   above.
 
+## Questions and help
+
+For questions about specific software or their usage, please refer to
+the software's github issue page, or use the [Bioconductor support
+site](http://support.bioconductor.org/).
+
+
 ## Session information
 
 The following packages have been used to generate this document.
