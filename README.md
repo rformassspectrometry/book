@@ -7,5 +7,5 @@ Spectrometry](https://www.rformassspectrometry.org/) software
 infrastructure.
 
 
-Go to http://rformassspectrometry.github.io/docs to browse the
+Go to http://rformassspectrometry.github.io/book to browse the
 material online.
