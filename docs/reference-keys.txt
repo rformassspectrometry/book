@@ -6,7 +6,7 @@ fig:unnamed-chunk-5
 fig:unnamed-chunk-6
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
-fig:unnamed-chunk-22
+fig:unnamed-chunk-23
 fig:answid1
 fig:sc
 fig:itraq
@@ -23,7 +23,7 @@ fig:plotdens
 fig:plotpca
 fig:vis
 fig:vp
-fig:unnamed-chunk-75
+fig:unnamed-chunk-76
 preamble
 sec-msintro
 how-does-mass-spectrometry-work

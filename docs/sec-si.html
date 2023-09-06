@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2023-09-06" />
 
 
 <meta name="description" content="Chapter 7 Additional materials and session information | R for Mass Spectrometry">
@@ -205,27 +205,32 @@ focuses on single-cell application and introduces the <code>scp</code> package
 vignette also provides exercises that give the attendee the
 opportunity to apply the learned concepts to reproduce a published
 analysis on a subset of a real data set.</p></li>
-<li><p>The <a href="https://jorainer.github.io/SpectraTutorials/">Seamless Integration of Mass Spectrometry Data from Different
-Sources</a> workshop
-explains the <code>Spectra</code> package and shows how this new infrastructure
-can be used to represent and analyze Mass Spectrometry (MS)
-data. The use of different data type and format specific backends
-guarantees an easy expandability of the infrastructure. This is
-illustrated in this tutorial on a simple use case, in which MS/MS
-(a.k.a. MS2) spectra, measured by an MS instrument, are compared and
-matched against a public spectral database containing public domain
-reference MS2 spectra.</p></li>
+<li>
+<p>The <a href="https://jorainer.github.io/SpectraTutorials">SpectraTutorials</a> package
+provides three different vignettes:</p>
+<ul>
+<li>
+<a href="https://jorainer.github.io/SpectraTutorials/articles/analyzing-MS-data-from-different-sources-with-Spectra.html">Seamless Integration of Mass Spectrometry Data from Different
+Sources</a>:
+describes import/export of MS data from/to files in different format as well
+as processing and handling of MS data with the <em>Spectra</em> package.</li>
+<li>
+<a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html">Spectra: an Expandable Infrastructure to Handle Mass Spectrometry
+Data</a>:
+explains the concept of backends in <em>Spectra</em>, their properties, use cases
+along with performance considerations.</li>
+<li>
+<a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-matching-with-MetaboAnnotation.html">MS/MS Spectra Matching with the MetaboAnnotation
+Package</a>:
+explains how the <em>Spectra</em> package can be used together with the <code>r BiocStyle::Biocpkg("MetaboAnnotation")</code> package in LC-MS/MS annotation
+workflows for untargeted metabolomics data.</li>
+</ul>
+</li>
 <li><p>A tutorial presenting <a href="https://jorainer.github.io/MetaboAnnotationTutorials/">Use Cases and Examples for Annotation of
 Untargeted Metabolomics
 Data</a> using
 the <code>MetaboAnnotation</code> and <code>MetaboCoreUtils</code> packages
 <span class="citation">(<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">Rainer et al. 2022<span class="marginnote">Rainer, Johannes, Andrea Vicini, Liesa Salzer, Jan Stanstrup, Josep M Badia, Steffen Neumann, Michael A Stravs, et al. 2022. <span>“A Modular and Expandable Ecosystem for Metabolomics Data Annotation in <span>R</span>.”</span> <em>Metabolites</em> 12 (2): 173.</span>)</span>.</p></li>
-<li><p>A tutorial for <a href="https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html">LC-MS pre-processing with
-<code>xcms</code></a>
-with examples on how to perform centroiding of profile-mode MS data
-in <code>R</code> and how to define data set-specific parameters for
-chromatographic peak detection, alignment and correspondence of
-untargeted (LC-MS-based) metabolomics data.</p></li>
 <li><p><a href="https://jorainer.github.io/xcmsTutorials/">Exploring and analyzing LC-MS data with Spectra and
 xcms</a> provides an
 overview of recent developments in Bioconductor to work with mass
@@ -235,10 +240,7 @@ spectrometry
 specifically LC-MS data (<a href="https://github.com/sneumann/xcms">xcms</a>)
 and walks through the preprocessing of a small data set emphasizing
 on selection of data-dependent settings for the individual
-pre-processing steps. This workshop is an update (using new
-packages) to <a href="https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html">LC-MS pre-processing with
-<code>xcms</code></a>
-above.</p></li>
+pre-processing steps.</p></li>
 </ul>
 </div>
 <div id="questions-and-help" class="section level2" number="7.2">
@@ -254,7 +256,7 @@ site</a>.</p>
 <span class="header-section-number">7.3</span> Session information<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('session-information')" onmouseout="reset_tooltip('session-information-tooltip')"><span class="tooltiptext" id="session-information-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="sec-si.html#cb462-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="sec-si.html#cb461-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.3.1 Patched (2023-07-10 r84676)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Manjaro Linux
@@ -285,9 +287,9 @@ site</a>.</p>
 ##  [7] forcats_1.0.0               stringr_1.5.0              
 ##  [9] purrr_1.0.2                 readr_2.1.4                
 ## [11] tibble_3.2.1                tidyverse_2.0.0            
-## [13] MSnID_1.34.0                tidyr_1.3.0                
-## [15] ggplot2_3.4.3               dplyr_1.1.2                
-## [17] magrittr_2.0.3              msdata_0.40.0              
+## [13] MSnID_1.34.0                magrittr_2.0.3             
+## [15] tidyr_1.3.0                 ggplot2_3.4.3              
+## [17] dplyr_1.1.2                 msdata_0.40.0              
 ## [19] rpx_2.8.0                   MsCoreUtils_1.12.0         
 ## [21] QFeatures_1.11.1            MultiAssayExperiment_1.26.0
 ## [23] SummarizedExperiment_1.30.2 Biobase_2.60.0             
@@ -343,7 +345,7 @@ site</a>.</p>
 <a href="sec-anx.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-09-03
+2023-09-06
  using 
 R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
