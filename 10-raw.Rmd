@@ -66,7 +66,8 @@ sp0
 
 Explore the newly created object using
 
-- `spectraVariables` to extract all the metadata variables.
+- `spectraVariables` to extract all the metadata variables. Compare these to the
+  spectra variables available from the previous example.
 - `spectraData` to extract all the metadata.
 - `peaksData` to extract a list containing the raw data.
 - `[` to create subsets.
@@ -109,7 +110,7 @@ core variables and their data type are (alphabetically ordered):
 - *dataStorage* `character(1)`: the (current) storage location of the
   spectrum data. This value depends on the backend used to handle and
   provide the data. For an *in-memory* backend like the
-  `MsBackendDataFrame` this will be `"<memory>"`, for an on-disk
+  `MsBackendMemory` this will be `"<memory>"`, for an on-disk
   backend such as the `MsBackendHdf5Peaks` it will be the name of the
   HDF5 file where the spectrum's peak data is stored.
 - *intensity* `numeric`: intensity values for the spectrum's peaks.
@@ -141,6 +142,19 @@ function see the help for `Spectra` (`?Spectra`). Also note that these
 variables are suggested, but not required to characterize a
 spectrum. Also, some only make sense for MSn, but not for MS1 spectra.
 
+In addition to the core spectra variables it is also possible to add additional
+spectra variables to a `Spectra` object. As an example we add below a spectra
+variable representing the retention times in minutes to the object. This
+information can then be extracted again using the `$` notation (similar to
+accessing a column in a `data.frame`, i.e., `$` and the name of the spectra
+variable).
+
+```{r}
+sp$rtime_minute <- rtime(sp) / 60
+sp$rtime_minute |> head()
+```
+
+
 #### Exercise {-}
 
 - Extract a set of spectra variables using the accessor (for example
@@ -167,7 +181,11 @@ following questions:
   mode?
 
 
-These objects and their manipulations are not limited to single files:
+These objects and their manipulations are not limited to single files or
+samples. Below we load data from two mzML files. The MS data from both files in
+the `Spectra` is organized linearly (first all spectra from the first file
+and then from the second). The `dataOrigin` function can be used to identify
+spectra from the different data files.
 
 ```{r, sciex_mzr}
 (fls <- dir(system.file("sciex", package = "msdata"), full.names = TRUE))
@@ -178,9 +196,11 @@ table(dataOrigin(sp_sciex))
 ### Backends
 
 Backends allow to use different *backends* to store mass spectrometry data while
-providing *via* the `Spectra` class a unified interface to use that data. The
-`Spectra` package defines a set of example backends but any object extending the
-base `MsBackend` class could be used instead. The default backends are:
+providing *via* the `Spectra` class a unified interface to use that data. With
+the `setBackend` function it is possible to change between different backends
+and hence different data representations. The `Spectra` package defines a set of
+example backends but any object extending the base `MsBackend` class could be
+used instead. The default backends are:
 
 - `MsBackendMzR`: this backend keeps only general spectra variables in memory
   and relies on the `r Biocpkg("mzR")` package to read mass peaks (m/z and
@@ -190,20 +210,23 @@ base `MsBackend` class could be used instead. The default backends are:
 sp_sciex
 ```
 
-- `MsBackendDataFrame`: the mass spectrometry data is stored (in-memory) in a
-  `DataFrame`. Keeping the data in memory guarantees high performance but has
-  also, depending on the number of mass peaks in each spectrum, a much higher
-  memory footprint.
+- `MsBackendMemory` and `MsBackendDataFrame`: the full mass spectrometry data is
+  stored (in-memory) within the object. Keeping the data in memory guarantees
+  high performance but has also, depending on the number of mass peaks in each
+  spectrum, a much higher memory footprint.
 
 
 ```{r sciex_dfr}
-setBackend(sp_sciex, MsBackendDataFrame())
+setBackend(sp_sciex, MsBackendMemory())
 ```
 
 - `MsBackendHdf5Peaks`: similar to `MsBackendMzR` this backend reads peak data
   only on-demand from disk while all other spectra variables are kept in
   memory. The peak data are stored in Hdf5 files which guarantees scalability.
 
+With the example below we load the data from a single mzML file and use a
+`MsBackendHdf5Peaks` backend for data storage. The `hdf5path` parameter allows
+us to specify the storage location of the HDF5 file.
 
 ```{r sciex_hdf5}
 sp_hdf5 <- setBackend(sp_sciex, MsBackendHdf5Peaks(), hdf5path = tempdir())
@@ -216,25 +239,29 @@ All of the above mentioned backends support changing all of their their spectra
 variables, **except** the `MsBackendMzR` that does not support changing m/z or
 intensity values for the mass peaks.
 
-With the example below we load the data from a single mzML file and use a
-`MsBackendHdf5Peaks` backend for data storage. The `hdf5path` parameter allows
-us to specify the storage location of the HDF5 file.
+Next to these default backends there are a set of other backend implementations
+provided by additional R packages. The
+[`MsBackendSql`](https://rformassspectrometry.github.io/MsBackendSql) for
+example allows to store (and retrieve) all MS data in (from) an SQL database
+guaranteeing thus a minimal memory footprint.
 
-There is also an SQL-based backend called
-[`MsBackendSqlDb`](https://rformassspectrometry.github.io/MsBackendSql)
-that will store all data, i.e. raw and metadata, on disk.
-
-Other backends focused on specific files format such as
-[`MsBackendMgf`](https://rformassspectrometry.github.io/MsBackendMgf/)
-of `mgf` peak lists or on specific acquisitions such as
+Other backends focus on specific file formats such as
+[`MsBackendMgf`](https://rformassspectrometry.github.io/MsBackendMgf/) for files
+in `mgf` file format or on specific acquisitions such as
 [`MsBackendTimsTof`](https://rformassspectrometry.github.io/MsBackendTimsTof/)
-are also available, and over time, more are developed to address
-specific needs or technologies, while remaining compliant with the
-`Spectra` interface.
+or provide access to certain MS data resources such as the
+[`MsBackendMassbank`](https://rformassspectrometry.github.io/MsBackendMassbank/).
+Additional backends are being developed to address specific needs or
+technologies, while remaining compliant with the `Spectra` interface.
 
 If you would like to learn more about how the raw MS formats are
 handled by `Spectra` via the `r BiocStyle::Biocpkg("mzR")` package,
 check out the \@ref(sec-raw2) section in the annex.
+
+See also [Spectra
+backends](https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html)
+for more information on different backends, their properties and
+advantages/disadvantages.
 
 
 ## Visualisation of raw MS data
@@ -442,27 +469,57 @@ above.
 
 ## Raw data processing and manipulation
 
-Apart from *classical* subsetting operations such as `[` and `split`,
-a set of filter functions are defined for `Spectra` objects (for
-detailed help please see the `?Spectra` help):
+Apart from *classical* subsetting operations such as `[` and `split`, a set of
+filter functions are defined for `Spectra` objects that filter/reduce the number
+of spectra within the object (for detailed help please see the `?Spectra` help):
 
-- `filterAcquisitionNum`: retain spectra with certain acquisition numbers.
-- `filterDataOrigin`: subset to spectra from specific origins.
-- `filterDataStorage`: subset to spectra from certain data storage files.
-- `filterEmptySpectra`: remove spectra without mass peaks.
-- `filterMzRange`: subset spectra keeping only peaks with an m/z within the
+- `filterAcquisitionNum`: retains spectra with certain acquisition numbers.
+- `filterDataOrigin`: subsets to spectra from specific origins.
+- `filterDataStorage`: subsets to spectra from certain data storage files.
+- `filterEmptySpectra`: removes spectra without mass peaks.
+- `filterMzRange`: subsets spectra keeping only peaks with an m/z within the
   provided m/z range.
-- `filterMzValues`: subset spectra keeping only peaks matching provided m/z
-  value(s).
-- `filterIsolationWindow`: keep spectra with the provided `mz` in their
+- `filterIsolationWindow`: keeps spectra with the provided `mz` in their
   isolation window (m/z range).
-- `filterMsLevel`: filter by MS level.
-- `filterPolarity`: filter by polarity.
-- `filterPrecursorMz`: retain (MSn) spectra with a precursor m/z within the
-  provided m/z range.
-- `filterPrecursorScan`: retain (parent and children) scans of an acquisition
+- `filterMsLevel`: filters by MS level.
+- `filterPolarity`: filters by polarity.
+- `filterPrecursorIsotopes`: identifies precursor ions (from fragment spectra)
+  that could represent isotopes of the same molecule. For each of these spectra
+  groups only the spectrum of the monoisotopic precursor ion is returned. MS1
+  spectra are returned without filtering.
+- `filterPrecursorMaxIntensity`: filters spectra keeping, for groups of spectra
+  with similar precursor m/z, the one spectrum with the highest precursor
+  intensity. All MS1 spectra are returned without filtering.
+- `filterPrecursorMzRange`: retains (MSn) spectra with a precursor m/z within
+  the provided m/z range.
+- `filterPrecursorMzValues`: retains (MSn) spectra with precursor m/z value
+  matching the provided value(s) considering also a `tolerance` and `ppm`.
+- `filterPrecursorCharge`: retains (MSn) spectra with speified
+  precursor charge(s).
+- `filterPrecursorScan`: retains (parent and children) scans of an acquisition
   number.
-- `filterRt`: filter based on retention time ranges.
+- `filterRt`: filters based on retention time range.
+
+In addition to these, there is also a set of filter functions that operate on
+the peak data, filtering and modifying the number of peaks of each spectrum
+within a `Spectra`:
+
+- `combinePeaks`: groups peaks within each spectrum based on similarity of their
+  m/z values and combines these into a single peak per peak group.
+- `deisotopeSpectra`: deisotopes each individual spectrum keeping only the
+  monoisotopic peak for peaks groups of potential isotopologues.
+- `filterIntensity`: filter each spectrum keeping only peaks with intensities
+  meeting certain criteria.
+- `filterMzRange`: subsets peaks data within each spectrum keeping only peaks
+  with their m/z values within the specified m/z range.
+- `filterPrecursorPeaks`: removes peaks with either an m/z value matching the
+  precursor m/z of the respective spectrum (with parameter `mz = "=="`) or peaks
+  with an m/z value larger or equal to the precursor m/z (with parameter
+  `mz = ">="`).
+- `filterMzValues`: subsets peaks within each spectrum keeping or removing (all)
+  peaks matching provided m/z value(s) (given parameters `ppm` and `tolerance`).
+- `reduceSpectra`: filters individual spectra keeping only the largest peak for
+  groups of peaks with similar m/z values.
 
 
 `r msmbstyle::question_begin()`
@@ -485,25 +542,27 @@ length(sps_sub)
 ```
 
 ```{r filterfile-filterrt2}
-library("magrittr")
-sp_sciex %>%
-    filterDataOrigin(fls[2]) %>%
+sp_sciex |>
+    filterDataOrigin(fls[2]) |>
     filterRt(c(175, 189))
 ```
 
 `r msmbstyle::solution_end()`
 
-As an example of data processing, below we use the `pickPeaks()`
-function to pick peaks:
+As an example of data processing, we use below the `pickPeaks()`
+function. This function allows to convert *profile mode* MS data to *centroid
+mode* data (a process also referred to as *centroiding*).
 
 ```{r}
 plotSpectra(sp[2807], xlim = c(521.2, 522.5))
 ```
 
+Centroiding reduces the profile mode MS data to a *representative* single mass
+peak per ion.
+
 ```{r}
-library("magrittr")
-pickPeaks(sp[2807]) %>%
-    filterIntensity(1e7) %>%
+pickPeaks(sp[2807]) |>
+    filterIntensity(1e7) |>
     plotSpectra(xlim = c(521.2, 522.5))
 ```
 
@@ -549,9 +608,16 @@ min(intensity(sp_sciex[1]))
 sp_sciex@processingQueue
 ```
 
+Through this lazy evaluation system it is also possible to *undo* data
+manipulations:
 
 ```{r}
 sp_sciex <- reset(sp_sciex)
 sp_sciex@processingQueue
 min(intensity(sp_sciex[1]))
 ```
+
+More information on this lazy evaluation concept implemented in `Spectra` is
+provided in the [Spectra
+backends](https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html)
+vignette.
