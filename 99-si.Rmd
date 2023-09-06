@@ -13,29 +13,27 @@
   opportunity to apply the learned concepts to reproduce a published
   analysis on a subset of a real data set.
 
-- The [Seamless Integration of Mass Spectrometry Data from Different
-  Sources](https://jorainer.github.io/SpectraTutorials/) workshop
-  explains the `Spectra` package and shows how this new infrastructure
-  can be used to represent and analyze Mass Spectrometry (MS)
-  data. The use of different data type and format specific backends
-  guarantees an easy expandability of the infrastructure. This is
-  illustrated in this tutorial on a simple use case, in which MS/MS
-  (a.k.a. MS2) spectra, measured by an MS instrument, are compared and
-  matched against a public spectral database containing public domain
-  reference MS2 spectra.
+- The [SpectraTutorials](https://jorainer.github.io/SpectraTutorials) package
+  provides three different vignettes:
+  - [Seamless Integration of Mass Spectrometry Data from Different
+  Sources](https://jorainer.github.io/SpectraTutorials/articles/analyzing-MS-data-from-different-sources-with-Spectra.html):
+  describes import/export of MS data from/to files in different format as well
+  as processing and handling of MS data with the *Spectra* package.
+  - [Spectra: an Expandable Infrastructure to Handle Mass Spectrometry
+  Data](https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html):
+  explains the concept of backends in *Spectra*, their properties, use cases
+  along with performance considerations.
+  - [MS/MS Spectra Matching with the MetaboAnnotation
+  Package](https://jorainer.github.io/SpectraTutorials/articles/Spectra-matching-with-MetaboAnnotation.html):
+  explains how the *Spectra* package can be used together with the `r
+  BiocStyle::Biocpkg("MetaboAnnotation")` package in LC-MS/MS annotation
+  workflows for untargeted metabolomics data.
 
 - A tutorial presenting [Use Cases and Examples for Annotation of
   Untargeted Metabolomics
   Data](https://jorainer.github.io/MetaboAnnotationTutorials/) using
   the `MetaboAnnotation` and `MetaboCoreUtils` packages
   [@Rainer:2022].
-
-- A tutorial for [LC-MS pre-processing with
-  `xcms`](https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html)
-  with examples on how to perform centroiding of profile-mode MS data
-  in `R` and how to define data set-specific parameters for
-  chromatographic peak detection, alignment and correspondence of
-  untargeted (LC-MS-based) metabolomics data.
 
 - [Exploring and analyzing LC-MS data with Spectra and
   xcms](https://jorainer.github.io/xcmsTutorials/) provides an
@@ -46,10 +44,7 @@
   specifically LC-MS data ([xcms](https://github.com/sneumann/xcms))
   and walks through the preprocessing of a small data set emphasizing
   on selection of data-dependent settings for the individual
-  pre-processing steps. This workshop is an update (using new
-  packages) to [LC-MS pre-processing with
-  `xcms`](https://jorainer.github.io/metabolomics2018/xcms-preprocessing.html)
-  above.
+  pre-processing steps.
 
 ## Questions and help
 
