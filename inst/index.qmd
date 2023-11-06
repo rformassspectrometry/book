@@ -1,0 +1,95 @@
+```{r "intro"}
+#| echo: false
+intro <- tryCatch(
+    {
+        description <- packageDescription("R4MS")
+        pkg <- description$Package
+        version <- description$Version
+        authors <- eval(parse(text = description$Authors))
+        license <- description$License
+        glue::glue(
+            "**Package:** {pkg}<br/>\n", 
+            "**Authors:** {paste(format(authors, include = c('given', 'family', 'role')), collapse = ', ')}<br/>\n", 
+            "**Compiled:** {as.character(Sys.Date())}<br/>\n", 
+            "**Package version:** {version}<br/>\n", 
+            "**R version:** <b style='color:red;'>{R.version.string}</b><br/>\n", 
+            "**BioC version:** <b style='color:red;'>{BiocManager::version()}</b><br/>\n", 
+            "**License:** {license}<br/>"
+        )
+    }, 
+    error = function(e) {"Local preview"}
+)
+```
+
+`r intro`
+
+# Welcome {-}
+
+This is the landing page of the `BiocBook` entitled *...*.  
+
+This book introduces the reader to *...*.  
+
+# Docker image {-}
+
+A `Docker` image built from this repository is available here: 
+
+👉 [ghcr.io/js2264/r4ms](https://ghcr.io/js2264/r4ms) 🐳
+
+::: {.callout-tip icon='true'}
+## Get started now 🎉
+
+You can get access to all the packages used in this book in < 1 minute, 
+using this command in a terminal: 
+
+```{sh "docker", filename="bash"}
+#| eval: false
+docker run -it ghcr.io/js2264/r4ms:devel R
+```
+
+:::
+
+# RStudio Server {-}
+
+An RStudio Server instance can be initiated from the `Docker` image as follows: 
+
+```{sh "rstudio", filename="bash"}
+#| eval: false
+docker run \
+    --volume <local_folder>:<destination_folder> \
+    -e PASSWORD=OHCA \
+    -p 8787:8787 \
+    ghcr.io/js2264/r4ms:devel
+```
+
+The initiated RStudio Server instance will be available at 
+[https://localhost:8787](https://localhost:8787).
+
+<!-- 
+# System dependencies and conda 
+
+A pre-configured `micromamba` environment called `BiocBook` is available 
+once the Docker image is loaded. It provides all the softwares listed in 
+`requirements.yml`. 
+
+```{sh "micromamba", filename="bash"}
+#| eval: false
+docker run -it ghcr.io/js2264/r4ms:devel bash
+micromamba activate BiocBook
+``` 
+-->
+
+# Session info {-}
+
+::: {.callout-note collapse="true"}
+
+## Click to expand 👇
+
+```{r "session info"}
+#| cache: false
+sessioninfo::session_info(
+    installed.packages()[,"Package"], 
+    include_base = TRUE
+)
+```
+
+:::

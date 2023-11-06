@@ -1,0 +1,17 @@
+format: 
+  html:
+    grid:
+      sidebar-width: 500px
+      body-width: 800px
+    theme: 
+      - cosmo
+      - assets/book.scss
+    mainfont: "Atkinson Hyperlegible, sans-serif"
+    highlight-style: atom-one
+    code-link: true
+    editor: visual
+    bibliography: assets/bibliography.bib
+    from: markdown+emoji
+  pdf: default
+
+# coolf <- "<path-to-disk-stored-contact-matrix
