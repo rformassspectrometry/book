@@ -1,0 +1,161 @@
+# Introduction {#sec-msintro}
+
+## How does mass spectrometry work?
+
+Mass spectrometry (MS) is a technology that *separates* charged
+molecules (ions) based on their mass to charge ratio (M/Z). It is
+often coupled to chromatography (liquid LC, but can also be gas-based
+GC). The time an analyte takes to elute from the chromatography
+column is the *retention time*.
+
+```{r, results='markup', fig.cap="A chromatogram, illustrating the total amount of analytes over the retention time.", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/chromatogram.png")
+```
+
+An mass spectrometer is composed of three components:
+
+1. The *source*, that ionises the molecules: examples are Matrix-assisted
+   laser desorption/ionisation (MALDI) or electrospray ionisation.
+   (ESI)
+2. The *analyser*, that separates the ions: Time of flight (TOF) or Orbitrap.
+3. The *detector* that quantifies the ions.
+
+When using mass spectrometry for proteomics, the proteins are first
+digested with a protease such as trypsin. In mass shotgun proteomics,
+the analytes assayed in the mass spectrometer are peptides.
+
+Often, ions are subjected to more than a single MS round. After a
+first round of separation, the peaks in the spectra, called MS1
+spectra, represent peptides. At this stage, the only information we
+possess about these peptides are their retention time and their
+mass-to-charge (we can also infer their charge by inspecting their
+isotopic envelope, i.e the peaks of the individual isotopes, see
+below), which is not enough to infer their identify (i.e. their
+sequence).
+
+In MSMS (or MS2), the settings of the mass spectrometer are set
+automatically to select a certain number of MS1 peaks (for example
+20)^[Here, we will focus on data dependent acquisition (DDA), where
+MS1 peaks are selected. In data independent acquisition (DIA), all peaks
+in the MS1 spectrum are fragmented.]. Once a narrow M/Z range has been
+selected (corresponding to one high-intensity peak, a peptide, and
+some background noise), it is fragmented (using for example
+collision-induced dissociation (CID), higher energy collisional
+dissociation (HCD) or electron-transfer dissociation (ETD)). The
+fragment ions are then themselves separated in the analyser to produce
+a MS2 spectrum. The unique fragment ion pattern can then be used to
+infer the peptide sequence using de novo sequencing (when the spectrum
+is of high enough quality) or using a search engine such as, for
+example Mascot, MSGF+, ..., that will match the observed, experimental
+spectrum to theoretical spectra (see details below).
+
+```{r, results='markup', fig.cap="Schematics of a mass spectrometer and two rounds of MS.", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/SchematicMS2.png")
+```
+
+The animation below show how 25 ions different ions (i.e. having
+different M/Z values) are separated throughout the MS analysis and are
+eventually detected (i.e. quantified). The final frame shows the
+hypothetical spectrum.
+
+```{r, results='markup', fig.cap="Separation and detection of ions in a mass spectrometer.", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/mstut.gif")
+```
+
+The figures below illustrate the two rounds of MS. The spectrum on the
+left is an MS1 spectrum acquired after 21 minutes and 3 seconds of
+elution. 10 peaks, highlited by dotted vertical lines, were selected
+for MS2 analysis. The peak at M/Z 460.79 (488.8) is highlighted by a
+red (orange) vertical line on the MS1 spectrum and the fragment
+spectra are shown on the MS2 spectrum on the top (bottom) right
+figure.
+
+```{r, results='markup', fig.cap="Parent ions in the MS1 spectrum (left) and two sected fragment ions MS2 spectra (right)", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/MS1-MS2-spectra.png")
+```
+
+The figures below represent the 3 dimensions of MS data: a set of
+spectra (M/Z and intensity) of retention time, as well as the
+interleaved nature of MS1 and MS2 (and there could be more levels)
+data.
+
+```{r, results='markup', fig.cap="MS1 spectra over retention time.", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/F02-3D-MS1-scans-400-1200-lattice.png")
+```
+
+```{r, results='markup', fig.cap="MS2 spectra interleaved between two MS1 spectra.", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("./img/F02-3D-MS1-MS2-scans-100-1200-lattice.png")
+```
+
+## Accessing data
+
+### From the ProteomeXchange database
+
+MS-based proteomics data is disseminated through the
+[ProteomeXchange](http://www.proteomexchange.org/) infrastructure,
+which centrally coordinates submission, storage and dissemination
+through multiple data repositories, such as the
+[PRoteomics IDEntifications (PRIDE)](https://www.ebi.ac.uk/pride/archive/)
+database at the EBI for mass spectrometry-based experiments (including
+quantitative data, as opposed as the name suggests),
+[PASSEL](http://www.peptideatlas.org/passel/) at the ISB for Selected
+Reaction Monitoring (SRM, i.e. targeted) data and the
+[MassIVE](http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp)
+resource. These data can be downloaded within R using the
+`r Biocpkg("rpx")` package.
+
+```{r rpx}
+library(rpx)
+```
+
+Using the unique `PXD000001` identifier, we can retrieve the relevant
+metadata that will be stored in a `PXDataset` object. The names of the
+files available in this data can be retrieved with the `pxfiles`
+accessor function.
+
+```{r pxd}
+px <- PXDataset("PXD000001")
+px
+pxfiles(px)
+```
+
+Other metadata for the `px` data set:
+
+```{r pxvar}
+pxtax(px)
+pxurl(px)
+pxref(px)
+```
+
+Data files can then be downloaded with the `pxget` function. Below, we
+retrieve the raw data file. The file is
+downloaded^[If the file is already available, it is not downloaded a second time.]
+in the working directory and the name of the file is return by the
+function and stored in the `mzf` variable for later use ^[This and other files are also availabel in the `msdata` package, described below].
+
+```{r pxget}
+fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
+mzf <- pxget(px, fn)
+mzf
+```
+
+### Data packages
+
+Some data are also distributed through dedicated packages. The
+`r BiocStyle::Biocexptpkg("msdata")`, for example, provides some
+general raw data files relevant for both proteomics and
+metabolomics.
+
+```{r msdatafiles, message = FALSE}
+library(msdata)
+## proteomics raw data
+proteomics()
+## proteomics identification data
+ident()
+## quantitative data
+quant()
+```
+
+More often, such *experiment packages* distribute processed data; an
+example of such is the `r BiocStyle::Biocexptpkg("pRolocdata")`
+package, that offers quantitative proteomics data.

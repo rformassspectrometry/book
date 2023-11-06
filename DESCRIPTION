@@ -52,7 +52,7 @@ Suggests:
     knitr, 
     quarto
 Remotes:
-    github::js2264/BiocBook,
+    github::grimbough/msmbstyle,
     github::RforMassSpectrometry/SpectraVis
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
