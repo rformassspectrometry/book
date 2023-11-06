@@ -182,7 +182,7 @@ and then from the second). The `dataOrigin` function can be used to identify
 spectra from the different data files.
 
 ```{r, sciex_mzr}
-(fls <- dir(system.file("sciex", package = "msdata"), full.names = TRUE))
+fls <- dir(system.file("sciex", package = "msdata"), full.names = TRUE)
 sp_sciex <- Spectra(fls)
 table(dataOrigin(sp_sciex))
 ```
@@ -295,7 +295,6 @@ We are going to reproduce the figure above through a set of exercices.
 
 `r msmbstyle::question_end()`
 
-
 `r msmbstyle::solution_begin()`
 
 ```{r}
@@ -340,7 +339,6 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 
 `r msmbstyle::solution_end()`
 
-
 `r msmbstyle::question_begin()`
 
 4. Zoom in mz values 521.1 and 522.5 to reveal the isotopic envelope
@@ -356,7 +354,6 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 ```
 
 `r msmbstyle::solution_end()`
-
 
 `r msmbstyle::question_begin()`
 
@@ -377,7 +374,6 @@ It is possible to label the peaks with the `plotSpectra()`
 function. The `labels` argument is either a `character` of appropriate
 length (i.e. with a label for each peak) or, as illustrated below, a
 function that computes the labels.
-
 
 ```{r}
 mzLabel <- function(z) {
@@ -433,7 +429,6 @@ plotSpectraMirror(sp2i[1], sp2i[2])
 ```
 `r msmbstyle::solution_end()`
 
-
 It is also possible to explore raw data interactively with the
 [`SpectraVis`
 package](https://rformassspectrometry.github.io/SpectraVis/):
@@ -449,14 +444,12 @@ package](https://rformassspectrometry.github.io/SpectraVis/):
   [`plotly`](https://plotly.com/r/) allowing to explore (zooming,
   panning) the spectrum interactively.
 
-
 `r msmbstyle::question_begin()`
 
 Test the `SpectraVis` function on some the `Spectra` objects produce
 above.
 
 `r msmbstyle::question_end()`
-
 
 ## Raw data processing and manipulation
 
@@ -511,7 +504,6 @@ within a `Spectra`:
   peaks matching provided m/z value(s) (given parameters `ppm` and `tolerance`).
 - `reduceSpectra`: filters individual spectra keeping only the largest peak for
   groups of peaks with similar m/z values.
-
 
 `r msmbstyle::question_begin()`
 
@@ -589,7 +581,6 @@ manipulation operations are also possible for read-only backends
 (e.g. mzML-file based backends or database-based backends). The
 information about the number of such processing steps can be seen
 below (next to Lazy evaluation queue).
-
 
 ```{r}
 min(intensity(sp_sciex[1]))
