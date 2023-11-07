@@ -198,7 +198,7 @@ example backends but any object extending the base `MsBackend` class could be
 used instead. The default backends are:
 
 - `MsBackendMzR`: this backend keeps only general spectra variables in memory
-  and relies on the `r Biocpkg("mzR")` package to read mass peaks (m/z and
+  and relies on the `r BiocStyle::Biocpkg("mzR")` package to read mass peaks (m/z and
   intensity values) from the original MS files on-demand.
 
 ```{r sciex_mzr_show}

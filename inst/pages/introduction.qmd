@@ -102,7 +102,7 @@ quantitative data, as opposed as the name suggests),
 Reaction Monitoring (SRM, i.e. targeted) data and the
 [MassIVE](http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp)
 resource. These data can be downloaded within R using the
-`r Biocpkg("rpx")` package.
+`r BiocStyle::Biocpkg("rpx")` package.
 
 ```{r rpx}
 library(rpx)
