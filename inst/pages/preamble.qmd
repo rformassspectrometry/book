@@ -106,7 +106,7 @@ resource. These data can be downloaded within R using the
 `r BiocStyle::Biocpkg("rpx")` package.
 
 ```{r rpx}
-library("rpx")
+library(rpx)
 ```
 
 Using the unique `PXD000001` identifier, we can retrieve the relevant
@@ -136,8 +136,6 @@ function and stored in the `mzf` variable for later use ^[This and other files a
 
 ```{r pxget}
 fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
-fn <- "PRIDE_Exp_Complete_Ac_22134.pride.mgf.gz"
-fn <- system.file(package = 'msdata', 'proteomics', proteomics()[[4]])
 mzf <- pxget(px, fn)
 mzf
 ```
@@ -150,7 +148,7 @@ general raw data files relevant for both proteomics and
 metabolomics.
 
 ```{r msdatafiles, message = FALSE}
-library("msdata")
+library(msdata)
 ## proteomics raw data
 proteomics()
 ## proteomics identification data

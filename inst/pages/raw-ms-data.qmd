@@ -73,6 +73,7 @@ downloaded and available in the `mzf` file.
 ```{r, spectra2}
 library(rpx)
 fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
+px <- PXDataset("PXD000001")
 mzf <- pxget(px, fn)
 mzf
 sp <- Spectra(mzf)
