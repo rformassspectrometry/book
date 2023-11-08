@@ -12,6 +12,4 @@ format:
     editor: visual
     bibliography: assets/bibliography.bib
     from: markdown+emoji
-  pdf: default
-
-# coolf <- "<path-to-disk-stored-contact-matrix
+  # pdf: default
