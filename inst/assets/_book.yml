@@ -2,7 +2,6 @@ book:
   title: "R for Mass Spectrometry"
   chapters:
     - index.qmd
-    - pages/preamble.qmd
     - pages/introduction.qmd
     - pages/raw-ms-data.qmd
   cover-image: assets/cover.png

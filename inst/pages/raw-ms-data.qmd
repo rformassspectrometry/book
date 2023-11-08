@@ -294,7 +294,7 @@ We are going to reproduce the figure above through a set of exercices.
 
 ::: {.callout-answer .icon .callout-note collapse=true}
 
-```{bash, filename = 'R'}
+```{r}
 
 with(spectraData(filterMsLevel(sp, 1)),
      plot(rtime, totIonCurrent, type = "l"))
@@ -311,7 +311,7 @@ abline(v = rtime(sp)[2807], col = "red")
 
 ::: {.callout-answer .icon .callout-note collapse=true}
 
-```{bash, filename = 'R'}
+```{r}
 
 ms_2 <- filterPrecursorScan(sp, 2807)
 ms_2
@@ -325,7 +325,7 @@ ms_2
 
 ::: {.callout-answer .icon .callout-note collapse=true}
 
-```{bash, filename = 'R'}
+```{r}
 
 plotSpectra(sp[2807], xlim = c(400, 1000))
 abline(v = precursorMz(ms_2)[-1], col = "grey")
@@ -340,7 +340,7 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 
 ::: {.callout-answer .icon .callout-note collapse=true}
 
-```{bash, filename = 'R'}
+```{r}
 
 plotSpectra(sp[2807], xlim = c(521.2, 522.5), type = "l")
 abline(v = precursorMz(ms_2)[2], col = "red")
@@ -354,7 +354,7 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 
 ::: {.callout-answer .icon .callout-note collapse=true}
 
-```{bash, filename = 'R'}
+```{r}
 
 plotSpectra(ms_2[-1])
 
@@ -384,3 +384,205 @@ plotSpectra(ms_2[7],
 
 Spectra can also be compared either by overlay or mirror plotting
 using the `plotSpectraOverlay()` and `plotSpectraMirror()` functions.
+
+- Filter MS2 level spectra and find any 2 MS2 spectra that have matching
+precursor peaks based on the precursor m/z values.
+
+::: {.callout-answer .icon .callout-note collapse=true}
+
+```{r}
+
+sp2 <- filterMsLevel(sp, 2L)
+anyDuplicated(precursorMz(filterMsLevel(sp, 2)))
+i <- which(precursorMz(sp2) == precursorMz(sp2)[37])
+sp2i <- sp2[i]
+
+```
+
+:::
+
+- Visualise the matching pair using the `plotSpectraOverlay()` and
+`plotSpectraMirror()` functions.
+
+::: {.callout-answer .icon .callout-note collapse=true}
+
+```{r}
+
+plotSpectraOverlay(sp2i, col = c("red", "steelblue"))
+
+```
+
+```{r}
+plotSpectraMirror(sp2i[1], sp2i[2])
+```
+
+:::
+
+It is also possible to explore raw data interactively with the
+[`SpectraVis`
+package](https://rformassspectrometry.github.io/SpectraVis/):
+
+- The
+  [`browseSpectra()`](https://rformassspectrometry.github.io/SpectraVis/reference/browseSpectra.html)
+  function opens a simple shiny application that allows to browse
+  through the individual scans of a Spectra object.
+
+- The
+  [`plotlySpectra()`](https://rformassspectrometry.github.io/SpectraVis/reference/plotlySpectra.html)
+  function displays a single spectrum using
+  [`plotly`](https://plotly.com/r/) allowing to explore (zooming,
+  panning) the spectrum interactively.
+
+- Test the `SpectraVis` function on some the `Spectra` objects produce
+above.
+
+## Raw data processing and manipulation
+
+Apart from *classical* subsetting operations such as `[` and `split`, a set of
+filter functions are defined for `Spectra` objects that filter/reduce the number
+of spectra within the object (for detailed help please see the `?Spectra` help):
+
+- `filterAcquisitionNum`: retains spectra with certain acquisition numbers.
+- `filterDataOrigin`: subsets to spectra from specific origins.
+- `filterDataStorage`: subsets to spectra from certain data storage files.
+- `filterEmptySpectra`: removes spectra without mass peaks.
+- `filterMzRange`: subsets spectra keeping only peaks with an m/z within the
+  provided m/z range.
+- `filterIsolationWindow`: keeps spectra with the provided `mz` in their
+  isolation window (m/z range).
+- `filterMsLevel`: filters by MS level.
+- `filterPolarity`: filters by polarity.
+- `filterPrecursorIsotopes`: identifies precursor ions (from fragment spectra)
+  that could represent isotopes of the same molecule. For each of these spectra
+  groups only the spectrum of the monoisotopic precursor ion is returned. MS1
+  spectra are returned without filtering.
+- `filterPrecursorMaxIntensity`: filters spectra keeping, for groups of spectra
+  with similar precursor m/z, the one spectrum with the highest precursor
+  intensity. All MS1 spectra are returned without filtering.
+- `filterPrecursorMzRange`: retains (MSn) spectra with a precursor m/z within
+  the provided m/z range.
+- `filterPrecursorMzValues`: retains (MSn) spectra with precursor m/z value
+  matching the provided value(s) considering also a `tolerance` and `ppm`.
+- `filterPrecursorCharge`: retains (MSn) spectra with speified
+  precursor charge(s).
+- `filterPrecursorScan`: retains (parent and children) scans of an acquisition
+  number.
+- `filterRt`: filters based on retention time range.
+
+In addition to these, there is also a set of filter functions that operate on
+the peak data, filtering and modifying the number of peaks of each spectrum
+within a `Spectra`:
+
+- `combinePeaks`: groups peaks within each spectrum based on similarity of their
+  m/z values and combines these into a single peak per peak group.
+- `deisotopeSpectra`: deisotopes each individual spectrum keeping only the
+  monoisotopic peak for peaks groups of potential isotopologues.
+- `filterIntensity`: filter each spectrum keeping only peaks with intensities
+  meeting certain criteria.
+- `filterMzRange`: subsets peaks data within each spectrum keeping only peaks
+  with their m/z values within the specified m/z range.
+- `filterPrecursorPeaks`: removes peaks with either an m/z value matching the
+  precursor m/z of the respective spectrum (with parameter `mz = "=="`) or peaks
+  with an m/z value larger or equal to the precursor m/z (with parameter
+  `mz = ">="`).
+- `filterMzValues`: subsets peaks within each spectrum keeping or removing (all)
+  peaks matching provided m/z value(s) (given parameters `ppm` and `tolerance`).
+- `reduceSpectra`: filters individual spectra keeping only the largest peak for
+  groups of peaks with similar m/z values.
+
+- Using the `sp_sciex` data, select all spectra measured in the second
+mzML file and subsequently filter them to retain spectra measured
+between 175 and 189 seconds in the measurement run.
+
+::: {.callout-answer .icon .callout-note collapse=true}
+
+```{r}
+fls <- unique(dataOrigin(sp_sciex))
+fls
+file_2 <- filterDataOrigin(sp_sciex, dataOrigin = fls[2])
+length(file_2)
+sps_sub <- filterRt(file_2, rt = c(175, 189))
+length(sps_sub)
+```
+
+```{r filterfile-filterrt2}
+sp_sciex |>
+    filterDataOrigin(fls[2]) |>
+    filterRt(c(175, 189))
+```
+
+:::
+
+As an example of data processing, we use below the `pickPeaks()`
+function. This function allows to convert *profile mode* MS data to *centroid
+mode* data (a process also referred to as *centroiding*).
+
+```{r}
+plotSpectra(sp[2807], xlim = c(521.2, 522.5))
+```
+
+Centroiding reduces the profile mode MS data to a *representative* single mass
+peak per ion.
+
+```{r}
+pickPeaks(sp[2807]) |>
+    filterIntensity(1e7) |>
+    plotSpectra(xlim = c(521.2, 522.5))
+```
+
+## A note on efficiency
+
+### Backends
+
+The figure below (taken from [@Gatto:2020]) illustrates the respective
+advantages of storing data in memory or on disk. The benchmarking was
+done for the `MSnbase` package but also applies to the `Spectra` backends.
+
+```{r, results='markup', fig.cap="(a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package.", echo=FALSE, purl=FALSE, out.width='70%', fig.align='center'}
+knitr::include_graphics("./img/pr0c00313_0002.gif")
+```
+
+### Parallel processing
+
+Most functions on `Spectra` support (and use) parallel processing out
+of the box. Peak data access and manipulation methods perform by
+default parallel processing on a per-file basis (i.e. using the
+dataStorage variable as splitting factor). Spectra uses
+[`BiocParallel`](https://bioconductor.org/packages/BiocParallel) for
+parallel processing and all functions use the default registered
+parallel processing setup of that package.
+
+### Lazy evaluation
+
+Data manipulations on Spectra objects are not immediately applied to
+the peak data. They are added to a so called processing queue which is
+applied each time peak data is accessed (with the `peaksData`, `mz` or
+`intensity` functions). Thanks to this processing queue data
+manipulation operations are also possible for read-only backends
+(e.g. mzML-file based backends or database-based backends). The
+information about the number of such processing steps can be seen
+below (next to Lazy evaluation queue).
+
+```{r}
+min(intensity(sp_sciex[1]))
+sp_sciex <- filterIntensity(sp_sciex, intensity = c(10, Inf))
+sp_sciex ## Note the lazy evaluation queue
+min(intensity(sp_sciex[1]))
+sp_sciex@processingQueue
+```
+
+Through this lazy evaluation system it is also possible to *undo* data
+manipulations:
+
+```{r}
+sp_sciex <- reset(sp_sciex)
+sp_sciex@processingQueue
+min(intensity(sp_sciex[1]))
+```
+
+More information on this lazy evaluation concept implemented in `Spectra` is
+provided in the [Spectra
+backends](https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html)
+vignette.
+
+# References {-}

@@ -23,7 +23,7 @@ intro <- tryCatch(
 
 `r intro`
 
-# Introduction
+# Welcome {-}
 
 ```{r, echo = FALSE}
 options(bitmapType="cairo")
@@ -188,3 +188,5 @@ sessioninfo::session_info(
 ```
 
 :::
+
+# References {-}
