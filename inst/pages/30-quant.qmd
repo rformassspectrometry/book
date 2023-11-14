@@ -88,7 +88,7 @@ has been addressed in the frame of metabolomics data processing by the
 <!-- * Label-free: `r BiocStyle::Biocpkg("xcms")` (metabolomics). -->
 <!-- * Counting: `r BiocStyle::Biocpkg("MSnbase")` and `r BiocStyle::Biocpkg("MSnID")` for -->
 <!--   peptide-spectrum matching confidence assessment. -->
-<!-- * `r Githubpkg("vladpetyuk/N14N15")` for heavy Nitrogen-labelled data. -->
+<!-- * `r BiocStyle::Githubpkg("vladpetyuk/N14N15")` for heavy Nitrogen-labelled data. -->
 
 ## QFeatures {#sec-qf}
 
