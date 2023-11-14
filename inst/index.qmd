@@ -71,7 +71,7 @@ data classes and the tidyverse syntax is useful, but not necessary.
 
 ```{r bib, include=FALSE}
 # create a bib file for the R packages used in this document
-knitr::write_bib(c('base', 'rmarkdown', 'bookdown', 'msmbstyle'), file = 'skeleton.bib')
+knitr::write_bib(c('base', 'rmarkdown', 'bookdown'), file = 'skeleton.bib')
 ```
 
 ```{r env_0, echo = FALSE, message = FALSE, warning = FALSE}
@@ -109,7 +109,6 @@ BiocManager::install("PSMatch")
 BiocManager::install("pheatmap")
 BiocManager::install("limma")
 BiocManager::install("MSnID")
-BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
 
 Follow the instructions in [this

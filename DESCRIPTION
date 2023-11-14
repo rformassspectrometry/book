@@ -40,9 +40,7 @@ Imports:
     limma, 
     gplots,
     patchwork,  
-    MSnID, 
-    SpectraVis, 
-    msmbstyle
+    MSnID
 Suggests:
     BiocManager, 
     BiocVersion, 
@@ -53,9 +51,6 @@ Suggests:
     sessioninfo, 
     knitr, 
     quarto
-Remotes:
-    github::grimbough/msmbstyle,
-    github::RforMassSpectrometry/SpectraVis
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
