@@ -6,6 +6,8 @@ book:
     - pages/raw-ms-data.qmd
     - pages/20-id.qmd
     - pages/30-quant.qmd
+    - pages/95-annex.qmd
+    - pages/99-si.qmd
   cover-image: assets/cover.png
   favicon: assets/favicon.png
   sidebar: 
