@@ -54,9 +54,5 @@ Suggests:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-biocViews: 
-	Infrastructure, 
-    ReportWriting, 
-    Software
-License: MIT + file LICENSE
+BiocType: Book
 VignetteBuilder: knitr
