@@ -17,7 +17,7 @@ book:
           - text: Source Code
             url:  https://github.com/js2264/R4MS/
           - text: Browse version `devel`
-            url:  https://js2264.github.io/R4MS/devel/
+            url:  https://js2264.github.io/R4MS/docs/devel/
     style: "docked"
     background: "light"
     collapse-level: 5
