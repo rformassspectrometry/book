@@ -38,6 +38,8 @@ Imports:
     PSMatch, 
     pheatmap, 
     limma, 
+    gplots,
+    patchwork,  
     MSnID, 
     SpectraVis, 
     msmbstyle

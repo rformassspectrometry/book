@@ -57,7 +57,7 @@ sp0
 
 #### Exercise {-}
 
-Explore the newly created object using
+Explore the newly created object using:
 
 - `spectraVariables` to extract all the metadata variables. Compare these to the
   spectra variables available from the previous example.
@@ -295,11 +295,9 @@ We are going to reproduce the figure above through a set of exercices.
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 with(spectraData(filterMsLevel(sp, 1)),
      plot(rtime, totIonCurrent, type = "l"))
 abline(v = rtime(sp)[2807], col = "red")
-
 ```
 
 :::
@@ -312,10 +310,8 @@ abline(v = rtime(sp)[2807], col = "red")
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 ms_2 <- filterPrecursorScan(sp, 2807)
 ms_2
-
 ```
 
 :::
@@ -326,11 +322,9 @@ ms_2
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 plotSpectra(sp[2807], xlim = c(400, 1000))
 abline(v = precursorMz(ms_2)[-1], col = "grey")
 abline(v = precursorMz(ms_2)[2], col = "red")
-
 ```
 
 :::
@@ -341,10 +335,8 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 plotSpectra(sp[2807], xlim = c(521.2, 522.5), type = "l")
 abline(v = precursorMz(ms_2)[2], col = "red")
-
 ```
 
 :::
@@ -355,9 +347,7 @@ abline(v = precursorMz(ms_2)[2], col = "red")
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 plotSpectra(ms_2[-1])
-
 ```
 
 :::
@@ -391,12 +381,10 @@ precursor peaks based on the precursor m/z values.
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 sp2 <- filterMsLevel(sp, 2L)
 anyDuplicated(precursorMz(filterMsLevel(sp, 2)))
 i <- which(precursorMz(sp2) == precursorMz(sp2)[37])
 sp2i <- sp2[i]
-
 ```
 
 :::
@@ -407,9 +395,7 @@ sp2i <- sp2[i]
 ::: {.callout-answer .icon .callout-note collapse=true}
 
 ```{r}
-
 plotSpectraOverlay(sp2i, col = c("red", "steelblue"))
-
 ```
 
 ```{r}
