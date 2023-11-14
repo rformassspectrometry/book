@@ -51,3 +51,5 @@
 For questions about specific software or their usage, please refer to
 the software's github issue page, or use the [Bioconductor support
 site](http://support.bioconductor.org/).
+
+# References {-}

@@ -1144,3 +1144,5 @@ knitr::include_graphics("./img/vp2.png")
 
 Repeat and adapt what we have seen here using, for example, the
 `robustSummary()` function.
+
+# References {-}
