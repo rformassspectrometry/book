@@ -11,3 +11,18 @@ Original authors of the *R for mass spectrometry* book are:
 - Laurent Gatto
 - Sebastian Gibb
 - Johannes Rainer
+
+Go to http://rformassspectrometry.github.io/book to browse the
+material online.
+
+
+## Contribution
+
+For contributions, see the [RforMassSpectrometry contributions
+guideline](https://rformassspectrometry.github.io/RforMassSpectrometry/articles/RforMassSpectrometry.html#contributions).
+
+
+## Code of Conduct
+
+See the [RforMassSpectrometry Code of
+Conduct](https://rformassspectrometry.github.io/RforMassSpectrometry/articles/RforMassSpectrometry.html#code-of-conduct).
