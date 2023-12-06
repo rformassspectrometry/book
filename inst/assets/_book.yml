@@ -1,4 +1,5 @@
 book:
+  license: "CC BY-NC-SA"
   title: "R for Mass Spectrometry"
   chapters:
     - index.qmd

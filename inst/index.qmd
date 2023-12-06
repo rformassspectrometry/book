@@ -1,3 +1,7 @@
+---
+license: "CC BY-NC-SA"
+---
+
 ```{r "intro"}
 #| echo: false
 intro <- tryCatch(
@@ -14,7 +18,8 @@ intro <- tryCatch(
             "**Package version:** {version}<br/>\n", 
             "**R version:** <b style='color:red;'>{R.version.string}</b><br/>\n", 
             "**BioC version:** <b style='color:red;'>{BiocManager::version()}</b><br/>\n", 
-            "**License:** {license}<br/>"
+            "**Package license:** {license}<br/>\n",
+            "**Book license:** CC BY-NC-SA<br/>"
         )
     }, 
     error = function(e) {"Local preview"}
@@ -68,11 +73,6 @@ A working knowledge of R (R syntax, commonly used functions, basic
 data structures such as data frames, vectors, matrices, ... and their
 manipulation) is required. Familiarity with other Bioconductor omics
 data classes and the tidyverse syntax is useful, but not necessary.
-
-```{r bib, include=FALSE}
-# create a bib file for the R packages used in this document
-knitr::write_bib(c('base', 'rmarkdown', 'bookdown'), file = 'skeleton.bib')
-```
 
 ```{r env_0, echo = FALSE, message = FALSE, warning = FALSE}
 suppressPackageStartupMessages(library("BiocStyle"))
