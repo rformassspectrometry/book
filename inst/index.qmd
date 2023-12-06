@@ -1,5 +1,5 @@
 ---
-license: "CC BY-NC-SA"
+license: "CC BY-SA"
 ---
 
 ```{r "intro"}
