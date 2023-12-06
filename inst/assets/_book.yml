@@ -1,0 +1,24 @@
+book:
+  license: "CC BY-NC-SA"
+  title: "R for Mass Spectrometry"
+  chapters:
+    - index.qmd
+    - pages/introduction.qmd
+    - pages/raw-ms-data.qmd
+    - pages/20-id.qmd
+    - pages/30-quant.qmd
+    - pages/95-annex.qmd
+    - pages/99-si.qmd
+  cover-image: assets/cover.png
+  favicon: assets/favicon.png
+  sidebar: 
+    tools:
+      - icon: git
+        menu:
+          - text: Source Code
+            url:  https://github.com/js2264/R4MS/
+          - text: Browse version `devel`
+            url:  https://js2264.github.io/R4MS/docs/devel/
+    style: "docked"
+    background: "light"
+    collapse-level: 5

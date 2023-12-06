@@ -1,0 +1,191 @@
+---
+license: "CC BY-SA"
+---
+
+```{r "intro"}
+#| echo: false
+intro <- tryCatch(
+    {
+        description <- packageDescription("R4MS")
+        pkg <- description$Package
+        version <- description$Version
+        authors <- eval(parse(text = description$Authors))
+        license <- description$License
+        glue::glue(
+            "**Package:** {pkg}<br/>\n", 
+            "**Authors:** {paste(format(authors, include = c('given', 'family', 'role')), collapse = ', ')}<br/>\n", 
+            "**Compiled:** {as.character(Sys.Date())}<br/>\n", 
+            "**Package version:** {version}<br/>\n", 
+            "**R version:** <b style='color:red;'>{R.version.string}</b><br/>\n", 
+            "**BioC version:** <b style='color:red;'>{BiocManager::version()}</b><br/>\n", 
+            "**Package license:** {license}<br/>\n",
+            "**Book license:** CC BY-NC-SA<br/>"
+        )
+    }, 
+    error = function(e) {"Local preview"}
+)
+```
+
+`r intro`
+
+# Welcome {-}
+
+```{r, echo = FALSE}
+options(bitmapType="cairo")
+```
+
+The aim of the [R for Mass
+Spectrometry](https://www.rformassspectrometry.org/) initiative is to
+provide efficient, thoroughly documented, tested and flexible R
+software for the analysis and interpretation of high throughput mass
+spectrometry assays, including proteomics and metabolomics
+experiments. The project formalises the longtime collaborative
+development efforts of its core members under the RforMassSpectrometry
+organisation to facilitate dissemination and accessibility of their
+work.
+
+This material introduces participants to the analysis and exploration
+of mass spectrometry (MS) based proteomics data using R and
+Bioconductor. The course will cover all levels of MS data, from raw
+data to identification and quantitation data, up to the statistical
+interpretation of a typical shotgun MS experiment and will focus on
+hands-on tutorials. At the end of this course, the participants will
+be able to manipulate MS data in R and use existing packages for their
+exploratory and statistical proteomics data analysis.
+
+## Targeted audience and assumed background  {-}
+
+The course material is targeted to either proteomics practitioners or
+data analysts/bioinformaticians that would like to learn how to use R
+and Bioconductor to analyse proteomics data. Familiarity with MS or
+proteomics in general is desirable, but not essential as we will walk
+through and describe a typical MS data as part of learning about the
+tools. For approachable introductions to sample preparation, mass
+spectrometry, data interpretation and analysis, readers are redirected
+to:
+
+- *A beginner's guide to mass spectrometry–based proteomics* [@Sinha:2020]
+- *The ABC's (and XYZ's) of peptide sequencing* [@Steen:2004]
+- *How do shotgun proteomics algorithms identify proteins?* [@Marcotte:2007]
+- *An Introduction to Mass Spectrometry-Based Proteomics* [@Shuken:2023]
+
+A working knowledge of R (R syntax, commonly used functions, basic
+data structures such as data frames, vectors, matrices, ... and their
+manipulation) is required. Familiarity with other Bioconductor omics
+data classes and the tidyverse syntax is useful, but not necessary.
+
+```{r env_0, echo = FALSE, message = FALSE, warning = FALSE}
+suppressPackageStartupMessages(library("BiocStyle"))
+suppressPackageStartupMessages(library("mzR"))
+suppressPackageStartupMessages(library("Spectra"))
+suppressPackageStartupMessages(library("QFeatures"))
+suppressPackageStartupMessages(library("MsCoreUtils"))
+```
+
+## Setup {-}
+
+This material uses the latest version of the R for Mass Spectrometry
+package and their dependencies. It might thus be possible that even
+the latest Bioconductor stable version isn't recent enough.
+
+To install all the necessary package, please use the latest release of
+R and execute:
+
+```{r setup, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("tidyverse")
+BiocManager::install("factoextra")
+BiocManager::install("msdata")
+BiocManager::install("mzR")
+BiocManager::install("rhdf5")
+BiocManager::install("rpx")
+BiocManager::install("MsCoreUtils")
+BiocManager::install("QFeatures")
+BiocManager::install("Spectra")
+BiocManager::install("ProtGenerics")
+BiocManager::install("PSMatch")
+BiocManager::install("pheatmap")
+BiocManager::install("limma")
+BiocManager::install("MSnID")
+```
+
+Follow the instructions in [this
+script](https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e)
+to install the packages and download some of the data used in the
+following chapters. All software versions used to generate this
+document are recoded at the end of the book in \@ref(sec-si).
+
+## Acknowledgments {-}
+
+Thank you to [Charlotte Soneson](https://github.com/csoneson) for
+fixing many typos in a previous version of this book.
+
+## License {-}
+
+<a rel="license"
+href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+alt="Creative Commons Licence" style="border-width:0"
+src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br
+/>This material is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+Attribution-ShareAlike 4.0 International License</a>. You are free to
+**share** (copy and redistribute the material in any medium or format)
+and **adapt** (remix, transform, and build upon the material) for any
+purpose, even commercially, as long as you give appropriate credit and
+distribute your contributions under the same license as the original.
+
+
+# Docker image {-}
+
+A `Docker` image built from this repository is available here: 
+
+👉 [ghcr.io/js2264/r4ms](https://ghcr.io/js2264/r4ms) 🐳
+
+::: {.callout-tip icon='true'}
+## Get started now 🎉
+
+You can get access to all the packages used in this book in < 1 minute, 
+using this command in a terminal: 
+
+```{sh "docker", filename="bash"}
+#| eval: false
+docker run -it ghcr.io/js2264/r4ms:devel R
+```
+
+:::
+
+# RStudio Server {-}
+
+An RStudio Server instance can be initiated from the `Docker` image as follows: 
+
+```{sh "rstudio", filename="bash"}
+#| eval: false
+docker run \
+    --volume <local_folder>:<destination_folder> \
+    -e PASSWORD=OHCA \
+    -p 8787:8787 \
+    ghcr.io/js2264/r4ms:devel
+```
+
+The initiated RStudio Server instance will be available at 
+[https://localhost:8787](https://localhost:8787).
+
+# Session info {-}
+
+::: {.callout-note collapse="true"}
+
+## Click to expand 👇
+
+```{r "session info"}
+#| cache: false
+sessioninfo::session_info(
+    installed.packages()[,"Package"], 
+    include_base = TRUE
+)
+```
+
+:::
+
+# References {-}
