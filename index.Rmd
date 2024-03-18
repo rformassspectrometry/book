@@ -132,7 +132,7 @@ by executing the line below to install all requirements to compile the
 book:
 
 ```{r source, eval = FALSE}
-source("https://raw.githubusercontent.com/rformassspectrometry/docs/main/install_docs_deps.R")
+source("https://raw.githubusercontent.com/rformassspectrometry/book/main/install_docs_deps.R")
 ```
 
 ## Acknowledgments {-}
