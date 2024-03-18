@@ -1125,7 +1125,7 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzML
 ##  [remote] QEP2LC6_HeLa_50ng_251120_03.raw
-##  [remote] QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
+##  [local]  QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
 ##  ...</code></pre>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sec-id.html#cb207-1" tabindex="-1"></a>(mzids <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzID"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
 <pre><code>## Project PXD022816 files (32):
@@ -1138,7 +1138,7 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzML
 ##  [remote] QEP2LC6_HeLa_50ng_251120_03.raw
-##  [remote] QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
+##  [local]  QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
 ##  ...</code></pre>
 <pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument match
 ## of 'length' to 'length.out'</code></pre>
@@ -1163,7 +1163,7 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz
 ##  [local]  QEP2LC6_HeLa_50ng_251120_03-calib.mzML
 ##  [remote] QEP2LC6_HeLa_50ng_251120_03.raw
-##  [remote] QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
+##  [local]  QEP2LC6_HeLa_50ng_251120_04-calib.mzID.gz
 ##  ...</code></pre>
 <pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument match
 ## of 'length' to 'length.out'</code></pre>
@@ -1388,7 +1388,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Mar 18 09:11:06 2024]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Mon Mar 18 14:05:02 2024]</code></pre>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sec-id.html#cb257-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb257-2"><a href="sec-id.html#cb257-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb257-3"><a href="sec-id.html#cb257-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
