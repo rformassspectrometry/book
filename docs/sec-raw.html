@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2023-09-06" />
+<meta name="date" content="2024-03-18" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -64,7 +64,7 @@ function reset_tooltip(id) {
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -133,6 +133,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -222,7 +223,7 @@ Figure 3.1: Schematic representation of what is referred to by <em>raw data</em>
 <p>We are going to use the
 <a href="https://rformassspectrometry.github.io/Spectra/"><code>Spectra</code></a> package
 as an abstraction to raw mass spectrometry data.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sec-raw.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(Spectra)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-raw.html#cb30-1" tabindex="-1"></a><span class="fu">library</span>(Spectra)</span></code></pre></div>
 <p><code>Spectra</code> is part of the <a href="https://www.rformassspectrometry.org/">R for Mass Spectrometry
 initiative</a>. It
 defines the <code>Spectra</code> class that is used as a raw data abstraction, to
@@ -230,18 +231,18 @@ manipulate MS data and metadata. The best way to learn about a data
 structure is to create one by hand.</p>
 <p>Let’s create a <code>DataFrame</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> containing MS levels, retention time, m/z and intensities
 for 2 spectra:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-raw.html#cb30-1" tabindex="-1"></a>spd <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">msLevel =</span> <span class="fu">c</span>(1L, 2L), <span class="at">rtime =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>))</span>
-<span id="cb30-2"><a href="sec-raw.html#cb30-2" tabindex="-1"></a>spd<span class="sc">$</span>mz <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="fl">103.2</span>, <span class="fl">104.3</span>, <span class="fl">106.5</span>), <span class="fu">c</span>(<span class="fl">45.6</span>, <span class="fl">120.4</span>, <span class="fl">190.2</span>))</span>
-<span id="cb30-3"><a href="sec-raw.html#cb30-3" tabindex="-1"></a>spd<span class="sc">$</span>intensity <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">400</span>, <span class="fl">34.2</span>, <span class="dv">17</span>), <span class="fu">c</span>(<span class="fl">12.3</span>, <span class="fl">15.2</span>, <span class="fl">6.8</span>))</span>
-<span id="cb30-4"><a href="sec-raw.html#cb30-4" tabindex="-1"></a>spd</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-raw.html#cb31-1" tabindex="-1"></a>spd <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">msLevel =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="dt">L</span>, <span class="dv">2</span><span class="dt">L</span>), <span class="at">rtime =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.2</span>))</span>
+<span id="cb31-2"><a href="sec-raw.html#cb31-2" tabindex="-1"></a>spd<span class="sc">$</span>mz <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="fl">103.2</span>, <span class="fl">104.3</span>, <span class="fl">106.5</span>), <span class="fu">c</span>(<span class="fl">45.6</span>, <span class="fl">120.4</span>, <span class="fl">190.2</span>))</span>
+<span id="cb31-3"><a href="sec-raw.html#cb31-3" tabindex="-1"></a>spd<span class="sc">$</span>intensity <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">400</span>, <span class="fl">34.2</span>, <span class="dv">17</span>), <span class="fu">c</span>(<span class="fl">12.3</span>, <span class="fl">15.2</span>, <span class="fl">6.8</span>))</span>
+<span id="cb31-4"><a href="sec-raw.html#cb31-4" tabindex="-1"></a>spd</span></code></pre></div>
 <pre><code>## DataFrame with 2 rows and 4 columns
 ##     msLevel     rtime                    mz             intensity
 ##   &lt;integer&gt; &lt;numeric&gt;                &lt;list&gt;                &lt;list&gt;
 ## 1         1       1.1 100.0,103.2,104.3,... 200.0,400.0, 34.2,...
 ## 2         2       1.2      45.6,120.4,190.2        12.3,15.2, 6.8</code></pre>
 <p>And now convert this <code>DataFrame</code> into a <code>Spectra</code> object:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-raw.html#cb32-1" tabindex="-1"></a>sp0 <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(spd)</span>
-<span id="cb32-2"><a href="sec-raw.html#cb32-2" tabindex="-1"></a>sp0</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-raw.html#cb33-1" tabindex="-1"></a>sp0 <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(spd)</span>
+<span id="cb33-2"><a href="sec-raw.html#cb33-2" tabindex="-1"></a>sp0</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 2 spectra in a MsBackendMemory backend:
 ##     msLevel     rtime scanIndex
 ##   &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -270,10 +271,12 @@ spectra variables available from the previous example.</li>
 </h3>
 <p>Let’s now create a new object using the mzML data previously
 downloaded and available in the <code>mzf</code> file.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-raw.html#cb34-1" tabindex="-1"></a>mzf</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/8ee512042c5ff_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-raw.html#cb36-1" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzf)</span>
-<span id="cb36-2"><a href="sec-raw.html#cb36-2" tabindex="-1"></a>sp</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-raw.html#cb35-1" tabindex="-1"></a>mzf</span></code></pre></div>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/678521a4fbe2_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-raw.html#cb37-1" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzf)</span></code></pre></div>
+<pre><code>## Warning in seq.default(along = l): partial argument match of 'along' to
+## 'along.with'</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sec-raw.html#cb39-1" tabindex="-1"></a>sp</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 7534 spectra in a MsBackendMzR backend:
 ##        msLevel     rtime scanIndex
 ##      &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -291,7 +294,7 @@ downloaded and available in the <code>mzf</code> file.</p>
 ##  ... 33 more variables/columns.
 ## 
 ## file(s):
-## 8ee512042c5ff_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+## 678521a4fbe2_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
 <div id="exercise-1" class="section level4 unnumbered">
 <h4>Exercise</h4>
 <ul>
@@ -376,8 +379,8 @@ variable representing the retention times in minutes to the object. This
 information can then be extracted again using the <code>$</code> notation (similar to
 accessing a column in a <code>data.frame</code>, i.e., <code>$</code> and the name of the spectra
 variable).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-raw.html#cb38-1" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="ot">&lt;-</span> <span class="fu">rtime</span>(sp) <span class="sc">/</span> <span class="dv">60</span></span>
-<span id="cb38-2"><a href="sec-raw.html#cb38-2" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-raw.html#cb41-1" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="ot">&lt;-</span> <span class="fu">rtime</span>(sp) <span class="sc">/</span> <span class="dv">60</span></span>
+<span id="cb41-2"><a href="sec-raw.html#cb41-2" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## [1] 0.00764000 0.01620833 0.03087333 0.04570667 0.06020667 0.07487500</code></pre>
 </div>
 <div id="exercise-2" class="section level4 unnumbered">
@@ -412,11 +415,13 @@ samples. Below we load data from two mzML files. The MS data from both files in
 the <code>Spectra</code> is organized linearly (first all spectra from the first file
 and then from the second). The <code>dataOrigin</code> function can be used to identify
 spectra from the different data files.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sec-raw.html#cb40-1" tabindex="-1"></a>(fls <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="fu">system.file</span>(<span class="st">"sciex"</span>, <span class="at">package =</span> <span class="st">"msdata"</span>), <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sec-raw.html#cb43-1" tabindex="-1"></a>(fls <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="fu">system.file</span>(<span class="st">"sciex"</span>, <span class="at">package =</span> <span class="st">"msdata"</span>), <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
 ## [2] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sec-raw.html#cb42-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(fls)</span>
-<span id="cb42-2"><a href="sec-raw.html#cb42-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sec-raw.html#cb45-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(fls)</span></code></pre></div>
+<pre><code>## Warning in seq.default(along = l): partial argument match of 'along' to
+## 'along.with'</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sec-raw.html#cb47-1" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
 ##                                                                                               931 
@@ -437,10 +442,10 @@ used instead. The default backends are:</p>
 <ul>
 <li>
 <code>MsBackendMzR</code>: this backend keeps only general spectra variables in memory
-and relies on the <em><a href="https://bioconductor.org/packages/3.17/mzR">mzR</a></em> package to read mass peaks (m/z and
+and relies on the <em><a href="https://bioconductor.org/packages/3.18/mzR">mzR</a></em> package to read mass peaks (m/z and
 intensity values) from the original MS files on-demand.</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sec-raw.html#cb44-1" tabindex="-1"></a>sp_sciex</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-raw.html#cb49-1" tabindex="-1"></a>sp_sciex</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
 ##        msLevel     rtime scanIndex
 ##      &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -467,7 +472,9 @@ stored (in-memory) within the object. Keeping the data in memory guarantees
 high performance but has also, depending on the number of mass peaks in each
 spectrum, a much higher memory footprint.</li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sec-raw.html#cb46-1" tabindex="-1"></a><span class="fu">setBackend</span>(sp_sciex, <span class="fu">MsBackendMemory</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-raw.html#cb51-1" tabindex="-1"></a><span class="fu">setBackend</span>(sp_sciex, <span class="fu">MsBackendMemory</span>())</span></code></pre></div>
+<pre><code>## Warning in seq.default(along = l): partial argument match of 'along' to
+## 'along.with'</code></pre>
 <pre><code>## MSn data (Spectra) with 1862 spectra in a MsBackendMemory backend:
 ##        msLevel     rtime scanIndex
 ##      &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -484,7 +491,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Wed Sep  6 11:50:11 2023]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Mon Mar 18 09:10:18 2024]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -494,8 +501,8 @@ memory. The peak data are stored in Hdf5 files which guarantees scalability.</li
 <p>With the example below we load the data from a single mzML file and use a
 <code>MsBackendHdf5Peaks</code> backend for data storage. The <code>hdf5path</code> parameter allows
 us to specify the storage location of the HDF5 file.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-raw.html#cb48-1" tabindex="-1"></a>sp_hdf5 <span class="ot">&lt;-</span> <span class="fu">setBackend</span>(sp_sciex, <span class="fu">MsBackendHdf5Peaks</span>(), <span class="at">hdf5path =</span> <span class="fu">tempdir</span>())</span>
-<span id="cb48-2"><a href="sec-raw.html#cb48-2" tabindex="-1"></a>sp_hdf5</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sec-raw.html#cb54-1" tabindex="-1"></a>sp_hdf5 <span class="ot">&lt;-</span> <span class="fu">setBackend</span>(sp_sciex, <span class="fu">MsBackendHdf5Peaks</span>(), <span class="at">hdf5path =</span> <span class="fu">tempdir</span>())</span>
+<span id="cb54-2"><a href="sec-raw.html#cb54-2" tabindex="-1"></a>sp_hdf5</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 1862 spectra in a MsBackendHdf5Peaks backend:
 ##        msLevel     rtime scanIndex
 ##      &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -516,18 +523,18 @@ us to specify the storage location of the HDF5 file.</p>
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Sep  6 11:50:18 2023]</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-raw.html#cb50-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon Mar 18 09:10:24 2024]</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="sec-raw.html#cb56-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
 ##                                                                                               931 
 ## /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
 ##                                                                                               931</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sec-raw.html#cb52-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="sec-raw.html#cb58-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmphN3t3B/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpKu4Alm/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmphN3t3B/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpKu4Alm/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -546,7 +553,7 @@ or provide access to certain MS data resources such as the
 Additional backends are being developed to address specific needs or
 technologies, while remaining compliant with the <code>Spectra</code> interface.</p>
 <p>If you would like to learn more about how the raw MS formats are
-handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.17/mzR">mzR</a></em> package,
+handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.18/mzR">mzR</a></em> package,
 check out the <a href="sec-anx.html#sec-raw2">6.1</a> section in the annex.</p>
 <p>See also <a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html">Spectra
 backends</a>
@@ -600,9 +607,9 @@ interest.</li>
 ► Solution<span id="sol-start-1" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-1', 'sol-start-1')"></span>
 </p>
 <div id="sol-body-1" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sec-raw.html#cb54-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">spectraData</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>)),</span>
-<span id="cb54-2"><a href="sec-raw.html#cb54-2" tabindex="-1"></a>     <span class="fu">plot</span>(rtime, totIonCurrent, <span class="at">type =</span> <span class="st">"l"</span>))</span>
-<span id="cb54-3"><a href="sec-raw.html#cb54-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">rtime</span>(sp)[<span class="dv">2807</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sec-raw.html#cb60-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">spectraData</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>)),</span>
+<span id="cb60-2"><a href="sec-raw.html#cb60-2" tabindex="-1"></a>     <span class="fu">plot</span>(rtime, totIonCurrent, <span class="at">type =</span> <span class="st">"l"</span>))</span>
+<span id="cb60-3"><a href="sec-raw.html#cb60-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">rtime</span>(sp)[<span class="dv">2807</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -630,8 +637,8 @@ children.</li>
 ► Solution<span id="sol-start-2" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-2', 'sol-start-2')"></span>
 </p>
 <div id="sol-body-2" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sec-raw.html#cb55-1" tabindex="-1"></a>ms_2 <span class="ot">&lt;-</span> <span class="fu">filterPrecursorScan</span>(sp, <span class="dv">2807</span>)</span>
-<span id="cb55-2"><a href="sec-raw.html#cb55-2" tabindex="-1"></a>ms_2</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="sec-raw.html#cb61-1" tabindex="-1"></a>ms_2 <span class="ot">&lt;-</span> <span class="fu">filterPrecursorScan</span>(sp, <span class="dv">2807</span>)</span>
+<span id="cb61-2"><a href="sec-raw.html#cb61-2" tabindex="-1"></a>ms_2</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 11 spectra in a MsBackendMzR backend:
 ##      msLevel     rtime scanIndex
 ##    &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -649,9 +656,9 @@ children.</li>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## 8ee512042c5ff_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+## 678521a4fbe2_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Wed Sep  6 11:50:18 2023]</code></pre>
+##  Filter: select parent/children scans for 2807 [Mon Mar 18 09:10:25 2024]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -676,9 +683,9 @@ will be selected for MS2 analysis.</li>
 ► Solution<span id="sol-start-3" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-3', 'sol-start-3')"></span>
 </p>
 <div id="sol-body-3" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-raw.html#cb57-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">1000</span>))</span>
-<span id="cb57-2"><a href="sec-raw.html#cb57-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"grey"</span>)</span>
-<span id="cb57-3"><a href="sec-raw.html#cb57-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sec-raw.html#cb63-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">1000</span>))</span>
+<span id="cb63-2"><a href="sec-raw.html#cb63-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"grey"</span>)</span>
+<span id="cb63-3"><a href="sec-raw.html#cb63-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -704,8 +711,8 @@ of that peak.</li>
 ► Solution<span id="sol-start-4" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-4', 'sol-start-4')"></span>
 </p>
 <div id="sol-body-4" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="sec-raw.html#cb58-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>), <span class="at">type =</span> <span class="st">"l"</span>)</span>
-<span id="cb58-2"><a href="sec-raw.html#cb58-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="sec-raw.html#cb64-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>), <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb64-2"><a href="sec-raw.html#cb64-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">precursorMz</span>(ms_2)[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -731,7 +738,7 @@ one call.</li>
 ► Solution<span id="sol-start-5" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-5', 'sol-start-5')"></span>
 </p>
 <div id="sol-body-5" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sec-raw.html#cb59-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(ms_2[<span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-raw.html#cb65-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(ms_2[<span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-16-1.png" width="768"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -742,18 +749,18 @@ one call.</li>
 function. The <code>labels</code> argument is either a <code>character</code> of appropriate
 length (i.e. with a label for each peak) or, as illustrated below, a
 function that computes the labels.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sec-raw.html#cb60-1" tabindex="-1"></a>mzLabel <span class="ot">&lt;-</span> <span class="cf">function</span>(z) {</span>
-<span id="cb60-2"><a href="sec-raw.html#cb60-2" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">peaksData</span>(z)[[1L]]</span>
-<span id="cb60-3"><a href="sec-raw.html#cb60-3" tabindex="-1"></a>    lbls <span class="ot">&lt;-</span> <span class="fu">format</span>(z[, <span class="st">"mz"</span>], <span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb60-4"><a href="sec-raw.html#cb60-4" tabindex="-1"></a>    lbls[z[, <span class="st">"intensity"</span>] <span class="sc">&lt;</span> <span class="fl">1e5</span>] <span class="ot">&lt;-</span> <span class="st">""</span></span>
-<span id="cb60-5"><a href="sec-raw.html#cb60-5" tabindex="-1"></a>    lbls</span>
-<span id="cb60-6"><a href="sec-raw.html#cb60-6" tabindex="-1"></a>}</span>
-<span id="cb60-7"><a href="sec-raw.html#cb60-7" tabindex="-1"></a></span>
-<span id="cb60-8"><a href="sec-raw.html#cb60-8" tabindex="-1"></a><span class="fu">plotSpectra</span>(ms_2[<span class="dv">7</span>],</span>
-<span id="cb60-9"><a href="sec-raw.html#cb60-9" tabindex="-1"></a>            <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">126</span>, <span class="dv">132</span>),</span>
-<span id="cb60-10"><a href="sec-raw.html#cb60-10" tabindex="-1"></a>            <span class="at">labels =</span> mzLabel,</span>
-<span id="cb60-11"><a href="sec-raw.html#cb60-11" tabindex="-1"></a>            <span class="at">labelSrt =</span> <span class="sc">-</span><span class="dv">30</span>, <span class="at">labelPos =</span> <span class="dv">2</span>,</span>
-<span id="cb60-12"><a href="sec-raw.html#cb60-12" tabindex="-1"></a>            <span class="at">labelOffset =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-raw.html#cb66-1" tabindex="-1"></a>mzLabel <span class="ot">&lt;-</span> <span class="cf">function</span>(z) {</span>
+<span id="cb66-2"><a href="sec-raw.html#cb66-2" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">peaksData</span>(z)[[<span class="dv">1</span><span class="dt">L</span>]]</span>
+<span id="cb66-3"><a href="sec-raw.html#cb66-3" tabindex="-1"></a>    lbls <span class="ot">&lt;-</span> <span class="fu">format</span>(z[, <span class="st">"mz"</span>], <span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb66-4"><a href="sec-raw.html#cb66-4" tabindex="-1"></a>    lbls[z[, <span class="st">"intensity"</span>] <span class="sc">&lt;</span> <span class="fl">1e5</span>] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb66-5"><a href="sec-raw.html#cb66-5" tabindex="-1"></a>    lbls</span>
+<span id="cb66-6"><a href="sec-raw.html#cb66-6" tabindex="-1"></a>}</span>
+<span id="cb66-7"><a href="sec-raw.html#cb66-7" tabindex="-1"></a></span>
+<span id="cb66-8"><a href="sec-raw.html#cb66-8" tabindex="-1"></a><span class="fu">plotSpectra</span>(ms_2[<span class="dv">7</span>],</span>
+<span id="cb66-9"><a href="sec-raw.html#cb66-9" tabindex="-1"></a>            <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">126</span>, <span class="dv">132</span>),</span>
+<span id="cb66-10"><a href="sec-raw.html#cb66-10" tabindex="-1"></a>            <span class="at">labels =</span> mzLabel,</span>
+<span id="cb66-11"><a href="sec-raw.html#cb66-11" tabindex="-1"></a>            <span class="at">labelSrt =</span> <span class="sc">-</span><span class="dv">30</span>, <span class="at">labelPos =</span> <span class="dv">2</span>,</span>
+<span id="cb66-12"><a href="sec-raw.html#cb66-12" tabindex="-1"></a>            <span class="at">labelOffset =</span> <span class="fl">0.1</span>)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
 <p>Spectra can also be compared either by overlay or mirror plotting
 using the <code>plotSpectraOverlay()</code> and <code>plotSpectraMirror()</code> functions.</p>
@@ -774,11 +781,11 @@ precursor peaks based on the precursor m/z values.</p>
 ► Solution<span id="sol-start-6" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-6', 'sol-start-6')"></span>
 </p>
 <div id="sol-body-6" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="sec-raw.html#cb61-1" tabindex="-1"></a>sp2 <span class="ot">&lt;-</span> <span class="fu">filterMsLevel</span>(sp, 2L)</span>
-<span id="cb61-2"><a href="sec-raw.html#cb61-2" tabindex="-1"></a><span class="fu">anyDuplicated</span>(<span class="fu">precursorMz</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-raw.html#cb67-1" tabindex="-1"></a>sp2 <span class="ot">&lt;-</span> <span class="fu">filterMsLevel</span>(sp, <span class="dv">2</span><span class="dt">L</span>)</span>
+<span id="cb67-2"><a href="sec-raw.html#cb67-2" tabindex="-1"></a><span class="fu">anyDuplicated</span>(<span class="fu">precursorMz</span>(<span class="fu">filterMsLevel</span>(sp, <span class="dv">2</span>)))</span></code></pre></div>
 <pre><code>## [1] 37</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sec-raw.html#cb63-1" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">precursorMz</span>(sp2) <span class="sc">==</span> <span class="fu">precursorMz</span>(sp2)[<span class="dv">37</span>])</span>
-<span id="cb63-2"><a href="sec-raw.html#cb63-2" tabindex="-1"></a>sp2i <span class="ot">&lt;-</span> sp2[i]</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="sec-raw.html#cb69-1" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">precursorMz</span>(sp2) <span class="sc">==</span> <span class="fu">precursorMz</span>(sp2)[<span class="dv">37</span>])</span>
+<span id="cb69-2"><a href="sec-raw.html#cb69-2" tabindex="-1"></a>sp2i <span class="ot">&lt;-</span> sp2[i]</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -801,9 +808,9 @@ precursor peaks based on the precursor m/z values.</p>
 ► Solution<span id="sol-start-7" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-7', 'sol-start-7')"></span>
 </p>
 <div id="sol-body-7" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="sec-raw.html#cb64-1" tabindex="-1"></a><span class="fu">plotSpectraOverlay</span>(sp2i, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"steelblue"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="sec-raw.html#cb70-1" tabindex="-1"></a><span class="fu">plotSpectraOverlay</span>(sp2i, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"steelblue"</span>))</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-raw.html#cb65-1" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp2i[<span class="dv">1</span>], sp2i[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="sec-raw.html#cb71-1" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp2i[<span class="dv">1</span>], sp2i[<span class="dv">2</span>])</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -933,19 +940,19 @@ between 175 and 189 seconds in the measurement run.</p>
 ► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
 </p>
 <div id="sol-body-8" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-raw.html#cb66-1" tabindex="-1"></a>fls <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span>
-<span id="cb66-2"><a href="sec-raw.html#cb66-2" tabindex="-1"></a>fls</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="sec-raw.html#cb72-1" tabindex="-1"></a>fls <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span>
+<span id="cb72-2"><a href="sec-raw.html#cb72-2" tabindex="-1"></a>fls</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
 ## [2] "/home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="sec-raw.html#cb68-1" tabindex="-1"></a>file_2 <span class="ot">&lt;-</span> <span class="fu">filterDataOrigin</span>(sp_sciex, <span class="at">dataOrigin =</span> fls[<span class="dv">2</span>])</span>
-<span id="cb68-2"><a href="sec-raw.html#cb68-2" tabindex="-1"></a><span class="fu">length</span>(file_2)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sec-raw.html#cb74-1" tabindex="-1"></a>file_2 <span class="ot">&lt;-</span> <span class="fu">filterDataOrigin</span>(sp_sciex, <span class="at">dataOrigin =</span> fls[<span class="dv">2</span>])</span>
+<span id="cb74-2"><a href="sec-raw.html#cb74-2" tabindex="-1"></a><span class="fu">length</span>(file_2)</span></code></pre></div>
 <pre><code>## [1] 931</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="sec-raw.html#cb70-1" tabindex="-1"></a>sps_sub <span class="ot">&lt;-</span> <span class="fu">filterRt</span>(file_2, <span class="at">rt =</span> <span class="fu">c</span>(<span class="dv">175</span>, <span class="dv">189</span>))</span>
-<span id="cb70-2"><a href="sec-raw.html#cb70-2" tabindex="-1"></a><span class="fu">length</span>(sps_sub)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sec-raw.html#cb76-1" tabindex="-1"></a>sps_sub <span class="ot">&lt;-</span> <span class="fu">filterRt</span>(file_2, <span class="at">rt =</span> <span class="fu">c</span>(<span class="dv">175</span>, <span class="dv">189</span>))</span>
+<span id="cb76-2"><a href="sec-raw.html#cb76-2" tabindex="-1"></a><span class="fu">length</span>(sps_sub)</span></code></pre></div>
 <pre><code>## [1] 50</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="sec-raw.html#cb72-1" tabindex="-1"></a>sp_sciex <span class="sc">|&gt;</span></span>
-<span id="cb72-2"><a href="sec-raw.html#cb72-2" tabindex="-1"></a>    <span class="fu">filterDataOrigin</span>(fls[<span class="dv">2</span>]) <span class="sc">|&gt;</span></span>
-<span id="cb72-3"><a href="sec-raw.html#cb72-3" tabindex="-1"></a>    <span class="fu">filterRt</span>(<span class="fu">c</span>(<span class="dv">175</span>, <span class="dv">189</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="sec-raw.html#cb78-1" tabindex="-1"></a>sp_sciex <span class="sc">|&gt;</span></span>
+<span id="cb78-2"><a href="sec-raw.html#cb78-2" tabindex="-1"></a>    <span class="fu">filterDataOrigin</span>(fls[<span class="dv">2</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb78-3"><a href="sec-raw.html#cb78-3" tabindex="-1"></a>    <span class="fu">filterRt</span>(<span class="fu">c</span>(<span class="dv">175</span>, <span class="dv">189</span>))</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 50 spectra in a MsBackendMzR backend:
 ##       msLevel     rtime scanIndex
 ##     &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -965,8 +972,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Sep  6 11:50:20 2023]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Sep  6 11:50:20 2023]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/disk/R/x86_64-pc-linux-gnu-library/4.3/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon Mar 18 09:10:26 2024]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Mon Mar 18 09:10:26 2024]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -975,13 +982,13 @@ between 175 and 189 seconds in the measurement run.</p>
 <p>As an example of data processing, we use below the <code>pickPeaks()</code>
 function. This function allows to convert <em>profile mode</em> MS data to <em>centroid
 mode</em> data (a process also referred to as <em>centroiding</em>).</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sec-raw.html#cb74-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="sec-raw.html#cb80-1" tabindex="-1"></a><span class="fu">plotSpectra</span>(sp[<span class="dv">2807</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>))</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 <p>Centroiding reduces the profile mode MS data to a <em>representative</em> single mass
 peak per ion.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sec-raw.html#cb75-1" tabindex="-1"></a><span class="fu">pickPeaks</span>(sp[<span class="dv">2807</span>]) <span class="sc">|&gt;</span></span>
-<span id="cb75-2"><a href="sec-raw.html#cb75-2" tabindex="-1"></a>    <span class="fu">filterIntensity</span>(<span class="fl">1e7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb75-3"><a href="sec-raw.html#cb75-3" tabindex="-1"></a>    <span class="fu">plotSpectra</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sec-raw.html#cb81-1" tabindex="-1"></a><span class="fu">pickPeaks</span>(sp[<span class="dv">2807</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb81-2"><a href="sec-raw.html#cb81-2" tabindex="-1"></a>    <span class="fu">filterIntensity</span>(<span class="fl">1e7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb81-3"><a href="sec-raw.html#cb81-3" tabindex="-1"></a>    <span class="fu">plotSpectra</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">521.2</span>, <span class="fl">522.5</span>))</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 </div>
 <div id="a-note-on-efficiency" class="section level2" number="3.4">
@@ -1027,10 +1034,10 @@ manipulation operations are also possible for read-only backends
 (e.g. mzML-file based backends or database-based backends). The
 information about the number of such processing steps can be seen
 below (next to Lazy evaluation queue).</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sec-raw.html#cb76-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="sec-raw.html#cb78-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">filterIntensity</span>(sp_sciex, <span class="at">intensity =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">Inf</span>))</span>
-<span id="cb78-2"><a href="sec-raw.html#cb78-2" tabindex="-1"></a>sp_sciex <span class="do">## Note the lazy evaluation queue</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-raw.html#cb84-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">filterIntensity</span>(sp_sciex, <span class="at">intensity =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="cn">Inf</span>))</span>
+<span id="cb84-2"><a href="sec-raw.html#cb84-2" tabindex="-1"></a>sp_sciex <span class="do">## Note the lazy evaluation queue</span></span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 1862 spectra in a MsBackendMzR backend:
 ##        msLevel     rtime scanIndex
 ##      &lt;integer&gt; &lt;numeric&gt; &lt;integer&gt;
@@ -1052,10 +1059,10 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Sep  6 11:50:20 2023]</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="sec-raw.html#cb80-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon Mar 18 09:10:26 2024]</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sec-raw.html#cb86-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="sec-raw.html#cb88-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
 <pre><code>## [[1]]
 ## Object of class "ProcessingStep"
 ##  Function: user-provided function
@@ -1064,10 +1071,10 @@ below (next to Lazy evaluation queue).</p>
 ##   o msLevel = 1</code></pre>
 <p>Through this lazy evaluation system it is also possible to <em>undo</em> data
 manipulations:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-raw.html#cb84-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">reset</span>(sp_sciex)</span>
-<span id="cb84-2"><a href="sec-raw.html#cb84-2" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="sec-raw.html#cb90-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">reset</span>(sp_sciex)</span>
+<span id="cb90-2"><a href="sec-raw.html#cb90-2" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
 <pre><code>## list()</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sec-raw.html#cb86-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="sec-raw.html#cb92-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>More information on this lazy evaluation concept implemented in <code>Spectra</code> is
 provided in the <a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html">Spectra
@@ -1091,9 +1098,9 @@ package.<a href="sec-raw.html#fnref4" class="footnote-back">↩︎</a></p></li>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-09-06
+2024-03-18
  using 
-R version 4.3.1 Patched (2023-07-10 r84676)
+R version 4.3.2 Patched (2023-12-27 r85757)
 </p>
 </div>
 </div>
