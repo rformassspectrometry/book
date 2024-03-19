@@ -1,12 +1,12 @@
 # Identification data {#sec-id}
 
 Peptide identification is performed using third-party software - there
-is no package to run these searches directly in R. When using line
-search engines it possible to hard-code or automatically generate the
-search command lines and run them from R using a `system()` call. This
-allows to generate these reproducibly (especially useful if many
-command lines need to be run) and to keep a record in the R script of
-the exact command.
+is no package to run these searches directly in R. When using command
+line search engines it possible to hard-code or automatically generate
+the search command lines and run them from R using a `system()`
+call. This allows to generate these reproducibly (especially useful if
+many command lines need to be run) and to keep a record in the R
+script of the exact command.
 
 The example below illustrates this for 3 mzML files to be searched
 using `MSGFplus`:
