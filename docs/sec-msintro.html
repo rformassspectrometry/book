@@ -349,10 +349,8 @@ in the working directory and the name of the file is return by the
 function and stored in the <code>mzf</code> variable for later use <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-msintro.html#cb19-1" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
 <span id="cb19-2"><a href="sec-msintro.html#cb19-2" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span></code></pre></div>
-<pre><code>## Warning in rep(as.integer(len), length = length(str)): partial argument match
-## of 'length' to 'length.out'</code></pre>
 <pre><code>## Loading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML from cache.</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a>mzf</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-msintro.html#cb21-1" tabindex="-1"></a>mzf</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/.cache/R/rpx/678521a4fbe2_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 </div>
 <div id="data-packages" class="section level3 unnumbered">
@@ -362,19 +360,19 @@ function and stored in the <code>mzf</code> variable for later use <a href="#fn3
 <em><a href="https://bioconductor.org/packages/3.18/msdata">msdata</a></em>, for example, provides some
 general raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-msintro.html#cb24-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb24-2"><a href="sec-msintro.html#cb24-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb24-3"><a href="sec-msintro.html#cb24-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-msintro.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb23-2"><a href="sec-msintro.html#cb23-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
+<span id="cb23-3"><a href="sec-msintro.html#cb23-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="sec-msintro.html#cb26-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb26-2"><a href="sec-msintro.html#cb26-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-msintro.html#cb25-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
+<span id="cb25-2"><a href="sec-msintro.html#cb25-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb28-2"><a href="sec-msintro.html#cb28-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sec-msintro.html#cb27-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
+<span id="cb27-2"><a href="sec-msintro.html#cb27-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>More often, such <em>experiment packages</em> distribute processed data; an
 example of such is the <em><a href="https://bioconductor.org/packages/3.18/pRolocdata">pRolocdata</a></em>
