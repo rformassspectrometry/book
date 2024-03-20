@@ -1136,7 +1136,7 @@ res %>%
 ```
 
 
-Using the pipeline described above, we would would identify a single
+Using the pipeline described above, we would identify a single
 differentially expressed protein at an 5 percent FDR but miss out the
 other `r sum(res$TP) - 1` expected spike-in proteins.
 
