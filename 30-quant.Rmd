@@ -1010,7 +1010,7 @@ above.
 ```{r plotqf2, message = FALSE}
 normalize(cptac, "log_peptides",
           name = "logquantiles_peptides",
-          method = "quantiles") |>
+          method = "quantiles.robust") |>
     aggregateFeatures(
         "logquantiles_peptides",
         name = "proteins_med2",
@@ -1055,10 +1055,11 @@ packages provide dedicated resources for proteomics data:
   approach is both more sensitive and specific than summarizing
   peptide-level input to protein-level values. Model estimates are
   stabilized by ridge regression, empirical Bayes variance estimation
-  and downweighing of outliers. Currently, only label-free proteomics
-  data types are
-  supported. [`msqrob2`](https://github.com/statOmics/msqrob2/) is now
-  available and makes use of the `QFeatures` infrastructure.
+  and downweighing of outliers. The new version makes use of the
+  `QFeatures` infrastructure. Label-free proteomics data are
+  supported. [`msqrob2`](https://github.com/statOmics/msqrob2/), and
+  TMT workflows with
+  [`msqrob2tmt`](https://www.biorxiv.org/content/10.1101/2024.03.29.587218v1).
 
 - `r BiocStyle::Githubpkg("const-ae/proDA")` accounts for missing
   values in label-free mass spectrometry data without imputation. The

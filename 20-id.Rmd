@@ -507,7 +507,7 @@ computing the normalised dot product).
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r compare_spectra}
 k <- which(sp$sequence %in% c("SQILQQAGTSVLSQANQVPQTVLSLLR", "TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR"))
 sp_k <- sp[k]
 sp_k
@@ -526,7 +526,7 @@ sp_k
 `r msmbstyle::solution_begin()`
 
 
-```{r}
+```{r spectra_comp_heatmap}
 mat <- compareSpectra(sp_k)
 rownames(mat) <- colnames(mat) <- strtrim(sp_k$sequence, 2)
 mat
@@ -544,7 +544,7 @@ pheatmap::pheatmap(mat)
 `r msmbstyle::solution_begin()`
 
 
-```{r}
+```{r plot_spectra_compared}
 filterIntensity(sp_k, 1e3) %>% plotSpectra(main = sp_k$sequence)
 ```
 
@@ -569,7 +569,7 @@ project [@Morgenstern:2020].
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r get_PXD022816}
 ## Getting data from PX/PRIDE
 library(rpx)
 
@@ -600,7 +600,7 @@ PSMs id scores for each file.
 
 `r msmbstyle::solution_begin()`
 
-```{r, message = FALSE}
+```{r spectra_PXD022816, message = FALSE}
 ## Loading raw data
 library("Spectra")
 sp <- Spectra(mzmls)
@@ -612,7 +612,7 @@ table(basename(sp$dataOrigin))
 table(sp$centroided, sp$msLevel)
 ```
 
-```{r, message = FALSE, fig.width = 12}
+```{r mslevel_PXD022816, message = FALSE, fig.width = 12}
 library("ggplot2")
 library("tidyr")
 library("magrittr")
@@ -627,7 +627,7 @@ filterMsLevel(sp, 1) %>%
     geom_line()
 ```
 
-```{r, message = FALSE, fig.width = 12}
+```{r is_PXD022816, message = FALSE, fig.width = 12}
 ## Identification data
 library("PSMatch")
 id <- PSM(mzids)
@@ -642,7 +642,7 @@ tidyr::as_tibble(id) %>%
     facet_wrap(~ spectrumFile)
 ```
 
-```{r}
+```{r idfilter_PXD022816}
 id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
@@ -659,7 +659,7 @@ must now be performed by spectrum ids and by files.
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r joinsp_PXD022816}
 ## primary key for spectra
 sp$pkey <-
     paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))),
@@ -697,7 +697,7 @@ switch to an in-memory backend to seed up the calculations.
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r compare_PXD022816}
 sp_O43175 <- sp[which(sp$DatabaseAccess == "O43175")]
 sp_O43175 <- setBackend(sp_O43175, MsBackendDataFrame())
 sp_O43175
@@ -719,7 +719,7 @@ spectraData(sp_O43175[i])$precursorMz
 spectraData(sp_O43175[i])$modName
 ```
 
-```{r}
+```{r plotmirror_PXD022816}
 ## Directly compare spectra with/without Carbamyl
 plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
@@ -744,7 +744,7 @@ sp <- countIdentifications(sp)
 table(msLevel(sp), sp$countIdentifications)
 ```
 
-```{r}
+```{r tic_PXD022816}
 sp |>
  filterMsLevel(1) |>
  spectraData() |>
@@ -765,7 +765,7 @@ sp |>
 
 ## Exploration and Assessment of Identifications using `MSnID`
 
-```{r, echo = FALSE}
+```{r unload_PSMatch, echo = FALSE}
 unloadNamespace("PSMatch")
 ```
 
