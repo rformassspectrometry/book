@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2024-06-25" />
+<meta name="date" content="2024-06-26" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -1345,7 +1345,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Jun 25 09:30:12 2024]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Wed Jun 26 10:38:04 2024]</code></pre>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-id.html#cb238-1" aria-hidden="true"></a>cmat &lt;-<span class="st"> </span><span class="kw">compareSpectra</span>(sp_O43175)</span>
 <span id="cb238-2"><a href="sec-id.html#cb238-2" aria-hidden="true"></a><span class="kw">rownames</span>(cmat) &lt;-</span>
 <span id="cb238-3"><a href="sec-id.html#cb238-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">colnames</span>(cmat) &lt;-<span class="st"> </span><span class="kw">strtrim</span>(sp_O43175<span class="op">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1689,7 +1689,7 @@ further processed and analysed using appropriate statistical tests.</p>
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-06-25
+2024-06-26
  using 
 R version 4.4.0 (2024-04-24)
 </p>

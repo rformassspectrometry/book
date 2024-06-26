@@ -11,7 +11,10 @@
   [@Vanderaa:2021] as an extension of `QFeatures`. This second
   vignette also provides exercises that give the attendee the
   opportunity to apply the learned concepts to reproduce a published
-  analysis on a subset of a real data set.
+  analysis on a subset of a real data set. A [recent
+  workshop](https://github.com/lgatto/2024_scpworkshop_EUBIC), offered
+  at the 2024 EuBIC winter school, provides teaching material for the
+  new *scplainer* analysis workflow.
 
 - A tutorial presenting [Use Cases and Examples for Annotation of
   Untargeted Metabolomics

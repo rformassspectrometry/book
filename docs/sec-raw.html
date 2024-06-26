@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2024-06-25" />
+<meta name="date" content="2024-06-26" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -461,7 +461,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Tue Jun 25 09:29:41 2024]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Wed Jun 26 10:37:36 2024]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -493,7 +493,7 @@ us to specify the storage location of the HDF5 file.</p>
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue Jun 25 09:29:45 2024]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Jun 26 10:37:39 2024]</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-raw.html#cb50-1" aria-hidden="true"></a><span class="kw">table</span>(sp_hdf5<span class="op">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/4.4/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -502,9 +502,9 @@ us to specify the storage location of the HDF5 file.</p>
 ##                                                                                          931</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sec-raw.html#cb52-1" aria-hidden="true"></a><span class="kw">table</span>(sp_hdf5<span class="op">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpNOxsuV/20171016_POOL_POS_1_105-134.h5 
+## /tmp/Rtmp00vUiE/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmpNOxsuV/20171016_POOL_POS_3_105-134.h5 
+## /tmp/Rtmp00vUiE/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -628,7 +628,7 @@ children.</li>
 ## file(s):
 ## 304f21616ca00_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Tue Jun 25 09:29:45 2024]</code></pre>
+##  Filter: select parent/children scans for 2807 [Wed Jun 26 10:37:39 2024]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -942,8 +942,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.4/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Tue Jun 25 09:29:46 2024]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Tue Jun 25 09:29:46 2024]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/4.4/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Jun 26 10:37:40 2024]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Jun 26 10:37:40 2024]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1029,7 +1029,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue Jun 25 09:29:46 2024]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Jun 26 10:37:41 2024]</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="sec-raw.html#cb80-1" aria-hidden="true"></a><span class="kw">min</span>(<span class="kw">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-raw.html#cb82-1" aria-hidden="true"></a>sp_sciex<span class="op">@</span>processingQueue</span></code></pre></div>
@@ -1059,7 +1059,7 @@ vignette.</p>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-06-25
+2024-06-26
  using 
 R version 4.4.0 (2024-04-24)
 </p>
