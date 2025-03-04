@@ -49,11 +49,25 @@ The [SpectraTutorials](https://jorainer.github.io/SpectraTutorials) package prov
   `r BiocStyle::Biocpkg("MetaboAnnotation")` package in LC-MS/MS annotation
   workflows for untargeted metabolomics data.
 
-## Questions and help
+## Compiling the book locally
 
-For questions about specific software or their usage, please refer to
-the software's github issue page, or use the [Bioconductor support
-site](http://support.bioconductor.org/).
+To compile and render the teaching material, you will also need
+the `r BiocStyle::Biocpkg("BiocStyle")` package and the (slighly
+modified) [Modern Statistics for Model Biology (msmb) HTML Book
+Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
+Smith:
+
+```{r setup2, eval = FALSE}
+BiocManager::install(c("bookdown", "BiocStyle", "lgatto/msmbstyle"))
+```
+
+Clone the [book
+repository](https://github.com/Rformassspectrometry/book) and render
+the book with
+
+```{r render, eval = FALSE}
+bookdown::render_book(".")
+```
 
 
 ## Session information

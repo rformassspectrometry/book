@@ -110,30 +110,28 @@ BiocManager::install("MSnID")
 BiocManager::install("RforMassSpectrometry/SpectraVis")
 ```
 
-Follow the instructions in [this
-script](https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e)
-to install the packages and download some of the data used in the
-following chapters. All software versions used to generate this
-document are recoded at the end of the book in \@ref(sec-si).
+After installation, you can download some data that will be used in
+the latter chapter running the following:
 
-To compile and render the teaching material, you will also need
-the `r BiocStyle::Biocpkg("BiocStyle")` package and the (slighly
-modified) [Modern Statistics for Model Biology (msmb) HTML Book
-Style](https://www-huber.embl.de/users/msmith/msmbstyle/) by Mike
-Smith:
-
-```{r setup2, eval = FALSE}
-BiocManager::install(c("bookdown", "BiocStyle", "lgatto/msmbstyle"))
+```{r downloaddata, eval = FALSE}
+library(rpx)
+px <- PXDataset("PXD000001") ## answer yes if asked to create a cache directory
+fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
+mzf <- pxget(px, fn)
+px <- PXDataset("PXD022816")
+pxget(px, grep("mzID", pxfiles(px))[1:3])
+pxget(px, grep("mzML", pxfiles(px))[1:3])
 ```
 
-Run the [installation
-script](https://github.com/rformassspectrometry/docs/blob/main/install_docs_deps.R)
-by executing the line below to install all requirements to compile the
-book:
 
-```{r source, eval = FALSE}
-source("https://raw.githubusercontent.com/rformassspectrometry/book/main/install_docs_deps.R")
-```
+All software versions used to generate this document are recoded at
+the end of the book in chapter \@ref(sec-si).
+
+## Questions and help
+
+For questions about specific software or their usage, please refer to
+the software's github issue page, or use the [Bioconductor support
+site](http://support.bioconductor.org/).
 
 ## Acknowledgments {-}
 
