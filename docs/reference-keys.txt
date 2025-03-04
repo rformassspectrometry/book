@@ -25,6 +25,7 @@ fig:vis
 fig:vp
 fig:unnamed-chunk-63
 preamble
+questions-and-help
 sec-msintro
 how-does-mass-spectrometry-work
 accessing-data
@@ -85,5 +86,5 @@ sec-raw2
 sec-id2
 sec-si
 additional-materials
-questions-and-help
+compiling-the-book-locally
 session-information
