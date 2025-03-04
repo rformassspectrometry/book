@@ -93,6 +93,7 @@ R and execute:
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
+BiocManager::install("remotes")
 BiocManager::install("tidyverse")
 BiocManager::install("factoextra")
 BiocManager::install("msdata")
