@@ -257,21 +257,22 @@ R and execute:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="index.html#cb1-4" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-5"><a href="index.html#cb1-5" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb1-6"><a href="index.html#cb1-6" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb1-7"><a href="index.html#cb1-7" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mzR"</span>)</span>
-<span id="cb1-8"><a href="index.html#cb1-8" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"rhdf5"</span>)</span>
-<span id="cb1-9"><a href="index.html#cb1-9" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"rpx"</span>)</span>
-<span id="cb1-10"><a href="index.html#cb1-10" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MsCoreUtils"</span>)</span>
-<span id="cb1-11"><a href="index.html#cb1-11" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"QFeatures"</span>)</span>
-<span id="cb1-12"><a href="index.html#cb1-12" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Spectra"</span>)</span>
-<span id="cb1-13"><a href="index.html#cb1-13" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ProtGenerics"</span>)</span>
-<span id="cb1-14"><a href="index.html#cb1-14" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"PSMatch"</span>)</span>
-<span id="cb1-15"><a href="index.html#cb1-15" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"pheatmap"</span>)</span>
-<span id="cb1-16"><a href="index.html#cb1-16" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"limma"</span>)</span>
-<span id="cb1-17"><a href="index.html#cb1-17" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MSnID"</span>)</span>
-<span id="cb1-18"><a href="index.html#cb1-18" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/SpectraVis"</span>)</span></code></pre></div>
+<span id="cb1-4"><a href="index.html#cb1-4" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-5"><a href="index.html#cb1-5" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-6"><a href="index.html#cb1-6" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MsDataHub"</span>)</span>
+<span id="cb1-8"><a href="index.html#cb1-8" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mzR"</span>)</span>
+<span id="cb1-9"><a href="index.html#cb1-9" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"rhdf5"</span>)</span>
+<span id="cb1-10"><a href="index.html#cb1-10" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"rpx"</span>)</span>
+<span id="cb1-11"><a href="index.html#cb1-11" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MsCoreUtils"</span>)</span>
+<span id="cb1-12"><a href="index.html#cb1-12" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"QFeatures"</span>)</span>
+<span id="cb1-13"><a href="index.html#cb1-13" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Spectra"</span>)</span>
+<span id="cb1-14"><a href="index.html#cb1-14" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ProtGenerics"</span>)</span>
+<span id="cb1-15"><a href="index.html#cb1-15" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"PSMatch"</span>)</span>
+<span id="cb1-16"><a href="index.html#cb1-16" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"pheatmap"</span>)</span>
+<span id="cb1-17"><a href="index.html#cb1-17" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"limma"</span>)</span>
+<span id="cb1-18"><a href="index.html#cb1-18" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MSnID"</span>)</span>
+<span id="cb1-19"><a href="index.html#cb1-19" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/SpectraVis"</span>)</span></code></pre></div>
 <p>After installation, you can download some data that will be used in
 the latter chapter running the following:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(rpx)</span>

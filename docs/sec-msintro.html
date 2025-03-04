@@ -352,30 +352,123 @@ function and stored in the <code>mzf</code> variable for later use <label for="t
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-msintro.html#cb20-1" tabindex="-1"></a>mzf</span></code></pre></div>
 <pre><code>## [1] "/home/lgatto/.cache/R/rpx/2831806f23ef0f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 </div>
-<div id="data-packages" class="section level3 unnumbered">
-<h3>Data packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-packages')" onmouseout="reset_tooltip('data-packages-tooltip')"><span class="tooltiptext" id="data-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<div id="data-hub" class="section level3 unnumbered">
+<h3>Data hub<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-hub')" onmouseout="reset_tooltip('data-hub-tooltip')"><span class="tooltiptext" id="data-hub-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>Some data are also distributed through dedicated packages. The
-<em><a href="https://bioconductor.org/packages/3.20/msdata">msdata</a></em>, for example, provides some
-general raw data files relevant for both proteomics and
+<p>The Bioconductor project had dedicated data hubs for experiment and
+annotation data. Data that is accessed through these hubs are cached
+centrally to avoid repeated downloads.</p>
+<p>The <em><a href="https://bioconductor.org/packages/3.20/MsDataHub">MsDataHub</a></em> package provides data for
+mass spectrometry in general, and proteomics in particular. Once
+loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span></code></pre></div>
+<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
+## 'S4Vectors::setequal' when loading 'ExperimentHub'</code></pre>
+<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
+## 'S4Vectors::setequal' when loading 'AnnotationHub'</code></pre>
+<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
+## 'S4Vectors::setequal' when loading 'AnnotationDbi'</code></pre>
+<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
+## 'S4Vectors::setequal' when loading 'Biostrings'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'union'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'intersect'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'setdiff'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'setequal'</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-msintro.html#cb31-1" tabindex="-1"></a><span class="fu">MsDataHub</span>()</span></code></pre></div>
+<pre><code>##                                                                 Title
+## 1                                                            ko15.CDF
+## 2                                            cptac_a_b_c_peptides.txt
+## 3                                              cptac_a_b_peptides.txt
+## 4                                                  cptac_peptides.txt
+## 5 TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzid
+##                                                                                                       Description
+## 1                                           Raw metabolomics MS file in netCDF format. See ?ko15.CDF for details.
+## 2 Conditions A, B and C of the CPTAC quantitative proteomics data (tab-delimited format). See ?cptac for details.
+## 3    Conditions A and B of the CPTAC quantitative proteomics data (tab-delimited format). See ?cptac for details.
+## 4                              CPTAC quantitative proteomics data (tab-delimited format). See ?cptac for details.
+## 5                             Peptide spectrum matches from the PDX000001 experiment. See ?PXD000001 for details.
+##   BiocVersion Genome SourceType
+## 1        3.17     NA        CDF
+## 2        3.17     NA        TXT
+## 3        3.17     NA        TXT
+## 4        3.17     NA        TXT
+## 5        3.17     NA       mzid
+##                                                                                                          SourceUrl
+## 1                                          https://bioconductor.org/packages/3.16/data/experiment/html/msdata.html
+## 2                                         https://uclouvain-cbio.github.io/WSBIM2122/data/cptac_a_b_c_peptides.txt
+## 3                                          https://bioconductor.org/packages/3.16/data/experiment/html/msdata.html
+## 4 https://raw.githubusercontent.com/statOmics/PDA/data/quantification/fullCptacDatasSetNotForTutorial/peptides.txt
+## 5                                          https://bioconductor.org/packages/3.16/data/experiment/html/msdata.html
+##   SourceVersion                  Species TaxonomyId Coordinate_1_based
+## 1             1             Mus musculus      10090                 NA
+## 2             1 Saccharomyces cerevisiae       4932                 NA
+## 3             1 Saccharomyces cerevisiae       4932                 NA
+## 4             1 Saccharomyces cerevisiae       4932                 NA
+## 5             1       Erwinia carotovora        554                 NA
+##   DataProvider                                 Maintainer RDataClass
+## 1           NA Laurent Gatto &lt;laurent.gatto@uclouvain.be&gt;    Spectra
+## 2           NA Laurent Gatto &lt;laurent.gatto@uclouvain.be&gt; data.frame
+## 3           NA Laurent Gatto &lt;laurent.gatto@uclouvain.be&gt; data.frame
+## 4           NA Laurent Gatto &lt;laurent.gatto@uclouvain.be&gt; data.frame
+## 5           NA Laurent Gatto &lt;laurent.gatto@uclouvain.be&gt;    Spectra
+##   DispatchClass Location_Prefix
+## 1      FilePath                
+## 2      FilePath                
+## 3      FilePath                
+## 4      FilePath                
+## 5      FilePath                
+##                                                                                 RDataPath
+## 1                                                                  MsDataHub/cdf/ko15.CDF
+## 2                                                MsDataHub/cptac/cptac_a_b_c_peptides.txt
+## 3                                                  MsDataHub/cptac/cptac_a_b_peptides.txt
+## 4                                                      MsDataHub/cptac/cptac_peptides.txt
+## 5 MsDataHub/PXD000001/TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid
+##   Tags
+## 1   NA
+## 2   NA
+## 3   NA
+## 4   NA
+## 5   NA
+##  [ reached 'max' / getOption("max.print") -- omitted 9 rows ]</code></pre>
+<p>The dataset table is also available as an <a href="https://rformassspectrometry.github.io/MsDataHub/articles/MsDataHub.html">interactive
+table</a>
+on the package page.</p>
+<p>Each data can then be downloaded with a dedicated function, for example</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-msintro.html#cb33-1" tabindex="-1"></a><span class="fu">ko15.CDF</span>()</span></code></pre></div>
+<pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
+<pre><code>## loading from cache</code></pre>
+<pre><code>##                                                    EH7803 
+## "/home/lgatto/.cache/R/ExperimentHub/2c37ce536f81ce_7853"</code></pre>
+<p>Note that the
+<code>TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code>
+file downloaded above happens to also be available in <code>MsDataHub</code>.</p>
+</div>
+<div id="experiment-packages" class="section level3 unnumbered">
+<h3>Experiment packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('experiment-packages')" onmouseout="reset_tooltip('experiment-packages-tooltip')"><span class="tooltiptext" id="experiment-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The <em><a href="https://bioconductor.org/packages/3.20/msdata">msdata</a></em> is an <em>experiment package</em>
+that directly ships raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb22-2"><a href="sec-msintro.html#cb22-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb22-3"><a href="sec-msintro.html#cb22-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-msintro.html#cb37-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb37-2"><a href="sec-msintro.html#cb37-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
+<span id="cb37-3"><a href="sec-msintro.html#cb37-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-msintro.html#cb24-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb24-2"><a href="sec-msintro.html#cb24-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sec-msintro.html#cb39-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
+<span id="cb39-2"><a href="sec-msintro.html#cb39-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="sec-msintro.html#cb26-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb26-2"><a href="sec-msintro.html#cb26-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-msintro.html#cb41-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
+<span id="cb41-2"><a href="sec-msintro.html#cb41-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
-<p>More often, such <em>experiment packages</em> distribute processed data; an
-example of such is the <em><a href="https://bioconductor.org/packages/3.20/pRolocdata">pRolocdata</a></em>
-package, that offers quantitative proteomics data.</p>
+<p>New data are added to the more modern and lightweight <code>MsDataHub</code>
+infrastructure.</p>
+<p>Often, experiment packages distribute processed data; examples thereof
+are the <em><a href="https://bioconductor.org/packages/3.20/pRolocdata">pRolocdata</a></em> and
+<em><a href="https://bioconductor.org/packages/3.20/scpdata">scpdata</a></em> packages, that ship processed
+and annotated quantitative spatial and single-cell proteomics data.</p>
 
 </div>
 </div>
