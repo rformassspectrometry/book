@@ -175,7 +175,7 @@ div.csl-indent {
 <a href="sec-anx.html" id="toc-sec-anx"><span class="toc-section-number">6</span> Annex</a>
 <a id="active-page" href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">7</span> Additional materials and session information</a><ul class="toc-sections">
 <li class="toc"><a href="#additional-materials"> Additional materials</a></li>
-<li class="toc"><a href="#questions-and-help"> Questions and help</a></li>
+<li class="toc"><a href="#compiling-the-book-locally"> Compiling the book locally</a></li>
 <li class="toc"><a href="#session-information"> Session information</a></li>
 </ul>
 </div>
@@ -243,20 +243,27 @@ explains how the <em>Spectra</em> package can be used together with the
 workflows for untargeted metabolomics data.</li>
 </ul>
 </div>
-<div id="questions-and-help" class="section level2" number="7.2">
+<div id="compiling-the-book-locally" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">7.2</span> Questions and help<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('questions-and-help')" onmouseout="reset_tooltip('questions-and-help-tooltip')"><span class="tooltiptext" id="questions-and-help-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<span class="header-section-number">7.2</span> Compiling the book locally<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('compiling-the-book-locally')" onmouseout="reset_tooltip('compiling-the-book-locally-tooltip')"><span class="tooltiptext" id="compiling-the-book-locally-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>For questions about specific software or their usage, please refer to
-the software’s github issue page, or use the <a href="http://support.bioconductor.org/">Bioconductor support
-site</a>.</p>
+<p>To compile and render the teaching material, you will also need
+the <em><a href="https://bioconductor.org/packages/3.20/BiocStyle">BiocStyle</a></em> package and the (slighly
+modified) <a href="https://www-huber.embl.de/users/msmith/msmbstyle/">Modern Statistics for Model Biology (msmb) HTML Book
+Style</a> by Mike
+Smith:</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="sec-si.html#cb476-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"bookdown"</span>, <span class="st">"BiocStyle"</span>, <span class="st">"lgatto/msmbstyle"</span>))</span></code></pre></div>
+<p>Clone the <a href="https://github.com/Rformassspectrometry/book">book
+repository</a> and render
+the book with</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="sec-si.html#cb477-1" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">"."</span>)</span></code></pre></div>
 </div>
 <div id="session-information" class="section level2" number="7.3">
 <h2>
 <span class="header-section-number">7.3</span> Session information<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('session-information')" onmouseout="reset_tooltip('session-information-tooltip')"><span class="tooltiptext" id="session-information-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="sec-si.html#cb477-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="sec-si.html#cb478-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.4.1 (2024-06-14)
 ## Platform: x86_64-pc-linux-gnu
 ## Running under: Ubuntu 24.04.2 LTS

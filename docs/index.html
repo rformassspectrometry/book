@@ -168,10 +168,11 @@ div.csl-indent {
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
 <a id="active-page" href="index.html" id="toc-preamble"><span class="toc-section-number">1</span> Preamble</a><ul class="toc-sections">
-<li class="toc"><a href="#targeted-audience-and-assumed-background">Targeted audience and assumed background</a></li>
-<li class="toc"><a href="#setup">Setup</a></li>
-<li class="toc"><a href="#acknowledgments">Acknowledgments</a></li>
-<li class="toc"><a href="#license">License</a></li>
+<li class="toc"><a href="#targeted-audience-and-assumed-background">NA</a></li>
+<li class="toc"><a href="#setup">NA</a></li>
+<li class="toc"><a href="#questions-and-help"> Questions and help</a></li>
+<li class="toc"><a href="#acknowledgments">NA</a></li>
+<li class="toc"><a href="#license">NA</a></li>
 </ul>
 <a href="sec-msintro.html" id="toc-sec-msintro"><span class="toc-section-number">2</span> Introduction</a>
 <a href="sec-raw.html" id="toc-sec-raw"><span class="toc-section-number">3</span> Raw MS data</a>
@@ -271,22 +272,25 @@ R and execute:</p>
 <span id="cb1-16"><a href="index.html#cb1-16" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"limma"</span>)</span>
 <span id="cb1-17"><a href="index.html#cb1-17" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"MSnID"</span>)</span>
 <span id="cb1-18"><a href="index.html#cb1-18" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"RforMassSpectrometry/SpectraVis"</span>)</span></code></pre></div>
-<p>Follow the instructions in <a href="https://gist.github.com/lgatto/b1875458ed4e478ff6e87ce3b346352e">this
-script</a>
-to install the packages and download some of the data used in the
-following chapters. All software versions used to generate this
-document are recoded at the end of the book in <a href="sec-si.html#sec-si">7</a>.</p>
-<p>To compile and render the teaching material, you will also need
-the <em><a href="https://bioconductor.org/packages/3.20/BiocStyle">BiocStyle</a></em> package and the (slighly
-modified) <a href="https://www-huber.embl.de/users/msmith/msmbstyle/">Modern Statistics for Model Biology (msmb) HTML Book
-Style</a> by Mike
-Smith:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"bookdown"</span>, <span class="st">"BiocStyle"</span>, <span class="st">"lgatto/msmbstyle"</span>))</span></code></pre></div>
-<p>Run the <a href="https://github.com/rformassspectrometry/docs/blob/main/install_docs_deps.R">installation
-script</a>
-by executing the line below to install all requirements to compile the
-book:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/rformassspectrometry/book/main/install_docs_deps.R"</span>)</span></code></pre></div>
+<p>After installation, you can download some data that will be used in
+the latter chapter running the following:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(rpx)</span>
+<span id="cb2-2"><a href="index.html#cb2-2" tabindex="-1"></a>px <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD000001"</span>) <span class="do">## answer yes if asked to create a cache directory</span></span>
+<span id="cb2-3"><a href="index.html#cb2-3" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
+<span id="cb2-4"><a href="index.html#cb2-4" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span>
+<span id="cb2-5"><a href="index.html#cb2-5" tabindex="-1"></a>px <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD022816"</span>)</span>
+<span id="cb2-6"><a href="index.html#cb2-6" tabindex="-1"></a><span class="fu">pxget</span>(px, <span class="fu">grep</span>(<span class="st">"mzID"</span>, <span class="fu">pxfiles</span>(px))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb2-7"><a href="index.html#cb2-7" tabindex="-1"></a><span class="fu">pxget</span>(px, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(px))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<p>All software versions used to generate this document are recoded at
+the end of the book in chapter <a href="sec-si.html#sec-si">7</a>.</p>
+</div>
+<div id="questions-and-help" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Questions and help<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('questions-and-help')" onmouseout="reset_tooltip('questions-and-help-tooltip')"><span class="tooltiptext" id="questions-and-help-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>For questions about specific software or their usage, please refer to
+the software’s github issue page, or use the <a href="http://support.bioconductor.org/">Bioconductor support
+site</a>.</p>
 </div>
 <div id="acknowledgments" class="section level2 unnumbered">
 <h2>Acknowledgments<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('acknowledgments')" onmouseout="reset_tooltip('acknowledgments-tooltip')"><span class="tooltiptext" id="acknowledgments-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
