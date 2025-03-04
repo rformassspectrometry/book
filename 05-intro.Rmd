@@ -145,11 +145,39 @@ mzf <- pxget(px, fn)
 mzf
 ```
 
-### Data packages {-}
+### Data hub {-}
 
-Some data are also distributed through dedicated packages. The
-`r BiocStyle::Biocexptpkg("msdata")`, for example, provides some
-general raw data files relevant for both proteomics and
+The Bioconductor project had dedicated data hubs for experiment and
+annotation data. Data that is accessed through these hubs are cached
+centrally to avoid repeated downloads.
+
+The `r BiocStyle::Biocexptpkg("MsDataHub")` package provides data for
+mass spectrometry in general, and proteomics in particular. Once
+loaded, the `MsDataHub()` function lists the available datasets
+
+```{r MsDataHub}
+library("MsDataHub")
+MsDataHub()
+```
+
+The dataset table is also available as an [interactive
+table](https://rformassspectrometry.github.io/MsDataHub/articles/MsDataHub.html)
+on the package page.
+
+Each data can then be downloaded with a dedicated function, for example
+
+```{r ko15}
+ko15.CDF()
+```
+
+Note that the
+`TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
+file downloaded above happens to also be available in `MsDataHub`.
+
+### Experiment packages {-}
+
+The `r BiocStyle::Biocexptpkg("msdata")` is an *experiment package*
+that directly ships raw data files relevant for both proteomics and
 metabolomics.
 
 ```{r msdatafiles, message = FALSE}
@@ -162,6 +190,11 @@ ident()
 quant()
 ```
 
-More often, such *experiment packages* distribute processed data; an
-example of such is the `r BiocStyle::Biocexptpkg("pRolocdata")`
-package, that offers quantitative proteomics data.
+New data are added to the more modern and lightweight `MsDataHub`
+infrastructure.
+
+
+Often, experiment packages distribute processed data; examples thereof
+are the `r BiocStyle::Biocexptpkg("pRolocdata")` and
+`r BiocStyle::Biocexptpkg("scpdata")` packages, that ship processed
+and annotated quantitative spatial and single-cell proteomics data.
