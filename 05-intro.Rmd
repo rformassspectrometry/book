@@ -155,7 +155,7 @@ The `r BiocStyle::Biocexptpkg("MsDataHub")` package provides data for
 mass spectrometry in general, and proteomics in particular. Once
 loaded, the `MsDataHub()` function lists the available datasets
 
-```{r MsDataHub}
+```{r MsDataHub, warning = FALSE}
 library("MsDataHub")
 MsDataHub()
 ```

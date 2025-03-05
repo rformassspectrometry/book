@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-03-04" />
+<meta name="date" content="2025-03-05" />
 
 
 <meta name="description" content="Chapter 2 Introduction | R for Mass Spectrometry">
@@ -361,20 +361,8 @@ centrally to avoid repeated downloads.</p>
 <p>The <em><a href="https://bioconductor.org/packages/3.20/MsDataHub">MsDataHub</a></em> package provides data for
 mass spectrometry in general, and proteomics in particular. Once
 loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span></code></pre></div>
-<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
-## 'S4Vectors::setequal' when loading 'ExperimentHub'</code></pre>
-<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
-## 'S4Vectors::setequal' when loading 'AnnotationHub'</code></pre>
-<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
-## 'S4Vectors::setequal' when loading 'AnnotationDbi'</code></pre>
-<pre><code>## Warning: replacing previous import 'BiocGenerics::setequal' by
-## 'S4Vectors::setequal' when loading 'Biostrings'</code></pre>
-<pre><code>## Warning: multiple methods tables found for 'union'</code></pre>
-<pre><code>## Warning: multiple methods tables found for 'intersect'</code></pre>
-<pre><code>## Warning: multiple methods tables found for 'setdiff'</code></pre>
-<pre><code>## Warning: multiple methods tables found for 'setequal'</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-msintro.html#cb31-1" tabindex="-1"></a><span class="fu">MsDataHub</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span>
+<span id="cb22-2"><a href="sec-msintro.html#cb22-2" tabindex="-1"></a><span class="fu">MsDataHub</span>()</span></code></pre></div>
 <pre><code>##                                                                 Title
 ## 1                                                            ko15.CDF
 ## 2                                            cptac_a_b_c_peptides.txt
@@ -434,7 +422,7 @@ loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
 table</a>
 on the package page.</p>
 <p>Each data can then be downloaded with a dedicated function, for example</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-msintro.html#cb33-1" tabindex="-1"></a><span class="fu">ko15.CDF</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-msintro.html#cb24-1" tabindex="-1"></a><span class="fu">ko15.CDF</span>()</span></code></pre></div>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
 <pre><code>##                                                    EH7803 
@@ -449,19 +437,19 @@ file downloaded above happens to also be available in <code>MsDataHub</code>.</p
 <p>The <em><a href="https://bioconductor.org/packages/3.20/msdata">msdata</a></em> is an <em>experiment package</em>
 that directly ships raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-msintro.html#cb37-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb37-2"><a href="sec-msintro.html#cb37-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb37-3"><a href="sec-msintro.html#cb37-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb28-2"><a href="sec-msintro.html#cb28-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
+<span id="cb28-3"><a href="sec-msintro.html#cb28-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sec-msintro.html#cb39-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb39-2"><a href="sec-msintro.html#cb39-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-msintro.html#cb30-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
+<span id="cb30-2"><a href="sec-msintro.html#cb30-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-msintro.html#cb41-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb41-2"><a href="sec-msintro.html#cb41-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
+<span id="cb32-2"><a href="sec-msintro.html#cb32-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>New data are added to the more modern and lightweight <code>MsDataHub</code>
 infrastructure.</p>
@@ -478,7 +466,7 @@ and annotated quantitative spatial and single-cell proteomics data.</p>
 <a href="sec-raw.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-03-04
+2025-03-05
  using 
 R version 4.4.1 (2024-06-14)
 </p>

@@ -45,7 +45,7 @@ hands-on tutorials. At the end of this course, the participants will
 be able to manipulate MS data in R and use existing packages for their
 exploratory and statistical proteomics data analysis.
 
-## Targeted audience and assumed background  {-}
+## Targeted audience and assumed background
 
 The course material is targeted to either proteomics practitioners or
 data analysts/bioinformaticians that would like to learn how to use R
@@ -80,7 +80,7 @@ suppressPackageStartupMessages(library("QFeatures"))
 suppressPackageStartupMessages(library("MsCoreUtils"))
 ```
 
-## Setup {-}
+## Setup
 
 This material uses the latest version of the R for Mass Spectrometry
 package and their dependencies. It might thus be possible that even
@@ -134,12 +134,12 @@ For questions about specific software or their usage, please refer to
 the software's github issue page, or use the [Bioconductor support
 site](http://support.bioconductor.org/).
 
-## Acknowledgments {-}
+## Acknowledgments
 
 Thank you to [Charlotte Soneson](https://github.com/csoneson) for
 fixing many typos in a previous version of this book.
 
-## License {-}
+## License
 
 <a rel="license"
 href="http://creativecommons.org/licenses/by-sa/4.0/"><img

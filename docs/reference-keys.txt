@@ -25,7 +25,11 @@ fig:vis
 fig:vp
 fig:unnamed-chunk-63
 preamble
+targeted-audience-and-assumed-background
+setup
 questions-and-help
+acknowledgments
+license
 sec-msintro
 how-does-mass-spectrometry-work
 accessing-data
