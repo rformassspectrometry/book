@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-03-05" />
+<meta name="date" content="2025-03-17" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -247,8 +247,11 @@ for 2 spectra:</p>
 ## 1         1       1.1        NA
 ## 2         2       1.2        NA
 ##  ... 16 more variables/columns.</code></pre>
-<div id="exercise" class="section level4 unnumbered">
-<h4>Exercise</h4>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <p>Explore the newly created object using</p>
 <ul>
 <li>
@@ -261,6 +264,10 @@ spectra variables available from the previous example.</li>
 <li>
 <code>[</code> to create subsets.</li>
 </ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
 </div>
 </div>
 <div id="spectra-from-mzml-files" class="section level3" number="3.1.2">
@@ -270,7 +277,7 @@ spectra variables available from the previous example.</li>
 <p>Let’s now create a new object using the mzML data previously
 downloaded and available in the <code>mzf</code> file.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sec-raw.html#cb39-1" tabindex="-1"></a>mzf</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/2831806f23ef0f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/2eafef6aa02fe1_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-raw.html#cb41-1" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzf)</span>
 <span id="cb41-2"><a href="sec-raw.html#cb41-2" tabindex="-1"></a>sp</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 7534 spectra in a MsBackendMzR backend:
@@ -290,15 +297,23 @@ downloaded and available in the <code>mzf</code> file.</p>
 ##  ... 33 more variables/columns.
 ## 
 ## file(s):
-## 2831806f23ef0f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
-<div id="exercise-1" class="section level4 unnumbered">
-<h4>Exercise</h4>
+## 2eafef6aa02fe1_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <ul>
 <li>Repeat the data manipulations above.</li>
 <li>Check the number of scans in the object with <code>length()</code>.</li>
 <li>Note the difference in the first line when showing the object in the
 console. We will get back to this idea of backend later.</li>
 </ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 <p>Mass spectrometry data in <code>Spectra</code> objects can be thought of as a
 list of individual spectra, with each spectrum having a set of
 variables associated with it. Besides <em>core</em> spectra variables (such
@@ -378,9 +393,11 @@ variable).</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sec-raw.html#cb43-1" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="ot">&lt;-</span> <span class="fu">rtime</span>(sp) <span class="sc">/</span> <span class="dv">60</span></span>
 <span id="cb43-2"><a href="sec-raw.html#cb43-2" tabindex="-1"></a>sp<span class="sc">$</span>rtime_minute <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## [1] 0.00764000 0.01620833 0.03087333 0.04570667 0.06020667 0.07487500</code></pre>
-</div>
-<div id="exercise-2" class="section level4 unnumbered">
-<h4>Exercise</h4>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <ul>
 <li>Extract a set of spectra variables using the accessor (for example
 <code>msLevel(.)</code>) or using the <code>$</code> notation (for example <code>.$msLevel</code>).</li>
@@ -393,9 +410,16 @@ centroided or in profile mode. You can use the <code>plotSpectra()</code>
 function to visualise peaks and set the m/z range with the <code>xlim</code>
 arguments.</li>
 </ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
 </div>
-<div id="exercise-3" class="section level4 unnumbered">
-<h4>Exercise</h4>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <p>Using the first raw data file starting with <code>MS3TMT10</code>, answer the
 following questions:</p>
 <ul>
@@ -406,6 +430,11 @@ intensity?</li>
 <li>Plot one spectrum of each level. Are they centroided or in profile
 mode?</li>
 </ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 <p>These objects and their manipulations are not limited to single files or
 samples. Below we load data from two mzML files. The MS data from both files in
 the <code>Spectra</code> is organized linearly (first all spectra from the first file
@@ -421,7 +450,6 @@ spectra from the different data files.</p>
 ##                                                                                               931 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
 ##                                                                                               931</code></pre>
-</div>
 </div>
 <div id="backends" class="section level3" number="3.1.3">
 <h3>
@@ -483,7 +511,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Wed Mar  5 13:41:18 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Mon Mar 17 11:40:48 2025]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -515,7 +543,7 @@ us to specify the storage location of the HDF5 file.</p>
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Mar  5 13:41:25 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Mon Mar 17 11:40:52 2025]</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sec-raw.html#cb55-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -524,9 +552,9 @@ us to specify the storage location of the HDF5 file.</p>
 ##                                                                                               931</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-raw.html#cb57-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpbXJpRH/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpUpJqrk/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmpbXJpRH/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpUpJqrk/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -648,9 +676,9 @@ children.</li>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## 2831806f23ef0f_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+## 2eafef6aa02fe1_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Wed Mar  5 13:41:25 2025]</code></pre>
+##  Filter: select parent/children scans for 2807 [Mon Mar 17 11:40:52 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -964,8 +992,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Mar  5 13:41:27 2025]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Mar  5 13:41:27 2025]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Mon Mar 17 11:40:53 2025]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Mon Mar 17 11:40:53 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1051,7 +1079,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Mar  5 13:41:28 2025]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Mon Mar 17 11:40:53 2025]</code></pre>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="sec-raw.html#cb85-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="sec-raw.html#cb87-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1081,7 +1109,7 @@ vignette.</p>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-03-05
+2025-03-17
  using 
 R version 4.4.1 (2024-06-14)
 </p>

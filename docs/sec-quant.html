@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-03-05" />
+<meta name="date" content="2025-03-17" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -366,7 +366,7 @@ package. The class is derived from the Bioconductor
 columns.</p>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="sec-quant.html#cb293-1" tabindex="-1"></a><span class="fu">data</span>(feat1)</span>
 <span id="cb293-2"><a href="sec-quant.html#cb293-2" tabindex="-1"></a>feat1</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 1 set(s):
+<pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns</code></pre>
 <p>Let’s perform some simple operations to familiarise ourselves with the
 <code>QFeatures</code> class:</p>
@@ -464,7 +464,7 @@ object.</li>
 <span id="cb307-3"><a href="sec-quant.html#cb307-3" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"peptides"</span>,</span>
 <span id="cb307-4"><a href="sec-quant.html#cb307-4" tabindex="-1"></a>                           <span class="at">fun =</span> colMeans)</span>
 <span id="cb307-5"><a href="sec-quant.html#cb307-5" tabindex="-1"></a>feat1</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 2 set(s):
+<pre><code>## An instance of class QFeatures containing 2 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns</code></pre>
 <ul>
@@ -507,7 +507,7 @@ assay using the <code>colMedians()</code> aggregation function.</p>
 <span id="cb323-3"><a href="sec-quant.html#cb323-3" tabindex="-1"></a>                           <span class="at">name =</span> <span class="st">"proteins"</span>,</span>
 <span id="cb323-4"><a href="sec-quant.html#cb323-4" tabindex="-1"></a>                           <span class="at">fun =</span> colMedians)</span>
 <span id="cb323-5"><a href="sec-quant.html#cb323-5" tabindex="-1"></a>feat1</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 10 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 2 rows and 2 columns</code></pre>
@@ -526,7 +526,7 @@ function. This creates a new instance of class <code>QFeatures</code> containing
 assays with the expression data for protein, its peptides and their
 PSMs.</p>
 <div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="sec-quant.html#cb327-1" tabindex="-1"></a>feat1[<span class="st">"ProtA"</span>, , ]</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
@@ -539,7 +539,7 @@ that assay.</p>
 <pre><code>## 'pval' found in 1 out of 3 assay(s)
 ## No filter applied to the following assay(s) because one or more filtering variables are missing in the rowData: peptides, proteins.
 ## You can control whether to remove or keep the features using the 'keep' argument (see '?filterFeature').</code></pre>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 0 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 0 rows and 2 columns</code></pre>
@@ -565,7 +565,7 @@ variables.</p>
 <pre><code>## 'pval' found in 1 out of 3 assay(s)
 ## No filter applied to the following assay(s) because one or more filtering variables are missing in the rowData: peptides, proteins.
 ## You can control whether to remove or keep the features using the 'keep' argument (see '?filterFeature').</code></pre>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 3 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 2 rows and 2 columns</code></pre>
@@ -578,7 +578,7 @@ variables.</p>
 the mitochondrion, we retain the relevant protein, peptides and PSMs.</p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="sec-quant.html#cb335-1" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">==</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
 <pre><code>## 'location' found in 3 out of 3 assay(s)</code></pre>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 6 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 2 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
@@ -601,7 +601,7 @@ mitochondrion.</p>
 <div id="sol-body-26" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-quant.html#cb338-1" tabindex="-1"></a><span class="fu">filterFeatures</span>(feat1, <span class="sc">~</span> location <span class="sc">!=</span> <span class="st">"Mitochondrion"</span>)</span></code></pre></div>
 <pre><code>## 'location' found in 3 out of 3 assay(s)</code></pre>
-<pre><code>## An instance of class QFeatures containing 3 set(s):
+<pre><code>## An instance of class QFeatures containing 3 assays:
 ##  [1] psms: SummarizedExperiment with 4 rows and 2 columns 
 ##  [2] peptides: SummarizedExperiment with 1 rows and 2 columns 
 ##  [3] proteins: SummarizedExperiment with 1 rows and 2 columns</code></pre>
@@ -640,7 +640,7 @@ the data.</p>
 <pre><code>## Formatting sample annotations (colData).</code></pre>
 <pre><code>## Formatting data as a 'QFeatures' object.</code></pre>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-quant.html#cb347-1" tabindex="-1"></a>hl</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 1 set(s):
+<pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psms: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>Below, we see that we can extract an assay using its index or its
 name. The individual assays are stored as <em>SummarizedExperiment</em>
@@ -724,13 +724,13 @@ only include it into a <code>QFeatures</code> object.</p>
 ## colnames(10): X126 X127C ... X130N X131
 ## colData names(0):</code></pre>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-quant.html#cb361-1" tabindex="-1"></a><span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">psm =</span> se))</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 1 set(s):
+<pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] psm: SummarizedExperiment with 3010 rows and 10 columns</code></pre>
 <p>At this stage, i.e. at the beginning of the analysis, whether you have
 a <code>SummarizedExperiment</code> or a <code>QFeatures</code> object, it is a good time to
 define the experimental design in the <code>colData</code> slot.</p>
-<div id="exercise-4" class="section level3 unnumbered">
-<h3>Exercise<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('exercise-4')" onmouseout="reset_tooltip('exercise-4-tooltip')"><span class="tooltiptext" id="exercise-4-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<div id="exercise" class="section level3 unnumbered">
+<h3>Exercise<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('exercise')" onmouseout="reset_tooltip('exercise-tooltip')"><span class="tooltiptext" id="exercise-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>The CPTAC spike-in study 6 <span class="citation">(<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Paulovich et al. 2010<span class="marginnote">Paulovich, Amanda G, Dean Billheimer, Amy-Joan L Ham, Lorenzo Vega-Montoto, Paul A Rudnick, David L Tabb, Pei Wang, et al. 2010. <span>“Interlaboratory Study Characterizing a Yeast Performance Standard for Benchmarking <span>LC-MS</span> Platform Performance.”</span> <em>Mol. Cell. Proteomics</em> 9 (2): 242–54.</span>)</span> combines the Sigma UPS1
 standard containing 48 different human proteins that are spiked in at
@@ -751,7 +751,7 @@ available in the <code>MsDataHub</code> package:</p>
 <div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="sec-quant.html#cb363-1" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> MsDataHub<span class="sc">::</span><span class="fu">cptac_a_b_peptides.txt</span>())</span></code></pre></div>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
-<pre><code>## [1] "2c37ce3df3dbd9_7855"</code></pre>
+<pre><code>## [1] "2f5f996e6390fa_7855"</code></pre>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -1258,7 +1258,7 @@ vignette.</p>
 <code>SummarizedExperiment</code> as shown below.</p>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="sec-quant.html#cb415-1" tabindex="-1"></a>cptac <span class="ot">&lt;-</span> <span class="fu">QFeatures</span>(<span class="fu">list</span>(<span class="at">peptides =</span> cptac_se))</span>
 <span id="cb415-2"><a href="sec-quant.html#cb415-2" tabindex="-1"></a>cptac</span></code></pre></div>
-<pre><code>## An instance of class QFeatures containing 1 set(s):
+<pre><code>## An instance of class QFeatures containing 1 assays:
 ##  [1] peptides: SummarizedExperiment with 7584 rows and 6 columns</code></pre>
 <p>We should also assign the <code>QFeatures</code> column data with the
 <code>SummarizedExperiment</code> slot.</p>
@@ -1691,7 +1691,7 @@ Figure 5.16: Aggregation using robust summarisation.
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-03-05
+2025-03-17
  using 
 R version 4.4.1 (2024-06-14)
 </p>

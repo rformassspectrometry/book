@@ -1,0 +1,295 @@
+import(methods)
+import(utils)
+import(graphics)
+import(stats)
+
+exportClasses(
+    ## from R/S3-classes-as-S4-classes.R:
+    connection,
+    file, url, gzfile, bzfile, unz, pipe,
+    fifo, sockconn, terminal, textConnection,
+    gzcon,
+    character_OR_connection,
+    AsIs,
+    #table, xtabs,
+    dist,
+
+    ## from R/containsOutOfMemoryData.R:
+    OutOfMemoryObject
+)
+
+
+### ==========================================================================
+### Export functions defined in base R and explicitly promoted to generics in
+### the BiocGenerics package
+### --------------------------------------------------------------------------
+
+### Generics for functions defined in package base:
+export(
+    ## from R/aperm.R:
+    aperm,
+
+    ## from R/append.R:
+    append,
+
+    ## from R/as.data.frame.R:
+    as.data.frame,
+
+    ## from R/as.list.R:
+    as.list,
+
+    ## from R/as.vector.R:
+    as.vector,
+
+    ## from R/cbind.R:
+    rbind, cbind,
+
+    ## from R/do.call.R:
+    do.call,
+
+    ## from R/duplicated.R:
+    duplicated, anyDuplicated,
+
+    ## from R/eval.R:
+    eval, evalq,
+
+    ## from R/Extremes.R:
+    pmax, pmin, pmax.int, pmin.int,
+
+    ## from R/format.R:
+    format,
+
+    ## from R/funprog.R:
+    Reduce, Filter, Find, Map, Position,
+
+    ## from R/get.R:
+    get, mget,
+
+    ## from R/grepl.R:
+    grep, grepl,
+
+    ## from R/is.unsorted.R:
+    is.unsorted,
+
+    ## from R/lapply.R:
+    lapply, sapply,
+
+    ## from R/mapply.R:
+    mapply,
+
+    ## from R/match.R:
+    match, "%in%",
+
+    ## from R/mean.R:
+    mean,
+
+    ## from R/nrow.R:
+    nrow, ncol, NROW, NCOL,
+
+    ## from R/order.R:
+    order,
+
+    ## from R/paste.R:
+    paste,
+
+    ## from R/rank.R:
+    rank,
+
+    ## from R/rep.R:
+    rep.int,
+
+    ## from R/row_colnames.R:
+    rownames, "rownames<-", colnames, "colnames<-",
+
+    ## from R/saveRDS.R:
+    saveRDS,
+
+    ## from R/sets.R:
+    union, intersect, setdiff,
+
+    ## from R/sort.R:
+    sort,
+
+    ## from R/start.R:
+    start, "start<-",
+    end, "end<-",
+    width, "width<-",
+    pos,
+
+    ## from R/subset.R:
+    subset,
+
+    ## from R/t.R:
+    t,
+
+    ## from R/table.R:
+    table,
+
+    ## from R/tapply.R:
+    tapply,
+
+    ## from R/unique.R:
+    unique,
+
+    ## from R/unlist.R:
+    unlist,
+
+    ## from R/unsplit.R:
+    unsplit,
+
+    ## from R/which.R:
+    which,
+
+    ## from R/which.min.R:
+    which.min, which.max
+)
+
+S3method(format, list)
+export(format.list)
+
+### Generics for functions defined in package utils:
+export(
+    ## from R/relist.R:
+    relist
+)
+
+### Generics for functions defined in package graphics:
+export(
+    ## from R/boxplot.R:
+    boxplot,
+
+    ## from R/image.R:
+    image
+)
+
+### Generics for functions defined in package stats:
+export(
+    ## from R/density.R:
+    density,
+
+    ## from R/IQR.R:
+    IQR,
+
+    ## from R/mad.R:
+    mad,
+
+    ## from R/residuals.R:
+    residuals,
+
+    ## from R/var.R:
+    var, sd,
+
+    ## from R/weights.R:
+    weights,
+
+    ## from R/xtabs.R:
+    xtabs
+)
+
+
+### ==========================================================================
+### Export Bioconductor specific generics and their methods
+### --------------------------------------------------------------------------
+
+export(
+    ## from R/annotation.R:
+    annotation, "annotation<-",
+
+    ## from R/combine.R:
+    combine,
+
+    ## from R/containsOutOfMemoryData.R:
+    containsOutOfMemoryData,
+
+    ## from R/dbconn.R:
+    dbconn, dbfile,
+
+    ## from R/dge.R:
+    counts, "counts<-",
+    design, "design<-",
+    dispTable, "dispTable<-",
+    sizeFactors, "sizeFactors<-",
+    conditions, "conditions<-",
+    estimateSizeFactors,
+    estimateDispersions,
+    plotDispEsts,
+
+    ## from R/dims.R:
+    dims, nrows, ncols,
+
+    ## from R/fileName.R:
+    fileName,
+
+    ## from R/normalize.R:
+    normalize,
+
+    ## from R/Ontology.R:
+    Ontology,
+
+    ## from R/organism_species.R:
+    organism, "organism<-",
+    species, "species<-",
+
+    ## from R/path.R:
+    path, "path<-",
+    basename, "basename<-",
+    dirname, "dirname<-",
+
+    ## from R/plotMA.R:
+    plotMA,
+
+    ## from R/plotPCA.R:
+    plotPCA,
+
+    ## from R/score.R:
+    score, "score<-",
+
+    ## from R/strand.R:
+    strand, "strand<-", invertStrand,
+
+    ## from R/toTable.R:
+    toTable,
+
+    ## from R/type.R:
+    type, "type<-",
+
+    ## from R/updateObject.R:
+    updateObject,
+    updateObjectFromSlots,
+    getObjectSlots
+)
+
+exportMethods(
+    ## from R/combine.R:
+    combine,
+
+    ## from R/containsOutOfMemoryData.R:
+    containsOutOfMemoryData,
+
+    ## from R/path.R:
+    basename, "basename<-",
+    dirname, "dirname<-",
+
+    ## from R/plotMA.R:
+    plotMA,
+
+    ## from R/strand.R:
+    invertStrand,
+
+    ## from R/type.R:
+    type, "type<-",
+
+    ## from R/updateObject.R:
+    updateObject
+)
+
+
+### ==========================================================================
+### Export non-generic functions
+### --------------------------------------------------------------------------
+
+export(
+    ## from R/strand.R:
+    unstrand
+)
+

@@ -1,0 +1,14 @@
+CHANGES IN VERSION 0.52.0
+-------------------------
+
+NEW FEATURES
+
+    o Define the OutOfMemoryObject class (VIRTUAL class with no slots).
+
+    o Add S4 generic containsOutOfMemoryData() and implement various methods.
+      See '?containsOutOfMemoryData' for the details.
+
+    o Add S4 generic saveRDS() and a default method that is just a thin wrapper
+      around base::saveRDS() that issues a warning if the object to serialize
+      contains out-of-memory data.
+

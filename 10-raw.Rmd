@@ -62,7 +62,9 @@ sp0 <- Spectra(spd)
 sp0
 ```
 
-#### Exercise {-}
+
+`r msmbstyle::question_begin()`
+
 
 Explore the newly created object using
 
@@ -71,6 +73,8 @@ Explore the newly created object using
 - `spectraData` to extract all the metadata.
 - `peaksData` to extract a list containing the raw data.
 - `[` to create subsets.
+
+`r msmbstyle::question_end()`
 
 ### `Spectra` from mzML files
 
@@ -83,12 +87,16 @@ sp <- Spectra(mzf)
 sp
 ```
 
-#### Exercise {-}
+
+`r msmbstyle::question_begin()`
+
 
 - Repeat the data manipulations above.
 - Check the number of scans in the object with `length()`.
 - Note the difference in the first line when showing the object in the
   console. We will get back to this idea of backend later.
+
+`r msmbstyle::question_end()`
 
 Mass spectrometry data in `Spectra` objects can be thought of as a
 list of individual spectra, with each spectrum having a set of
@@ -154,8 +162,8 @@ sp$rtime_minute <- rtime(sp) / 60
 sp$rtime_minute |> head()
 ```
 
+`r msmbstyle::question_begin()`
 
-#### Exercise {-}
 
 - Extract a set of spectra variables using the accessor (for example
   `msLevel(.)`) or using the `$` notation (for example `.$msLevel`).
@@ -168,7 +176,10 @@ sp$rtime_minute |> head()
   function to visualise peaks and set the m/z range with the `xlim`
   arguments.
 
-#### Exercise {-}
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
 
 Using the first raw data file starting with `MS3TMT10`, answer the
 following questions:
@@ -180,6 +191,7 @@ following questions:
 * Plot one spectrum of each level. Are they centroided or in profile
   mode?
 
+`r msmbstyle::question_end()`
 
 These objects and their manipulations are not limited to single files or
 samples. Below we load data from two mzML files. The MS data from both files in
