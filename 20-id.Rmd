@@ -29,9 +29,12 @@ paste0("java -jar /path/to/MSGFPlus.jar",
 Let's use the identification from `msdata`:
 
 ```{r mzrvsid, eval = TRUE}
-idf <- msdata::ident(full.names = TRUE)
+idf <- MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzid()
 basename(idf)
 ```
+
+Alternatively, the same file is also available from the `msdata`
+package with `idf <- msdata::ident(full.names = TRUE)`.
 
 The easiest way to read identification data in `mzIdentML` (often
 abbreviated with `mzid`) into R is to read it with the `readPSMs()`
