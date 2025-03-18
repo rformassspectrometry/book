@@ -435,11 +435,11 @@ These data can also be visualised on the total ion chromatogram:
 
 ```{r nSequencePlot, fig.fullwidth = TRUE, fig.width = 8, fig.height = 4}
 sp |>
-filterMsLevel(1) |>
-spectraData() |>
-as_tibble() |>
-ggplot(aes(x = rtime,
-           y = totIonCurrent)) +
+    filterMsLevel(1) |>
+    spectraData() |>
+    as_tibble() |>
+    ggplot(aes(x = rtime,
+               y = totIonCurrent)) +
     geom_line(alpha = 0.25) +
     geom_point(aes(colour = ifelse(countIdentifications == 0,
                                    NA, countIdentifications)),
