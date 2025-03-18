@@ -170,9 +170,13 @@ Each data can then be downloaded with a dedicated function, for example
 ko15.CDF()
 ```
 
-Note that the
+Note that the (compressed)
 `TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML`
 file downloaded above happens to also be available in `MsDataHub`.
+
+```{r}
+MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz()
+```
 
 ### Experiment packages {-}
 
