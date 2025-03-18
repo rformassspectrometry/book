@@ -253,8 +253,7 @@ non-decoy hits. Interpret the figure.
 
 ```{r}
 library(ggplot2)
-as_tibble(id) |>
-    ggplot(aes(x = MS.GF.RawScore,
+ggplot(id, aes(x = MS.GF.RawScore,
                colour = isDecoy)) +
     geom_density()
 ```

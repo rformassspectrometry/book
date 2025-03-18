@@ -595,10 +595,9 @@ non-decoy hits. Interpret the figure.</p>
 </p>
 <div id="sol-body-13" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sec-id.html#cb156-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb156-2"><a href="sec-id.html#cb156-2" tabindex="-1"></a><span class="fu">as_tibble</span>(id) <span class="sc">|&gt;</span></span>
-<span id="cb156-3"><a href="sec-id.html#cb156-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MS.GF.RawScore,</span>
-<span id="cb156-4"><a href="sec-id.html#cb156-4" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
-<span id="cb156-5"><a href="sec-id.html#cb156-5" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<span id="cb156-2"><a href="sec-id.html#cb156-2" tabindex="-1"></a><span class="fu">ggplot</span>(id, <span class="fu">aes</span>(<span class="at">x =</span> MS.GF.RawScore,</span>
+<span id="cb156-3"><a href="sec-id.html#cb156-3" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
+<span id="cb156-4"><a href="sec-id.html#cb156-4" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/unnamed-chunk-43-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1376,7 +1375,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 16:08:42 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 16:18:14 2025]</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb250-2"><a href="sec-id.html#cb250-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb250-3"><a href="sec-id.html#cb250-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
