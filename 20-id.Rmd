@@ -675,7 +675,7 @@ id_filtered$pkey <-
            sub("^.+=", "::", id_filtered$spectrumID))
 head(id_filtered$pkey)
 
-## For simplicity, let keep single hits per spectrum id.
+## For simplicity, let's keep single hits per spectrum id.
 ## Alternatively, explore duplicates and use QFeatures::reduceDataFrame
 id_filtered <- id_filtered[!duplicated(id_filtered$pkey), ]
 

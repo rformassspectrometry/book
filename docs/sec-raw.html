@@ -511,7 +511,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 33 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Tue Mar 18 17:11:39 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Tue Mar 18 19:29:18 2025]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -543,7 +543,7 @@ us to specify the storage location of the HDF5 file.</p>
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue Mar 18 17:11:44 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue Mar 18 19:29:23 2025]</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sec-raw.html#cb59-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
@@ -552,9 +552,9 @@ us to specify the storage location of the HDF5 file.</p>
 ##                                                                                               931</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="sec-raw.html#cb61-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmpw62PP5/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpknIpey/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/Rtmpw62PP5/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpknIpey/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -678,7 +678,7 @@ children.</li>
 ## file(s):
 ## 2eafef6aa02fe1_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Tue Mar 18 17:11:44 2025]</code></pre>
+##  Filter: select parent/children scans for 2807 [Tue Mar 18 19:29:23 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -992,8 +992,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Tue Mar 18 17:11:45 2025]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Tue Mar 18 17:11:45 2025]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Tue Mar 18 19:29:24 2025]
+##  Filter: select retention time [175..189] on MS level(s) 1 [Tue Mar 18 19:29:24 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1079,7 +1079,7 @@ below (next to Lazy evaluation queue).</p>
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue Mar 18 17:11:45 2025]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue Mar 18 19:29:24 2025]</code></pre>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="sec-raw.html#cb89-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sec-raw.html#cb91-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>

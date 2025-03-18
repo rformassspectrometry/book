@@ -1290,7 +1290,7 @@ must now be performed by spectrum ids and by files.</p>
 ## [4] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::15180"
 ## [5] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::10327"
 ## [6] "QEP2LC6_HeLa_50ng_251120_01-calib.mzML::12894"</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-id.html#cb244-1" tabindex="-1"></a><span class="do">## For simplicity, let keep single hits per spectrum id.</span></span>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-id.html#cb244-1" tabindex="-1"></a><span class="do">## For simplicity, let's keep single hits per spectrum id.</span></span>
 <span id="cb244-2"><a href="sec-id.html#cb244-2" tabindex="-1"></a><span class="do">## Alternatively, explore duplicates and use QFeatures::reduceDataFrame</span></span>
 <span id="cb244-3"><a href="sec-id.html#cb244-3" tabindex="-1"></a>id_filtered <span class="ot">&lt;-</span> id_filtered[<span class="sc">!</span><span class="fu">duplicated</span>(id_filtered<span class="sc">$</span>pkey), ]</span>
 <span id="cb244-4"><a href="sec-id.html#cb244-4" tabindex="-1"></a></span>
@@ -1351,7 +1351,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 17:12:15 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 19:29:54 2025]</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb250-2"><a href="sec-id.html#cb250-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb250-3"><a href="sec-id.html#cb250-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
