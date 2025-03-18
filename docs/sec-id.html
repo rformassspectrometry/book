@@ -681,44 +681,20 @@ variables.</p>
 <div id="sol-body-15" class="solution-body" style="display: none;">
 <p>In the raw data, it is encoded as <code>spectrumId</code>, while in the
 identification data, we have <code>spectrumID</code>.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sec-id.html#cb160-1" tabindex="-1"></a><span class="fu">spectraVariables</span>(sp)</span></code></pre></div>
-<pre><code>##  [1] "msLevel"                  "rtime"                   
-##  [3] "acquisitionNum"           "scanIndex"               
-##  [5] "dataStorage"              "dataOrigin"              
-##  [7] "centroided"               "smoothed"                
-##  [9] "polarity"                 "precScanNum"             
-## [11] "precursorMz"              "precursorIntensity"      
-## [13] "precursorCharge"          "collisionEnergy"         
-## [15] "isolationWindowLowerMz"   "isolationWindowTargetMz" 
-## [17] "isolationWindowUpperMz"   "peaksCount"              
-## [19] "totIonCurrent"            "basePeakMZ"              
-## [21] "basePeakIntensity"        "ionisationEnergy"        
-## [23] "lowMZ"                    "highMZ"                  
-## [25] "mergedScan"               "mergedResultScanNum"     
-## [27] "mergedResultStartScanNum" "mergedResultEndScanNum"  
-## [29] "injectionTime"            "filterString"            
-## [31] "spectrumId"               "ionMobilityDriftTime"    
-## [33] "scanWindowLowerLimit"     "scanWindowUpperLimit"    
-## [35] "rtime_minute"</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-id.html#cb162-1" tabindex="-1"></a><span class="fu">names</span>(id_filtered)</span></code></pre></div>
-<pre><code>##  [1] "sequence"                 "spectrumID"              
-##  [3] "chargeState"              "rank"                    
-##  [5] "passThreshold"            "experimentalMassToCharge"
-##  [7] "calculatedMassToCharge"   "peptideRef"              
-##  [9] "modNum"                   "isDecoy"                 
-## [11] "post"                     "pre"                     
-## [13] "start"                    "end"                     
-## [15] "DatabaseAccess"           "DBseqLength"             
-## [17] "DatabaseSeq"              "DatabaseDescription"     
-## [19] "scan.number.s."           "acquisitionNum"          
-## [21] "spectrumFile"             "idFile"                  
-## [23] "MS.GF.RawScore"           "MS.GF.DeNovoScore"       
-## [25] "MS.GF.SpecEValue"         "MS.GF.EValue"            
-## [27] "MS.GF.QValue"             "MS.GF.PepQValue"         
-## [29] "modPeptideRef"            "modName"                 
-## [31] "modMass"                  "modLocation"             
-## [33] "subOriginalResidue"       "subReplacementResidue"   
-## [35] "subLocation"</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sec-id.html#cb160-1" tabindex="-1"></a><span class="fu">head</span>(id_filtered<span class="sc">$</span>spectrumID)</span></code></pre></div>
+<pre><code>## [1] "controllerType=0 controllerNumber=1 scan=2949"
+## [2] "controllerType=0 controllerNumber=1 scan=6534"
+## [3] "controllerType=0 controllerNumber=1 scan=4782"
+## [4] "controllerType=0 controllerNumber=1 scan=6118"
+## [5] "controllerType=0 controllerNumber=1 scan=4757"
+## [6] "controllerType=0 controllerNumber=1 scan=6518"</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-id.html#cb162-1" tabindex="-1"></a><span class="fu">head</span>(sp<span class="sc">$</span>spectrumId)</span></code></pre></div>
+<pre><code>## [1] "controllerType=0 controllerNumber=1 scan=1"
+## [2] "controllerType=0 controllerNumber=1 scan=2"
+## [3] "controllerType=0 controllerNumber=1 scan=3"
+## [4] "controllerType=0 controllerNumber=1 scan=4"
+## [5] "controllerType=0 controllerNumber=1 scan=5"
+## [6] "controllerType=0 controllerNumber=1 scan=6"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1375,7 +1351,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 16:18:14 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 17:12:15 2025]</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb250-2"><a href="sec-id.html#cb250-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb250-3"><a href="sec-id.html#cb250-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>

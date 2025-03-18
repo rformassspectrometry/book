@@ -320,8 +320,8 @@ In the raw data, it is encoded as `spectrumId`, while in the
 identification data, we have `spectrumID`.
 
 ```{r}
-spectraVariables(sp)
-names(id_filtered)
+head(id_filtered$spectrumID)
+head(sp$spectrumId)
 ```
 
 `r msmbstyle::solution_end()`
