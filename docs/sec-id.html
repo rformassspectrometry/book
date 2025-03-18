@@ -393,7 +393,7 @@ will thus start by converting the <code>DataFrame</code> to a <code>tibble</code
 ► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
 <div id="sol-body-10" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="sec-id.html#cb132-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> id_tbl <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="sec-id.html#cb132-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> id_tbl <span class="sc">|&gt;</span></span>
 <span id="cb132-2"><a href="sec-id.html#cb132-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>isDecoy)</span>
 <span id="cb132-3"><a href="sec-id.html#cb132-3" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,906 × 35
@@ -439,7 +439,7 @@ will thus start by converting the <code>DataFrame</code> to a <code>tibble</code
 ► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
 <div id="sol-body-11" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="sec-id.html#cb134-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> id_tbl <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="sec-id.html#cb134-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span> id_tbl <span class="sc">|&gt;</span></span>
 <span id="cb134-2"><a href="sec-id.html#cb134-2" tabindex="-1"></a>    <span class="fu">filter</span>(rank <span class="sc">==</span> <span class="dv">1</span>)</span>
 <span id="cb134-3"><a href="sec-id.html#cb134-3" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,751 × 35
@@ -490,10 +490,10 @@ match any of these proteins.</li>
 </p>
 <div id="sol-body-12" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="sec-id.html#cb136-1" tabindex="-1"></a>mltm <span class="ot">&lt;-</span></span>
-<span id="cb136-2"><a href="sec-id.html#cb136-2" tabindex="-1"></a>    id_tbl <span class="sc">%&gt;%</span></span>
-<span id="cb136-3"><a href="sec-id.html#cb136-3" tabindex="-1"></a>    <span class="fu">group_by</span>(spectrumID) <span class="sc">%&gt;%</span></span>
-<span id="cb136-4"><a href="sec-id.html#cb136-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">nProts =</span> <span class="fu">length</span>(<span class="fu">unique</span>(DatabaseAccess))) <span class="sc">%&gt;%</span></span>
-<span id="cb136-5"><a href="sec-id.html#cb136-5" tabindex="-1"></a>    <span class="fu">filter</span>(nProts <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb136-2"><a href="sec-id.html#cb136-2" tabindex="-1"></a>    id_tbl <span class="sc">|&gt;</span></span>
+<span id="cb136-3"><a href="sec-id.html#cb136-3" tabindex="-1"></a>    <span class="fu">group_by</span>(spectrumID) <span class="sc">|&gt;</span></span>
+<span id="cb136-4"><a href="sec-id.html#cb136-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">nProts =</span> <span class="fu">length</span>(<span class="fu">unique</span>(DatabaseAccess))) <span class="sc">|&gt;</span></span>
+<span id="cb136-5"><a href="sec-id.html#cb136-5" tabindex="-1"></a>    <span class="fu">filter</span>(nProts <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb136-6"><a href="sec-id.html#cb136-6" tabindex="-1"></a>    <span class="fu">select</span>(spectrumID, nProts)</span>
 <span id="cb136-7"><a href="sec-id.html#cb136-7" tabindex="-1"></a>mltm</span></code></pre></div>
 <pre><code>## # A tibble: 85 × 2
@@ -512,7 +512,7 @@ match any of these proteins.</li>
 ## 10 controllerType=0 controllerNumber=1 scan=4784      2
 ## # ℹ 75 more rows</code></pre>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="sec-id.html#cb138-1" tabindex="-1"></a>id_tbl <span class="ot">&lt;-</span></span>
-<span id="cb138-2"><a href="sec-id.html#cb138-2" tabindex="-1"></a>    id_tbl <span class="sc">%&gt;%</span></span>
+<span id="cb138-2"><a href="sec-id.html#cb138-2" tabindex="-1"></a>    id_tbl <span class="sc">|&gt;</span></span>
 <span id="cb138-3"><a href="sec-id.html#cb138-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>spectrumID <span class="sc">%in%</span> mltm<span class="sc">$</span>spectrumID)</span>
 <span id="cb138-4"><a href="sec-id.html#cb138-4" tabindex="-1"></a>id_tbl</span></code></pre></div>
 <pre><code>## # A tibble: 2,666 × 35
@@ -595,7 +595,7 @@ non-decoy hits. Interpret the figure.</p>
 </p>
 <div id="sol-body-13" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sec-id.html#cb156-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb156-2"><a href="sec-id.html#cb156-2" tabindex="-1"></a><span class="fu">as_tibble</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb156-2"><a href="sec-id.html#cb156-2" tabindex="-1"></a><span class="fu">as_tibble</span>(id) <span class="sc">|&gt;</span></span>
 <span id="cb156-3"><a href="sec-id.html#cb156-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MS.GF.RawScore,</span>
 <span id="cb156-4"><a href="sec-id.html#cb156-4" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
 <span id="cb156-5"><a href="sec-id.html#cb156-5" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
@@ -628,11 +628,11 @@ respective number of peptides.</p>
 </p>
 <div id="sol-body-14" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="sec-id.html#cb157-1" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(<span class="st">"dplyr"</span>))</span>
-<span id="cb157-2"><a href="sec-id.html#cb157-2" tabindex="-1"></a>iddf <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(id_filtered) <span class="sc">%&gt;%</span></span>
+<span id="cb157-2"><a href="sec-id.html#cb157-2" tabindex="-1"></a>iddf <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(id_filtered) <span class="sc">|&gt;</span></span>
 <span id="cb157-3"><a href="sec-id.html#cb157-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">peplen =</span> <span class="fu">nchar</span>(sequence))</span>
-<span id="cb157-4"><a href="sec-id.html#cb157-4" tabindex="-1"></a>npeps <span class="ot">&lt;-</span> iddf <span class="sc">%&gt;%</span></span>
-<span id="cb157-5"><a href="sec-id.html#cb157-5" tabindex="-1"></a>    <span class="fu">group_by</span>(DatabaseAccess) <span class="sc">%&gt;%</span></span>
-<span id="cb157-6"><a href="sec-id.html#cb157-6" tabindex="-1"></a>    tally</span>
+<span id="cb157-4"><a href="sec-id.html#cb157-4" tabindex="-1"></a>npeps <span class="ot">&lt;-</span> iddf <span class="sc">|&gt;</span></span>
+<span id="cb157-5"><a href="sec-id.html#cb157-5" tabindex="-1"></a>    <span class="fu">group_by</span>(DatabaseAccess) <span class="sc">|&gt;</span></span>
+<span id="cb157-6"><a href="sec-id.html#cb157-6" tabindex="-1"></a>    <span class="fu">tally</span>()</span>
 <span id="cb157-7"><a href="sec-id.html#cb157-7" tabindex="-1"></a>iddf <span class="ot">&lt;-</span> <span class="fu">full_join</span>(iddf, npeps)</span></code></pre></div>
 <pre><code>## Joining with `by = join_by(DatabaseAccess)`</code></pre>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="sec-id.html#cb159-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
@@ -736,7 +736,7 @@ has 4 matching PSMs in detail.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-id.html#cb166-1" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">table</span>(id_filtered<span class="sc">$</span>spectrumID) <span class="sc">==</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## controllerType=0 controllerNumber=1 scan=5490 
 ##                                          1903</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-id.html#cb168-1" tabindex="-1"></a>id_4 <span class="ot">&lt;-</span> id_filtered[id_filtered<span class="sc">$</span>spectrumID <span class="sc">==</span> <span class="st">"controllerType=0 controllerNumber=1 scan=5490"</span>, ] <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-id.html#cb168-1" tabindex="-1"></a>id_4 <span class="ot">&lt;-</span> id_filtered[id_filtered<span class="sc">$</span>spectrumID <span class="sc">==</span> <span class="st">"controllerType=0 controllerNumber=1 scan=5490"</span>, ] <span class="sc">|&gt;</span></span>
 <span id="cb168-2"><a href="sec-id.html#cb168-2" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
 <span id="cb168-3"><a href="sec-id.html#cb168-3" tabindex="-1"></a>id_4</span></code></pre></div>
 <pre><code>##                   sequence                                    spectrumID
@@ -1067,7 +1067,8 @@ matrix between all spectra using <code>compareSpectra</code>. See the
 ► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
 </p>
 <div id="sol-body-19" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-id.html#cb200-1" tabindex="-1"></a><span class="fu">filterIntensity</span>(sp_k, <span class="fl">1e3</span>) <span class="sc">%&gt;%</span> <span class="fu">plotSpectra</span>(<span class="at">main =</span> sp_k<span class="sc">$</span>sequence)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-id.html#cb200-1" tabindex="-1"></a><span class="fu">filterIntensity</span>(sp_k, <span class="fl">1e3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb200-2"><a href="sec-id.html#cb200-2" tabindex="-1"></a>    <span class="fu">plotSpectra</span>(<span class="at">main =</span> sp_k<span class="sc">$</span>sequence)</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/plot_spectra_compared-1.png" width="672"></p>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sec-id.html#cb201-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
 <span id="cb201-2"><a href="sec-id.html#cb201-2" tabindex="-1"></a><span class="fu">plotSpectraMirror</span>(sp_k[<span class="dv">1</span>], sp_k[<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"TK..."</span>)</span>
@@ -1235,9 +1236,9 @@ PSMs id scores for each file.</p>
 <span id="cb228-3"><a href="sec-id.html#cb228-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
 <span id="cb228-4"><a href="sec-id.html#cb228-4" tabindex="-1"></a></span>
 <span id="cb228-5"><a href="sec-id.html#cb228-5" tabindex="-1"></a><span class="do">## Chromatograms</span></span>
-<span id="cb228-6"><a href="sec-id.html#cb228-6" tabindex="-1"></a><span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb228-7"><a href="sec-id.html#cb228-7" tabindex="-1"></a>    <span class="fu">spectraData</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb228-8"><a href="sec-id.html#cb228-8" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb228-6"><a href="sec-id.html#cb228-6" tabindex="-1"></a><span class="fu">filterMsLevel</span>(sp, <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb228-7"><a href="sec-id.html#cb228-7" tabindex="-1"></a>    <span class="fu">spectraData</span>() <span class="sc">|&gt;</span></span>
+<span id="cb228-8"><a href="sec-id.html#cb228-8" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
 <span id="cb228-9"><a href="sec-id.html#cb228-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rtime,</span>
 <span id="cb228-10"><a href="sec-id.html#cb228-10" tabindex="-1"></a>               <span class="at">y =</span> totIonCurrent,</span>
 <span id="cb228-11"><a href="sec-id.html#cb228-11" tabindex="-1"></a>               <span class="at">colour =</span> <span class="fu">basename</span>(dataOrigin))) <span class="sc">+</span></span>
@@ -1256,7 +1257,7 @@ PSMs id scores for each file.</p>
 ##                                                    24436 
 ## 2ec17070d9ebb7_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
 ##                                                    25231</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-id.html#cb231-1" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-id.html#cb231-1" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">|&gt;</span></span>
 <span id="cb231-2"><a href="sec-id.html#cb231-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MetaMorpheus.score,</span>
 <span id="cb231-3"><a href="sec-id.html#cb231-3" tabindex="-1"></a>               <span class="at">colour =</span> isDecoy)) <span class="sc">+</span></span>
 <span id="cb231-4"><a href="sec-id.html#cb231-4" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span></span>
@@ -1375,7 +1376,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 12:55:40 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Tue Mar 18 16:08:42 2025]</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb250-2"><a href="sec-id.html#cb250-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb250-3"><a href="sec-id.html#cb250-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>

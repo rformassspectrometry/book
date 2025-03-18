@@ -155,7 +155,7 @@ id_tbl
 `r msmbstyle::solution_begin()`
 
 ```{r, message = FALSE}
-id_tbl <- id_tbl %>%
+id_tbl <- id_tbl |>
     filter(!isDecoy)
 id_tbl
 ```
@@ -171,7 +171,7 @@ id_tbl
 
 
 ```{r}
-id_tbl <- id_tbl %>%
+id_tbl <- id_tbl |>
     filter(rank == 1)
 id_tbl
 ```
@@ -192,16 +192,16 @@ id_tbl
 
 ```{r}
 mltm <-
-    id_tbl %>%
-    group_by(spectrumID) %>%
-    mutate(nProts = length(unique(DatabaseAccess))) %>%
-    filter(nProts > 1) %>%
+    id_tbl |>
+    group_by(spectrumID) |>
+    mutate(nProts = length(unique(DatabaseAccess))) |>
+    filter(nProts > 1) |>
     select(spectrumID, nProts)
 mltm
 ```
 ```{r}
 id_tbl <-
-    id_tbl %>%
+    id_tbl |>
     filter(!spectrumID %in% mltm$spectrumID)
 id_tbl
 ```
@@ -253,7 +253,7 @@ non-decoy hits. Interpret the figure.
 
 ```{r}
 library(ggplot2)
-as_tibble(id) %>%
+as_tibble(id) |>
     ggplot(aes(x = MS.GF.RawScore,
                colour = isDecoy)) +
     geom_density()
@@ -278,11 +278,11 @@ respective number of peptides.
 
 ```{r answid1, fig.cap = "Identifcation data wrangling."}
 suppressPackageStartupMessages(library("dplyr"))
-iddf <- as_tibble(id_filtered) %>%
+iddf <- as_tibble(id_filtered) |>
     mutate(peplen = nchar(sequence))
-npeps <- iddf %>%
-    group_by(DatabaseAccess) %>%
-    tally
+npeps <- iddf |>
+    group_by(DatabaseAccess) |>
+    tally()
 iddf <- full_join(iddf, npeps)
 
 library("ggplot2")
@@ -340,7 +340,7 @@ has 4 matching PSMs in detail.
 
 ```{r}
 which(table(id_filtered$spectrumID) == 4)
-id_4 <- id_filtered[id_filtered$spectrumID == "controllerType=0 controllerNumber=1 scan=5490", ] %>%
+id_4 <- id_filtered[id_filtered$spectrumID == "controllerType=0 controllerNumber=1 scan=5490", ] |>
     as.data.frame()
 id_4
 ```
@@ -548,7 +548,8 @@ pheatmap::pheatmap(mat)
 
 
 ```{r plot_spectra_compared}
-filterIntensity(sp_k, 1e3) %>% plotSpectra(main = sp_k$sequence)
+filterIntensity(sp_k, 1e3) |>
+    plotSpectra(main = sp_k$sequence)
 ```
 
 ```{r}
@@ -621,9 +622,9 @@ library("tidyr")
 library("magrittr")
 
 ## Chromatograms
-filterMsLevel(sp, 1) %>%
-    spectraData() %>%
-    as_tibble() %>%
+filterMsLevel(sp, 1) |>
+    spectraData() |>
+    as_tibble() |>
     ggplot(aes(x = rtime,
                y = totIonCurrent,
                colour = basename(dataOrigin))) +
@@ -638,7 +639,7 @@ id <- PSM(mzids)
 ## Number of PSMs per acquisition
 table(id$idFile)
 
-tidyr::as_tibble(id) %>%
+tidyr::as_tibble(id) |>
     ggplot(aes(x = MetaMorpheus.score,
                colour = isDecoy)) +
     geom_density() +
