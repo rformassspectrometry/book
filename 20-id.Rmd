@@ -30,15 +30,15 @@ Let's use the identification from `msdata`:
 
 ```{r mzrvsid, eval = TRUE}
 idf <- MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzid()
-basename(idf)
+idf
 ```
 
 Alternatively, the same file is also available from the `msdata`
 package with `idf <- msdata::ident(full.names = TRUE)`.
 
 The easiest way to read identification data in `mzIdentML` (often
-abbreviated with `mzid`) into R is to read it with the `readPSMs()`
-function from the
+abbreviated with `mzid`) into R is to read it with the `PSM()`
+constructor function from the
 [`PSMatch`](https://rformassspectrometry.github.io/PSMatch/)
 package[^oldname]. The function will parse the file and return a
 `DataFrame`.

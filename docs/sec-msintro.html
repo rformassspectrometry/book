@@ -427,9 +427,14 @@ on the package page.</p>
 <pre><code>## loading from cache</code></pre>
 <pre><code>##                                                    EH7803 
 ## "/home/lgatto/.cache/R/ExperimentHub/2f5f99721e1c94_7853"</code></pre>
-<p>Note that the
+<p>Note that the (compressed)
 <code>TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code>
 file downloaded above happens to also be available in <code>MsDataHub</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" tabindex="-1"></a>MsDataHub<span class="sc">::</span><span class="fu">TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz</span>()</span></code></pre></div>
+<pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
+<pre><code>## loading from cache</code></pre>
+<pre><code>##                                                   EH7808 
+## "/home/lgatto/.cache/R/ExperimentHub/4189228548251_7858"</code></pre>
 </div>
 <div id="experiment-packages" class="section level3 unnumbered">
 <h3>Experiment packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('experiment-packages')" onmouseout="reset_tooltip('experiment-packages-tooltip')"><span class="tooltiptext" id="experiment-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -437,19 +442,19 @@ file downloaded above happens to also be available in <code>MsDataHub</code>.</p
 <p>The <em><a href="https://bioconductor.org/packages/3.20/msdata">msdata</a></em> is an <em>experiment package</em>
 that directly ships raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb28-2"><a href="sec-msintro.html#cb28-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb28-3"><a href="sec-msintro.html#cb28-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb32-2"><a href="sec-msintro.html#cb32-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
+<span id="cb32-3"><a href="sec-msintro.html#cb32-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-msintro.html#cb30-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb30-2"><a href="sec-msintro.html#cb30-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-msintro.html#cb34-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
+<span id="cb34-2"><a href="sec-msintro.html#cb34-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb32-2"><a href="sec-msintro.html#cb32-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-msintro.html#cb36-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
+<span id="cb36-2"><a href="sec-msintro.html#cb36-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>New data are added to the more modern and lightweight <code>MsDataHub</code>
 infrastructure.</p>
