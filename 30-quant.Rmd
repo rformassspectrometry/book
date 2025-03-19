@@ -477,6 +477,16 @@ cptac_se <- readSummarizedExperiment(f, quantCols = i,
 cptac_se
 ```
 
+or
+
+```{r readse2}
+dfr <- read.delim(f)
+cptac_se <- readSummarizedExperiment(dfr, quantCols = i,
+                                     fnames = "Sequence")
+cptac_se
+```
+
+
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
