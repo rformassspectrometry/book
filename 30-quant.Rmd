@@ -797,16 +797,16 @@ interpret the figure.
 
 
 ```{r idqc1}
-rowData(cptac_se) %>%
-    as_tibble() %>%
+rowData(cptac_se) |>
+    as_tibble() |>
     ggplot(aes(x = Score, colour = Reverse)) +
     geom_density()
 
 ```
 
 ```{r idqc2}
-rowData(cptac_se) %>%
-    as_tibble() %>%
+rowData(cptac_se) |>
+    as_tibble() |>
     ggplot(aes(x = PEP, colour = Reverse)) +
     geom_density()
 ```
@@ -859,9 +859,9 @@ probability smaller than 0.05.
 
 ```{r qcfilter}
 cptac <-
-    cptac %>%
-    filterFeatures(~ Reverse != "+") %>%
-    filterFeatures(~ Potential.contaminant != "+") %>%
+    cptac |>
+    filterFeatures(~ Reverse != "+") |>
+    filterFeatures(~ Potential.contaminant != "+") |>
     filterFeatures(~ PEP < 0.05)
 ```
 
@@ -954,19 +954,19 @@ table(rowData(cptac[["proteins_med"]])$.n)
 library("factoextra")
 
 pca_pep <-
-    cptac[["lognorm_peptides"]] %>%
-    filterNA() %>%
-    assay() %>%
-    t() %>%
-    prcomp(scale = TRUE, center = TRUE) %>%
+    cptac[["lognorm_peptides"]] |>
+    filterNA() |>
+    assay() |>
+    t() |>
+    prcomp(scale = TRUE, center = TRUE) |>
     fviz_pca_ind(habillage = cptac$condition, title = "Peptides")
 
 pca_prot <-
-    cptac[["proteins_med"]] %>%
-    filterNA() %>%
-    assay() %>%
-    t() %>%
-    prcomp() %>%
+    cptac[["proteins_med"]] |>
+    filterNA() |>
+    assay() |>
+    t() |>
+    prcomp() |>
     fviz_pca_ind(habillage = cptac$condition,
                  title = "Proteins (median aggregation)")
 
@@ -986,9 +986,9 @@ tidyverse tools.
 
 ```{r vis, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 6, fig.cap = "Peptide and protein expression profile."}
 longFormat(cptac["P02787ups|TRFE_HUMAN_UPS", ,
-                 c("lognorm_peptides", "proteins_med")]) %>%
-    as_tibble() %>%
-    mutate(condition = ifelse(grepl("A", colname), "A", "B")) %>%
+                 c("lognorm_peptides", "proteins_med")]) |>
+    as_tibble() |>
+    mutate(condition = ifelse(grepl("A", colname), "A", "B")) |>
     ggplot(aes(x = colname, y = value, colour = rowname, shape = condition)) +
     geom_point(size = 3) +
     geom_line(aes(group = rowname)) +
@@ -1119,9 +1119,9 @@ the coefficient of interest.
 
 ```{r res}
 res <-
-    topTable(fit, coef = "prots$condition6B", number = Inf) %>%
-    rownames_to_column("protein") %>%
-    as_tibble() %>%
+    topTable(fit, coef = "prots$condition6B", number = Inf) |>
+    rownames_to_column("protein") |>
+    as_tibble() |>
     mutate(TP = grepl("ups", protein))
 ```
 
@@ -1129,7 +1129,7 @@ Note the warning about partial `NA` coefficients for 23 probes:
 
 ```{r nacoefs}
 na_coefs <-
-    filter(res, is.na(t)) %>%
+    filter(res, is.na(t)) |>
     pull(protein)
 assay(prots[na_coefs, ])
 ```
@@ -1137,7 +1137,7 @@ assay(prots[na_coefs, ])
 We can now visualise the results using a volcano plot:
 
 ```{r vp, fig.cap = "Volcano plot highlighing spiked-in proteins in red."}
-res %>%
+res |>
     ggplot(aes(x = logFC, y = -log10(adj.P.Val))) +
     geom_point(aes(colour = TP)) +
     geom_vline(xintercept = c(-1, 1)) +

@@ -1238,13 +1238,13 @@ interpret the figure.</p>
 ► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
 </p>
 <div id="sol-body-33" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="sec-quant.html#cb417-1" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
-<span id="cb417-2"><a href="sec-quant.html#cb417-2" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="sec-quant.html#cb417-1" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">|&gt;</span></span>
+<span id="cb417-2"><a href="sec-quant.html#cb417-2" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
 <span id="cb417-3"><a href="sec-quant.html#cb417-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Score, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
 <span id="cb417-4"><a href="sec-quant.html#cb417-4" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/idqc1-1.png" width="672"></p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-quant.html#cb418-1" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">%&gt;%</span></span>
-<span id="cb418-2"><a href="sec-quant.html#cb418-2" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-quant.html#cb418-1" tabindex="-1"></a><span class="fu">rowData</span>(cptac_se) <span class="sc">|&gt;</span></span>
+<span id="cb418-2"><a href="sec-quant.html#cb418-2" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
 <span id="cb418-3"><a href="sec-quant.html#cb418-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PEP, <span class="at">colour =</span> Reverse)) <span class="sc">+</span></span>
 <span id="cb418-4"><a href="sec-quant.html#cb418-4" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R4MS_files/figure-html/idqc2-1.png" width="672"></p>
@@ -1302,9 +1302,9 @@ probability smaller than 0.05.</p>
 </p>
 <div id="sol-body-34" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="sec-quant.html#cb422-1" tabindex="-1"></a>cptac <span class="ot">&lt;-</span></span>
-<span id="cb422-2"><a href="sec-quant.html#cb422-2" tabindex="-1"></a>    cptac <span class="sc">%&gt;%</span></span>
-<span id="cb422-3"><a href="sec-quant.html#cb422-3" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Reverse <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb422-4"><a href="sec-quant.html#cb422-4" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb422-2"><a href="sec-quant.html#cb422-2" tabindex="-1"></a>    cptac <span class="sc">|&gt;</span></span>
+<span id="cb422-3"><a href="sec-quant.html#cb422-3" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Reverse <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb422-4"><a href="sec-quant.html#cb422-4" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb422-5"><a href="sec-quant.html#cb422-5" tabindex="-1"></a>    <span class="fu">filterFeatures</span>(<span class="sc">~</span> PEP <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## 'Reverse' found in 1 out of 1 assay(s)</code></pre>
 <pre><code>## 'Potential.contaminant' found in 1 out of 1 assay(s)</code></pre>
@@ -1435,19 +1435,19 @@ less, while very few proteins are accounted for by tens of peptides.</p>
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="sec-quant.html#cb432-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
 <span id="cb432-2"><a href="sec-quant.html#cb432-2" tabindex="-1"></a></span>
 <span id="cb432-3"><a href="sec-quant.html#cb432-3" tabindex="-1"></a>pca_pep <span class="ot">&lt;-</span></span>
-<span id="cb432-4"><a href="sec-quant.html#cb432-4" tabindex="-1"></a>    cptac[[<span class="st">"lognorm_peptides"</span>]] <span class="sc">%&gt;%</span></span>
-<span id="cb432-5"><a href="sec-quant.html#cb432-5" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-6"><a href="sec-quant.html#cb432-6" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-7"><a href="sec-quant.html#cb432-7" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-8"><a href="sec-quant.html#cb432-8" tabindex="-1"></a>    <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb432-4"><a href="sec-quant.html#cb432-4" tabindex="-1"></a>    cptac[[<span class="st">"lognorm_peptides"</span>]] <span class="sc">|&gt;</span></span>
+<span id="cb432-5"><a href="sec-quant.html#cb432-5" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-6"><a href="sec-quant.html#cb432-6" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-7"><a href="sec-quant.html#cb432-7" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-8"><a href="sec-quant.html#cb432-8" tabindex="-1"></a>    <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
 <span id="cb432-9"><a href="sec-quant.html#cb432-9" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition, <span class="at">title =</span> <span class="st">"Peptides"</span>)</span>
 <span id="cb432-10"><a href="sec-quant.html#cb432-10" tabindex="-1"></a></span>
 <span id="cb432-11"><a href="sec-quant.html#cb432-11" tabindex="-1"></a>pca_prot <span class="ot">&lt;-</span></span>
-<span id="cb432-12"><a href="sec-quant.html#cb432-12" tabindex="-1"></a>    cptac[[<span class="st">"proteins_med"</span>]] <span class="sc">%&gt;%</span></span>
-<span id="cb432-13"><a href="sec-quant.html#cb432-13" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-14"><a href="sec-quant.html#cb432-14" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-15"><a href="sec-quant.html#cb432-15" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb432-16"><a href="sec-quant.html#cb432-16" tabindex="-1"></a>    <span class="fu">prcomp</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb432-12"><a href="sec-quant.html#cb432-12" tabindex="-1"></a>    cptac[[<span class="st">"proteins_med"</span>]] <span class="sc">|&gt;</span></span>
+<span id="cb432-13"><a href="sec-quant.html#cb432-13" tabindex="-1"></a>    <span class="fu">filterNA</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-14"><a href="sec-quant.html#cb432-14" tabindex="-1"></a>    <span class="fu">assay</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-15"><a href="sec-quant.html#cb432-15" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
+<span id="cb432-16"><a href="sec-quant.html#cb432-16" tabindex="-1"></a>    <span class="fu">prcomp</span>() <span class="sc">|&gt;</span></span>
 <span id="cb432-17"><a href="sec-quant.html#cb432-17" tabindex="-1"></a>    <span class="fu">fviz_pca_ind</span>(<span class="at">habillage =</span> cptac<span class="sc">$</span>condition,</span>
 <span id="cb432-18"><a href="sec-quant.html#cb432-18" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Proteins (median aggregation)"</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-quant.html#cb433-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
@@ -1468,9 +1468,9 @@ Figure 5.13: Peptide and protein level PCA analyses.
 and row data in a long format, that can be directly reused by the
 tidyverse tools.</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="sec-quant.html#cb434-1" tabindex="-1"></a><span class="fu">longFormat</span>(cptac[<span class="st">"P02787ups|TRFE_HUMAN_UPS"</span>, ,</span>
-<span id="cb434-2"><a href="sec-quant.html#cb434-2" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"lognorm_peptides"</span>, <span class="st">"proteins_med"</span>)]) <span class="sc">%&gt;%</span></span>
-<span id="cb434-3"><a href="sec-quant.html#cb434-3" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb434-4"><a href="sec-quant.html#cb434-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"A"</span>, colname), <span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb434-2"><a href="sec-quant.html#cb434-2" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"lognorm_peptides"</span>, <span class="st">"proteins_med"</span>)]) <span class="sc">|&gt;</span></span>
+<span id="cb434-3"><a href="sec-quant.html#cb434-3" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb434-4"><a href="sec-quant.html#cb434-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"A"</span>, colname), <span class="st">"A"</span>, <span class="st">"B"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb434-5"><a href="sec-quant.html#cb434-5" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> colname, <span class="at">y =</span> value, <span class="at">colour =</span> rowname, <span class="at">shape =</span> condition)) <span class="sc">+</span></span>
 <span id="cb434-6"><a href="sec-quant.html#cb434-6" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb434-7"><a href="sec-quant.html#cb434-7" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> rowname)) <span class="sc">+</span></span>
@@ -1597,13 +1597,13 @@ apply the empirical Bayes moderation.</p>
 <p>Finally, the <code>topTable()</code> function is used the extract the results for
 the coefficient of interest.</p>
 <div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="sec-quant.html#cb443-1" tabindex="-1"></a>res <span class="ot">&lt;-</span></span>
-<span id="cb443-2"><a href="sec-quant.html#cb443-2" tabindex="-1"></a>    <span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"prots$condition6B"</span>, <span class="at">number =</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb443-3"><a href="sec-quant.html#cb443-3" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">"protein"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb443-4"><a href="sec-quant.html#cb443-4" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb443-2"><a href="sec-quant.html#cb443-2" tabindex="-1"></a>    <span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"prots$condition6B"</span>, <span class="at">number =</span> <span class="cn">Inf</span>) <span class="sc">|&gt;</span></span>
+<span id="cb443-3"><a href="sec-quant.html#cb443-3" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="st">"protein"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb443-4"><a href="sec-quant.html#cb443-4" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
 <span id="cb443-5"><a href="sec-quant.html#cb443-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">TP =</span> <span class="fu">grepl</span>(<span class="st">"ups"</span>, protein))</span></code></pre></div>
 <p>Note the warning about partial <code>NA</code> coefficients for 23 probes:</p>
 <div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="sec-quant.html#cb444-1" tabindex="-1"></a>na_coefs <span class="ot">&lt;-</span></span>
-<span id="cb444-2"><a href="sec-quant.html#cb444-2" tabindex="-1"></a>    <span class="fu">filter</span>(res, <span class="fu">is.na</span>(t)) <span class="sc">%&gt;%</span></span>
+<span id="cb444-2"><a href="sec-quant.html#cb444-2" tabindex="-1"></a>    <span class="fu">filter</span>(res, <span class="fu">is.na</span>(t)) <span class="sc">|&gt;</span></span>
 <span id="cb444-3"><a href="sec-quant.html#cb444-3" tabindex="-1"></a>    <span class="fu">pull</span>(protein)</span>
 <span id="cb444-4"><a href="sec-quant.html#cb444-4" tabindex="-1"></a><span class="fu">assay</span>(prots[na_coefs, ])</span></code></pre></div>
 <pre><code>##                                6A_7      6A_8       6A_9       6B_7       6B_8
@@ -1642,7 +1642,7 @@ the coefficient of interest.</p>
 ## sp|P48363|PFD3_YEAST      -0.5087747
 ##  [ reached getOption("max.print") -- omitted 9 rows ]</code></pre>
 <p>We can now visualise the results using a volcano plot:</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="sec-quant.html#cb446-1" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="sec-quant.html#cb446-1" tabindex="-1"></a>res <span class="sc">|&gt;</span></span>
 <span id="cb446-2"><a href="sec-quant.html#cb446-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logFC, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(adj.P.Val))) <span class="sc">+</span></span>
 <span id="cb446-3"><a href="sec-quant.html#cb446-3" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> TP)) <span class="sc">+</span></span>
 <span id="cb446-4"><a href="sec-quant.html#cb446-4" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
