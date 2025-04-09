@@ -139,6 +139,15 @@ site](http://support.bioconductor.org/).
 Thank you to [Charlotte Soneson](https://github.com/csoneson) for
 fixing many typos in a previous version of this book.
 
+<!-- ## Citation -->
+
+<!-- [![DOI](https://zenodo.org/badge/349528091.svg)](https://doi.org/10.5281/zenodo.15180829) -->
+
+<!-- 20250409  rformassspectrometry/book: Book release 20250409 -->
+<!-- DOI: 10.5281/zenodo.15180830 -->
+
+<!-- Book release 20250409 -->
+
 ## License
 
 <a rel="license"
