@@ -28,6 +28,7 @@ preamble
 targeted-audience-and-assumed-background
 setup
 questions-and-help
+citation
 acknowledgments
 license
 sec-msintro

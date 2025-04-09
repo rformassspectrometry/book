@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-03-19" />
+<meta name="date" content="2025-04-09" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -982,7 +982,7 @@ sequences <code>"SQILQQAGTSVLSQANQVPQTVLSLLR"</code> and
 ##  ... 69 more variables/columns.
 ## 
 ## file(s):
-## 2eafef6aa02fe1_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1090,7 +1090,7 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sec-id.html#cb204-1" tabindex="-1"></a>PXD022816</span></code></pre></div>
 <pre><code>## Project PXD022816 with 32 files
 ## </code></pre>
-<pre><code>## Resource ID BFC3 in cache in /home/lgatto/.cache/R/rpx.</code></pre>
+<pre><code>## Resource ID BFC2 in cache in /home/lgatto/.cache/R/rpx.</code></pre>
 <pre><code>##  [1] 'QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz' ... [32] 'checksum.txt'
 ##  Use 'pxfiles(.)' to see all files.</code></pre>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sec-id.html#cb208-1" tabindex="-1"></a><span class="fu">pxfiles</span>(PXD022816)</span></code></pre></div>
@@ -1122,9 +1122,9 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz from cache.</code></pre>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/2ec17070d9ebb7_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz"
-## [2] "/home/lgatto/.cache/R/rpx/2ec1701cb5ab42_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz"
-## [3] "/home/lgatto/.cache/R/rpx/2ec1701fe27654_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/d10169ce607e_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz"  
+## [2] "/home/lgatto/.cache/R/rpx/d101621a9eb05_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz" 
+## [3] "/home/lgatto/.cache/R/rpx/1b0e6c21493ffa_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz"</code></pre>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="sec-id.html#cb216-1" tabindex="-1"></a>(mzmls <span class="ot">&lt;-</span> <span class="fu">pxget</span>(PXD022816, <span class="fu">grep</span>(<span class="st">"mzML"</span>, <span class="fu">pxfiles</span>(PXD022816))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span></code></pre></div>
 <pre><code>## Project PXD022816 files (32):
 ##  [local]  QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz
@@ -1141,9 +1141,9 @@ project <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">‚ä
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_01-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_02-calib.mzML from cache.</code></pre>
 <pre><code>## Loading QEP2LC6_HeLa_50ng_251120_03-calib.mzML from cache.</code></pre>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/2ec1705600848d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML"
-## [2] "/home/lgatto/.cache/R/rpx/2ec1704437505_QEP2LC6_HeLa_50ng_251120_02-calib.mzML" 
-## [3] "/home/lgatto/.cache/R/rpx/2ec170733b2fcb_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/bbf944100189b_QEP2LC6_HeLa_50ng_251120_01-calib.mzML" 
+## [2] "/home/lgatto/.cache/R/rpx/bbf94723f1b31_QEP2LC6_HeLa_50ng_251120_02-calib.mzML" 
+## [3] "/home/lgatto/.cache/R/rpx/1b0e6c1bf6e68d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1189,18 +1189,18 @@ PSMs id scores for each file.</p>
 ##  ... 33 more variables/columns.
 ## 
 ## file(s):
-## 2ec1705600848d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
-## 2ec1704437505_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
-## 2ec170733b2fcb_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
+## bbf944100189b_QEP2LC6_HeLa_50ng_251120_01-calib.mzML
+## bbf94723f1b31_QEP2LC6_HeLa_50ng_251120_02-calib.mzML
+## 1b0e6c1bf6e68d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML</code></pre>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-id.html#cb224-1" tabindex="-1"></a><span class="do">## number of spectra per file</span></span>
 <span id="cb224-2"><a href="sec-id.html#cb224-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">basename</span>(sp<span class="sc">$</span>dataOrigin))</span></code></pre></div>
 <pre><code>## 
-##  2ec1704437505_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
-##                                                 29332 
-## 2ec1705600848d_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
+## 1b0e6c1bf6e68d_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
+##                                                 28740 
+##  bbf944100189b_QEP2LC6_HeLa_50ng_251120_01-calib.mzML 
 ##                                                 29575 
-## 2ec170733b2fcb_QEP2LC6_HeLa_50ng_251120_03-calib.mzML 
-##                                                 28740</code></pre>
+##  bbf94723f1b31_QEP2LC6_HeLa_50ng_251120_02-calib.mzML 
+##                                                 29332</code></pre>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="sec-id.html#cb226-1" tabindex="-1"></a><span class="do">## all levels are centroided</span></span>
 <span id="cb226-2"><a href="sec-id.html#cb226-2" tabindex="-1"></a><span class="fu">table</span>(sp<span class="sc">$</span>centroided, sp<span class="sc">$</span>msLevel)</span></code></pre></div>
 <pre><code>##       
@@ -1226,11 +1226,11 @@ PSMs id scores for each file.</p>
 <span id="cb229-5"><a href="sec-id.html#cb229-5" tabindex="-1"></a><span class="do">## Number of PSMs per acquisition</span></span>
 <span id="cb229-6"><a href="sec-id.html#cb229-6" tabindex="-1"></a><span class="fu">table</span>(id<span class="sc">$</span>idFile)</span></code></pre></div>
 <pre><code>## 
-## 2ec1701cb5ab42_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
-##                                                    25083 
-## 2ec1701fe27654_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
+## 1b0e6c21493ffa_QEP2LC6_HeLa_50ng_251120_03-calib.mzID.gz 
 ##                                                    24436 
-## 2ec17070d9ebb7_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
+##  d101621a9eb05_QEP2LC6_HeLa_50ng_251120_02-calib.mzID.gz 
+##                                                    25083 
+##   d10169ce607e_QEP2LC6_HeLa_50ng_251120_01-calib.mzID.gz 
 ##                                                    25231</code></pre>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-id.html#cb231-1" tabindex="-1"></a>tidyr<span class="sc">::</span><span class="fu">as_tibble</span>(id) <span class="sc">|&gt;</span></span>
 <span id="cb231-2"><a href="sec-id.html#cb231-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MetaMorpheus.score,</span>
@@ -1351,7 +1351,7 @@ switch to an in-memory backend to seed up the calculations.</p>
 ## 77          2   3563.78     26314
 ##  ... 65 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendDataFrame [Wed Mar 19 17:50:51 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendDataFrame [Wed Apr  9 14:23:19 2025]</code></pre>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-id.html#cb250-1" tabindex="-1"></a>cmat <span class="ot">&lt;-</span> <span class="fu">compareSpectra</span>(sp_O43175)</span>
 <span id="cb250-2"><a href="sec-id.html#cb250-2" tabindex="-1"></a><span class="fu">rownames</span>(cmat) <span class="ot">&lt;-</span></span>
 <span id="cb250-3"><a href="sec-id.html#cb250-3" tabindex="-1"></a>    <span class="fu">colnames</span>(cmat) <span class="ot">&lt;-</span> <span class="fu">strtrim</span>(sp_O43175<span class="sc">$</span>sequence, <span class="dv">3</span>)</span>
@@ -1690,7 +1690,7 @@ further processed and analysed using appropriate statistical tests.</p>
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-03-19
+2025-04-09
  using 
 R version 4.4.1 (2024-06-14)
 </p>

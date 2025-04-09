@@ -134,19 +134,20 @@ For questions about specific software or their usage, please refer to
 the software's github issue page, or use the [Bioconductor support
 site](http://support.bioconductor.org/).
 
+## Citation
+
+If you need to cite this book, please use the following reference:
+
+[![DOI](https://zenodo.org/badge/349528091.svg)](https://doi.org/10.5281/zenodo.15180829)
+
+Laurent Gatto, Sebastian Gibb and Johannes Rainer, *R for Mass
+Spectrometry* (2025)
+[DOI:10.5281/zenodo.15180830](https://doi.org/10.5281/zenodo.15180829).
+
 ## Acknowledgments
 
 Thank you to [Charlotte Soneson](https://github.com/csoneson) for
 fixing many typos in a previous version of this book.
-
-<!-- ## Citation -->
-
-<!-- [![DOI](https://zenodo.org/badge/349528091.svg)](https://doi.org/10.5281/zenodo.15180829) -->
-
-<!-- 20250409  rformassspectrometry/book: Book release 20250409 -->
-<!-- DOI: 10.5281/zenodo.15180830 -->
-
-<!-- Book release 20250409 -->
 
 ## License
 
