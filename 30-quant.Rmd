@@ -979,14 +979,14 @@ pca_pep + pca_prot
 
 ### Visualisation
 
-Below, we use the `longFormat()` function to extract the quantitative
+Below, we use the `longForm()` function to extract the quantitative
 and row data in a long format, that can be directly reused by the
 tidyverse tools.
 
 
 ```{r vis, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 6, fig.cap = "Peptide and protein expression profile."}
-longFormat(cptac["P02787ups|TRFE_HUMAN_UPS", ,
-                 c("lognorm_peptides", "proteins_med")]) |>
+longForm(cptac["P02787ups|TRFE_HUMAN_UPS", ,
+               c("lognorm_peptides", "proteins_med")]) |>
     as_tibble() |>
     mutate(condition = ifelse(grepl("A", colname), "A", "B")) |>
     ggplot(aes(x = colname, y = value, colour = rowname, shape = condition)) +

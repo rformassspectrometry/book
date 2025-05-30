@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-04-09" />
+<meta name="date" content="2025-05-30" />
 
 
 <meta name="description" content="Chapter 2 Introduction | R for Mass Spectrometry">
@@ -307,7 +307,7 @@ quantitative data, as opposed as the name suggests),
 Reaction Monitoring (SRM, i.e. targeted) data and the
 <a href="http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp">MassIVE</a>
 resource. These data can be downloaded within R using the
-<em><a href="https://bioconductor.org/packages/3.20/rpx">rpx</a></em> package.</p>
+<em><a href="https://bioconductor.org/packages/3.21/rpx">rpx</a></em> package.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-msintro.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rpx"</span>)</span></code></pre></div>
 <p>Using the unique <code>PXD000001</code> identifier, we can retrieve the relevant
 metadata that will be stored in a <code>PXDataset</code> object. The names of the
@@ -358,7 +358,7 @@ function and stored in the <code>mzf</code> variable for later use <label for="t
 <p>The Bioconductor project had dedicated data hubs for experiment and
 annotation data. Data that is accessed through these hubs are cached
 centrally to avoid repeated downloads.</p>
-<p>The <em><a href="https://bioconductor.org/packages/3.20/MsDataHub">MsDataHub</a></em> package provides data for
+<p>The <em><a href="https://bioconductor.org/packages/3.21/MsDataHub">MsDataHub</a></em> package provides data for
 mass spectrometry in general, and proteomics in particular. Once
 loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span>
@@ -417,7 +417,7 @@ loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
 ## 3   NA
 ## 4   NA
 ## 5   NA
-##  [ reached 'max' / getOption("max.print") -- omitted 7 rows ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 12 rows ]</code></pre>
 <p>The dataset table is also available as an <a href="https://rformassspectrometry.github.io/MsDataHub/articles/MsDataHub.html">interactive
 table</a>
 on the package page.</p>
@@ -439,7 +439,7 @@ file downloaded above happens to also be available in <code>MsDataHub</code>.</p
 <div id="experiment-packages" class="section level3 unnumbered">
 <h3>Experiment packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('experiment-packages')" onmouseout="reset_tooltip('experiment-packages-tooltip')"><span class="tooltiptext" id="experiment-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>The <em><a href="https://bioconductor.org/packages/3.20/msdata">msdata</a></em> is an <em>experiment package</em>
+<p>The <em><a href="https://bioconductor.org/packages/3.21/msdata">msdata</a></em> is an <em>experiment package</em>
 that directly ships raw data files relevant for both proteomics and
 metabolomics.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
@@ -459,8 +459,8 @@ metabolomics.</p>
 <p>New data are added to the more modern and lightweight <code>MsDataHub</code>
 infrastructure.</p>
 <p>Often, experiment packages distribute processed data; examples thereof
-are the <em><a href="https://bioconductor.org/packages/3.20/pRolocdata">pRolocdata</a></em> and
-<em><a href="https://bioconductor.org/packages/3.20/scpdata">scpdata</a></em> packages, that ship processed
+are the <em><a href="https://bioconductor.org/packages/3.21/pRolocdata">pRolocdata</a></em> and
+<em><a href="https://bioconductor.org/packages/3.21/scpdata">scpdata</a></em> packages, that ship processed
 and annotated quantitative spatial and single-cell proteomics data.</p>
 
 </div>
@@ -471,9 +471,9 @@ and annotated quantitative spatial and single-cell proteomics data.</p>
 <a href="sec-raw.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-04-09
+2025-05-30
  using 
-R version 4.4.1 (2024-06-14)
+R version 4.5.0 (2025-04-11)
 </p>
 </div>
 </div>

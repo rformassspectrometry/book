@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2025-04-09" />
+<meta name="date" content="2025-05-30" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -294,7 +294,7 @@ downloaded and available in the <code>mzf</code> file.</p>
 ## 7532         2   3601.18      7532
 ## 7533         2   3601.57      7533
 ## 7534         2   3601.98      7534
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## 
 ## file(s):
 ## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
@@ -441,14 +441,14 @@ the <code>Spectra</code> is organized linearly (first all spectra from the first
 and then from the second). The <code>dataOrigin</code> function can be used to identify
 spectra from the different data files.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-raw.html#cb49-1" tabindex="-1"></a>(fls <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="fu">system.file</span>(<span class="st">"sciex"</span>, <span class="at">package =</span> <span class="st">"msdata"</span>), <span class="at">full.names =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
-## [2] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
+## [2] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-raw.html#cb51-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(fls)</span>
 <span id="cb51-2"><a href="sec-raw.html#cb51-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
+## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
 ##                                                                                               931 
-## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
+## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
 ##                                                                                               931</code></pre>
 </div>
 <div id="backends" class="section level3" number="3.1.3">
@@ -464,7 +464,7 @@ used instead. The default backends are:</p>
 <ul>
 <li>
 <code>MsBackendMzR</code>: this backend keeps only general spectra variables in memory
-and relies on the <em><a href="https://bioconductor.org/packages/3.20/mzR">mzR</a></em> package to read mass peaks (m/z and
+and relies on the <em><a href="https://bioconductor.org/packages/3.21/mzR">mzR</a></em> package to read mass peaks (m/z and
 intensity values) from the original MS files on-demand.</li>
 </ul>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sec-raw.html#cb53-1" tabindex="-1"></a>sp_sciex</span></code></pre></div>
@@ -482,7 +482,7 @@ intensity values) from the original MS files on-demand.</li>
 ## 1860         1   259.194       929
 ## 1861         1   259.473       930
 ## 1862         1   259.752       931
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## 
 ## file(s):
 ## 20171016_POOL_POS_1_105-134.mzML
@@ -509,9 +509,9 @@ spectrum, a much higher memory footprint.</li>
 ## 1860         1   259.194       929
 ## 1861         1   259.473       930
 ## 1862         1   259.752       931
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Wed Apr  9 14:22:13 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Fri May 30 10:03:32 2025]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -537,24 +537,24 @@ us to specify the storage location of the HDF5 file.</p>
 ## 1860         1   259.194       929
 ## 1861         1   259.473       930
 ## 1862         1   259.752       931
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## 
 ## file(s):
 ##  20171016_POOL_POS_1_105-134.h5
 ##  20171016_POOL_POS_3_105-134.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Wed Apr  9 14:22:23 2025]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Fri May 30 10:03:35 2025]</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sec-raw.html#cb59-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
+## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_1_105-134.mzML 
 ##                                                                                               931 
-## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
+## /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_3_105-134.mzML 
 ##                                                                                               931</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="sec-raw.html#cb61-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpZSUdpO/20171016_POOL_POS_1_105-134.h5 
+## /tmp/RtmpcqQGmg/20171016_POOL_POS_1_105-134.h5 
 ##                                            931 
-## /tmp/RtmpZSUdpO/20171016_POOL_POS_3_105-134.h5 
+## /tmp/RtmpcqQGmg/20171016_POOL_POS_3_105-134.h5 
 ##                                            931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -573,7 +573,7 @@ or provide access to certain MS data resources such as the
 Additional backends are being developed to address specific needs or
 technologies, while remaining compliant with the <code>Spectra</code> interface.</p>
 <p>If you would like to learn more about how the raw MS formats are
-handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.20/mzR">mzR</a></em> package,
+handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.21/mzR">mzR</a></em> package,
 check out the <a href="sec-anx.html#sec-raw2">6.1</a> section in the annex.</p>
 <p>See also <a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html">Spectra
 backends</a>
@@ -673,12 +673,12 @@ children.</li>
 ## 9          2   1803.64      2815
 ## 10         2   1803.93      2816
 ## 11         2   1804.21      2817
-##  ... 34 more variables/columns.
+##  ... 35 more variables/columns.
 ## 
 ## file(s):
 ## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Wed Apr  9 14:22:23 2025]</code></pre>
+##  Filter: select parent/children scans for 2807 [Fri May 30 10:03:35 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -962,8 +962,8 @@ between 175 and 189 seconds in the measurement run.</p>
 <div id="sol-body-8" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sec-raw.html#cb75-1" tabindex="-1"></a>fls <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span>
 <span id="cb75-2"><a href="sec-raw.html#cb75-2" tabindex="-1"></a>fls</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
-## [2] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_1_105-134.mzML"
+## [2] "/home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_3_105-134.mzML"</code></pre>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="sec-raw.html#cb77-1" tabindex="-1"></a>file_2 <span class="ot">&lt;-</span> <span class="fu">filterDataOrigin</span>(sp_sciex, <span class="at">dataOrigin =</span> fls[<span class="dv">2</span>])</span>
 <span id="cb77-2"><a href="sec-raw.html#cb77-2" tabindex="-1"></a><span class="fu">length</span>(file_2)</span></code></pre></div>
 <pre><code>## [1] 931</code></pre>
@@ -987,13 +987,13 @@ between 175 and 189 seconds in the measurement run.</p>
 ## 48          1   188.326       675
 ## 49          1   188.605       676
 ## 50          1   188.884       677
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## 
 ## file(s):
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.20/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Wed Apr  9 14:22:25 2025]
-##  Filter: select retention time [175..189] on MS level(s) 1 [Wed Apr  9 14:22:25 2025]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/R/x86_64-pc-linux-gnu-library/Bioc3.21/msdata/sciex/20171016_POOL_POS_3_105-134.mzML [Fri May 30 10:03:36 2025]
+##  Filter: select retention time [175..189] on MS level(s)  [Fri May 30 10:03:36 2025]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1072,14 +1072,14 @@ below (next to Lazy evaluation queue).</p>
 ## 1860         1   259.194       929
 ## 1861         1   259.473       930
 ## 1862         1   259.752       931
-##  ... 33 more variables/columns.
+##  ... 34 more variables/columns.
 ## 
 ## file(s):
 ## 20171016_POOL_POS_1_105-134.mzML
 ## 20171016_POOL_POS_3_105-134.mzML
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Wed Apr  9 14:22:26 2025]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Fri May 30 10:03:36 2025]</code></pre>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="sec-raw.html#cb89-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sec-raw.html#cb91-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1109,9 +1109,9 @@ vignette.</p>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-04-09
+2025-05-30
  using 
-R version 4.4.1 (2024-06-14)
+R version 4.5.0 (2025-04-11)
 </p>
 </div>
 </div>
