@@ -783,7 +783,7 @@ The fasta file can be read into R as a dedicated `AAStringSet` from
 the `r BiocStyle::Biocpkg("Biostrings")` package, that can be used to
 very efficiently manage DNA, RNA and protein sequence.
 
-```{r aass}
+```{r aass, message = FALSE}
 library(Biostrings)
 (prots <- readAAStringSet(fas))
 ```
@@ -798,7 +798,7 @@ library(cleaver)
 ```
 
 The resulting `AAStringSetList` contains the one `AAStringSet`
-containing peptides sequences for each of the `r length(prot)`
+containing peptides sequences for each of the `r length(prots)`
 proteins.
 
 ```{r pep}

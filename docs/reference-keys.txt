@@ -53,6 +53,7 @@ adding-identification-data-to-raw-data
 an-identification-annotated-chromatogram
 visualising-peptide-spectrum-matches
 comparing-spectra
+reading-and-processing-protein-sequences
 exploration-and-assessment-of-identifications-using-msnid
 step-by-step-work-flow
 analysis-of-peptide-sequences
