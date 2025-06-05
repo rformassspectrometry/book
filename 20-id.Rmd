@@ -461,18 +461,18 @@ plotSpectra(sp[i])
 ```
 
 We have seen above that we can add labels to each peak using the
-`labels` argument in `plotSpectra()`. The `addFragments()` function
+`labels` argument in `plotSpectra()`. The `labelFragments()` function
 takes a spectrum as input (that is a `Spectra` object of length 1) and
 annotates its peaks.
 
 ```{r}
-addFragments(sp[i])
+labelFragments(sp[i])
 ```
 
 It can be directly used with `plotSpectra()`:
 
 ```{r}
-plotSpectra(sp[i], labels = addFragments,
+plotSpectra(sp[i], labels = labelFragments,
             labelPos = 3, labelCol = "steelblue")
 ```
 
@@ -713,7 +713,7 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 
 <!-- (i <- which(rownames(cmat) == "DLP")) -->
 
-<!-- plotSpectra(sp_O43175[i], labels = addFragments, -->
+<!-- plotSpectra(sp_O43175[i], labels = labelFragments, -->
 <!--             labelPos = 3, labelCol = "steelblue", -->
 <!--             main = sp_O43175$sequence[i]) -->
 
