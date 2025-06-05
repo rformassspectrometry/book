@@ -790,7 +790,7 @@ library(Biostrings)
 
 Finally, the `r BiocStyle::Biocpkg("cleaver")` package can be used to
 cleave protein sequences using any of the many proteases. Below, we'll
-use trypsin without any miscleavages:
+use trypsin without any miscleavages.
 
 ```{r cleaver}
 library(cleaver)
