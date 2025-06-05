@@ -766,6 +766,45 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 
 <!-- `r msmbstyle::solution_end()` -->
 
+## Reading and processing protein sequences
+
+It can sometimes be necessary to do some protein sequence processing
+in R, for compute peptides for a set of proteins of interest. Let's
+start by downloading the fasta sequence file from the PXD000001
+experiment.
+
+```{r px1fas}
+library(rpx)
+px <- PXDataset("PXD000001")
+(fas <- pxget(px, grep("fasta", pxfiles(px))))
+```
+
+The fasta file can be read into R as a dedicated `AAStringSet` from
+the `r BiocStyle::Biocpkg("Biostrings")` package, that can be used to
+very efficiently manage DNA, RNA and protein sequence.
+
+```{r aass}
+library(Biostrings)
+(prots <- readAAStringSet(fas))
+```
+
+Finally, the `r BiocStyle::Biocpkg("cleaver")` package can be used to
+cleave protein sequences using any of the many proteases. Below, we'll
+use trypsin without any miscleavages:
+
+```{r cleaver}
+library(cleaver)
+(peps <- cleave(prots, enzym = "trypsin", missedCleavages = 0))
+```
+
+The resulting `AAStringSetList` contains the one `AAStringSet`
+containing peptides sequences for each of the `r length(prot)`
+proteins.
+
+```{r pep}
+peps[[1]]
+```
+
 ## Exploration and Assessment of Identifications using `MSnID`
 
 ```{r unload_PSMatch, echo = FALSE}
