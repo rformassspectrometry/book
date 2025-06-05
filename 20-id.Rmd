@@ -560,211 +560,211 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 `r msmbstyle::solution_end()`
 
 
-## Summary exercise
+<!-- ## Summary exercise -->
 
-`r msmbstyle::question_begin()`
+<!-- `r msmbstyle::question_begin()` -->
 
-Download the 3 first mzML and mzID files from the
-[PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
-project [@Morgenstern:2020].
+<!-- Download the 3 first mzML and mzID files from the -->
+<!-- [PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816) -->
+<!-- project [@Morgenstern:2020]. -->
 
-`r msmbstyle::question_end()`
+<!-- `r msmbstyle::question_end()` -->
 
-`r msmbstyle::solution_begin()`
+<!-- `r msmbstyle::solution_begin()` -->
 
-```{r get_PXD022816}
-## Getting data from PX/PRIDE
-library(rpx)
+<!-- ```{r get_PXD022816} -->
+<!-- ## Getting data from PX/PRIDE -->
+<!-- library(rpx) -->
 
-## https://www.ebi.ac.uk/pride/archive/projects/PXD022816
-## RawBeans: A Simple, Vendor-Independent, Raw-Data Quality-Control
-## Tool ()
+<!-- ## https://www.ebi.ac.uk/pride/archive/projects/PXD022816 -->
+<!-- ## RawBeans: A Simple, Vendor-Independent, Raw-Data Quality-Control -->
+<!-- ## Tool () -->
 
-PXD022816 <- PXDataset("PXD022816")
-PXD022816
+<!-- PXD022816 <- PXDataset("PXD022816") -->
+<!-- PXD022816 -->
 
-pxfiles(PXD022816)
+<!-- pxfiles(PXD022816) -->
 
-(mzids <- pxget(PXD022816, grep("mzID", pxfiles(PXD022816))[1:3]))
-(mzmls <- pxget(PXD022816, grep("mzML", pxfiles(PXD022816))[1:3]))
-```
+<!-- (mzids <- pxget(PXD022816, grep("mzID", pxfiles(PXD022816))[1:3])) -->
+<!-- (mzmls <- pxget(PXD022816, grep("mzML", pxfiles(PXD022816))[1:3])) -->
+<!-- ``` -->
 
-`r msmbstyle::solution_end()`
-
-
-`r msmbstyle::question_begin()`
-
-Generate a `Spectra` object and a table of filtered PSMs. Visualise
-the total ion chromatograms and check the quality of the
-identification data by comparing the density of the decoy and target
-PSMs id scores for each file.
-
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r spectra_PXD022816, message = FALSE}
-## Loading raw data
-library("Spectra")
-sp <- Spectra(mzmls)
-sp
-
-## number of spectra per file
-table(basename(sp$dataOrigin))
-## all levels are centroided
-table(sp$centroided, sp$msLevel)
-```
-
-```{r mslevel_PXD022816, message = FALSE, fig.width = 12}
-library("ggplot2")
-library("tidyr")
-library("magrittr")
-
-## Chromatograms
-filterMsLevel(sp, 1) |>
-    spectraData() |>
-    as_tibble() |>
-    ggplot(aes(x = rtime,
-               y = totIonCurrent,
-               colour = basename(dataOrigin))) +
-    geom_line()
-```
-
-```{r is_PXD022816, message = FALSE, fig.width = 12}
-## Identification data
-library("PSMatch")
-id <- PSM(mzids)
-
-## Number of PSMs per acquisition
-table(id$idFile)
-
-tidyr::as_tibble(id) |>
-    ggplot(aes(x = MetaMorpheus.score,
-               colour = isDecoy)) +
-    geom_density() +
-    facet_wrap(~ spectrumFile)
-```
-
-```{r idfilter_PXD022816}
-id_filtered <- filterPSMs(id)
-max(id_filtered$PSM.level.q.value)
-```
-
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_end()` -->
 
 
-`r msmbstyle::question_begin()`
+<!-- `r msmbstyle::question_begin()` -->
 
-Join the raw and identification data. Beware though that the joining
-must now be performed by spectrum ids and by files.
+<!-- Generate a `Spectra` object and a table of filtered PSMs. Visualise -->
+<!-- the total ion chromatograms and check the quality of the -->
+<!-- identification data by comparing the density of the decoy and target -->
+<!-- PSMs id scores for each file. -->
 
-`r msmbstyle::question_end()`
+<!-- `r msmbstyle::question_end()` -->
 
-`r msmbstyle::solution_begin()`
+<!-- `r msmbstyle::solution_begin()` -->
 
-```{r joinsp_PXD022816}
-## primary key for spectra
-sp$pkey <-
-    paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))),
-           gsub("^.+=", "::", sp$spectrumId))
-head(sp$pkey)
+<!-- ```{r spectra_PXD022816, message = FALSE} -->
+<!-- ## Loading raw data -->
+<!-- library("Spectra") -->
+<!-- sp <- Spectra(mzmls) -->
+<!-- sp -->
 
-## primary key for PSMs
-id_filtered$pkey <-
-    paste0(gsub("^.+\\QEP", "QEP", id_filtered$spectrumFile),
-           sub("^.+=", "::", id_filtered$spectrumID))
-head(id_filtered$pkey)
+<!-- ## number of spectra per file -->
+<!-- table(basename(sp$dataOrigin)) -->
+<!-- ## all levels are centroided -->
+<!-- table(sp$centroided, sp$msLevel) -->
+<!-- ``` -->
 
-## For simplicity, let's keep single hits per spectrum id.
-## Alternatively, explore duplicates and use QFeatures::reduceDataFrame
-id_filtered <- id_filtered[!duplicated(id_filtered$pkey), ]
+<!-- ```{r mslevel_PXD022816, message = FALSE, fig.width = 12} -->
+<!-- library("ggplot2") -->
+<!-- library("tidyr") -->
+<!-- library("magrittr") -->
 
-head(id_filtered$pkey)
+<!-- ## Chromatograms -->
+<!-- filterMsLevel(sp, 1) |> -->
+<!--     spectraData() |> -->
+<!--     as_tibble() |> -->
+<!--     ggplot(aes(x = rtime, -->
+<!--                y = totIonCurrent, -->
+<!--                colour = basename(dataOrigin))) + -->
+<!--     geom_line() -->
+<!-- ``` -->
 
-sp <- joinSpectraData(sp, id_filtered, by.x = "pkey")
+<!-- ```{r is_PXD022816, message = FALSE, fig.width = 12} -->
+<!-- ## Identification data -->
+<!-- library("PSMatch") -->
+<!-- id <- PSM(mzids) -->
 
-## Number of MS2 scans with a PSM
-table(!is.na(filterMsLevel(sp, 2)$sequence))
-```
-`r msmbstyle::solution_end()`
+<!-- ## Number of PSMs per acquisition -->
+<!-- table(id$idFile) -->
 
+<!-- tidyr::as_tibble(id) |> -->
+<!--     ggplot(aes(x = MetaMorpheus.score, -->
+<!--                colour = isDecoy)) + -->
+<!--     geom_density() + -->
+<!--     facet_wrap(~ spectrumFile) -->
+<!-- ``` -->
 
-`r msmbstyle::question_begin()`
+<!-- ```{r idfilter_PXD022816} -->
+<!-- id_filtered <- filterPSMs(id) -->
+<!-- max(id_filtered$PSM.level.q.value) -->
+<!-- ``` -->
 
-Extract the PSMs that have been matched to peptides from protein
-`O43175` and compare and cluster the scans. Hint: once you have
-created the smaller `Spectra` object with the scans of interest,
-switch to an in-memory backend to seed up the calculations.
-
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r compare_PXD022816}
-sp_O43175 <- sp[which(sp$DatabaseAccess == "O43175")]
-sp_O43175 <- setBackend(sp_O43175, MsBackendDataFrame())
-sp_O43175
-
-cmat <- compareSpectra(sp_O43175)
-rownames(cmat) <-
-    colnames(cmat) <- strtrim(sp_O43175$sequence, 3)
-
-pheatmap::pheatmap(cmat)
-
-(i <- which(rownames(cmat) == "DLP"))
-
-plotSpectra(sp_O43175[i], labels = addFragments,
-            labelPos = 3, labelCol = "steelblue",
-            main = sp_O43175$sequence[i])
-
-spectraData(sp_O43175[i])$precursorCharge
-spectraData(sp_O43175[i])$precursorMz
-spectraData(sp_O43175[i])$modName
-```
-
-```{r plotmirror_PXD022816}
-## Directly compare spectra with/without Carbamyl
-plotSpectraMirror(sp_O43175[4], sp_O43175[9])
-plotSpectraMirror(sp_O43175[2], sp_O43175[10])
-```
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_end()` -->
 
 
-`r msmbstyle::question_begin()`
+<!-- `r msmbstyle::question_begin()` -->
 
-Generate total ion chromatograms for each acquisition and annotate the
-MS1 scans with the number of PSMs using the `countIdentifications()`
-function, as shown above. The function will automatically perform the
-counts in parallel for each acquisition.
+<!-- Join the raw and identification data. Beware though that the joining -->
+<!-- must now be performed by spectrum ids and by files. -->
 
-`r msmbstyle::question_end()`
+<!-- `r msmbstyle::question_end()` -->
+
+<!-- `r msmbstyle::solution_begin()` -->
+
+<!-- ```{r joinsp_PXD022816} -->
+<!-- ## primary key for spectra -->
+<!-- sp$pkey <- -->
+<!--     paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))), -->
+<!--            gsub("^.+=", "::", sp$spectrumId)) -->
+<!-- head(sp$pkey) -->
+
+<!-- ## primary key for PSMs -->
+<!-- id_filtered$pkey <- -->
+<!--     paste0(gsub("^.+\\QEP", "QEP", id_filtered$spectrumFile), -->
+<!--            sub("^.+=", "::", id_filtered$spectrumID)) -->
+<!-- head(id_filtered$pkey) -->
+
+<!-- ## For simplicity, let's keep single hits per spectrum id. -->
+<!-- ## Alternatively, explore duplicates and use QFeatures::reduceDataFrame -->
+<!-- id_filtered <- id_filtered[!duplicated(id_filtered$pkey), ] -->
+
+<!-- head(id_filtered$pkey) -->
+
+<!-- sp <- joinSpectraData(sp, id_filtered, by.x = "pkey") -->
+
+<!-- ## Number of MS2 scans with a PSM -->
+<!-- table(!is.na(filterMsLevel(sp, 2)$sequence)) -->
+<!-- ``` -->
+<!-- `r msmbstyle::solution_end()` -->
 
 
-`r msmbstyle::solution_begin()`
+<!-- `r msmbstyle::question_begin()` -->
 
-```{r}
-sp <- countIdentifications(sp)
-table(msLevel(sp), sp$countIdentifications)
-```
+<!-- Extract the PSMs that have been matched to peptides from protein -->
+<!-- `O43175` and compare and cluster the scans. Hint: once you have -->
+<!-- created the smaller `Spectra` object with the scans of interest, -->
+<!-- switch to an in-memory backend to seed up the calculations. -->
 
-```{r tic_PXD022816}
-sp |>
- filterMsLevel(1) |>
- spectraData() |>
- as_tibble() |>
- ggplot(aes(x = rtime,
-            y = totIonCurrent)) +
-     geom_line(alpha = 0.25) +
-     geom_point(aes(colour = ifelse(countIdentifications == 0,
-                                    NA, countIdentifications)),
-                size = 0.75,
-                alpha = 0.5) +
-     scale_colour_gradient(low = "orange", high = "red") +
-     facet_grid(sub("^.+_", "", basename(dataOrigin)) ~ .) +
-     labs(colour = "Number of ids")
-```
+<!-- `r msmbstyle::question_end()` -->
 
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_begin()` -->
+
+<!-- ```{r compare_PXD022816} -->
+<!-- sp_O43175 <- sp[which(sp$DatabaseAccess == "O43175")] -->
+<!-- sp_O43175 <- setBackend(sp_O43175, MsBackendDataFrame()) -->
+<!-- sp_O43175 -->
+
+<!-- cmat <- compareSpectra(sp_O43175) -->
+<!-- rownames(cmat) <- -->
+<!--     colnames(cmat) <- strtrim(sp_O43175$sequence, 3) -->
+
+<!-- pheatmap::pheatmap(cmat) -->
+
+<!-- (i <- which(rownames(cmat) == "DLP")) -->
+
+<!-- plotSpectra(sp_O43175[i], labels = addFragments, -->
+<!--             labelPos = 3, labelCol = "steelblue", -->
+<!--             main = sp_O43175$sequence[i]) -->
+
+<!-- spectraData(sp_O43175[i])$precursorCharge -->
+<!-- spectraData(sp_O43175[i])$precursorMz -->
+<!-- spectraData(sp_O43175[i])$modName -->
+<!-- ``` -->
+
+<!-- ```{r plotmirror_PXD022816} -->
+<!-- ## Directly compare spectra with/without Carbamyl -->
+<!-- plotSpectraMirror(sp_O43175[4], sp_O43175[9]) -->
+<!-- plotSpectraMirror(sp_O43175[2], sp_O43175[10]) -->
+<!-- ``` -->
+<!-- `r msmbstyle::solution_end()` -->
+
+
+<!-- `r msmbstyle::question_begin()` -->
+
+<!-- Generate total ion chromatograms for each acquisition and annotate the -->
+<!-- MS1 scans with the number of PSMs using the `countIdentifications()` -->
+<!-- function, as shown above. The function will automatically perform the -->
+<!-- counts in parallel for each acquisition. -->
+
+<!-- `r msmbstyle::question_end()` -->
+
+
+<!-- `r msmbstyle::solution_begin()` -->
+
+<!-- ```{r} -->
+<!-- sp <- countIdentifications(sp) -->
+<!-- table(msLevel(sp), sp$countIdentifications) -->
+<!-- ``` -->
+
+<!-- ```{r tic_PXD022816} -->
+<!-- sp |> -->
+<!--  filterMsLevel(1) |> -->
+<!--  spectraData() |> -->
+<!--  as_tibble() |> -->
+<!--  ggplot(aes(x = rtime, -->
+<!--             y = totIonCurrent)) + -->
+<!--      geom_line(alpha = 0.25) + -->
+<!--      geom_point(aes(colour = ifelse(countIdentifications == 0, -->
+<!--                                     NA, countIdentifications)), -->
+<!--                 size = 0.75, -->
+<!--                 alpha = 0.5) + -->
+<!--      scale_colour_gradient(low = "orange", high = "red") + -->
+<!--      facet_grid(sub("^.+_", "", basename(dataOrigin)) ~ .) + -->
+<!--      labs(colour = "Number of ids") -->
+<!-- ``` -->
+
+<!-- `r msmbstyle::solution_end()` -->
 
 ## Exploration and Assessment of Identifications using `MSnID`
 

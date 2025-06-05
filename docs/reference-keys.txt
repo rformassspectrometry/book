@@ -23,7 +23,7 @@ fig:plotdens
 fig:plotpca
 fig:vis
 fig:vp
-fig:unnamed-chunk-64
+fig:unnamed-chunk-63
 preamble
 targeted-audience-and-assumed-background
 setup
@@ -53,7 +53,6 @@ adding-identification-data-to-raw-data
 an-identification-annotated-chromatogram
 visualising-peptide-spectrum-matches
 comparing-spectra
-summary-exercise
 exploration-and-assessment-of-identifications-using-msnid
 step-by-step-work-flow
 analysis-of-peptide-sequences
