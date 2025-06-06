@@ -85,9 +85,9 @@ table(id$isDecoy)
 
 ## Keeping all matches
 
-The data contains also contains multiple matches for several
-spectra. The table below shows the number of number of spectra that
-have 1, 2, ... up to 5 matches.
+The data also contains multiple matches for several spectra. The table
+below shows the number of number of spectra that have 1, 2, ... up to
+5 matches.
 
 ```{r}
 table(table(id$spectrumID))
