@@ -85,7 +85,7 @@ aggregation
 principal-component-analysis
 visualisation
 statistical-analysis
-summary-exercice
+the-impact-of-individual-steps
 sec-anx
 sec-raw2
 sec-id2

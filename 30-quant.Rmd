@@ -1157,8 +1157,7 @@ We can assess our results in terms of true/false postitves/negatives:
 - True negatives: `r nrow(filter(res, adj.P.Val > 0.05 & !TP))`
 - False negatives: `r nrow(filter(res, adj.P.Val > 0.05 & TP))`
 
-
-##  Summary exercice
+## The impact of individual steps
 
 As shown below, it is possible to substantially improve these results
 by aggregating features using a robust summarisation (available as
@@ -1175,6 +1174,3 @@ knitr::include_graphics("./img/vp2.png")
 - False positives: 2
 - True negatives: 1340
 - False negatives: 12
-
-Repeat and adapt what we have seen here using, for example, the
-`robustSummary()` function.
