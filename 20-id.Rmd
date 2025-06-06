@@ -227,14 +227,16 @@ in a PSM search result.
   and for the latter, the size of their protein groups:
 
 ```{r}
-describePeptides(id_filtered)
+describePeptides(id) ## before filtering
+describePeptides(id_filtered) ## filtered
 ```
 
 - `describeProteins()` gives the number of proteins defined by only
   unique, only shared, or a mixture of unique/shared peptides:
 
 ```{r}
-describeProteins(id_filtered)
+describeProteins(id) ## before filtering
+describeProteins(id_filtered) ## filtered
 ```
 
 The [Understanding protein groups with adjacency
