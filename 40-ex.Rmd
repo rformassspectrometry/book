@@ -6,13 +6,10 @@ vis <- FALSE
 
 ## Raw data and identification results
 
-`r msmbstyle::question_begin()`
 
-Download the 3 first mzML and mzID files from the
-[PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
-project [@Morgenstern:2020].
-
-`r msmbstyle::question_end()`
+- Download the 3 first mzML and mzID files from the
+  [PXD022816](https://www.ebi.ac.uk/pride/archive/projects/PXD022816)
+  project [@Morgenstern:2020].
 
 
 ```{r get_PXD022816, echo = vis, include = vis}
@@ -32,15 +29,11 @@ pxfiles(PXD022816)
 (mzmls <- pxget(PXD022816, grep("mzML", pxfiles(PXD022816))[1:3]))
 ```
 
-`r msmbstyle::question_begin()`
 
-Generate a `Spectra` object and a table of filtered PSMs. Visualise
-the total ion chromatograms and check the quality of the
-identification data by comparing the density of the decoy and target
-PSMs id scores for each file.
-
-`r msmbstyle::question_end()`
-
+- Generate a `Spectra` object and a table of filtered PSMs. Visualise
+  the total ion chromatograms and check the quality of the
+  identification data by comparing the density of the decoy and target
+  PSMs id scores for each file.
 
 ```{r spectra_PXD022816, echo = vis, include = vis}
 ## Loading raw data
@@ -89,13 +82,10 @@ id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
 
-`r msmbstyle::question_begin()`
 
-Join the raw and identification data. Beware though that the joining
-must now be performed by spectrum ids and by files.
 
-`r msmbstyle::question_end()`
-
+- Join the raw and identification data. Beware though that the joining
+  must now be performed by spectrum ids and by files.
 
 ```{r joinsp_PXD022816, echo = vis, include = vis}
 ## primary key for spectra
@@ -122,14 +112,10 @@ sp <- joinSpectraData(sp, id_filtered, by.x = "pkey")
 table(!is.na(filterMsLevel(sp, 2)$sequence))
 ```
 
-`r msmbstyle::question_begin()`
-
-Extract the PSMs that have been matched to peptides from protein
-`O43175` and compare and cluster the scans. Hint: once you have
-created the smaller `Spectra` object with the scans of interest,
-switch to an in-memory backend to seed up the calculations.
-
-`r msmbstyle::question_end()`
+- Extract the PSMs that have been matched to peptides from protein
+  `O43175` and compare and cluster the scans. Hint: once you have
+  created the smaller `Spectra` object with the scans of interest,
+  switch to an in-memory backend to seed up the calculations.
 
 
 ```{r compare_PXD022816, echo = vis, include = vis}
@@ -160,15 +146,11 @@ plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
 ```
 
-`r msmbstyle::question_begin()`
 
-Generate total ion chromatograms for each acquisition and annotate the
-MS1 scans with the number of PSMs using the `countIdentifications()`
-function, as shown above. The function will automatically perform the
-counts in parallel for each acquisition.
-
-`r msmbstyle::question_end()`
-
+- Generate total ion chromatograms for each acquisition and annotate
+  the MS1 scans with the number of PSMs using the
+  `countIdentifications()` function, as shown above. The function will
+  automatically perform the counts in parallel for each acquisition.
 
 ```{r countIds, echo = vis, include = vis}
 sp <- countIdentifications(sp)
@@ -230,5 +212,9 @@ cd[colnames(cptac_se), "previous"] <- ""
 knitr::kable(cd, rownames = TRUE)
 ```
 
-Repeat the analysis described in chapter \@ref(sec-quant) using the
-extended dataset, trying to optimise the positive results.
+- Repeat the analysis described in chapter \@ref(sec-quant) using the
+  extended dataset, trying to optimise true positive results and
+  avoiding false positive. Think about the best experimental design
+  approach, how to best process the data, visualising important steps
+  along the way, to conclude with a volcano plot and a table tallying
+  the number of true/false positive/negative results.
