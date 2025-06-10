@@ -391,7 +391,9 @@ MS1 scans.
 all(is.na(filterMsLevel(sp, 1)$sequence))
 ```
 
-They have indeed been added to 56% of the MS2 spectra.
+They have indeed been added
+to `r sum(!is.na(filterMsLevel(sp, 2)$sequence))` of
+the `r sum(msLevel(sp) == 2)` MS2 spectra.
 
 ```{r}
 sp_2 <- filterMsLevel(sp, 2)
@@ -495,6 +497,22 @@ peptide and matching observed peaks to fragments:
 sp[i]$sequence
 calculateFragments(sp[i]$sequence)
 ```
+
+Note that the `plotSpectraPTM()` from the [`PSMatch`
+package](https://rformassspectrometry.github.io/PSMatch/) offers
+improved visualisation:
+
+1. The function nadds the annotated peptides sequence on the plot with
+   the respective b and y ions and the deviation between observed and
+   calculated fragment masses.
+
+```{r pltpsm}
+plotSpectraPTM(sp[i])
+```
+
+2. It can also display, as its name implies, multi-panel plots for
+   peptides with [variable
+   modifications](https://rformassspectrometry.github.io/PSMatch/reference/plotSpectraPTM.html).
 
 ## Comparing spectra
 
