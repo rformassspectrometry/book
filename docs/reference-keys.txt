@@ -53,7 +53,7 @@ adding-identification-data-to-raw-data
 an-identification-annotated-chromatogram
 visualising-peptide-spectrum-matches
 comparing-spectra
-reading-and-processing-protein-sequences
+sec-id-seq
 exploration-and-assessment-of-identifications-using-msnid
 step-by-step-work-flow
 analysis-of-peptide-sequences
@@ -86,6 +86,11 @@ principal-component-analysis
 visualisation
 statistical-analysis
 the-impact-of-individual-steps
+sec-ex
+raw-data-and-identification-results
+search-engine
+hints
+quantitative-data-processing
 sec-anx
 sec-raw2
 sec-id2
