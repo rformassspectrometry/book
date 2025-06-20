@@ -618,6 +618,19 @@ proteins.
 peps[[1]]
 ```
 
+It is also possible to repeat the above step to generate a decoy
+database by reversing the protein `AAStringSet` object:
+
+
+```{r rev}
+(rev <- reverse(prots))
+```
+
+```{r revshow}
+prots[[1]]
+rev[[1]]
+```
+
 ## Exploration and Assessment of Identifications using `MSnID`
 
 ```{r unload_PSMatch, echo = FALSE}
