@@ -64,7 +64,7 @@ function reset_tooltip(id) {
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -243,6 +243,8 @@ the precursor and <code>proton_mass</code> is the mass of a proton (available
 with <code>PSMatch::getAtomicMass()[["p"]]</code>).</li>
 <li>The <code>PSMatch::getAminoAcids()</code> function returns a <code>data.frame</code> of
 amino acid properties.</li>
+<li>Consider using <code>spectrapply</code> to iterate of the individual scans of a
+<code>Spectra</code> object.</li>
 </ul>
 </div>
 <div id="quantitative-data-processing" class="section level2" number="6.3">
@@ -252,7 +254,7 @@ amino acid properties.</li>
 <p>Following up from the quantitative data analysis seen on chapter
 <a href="sec-quant.html#sec-quant">5</a>, the following file includes a third condition C and
 a two additional lab, tallying now 27 samples.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="sec-ex.html#cb416-1" tabindex="-1"></a>f <span class="ot">&lt;-</span> MsDataHub<span class="sc">::</span><span class="fu">cptac_a_b_c_peptides.txt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="sec-ex.html#cb416-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> MsDataHub<span class="sc">::</span><span class="fu">cptac_a_b_c_peptides.txt</span>()</span></code></pre></div>
 <table>
 <thead><tr class="header">
 <th align="left"></th>

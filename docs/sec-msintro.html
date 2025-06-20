@@ -64,7 +64,7 @@ function reset_tooltip(id) {
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -309,20 +309,20 @@ Reaction Monitoring (SRM, i.e. targeted) data and the
 <a href="http://massive.ucsd.edu/ProteoSAFe/static/massive.jsp">MassIVE</a>
 resource. These data can be downloaded within R using the
 <em><a href="https://bioconductor.org/packages/3.21/rpx">rpx</a></em> package.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-msintro.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rpx"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-msintro.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rpx"</span>)</span></code></pre></div>
 <p>Using the unique <code>PXD000001</code> identifier, we can retrieve the relevant
 metadata that will be stored in a <code>PXDataset</code> object. The names of the
 files available in this data can be retrieved with the <code>pxfiles</code>
 accessor function.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sec-msintro.html#cb4-1" tabindex="-1"></a>px <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD000001"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sec-msintro.html#cb4-1" aria-hidden="true" tabindex="-1"></a>px <span class="ot">&lt;-</span> <span class="fu">PXDataset</span>(<span class="st">"PXD000001"</span>)</span></code></pre></div>
 <pre><code>## Loading PXD000001 from cache.</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-msintro.html#cb6-1" tabindex="-1"></a>px</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-msintro.html#cb6-1" aria-hidden="true" tabindex="-1"></a>px</span></code></pre></div>
 <pre><code>## Project PXD000001 with 11 files
 ## </code></pre>
 <pre><code>## Resource ID BFC1 in cache in /home/lgatto/.cache/R/rpx.</code></pre>
 <pre><code>##  [1] 'F063721.dat' ... [11] 'erwinia_carotovora.fasta'
 ##  Use 'pxfiles(.)' to see all files.</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-msintro.html#cb10-1" tabindex="-1"></a><span class="fu">pxfiles</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-msintro.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxfiles</span>(px)</span></code></pre></div>
 <pre><code>## Project PXD000001 files (11):
 ##  [remote] F063721.dat
 ##  [remote] F063721.dat-mztab.txt
@@ -336,22 +336,22 @@ accessor function.</p>
 ##  [remote] TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.raw
 ##  ...</code></pre>
 <p>Other metadata for the <code>px</code> data set:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sec-msintro.html#cb12-1" tabindex="-1"></a><span class="fu">pxtax</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sec-msintro.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxtax</span>(px)</span></code></pre></div>
 <pre><code>## [1] "Erwinia carotovora"</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-msintro.html#cb14-1" tabindex="-1"></a><span class="fu">pxurl</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-msintro.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxurl</span>(px)</span></code></pre></div>
 <pre><code>## [1] "ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2012/03/PXD000001/generated"</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-msintro.html#cb16-1" tabindex="-1"></a><span class="fu">pxref</span>(px)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-msintro.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxref</span>(px)</span></code></pre></div>
 <pre><code>## [1] "Gatto L, Christoforou A; Using R and Bioconductor for proteomics data analysis., Biochim Biophys Acta, 2013 May 18, doi:10.1016/j.bbapap.2013.04.032 PMID:NA"</code></pre>
 <p>Data files can then be downloaded with the <code>pxget</code> function. Below, we
 retrieve the raw data file. The file is
 downloaded<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> If the file is already available, it is not downloaded a second time.</span>
 in the working directory and the name of the file is return by the
 function and stored in the <code>mzf</code> variable for later use <label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> This and other files are also availabel in the <code>msdata</code> package, described below</span>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-msintro.html#cb18-1" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
-<span id="cb18-2"><a href="sec-msintro.html#cb18-2" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-msintro.html#cb18-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="st">"TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</span></span>
+<span id="cb18-2"><a href="sec-msintro.html#cb18-2" aria-hidden="true" tabindex="-1"></a>mzf <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, fn)</span></code></pre></div>
 <pre><code>## Loading TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML from cache.</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-msintro.html#cb20-1" tabindex="-1"></a>mzf</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-msintro.html#cb20-1" aria-hidden="true" tabindex="-1"></a>mzf</span></code></pre></div>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/184155b6efdb_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 </div>
 <div id="data-hub" class="section level3 unnumbered">
 <h3>Data hub<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-hub')" onmouseout="reset_tooltip('data-hub-tooltip')"><span class="tooltiptext" id="data-hub-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -362,8 +362,8 @@ centrally to avoid repeated downloads.</p>
 <p>The <em><a href="https://bioconductor.org/packages/3.21/MsDataHub">MsDataHub</a></em> package provides data for
 mass spectrometry in general, and proteomics in particular. Once
 loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span>
-<span id="cb22-2"><a href="sec-msintro.html#cb22-2" tabindex="-1"></a><span class="fu">MsDataHub</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-msintro.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MsDataHub"</span>)</span>
+<span id="cb22-2"><a href="sec-msintro.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">MsDataHub</span>()</span></code></pre></div>
 <pre><code>##                                                                 Title
 ## 1                                                            ko15.CDF
 ## 2                                            cptac_a_b_c_peptides.txt
@@ -423,19 +423,19 @@ loaded, the <code>MsDataHub()</code> function lists the available datasets</p>
 table</a>
 on the package page.</p>
 <p>Each data can then be downloaded with a dedicated function, for example</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-msintro.html#cb24-1" tabindex="-1"></a><span class="fu">ko15.CDF</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-msintro.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ko15.CDF</span>()</span></code></pre></div>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
-<pre><code>##                                                    EH7803 
-## "/home/lgatto/.cache/R/ExperimentHub/2f5f99721e1c94_7853"</code></pre>
+<pre><code>##                                                  EH7803 
+## "/home/lgatto/.cache/R/ExperimentHub/342f63629b86_7853"</code></pre>
 <p>Note that the (compressed)
 <code>TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code>
 file downloaded above happens to also be available in <code>MsDataHub</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" tabindex="-1"></a>MsDataHub<span class="sc">::</span><span class="fu">TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-msintro.html#cb28-1" aria-hidden="true" tabindex="-1"></a>MsDataHub<span class="sc">::</span><span class="fu">TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz</span>()</span></code></pre></div>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
-<pre><code>##                                                   EH7808 
-## "/home/lgatto/.cache/R/ExperimentHub/4189228548251_7858"</code></pre>
+<pre><code>##                                                  EH7808 
+## "/home/lgatto/.cache/R/ExperimentHub/27925e757a92_7858"</code></pre>
 </div>
 <div id="experiment-packages" class="section level3 unnumbered">
 <h3>Experiment packages<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('experiment-packages')" onmouseout="reset_tooltip('experiment-packages-tooltip')"><span class="tooltiptext" id="experiment-packages-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -443,19 +443,19 @@ file downloaded above happens to also be available in <code>MsDataHub</code>.</p
 <p>The <em><a href="https://bioconductor.org/packages/3.21/msdata">msdata</a></em> is an <em>experiment package</em>
 that directly ships raw data files relevant for both proteomics and
 metabolomics.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
-<span id="cb32-2"><a href="sec-msintro.html#cb32-2" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
-<span id="cb32-3"><a href="sec-msintro.html#cb32-3" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-msintro.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"msdata"</span>)</span>
+<span id="cb32-2"><a href="sec-msintro.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="do">## proteomics raw data</span></span>
+<span id="cb32-3"><a href="sec-msintro.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">proteomics</span>()</span></code></pre></div>
 <pre><code>## [1] "MRM-standmix-5.mzML.gz"                                                
 ## [2] "MS3TMT10_01022016_32917-33481.mzML.gz"                                 
 ## [3] "MS3TMT11.mzML"                                                         
 ## [4] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML.gz"
 ## [5] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.mzML.gz"</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-msintro.html#cb34-1" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
-<span id="cb34-2"><a href="sec-msintro.html#cb34-2" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-msintro.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## proteomics identification data</span></span>
+<span id="cb34-2"><a href="sec-msintro.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ident</span>()</span></code></pre></div>
 <pre><code>## [1] "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-msintro.html#cb36-1" tabindex="-1"></a><span class="do">## quantitative data</span></span>
-<span id="cb36-2"><a href="sec-msintro.html#cb36-2" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-msintro.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## quantitative data</span></span>
+<span id="cb36-2"><a href="sec-msintro.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quant</span>()</span></code></pre></div>
 <pre><code>## [1] "cptac_a_b_peptides.txt"</code></pre>
 <p>New data are added to the more modern and lightweight <code>MsDataHub</code>
 infrastructure.</p>

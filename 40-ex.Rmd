@@ -203,6 +203,8 @@ identification score.
   with `PSMatch::getAtomicMass()[["p"]]`).
 - The `PSMatch::getAminoAcids()` function returns a `data.frame` of
   amino acid properties.
+- Consider using `spectrapply` to iterate of the individual scans of a
+  `Spectra` object.
 
 
 ## Quantitative data processing
