@@ -82,8 +82,6 @@ id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
 
-
-
 - Join the raw and identification data. Beware though that the joining
   must now be performed by spectrum ids and by files.
 
@@ -175,6 +173,36 @@ sp |>
 ```
 
 ## Search engine
+
+Download the [spectra and protein
+database](https://dataverse.uclouvain.be/dataset.xhtml?persistentId=doi:10.14428/DVN/QR0OYG&faces-redirect=true#)
+needed for the exercise ([direct
+link](https://dataverse.uclouvain.be/api/access/dataset/:persistentId/?persistentId=doi:10.14428/DVN/QR0OYG)]. The
+protein database is in fasta format and can be processed as described
+in the section \@ref(sec-id-seq) *Reading and processing protein
+sequences*. The MS2 spectra are provided in the Mascot Generic Format
+(MGF) format, that can be loaded using the dedicated
+[MsBackendMgf](https://rformassspectrometry.github.io/MsBackendMgf/)
+backend as `Spectra` objects.
+
+You are asked to write code to identify the spectra, following the
+principles defined in the *Identification data* chapter, include ways
+to provide confidence in your identification results, beyond a single
+identification score.
+
+### Hints
+
+- Focus on expected peptides sequences that longer than 6 and shorter
+  than 28 amino acids to reduce the search space. 
+- Do not search each MS2 scan against the whole database, but focus on
+  peptides that have a mass that is close to the scan's precuror mass.
+- To calculate the mass of a peptides, use `m/z * c - proton_mass *
+  c`, where `m/z` and `c` is the mass-over-charge and the charge of
+  the precursor and `proton_mass` is the mass of a proton (available
+  with `PSMatch::getAtomicMass()[["p"]]`).
+- The `PSMatch::getAminoAcids()` function returns a `data.frame` of
+  amino acid properties.
+
 
 ## Quantitative data processing
 
