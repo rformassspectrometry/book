@@ -2,6 +2,7 @@
 
 ```{r visibility, echo = FALSE}
 vis <- FALSE
+evl <- FALSE
 ```
 
 ## Raw data and identification results
@@ -12,7 +13,7 @@ vis <- FALSE
   project [@Morgenstern:2020].
 
 
-```{r get_PXD022816, echo = vis, include = vis}
+```{r get_PXD022816, echo = vis, include = vis, eval = evl}
 ## Getting data from PX/PRIDE
 library(rpx)
 
@@ -35,7 +36,7 @@ pxfiles(PXD022816)
   identification data by comparing the density of the decoy and target
   PSMs id scores for each file.
 
-```{r spectra_PXD022816, echo = vis, include = vis}
+```{r spectra_PXD022816, echo = vis, include = vis, eval = evl}
 ## Loading raw data
 library("Spectra")
 sp <- Spectra(mzmls)
@@ -47,7 +48,7 @@ table(basename(sp$dataOrigin))
 table(sp$centroided, sp$msLevel)
 ```
 
-```{r mslevel_PXD022816, message = FALSE, fig.width = 12, echo = vis, include = vis}
+```{r mslevel_PXD022816, message = FALSE, fig.width = 12, echo = vis, include = vis, eval = evl}
 library("ggplot2")
 library("tidyr")
 library("magrittr")
@@ -62,7 +63,7 @@ filterMsLevel(sp, 1) |>
     geom_line()
 ```
 
-```{r is_PXD022816, message = FALSE, fig.width = 12, echo = vis, include = vis}
+```{r is_PXD022816, message = FALSE, fig.width = 12, echo = vis, include = vis, eval = evl}
 ## Identification data
 library("PSMatch")
 id <- PSM(mzids)
@@ -77,7 +78,7 @@ tidyr::as_tibble(id) |>
     facet_wrap(~ spectrumFile)
 ```
 
-```{r idfilter_PXD022816, echo = vis, include = vis}
+```{r idfilter_PXD022816, echo = vis, include = vis, eval = evl}
 id_filtered <- filterPSMs(id)
 max(id_filtered$PSM.level.q.value)
 ```
@@ -85,7 +86,7 @@ max(id_filtered$PSM.level.q.value)
 - Join the raw and identification data. Beware though that the joining
   must now be performed by spectrum ids and by files.
 
-```{r joinsp_PXD022816, echo = vis, include = vis}
+```{r joinsp_PXD022816, echo = vis, include = vis, eval = evl}
 ## primary key for spectra
 sp$pkey <-
     paste0(sub("^.+_QEP", "QEP", basename(dataOrigin(sp))),
@@ -116,7 +117,7 @@ table(!is.na(filterMsLevel(sp, 2)$sequence))
   switch to an in-memory backend to seed up the calculations.
 
 
-```{r compare_PXD022816, echo = vis, include = vis}
+```{r compare_PXD022816, echo = vis, include = vis, eval = evl}
 sp_O43175 <- sp[which(sp$DatabaseAccess == "O43175")]
 sp_O43175 <- setBackend(sp_O43175, MsBackendDataFrame())
 sp_O43175
@@ -138,7 +139,7 @@ spectraData(sp_O43175[i])$precursorMz
 spectraData(sp_O43175[i])$modName
 ```
 
-```{r plotmirror_PXD022816, echo = vis, include = vis}
+```{r plotmirror_PXD022816, echo = vis, include = vis, eval = evl}
 ## Directly compare spectra with/without Carbamyl
 plotSpectraMirror(sp_O43175[4], sp_O43175[9])
 plotSpectraMirror(sp_O43175[2], sp_O43175[10])
@@ -150,12 +151,12 @@ plotSpectraMirror(sp_O43175[2], sp_O43175[10])
   `countIdentifications()` function, as shown above. The function will
   automatically perform the counts in parallel for each acquisition.
 
-```{r countIds, echo = vis, include = vis}
+```{r countIds, echo = vis, include = vis, eval = evl}
 sp <- countIdentifications(sp)
 table(msLevel(sp), sp$countIdentifications)
 ```
 
-```{r tic_PXD022816, echo = vis, include = vis}
+```{r tic_PXD022816, echo = vis, include = vis, eval = evl}
 sp |>
  filterMsLevel(1) |>
  spectraData() |>
@@ -176,8 +177,8 @@ sp |>
 
 Download the [spectra and protein
 database](https://dataverse.uclouvain.be/dataset.xhtml?persistentId=doi:10.14428/DVN/QR0OYG&faces-redirect=true#)
-needed for the exercise ([direct
-link](https://dataverse.uclouvain.be/api/access/dataset/:persistentId/?persistentId=doi:10.14428/DVN/QR0OYG)]. The
+needed for the exercise (here is a [direct
+link](https://dataverse.uclouvain.be/api/access/dataset/:persistentId/?persistentId=doi:10.14428/DVN/QR0OYG]). The
 protein database is in fasta format and can be processed as described
 in the section \@ref(sec-id-seq) *Reading and processing protein
 sequences*. The MS2 spectra are provided in the Mascot Generic Format
@@ -193,7 +194,7 @@ identification score.
 ### Hints
 
 - Focus on expected peptides sequences that longer than 6 and shorter
-  than 28 amino acids to reduce the search space. 
+  than 28 amino acids to reduce the search space.
 - Do not search each MS2 scan against the whole database, but focus on
   peptides that have a mass that is close to the scan's precuror mass.
 - To calculate the mass of a peptides, use `m/z * c - proton_mass *
