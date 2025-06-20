@@ -579,7 +579,7 @@ plotSpectraMirror(sp_k[3], sp_k[4], main = "SQ...")
 ```
 `r msmbstyle::solution_end()`
 
-## Reading and processing protein sequences
+## Reading and processing protein sequences {#sec-id-seq}
 
 It can sometimes be necessary to do some protein sequence processing
 in R, for compute peptides for a set of proteins of interest. Let's
