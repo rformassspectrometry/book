@@ -191,7 +191,7 @@ principles defined in the *Identification data* chapter, include ways
 to provide confidence in your identification results, beyond a single
 identification score.
 
-### Hints
+**Hints:**
 
 - Focus on expected peptides sequences that longer than 6 and shorter
   than 28 amino acids to reduce the search space.

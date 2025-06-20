@@ -89,7 +89,6 @@ the-impact-of-individual-steps
 sec-ex
 raw-data-and-identification-results
 search-engine
-hints
 quantitative-data-processing
 sec-anx
 sec-raw2
