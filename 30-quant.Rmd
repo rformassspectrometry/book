@@ -787,9 +787,9 @@ code:
 `r msmbstyle::question_begin()`
 
 
-Visualise the identification score and the posterior probability
-probability (PEP) distributions from forward and reverse hits and
-interpret the figure.
+Visualise the identification score and the posterior error probability
+(PEP) distributions from forward and reverse hits and interpret the
+figure.
 
 `r msmbstyle::question_end()`
 
