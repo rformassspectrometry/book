@@ -8,17 +8,10 @@ The `mzR` package is a direct interface to the
 includes a substantial proportion of *pwiz*'s C/C++ code for fast and
 efficient parsing of these large raw data files.
 
-Let's start by using some raw data files from the `msdata`
-package. After loading it, we use the `proteomics()` function to
-return the full file names for two raw data files. We will start by
-focusing on the second one.
+Let's start by getting some raw data from the `MsDataHub` package.
 
 ```{r rwfiles}
-library("rpx")
-px <- PXDataset("PXD000001")
-fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
-f <- pxget(px, fn)
-basename(f)
+f <- MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz()
 ```
 
 The three main functions of `mzR` are

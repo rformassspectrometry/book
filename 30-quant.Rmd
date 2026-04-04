@@ -441,7 +441,7 @@ knitr::include_graphics("./img/cptac.png")
 The peptide-level data, as processed by MaxQuant [@Cox:2008] is
 available in the `MsDataHub` package:
 
-```{r msdata}
+```{r cptac_from_hub}
 basename(f <- MsDataHub::cptac_a_b_peptides.txt())
 ```
 

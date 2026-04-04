@@ -200,7 +200,10 @@ and then from the second). The `dataOrigin` function can be used to identify
 spectra from the different data files.
 
 ```{r, sciex_mzr}
-(fls <- dir(system.file("sciex", package = "msdata"), full.names = TRUE))
+grep("POOL", MsDataHub()[[1]], value = TRUE)
+fls <- c(X20171016_POOL_POS_1_105.134.mzML(),
+         X20171016_POOL_POS_3_105.134.mzML())
+fls
 sp_sciex <- Spectra(fls)
 table(dataOrigin(sp_sciex))
 ```
@@ -586,7 +589,7 @@ The figure below (taken from [@Gatto:2020]) illustrates the respective
 advantages of storing data in memory or on disk. The benchmarking was
 done for the `MSnbase` package but also applies to the `Spectra` backends.
 
-```{r, results='markup', fig.cap="(a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the msdata package.", echo=FALSE, purl=FALSE, out.width='70%', fig.align='center'}
+```{r, results='markup', fig.cap="(a) Reading time (triplicates, in seconds) and (b) data size in memory (in MB) to read/store 1, 5, and 10 files containing 1431 MS1 (on-disk only) and 6103 MS2 (on-disk and in-memory) spectra. (c) Filtering benchmark assessed over 10 interactions on in-memory and on-disk data containing 6103 MS2 spectra. (d) Access time to spectra for the in-memory (left) and on-disk (right) backends for 1, 10, 100 1000, 5000, and all 6103 spectra. Benchmarks were performed on a Dell XPS laptop with an Intel i5-8250U processor 1.60 GHz (4 cores, 8 threads), 7.5 GB RAM running Ubuntu 18.04.4 LTS 64-bit, and an SSD drive. The data used for the benchmarking are a TMT 4-plex experiment acquired on a LTQ Orbitrap Velos (Thermo Fisher Scientific) available in the MsDataHub package.", echo=FALSE, purl=FALSE, out.width='70%', fig.align='center'}
 knitr::include_graphics("./img/pr0c00313_0002.gif")
 ```
 

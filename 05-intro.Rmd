@@ -137,7 +137,8 @@ Data files can then be downloaded with the `pxget` function. Below, we
 retrieve the raw data file. The file is
 downloaded^[If the file is already available, it is not downloaded a second time.]
 in the working directory and the name of the file is return by the
-function and stored in the `mzf` variable for later use ^[This and other files are also availabel in the `msdata` package, described below].
+
+function and stored in the `mzf` variable for later use ^[This and other files are also availabel in the `MsDataHub` package, described below].
 
 ```{r pxget}
 fn <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"
@@ -178,25 +179,17 @@ file downloaded above happens to also be available in `MsDataHub`.
 MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzML.gz()
 ```
 
-### Experiment packages {-}
+In addition to raw data, there's also the matchin identification data
 
-The `r BiocStyle::Biocexptpkg("msdata")` is an *experiment package*
-that directly ships raw data files relevant for both proteomics and
-metabolomics.
-
-```{r msdatafiles, message = FALSE}
-library("msdata")
-## proteomics raw data
-proteomics()
-## proteomics identification data
-ident()
-## quantitative data
-quant()
+```{r MsDataHubId, message = FALSE}
+MsDataHub::TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01.20141210.mzid()
 ```
 
-New data are added to the more modern and lightweight `MsDataHub`
-infrastructure.
+and a quantitative proteomics data table
 
+```{r MsDataHubQuant, message = FALSE}
+MsDataHub::cptac_a_b_peptides.txt()
+```
 
 Often, experiment packages distribute processed data; examples thereof
 are the `r BiocStyle::Biocexptpkg("pRolocdata")` and
