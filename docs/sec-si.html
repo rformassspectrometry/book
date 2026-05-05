@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-04-04" />
+<meta name="date" content="2026-05-05" />
 
 
 <meta name="description" content="Chapter 8 Additional materials and session information | R for Mass Spectrometry">
@@ -240,7 +240,7 @@ along with performance considerations.</li>
 <a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-matching-with-MetaboAnnotation.html">MS/MS Spectra Matching with the MetaboAnnotation
 Package</a>:
 explains how the <em>Spectra</em> package can be used together with the
-<em><a href="https://bioconductor.org/packages/3.22/MetaboAnnotation">MetaboAnnotation</a></em> package in LC-MS/MS annotation
+<em><a href="https://bioconductor.org/packages/3.23/MetaboAnnotation">MetaboAnnotation</a></em> package in LC-MS/MS annotation
 workflows for untargeted metabolomics data.</li>
 </ul>
 </div>
@@ -249,29 +249,29 @@ workflows for untargeted metabolomics data.</li>
 <span class="header-section-number">8.2</span> Compiling the book locally<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('compiling-the-book-locally')" onmouseout="reset_tooltip('compiling-the-book-locally-tooltip')"><span class="tooltiptext" id="compiling-the-book-locally-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>To compile and render the teaching material, you will also need
-the <em><a href="https://bioconductor.org/packages/3.22/BiocStyle">BiocStyle</a></em> package and the (slighly
+the <em><a href="https://bioconductor.org/packages/3.23/BiocStyle">BiocStyle</a></em> package and the (slighly
 modified) <a href="https://www-huber.embl.de/users/msmith/msmbstyle/">Modern Statistics for Model Biology (msmb) HTML Book
 Style</a> by Mike
 Smith:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="sec-si.html#cb475-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"bookdown"</span>, <span class="st">"BiocStyle"</span>, <span class="st">"lgatto/msmbstyle"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="sec-si.html#cb477-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"bookdown"</span>, <span class="st">"BiocStyle"</span>, <span class="st">"lgatto/msmbstyle"</span>))</span></code></pre></div>
 <p>Clone the <a href="https://github.com/Rformassspectrometry/book">book
 repository</a> and render
 the book with</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="sec-si.html#cb476-1" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">"."</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="sec-si.html#cb478-1" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">"."</span>)</span></code></pre></div>
 </div>
 <div id="session-information" class="section level2" number="8.3">
 <h2>
 <span class="header-section-number">8.3</span> Session information<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('session-information')" onmouseout="reset_tooltip('session-information-tooltip')"><span class="tooltiptext" id="session-information-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="sec-si.html#cb477-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 4.5.0 (2025-04-11)
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="sec-si.html#cb479-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.6.0 (2026-04-24)
 ## Platform: x86_64-pc-linux-gnu
 ## Running under: Ubuntu 24.04.4 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /opt/R-4.5/lib/R/lib/libRblas.so 
-## LAPACK: /opt/R-4.5/lib/R/lib/libRlapack.so;  LAPACK version 3.12.1
+## BLAS:   /opt/R-4.6/lib/R/lib/libRblas.so 
+## LAPACK: /opt/R-4.6/lib/R/lib/libRlapack.so;  LAPACK version 3.12.1
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -289,62 +289,62 @@ the book with</p>
 ## [8] base     
 ## 
 ## other attached packages:
-##  [1] mzID_1.48.0                 patchwork_1.3.2            
+##  [1] mzID_1.50.0                 patchwork_1.3.2            
 ##  [3] factoextra_2.0.0            gplots_3.3.0               
-##  [5] limma_3.66.0                lubridate_1.9.5            
+##  [5] limma_3.68.1                lubridate_1.9.5            
 ##  [7] forcats_1.0.1               stringr_1.6.0              
-##  [9] purrr_1.2.1                 readr_2.2.0                
+##  [9] purrr_1.2.2                 readr_2.2.0                
 ## [11] tidyr_1.3.2                 tibble_3.3.1               
-## [13] tidyverse_2.0.0.9000        MSnID_1.44.2               
-## [15] cleaver_1.48.0              Biostrings_2.78.0          
-## [17] XVector_0.50.0              ggplot2_4.0.2              
-## [19] dplyr_1.2.0                 MsDataHub_1.11.2           
-## [21] rpx_2.18.0                  MsCoreUtils_1.22.1         
-## [23] QFeatures_1.20.0            MultiAssayExperiment_1.36.1
-## [25] SummarizedExperiment_1.40.0 Biobase_2.70.0             
-## [27] GenomicRanges_1.62.1        Seqinfo_1.0.0              
-## [29] IRanges_2.44.0              MatrixGenerics_1.22.0      
-## [31] matrixStats_1.5.0           Spectra_1.20.1             
-## [33] BiocParallel_1.44.0         S4Vectors_0.48.0           
-## [35] BiocGenerics_0.56.0         generics_0.1.4             
-## [37] mzR_2.44.0                  Rcpp_1.1.1                 
-## [39] BiocStyle_2.38.0           
+## [13] tidyverse_2.0.0             MSnID_1.46.0               
+## [15] cleaver_1.50.0              Biostrings_2.80.0          
+## [17] XVector_0.52.0              ggplot2_4.0.3              
+## [19] dplyr_1.2.1                 PTMods_1.0.0               
+## [21] MsDataHub_1.12.0            rpx_2.20.0                 
+## [23] MsCoreUtils_1.25.3          QFeatures_1.22.0           
+## [25] MultiAssayExperiment_1.38.0 SummarizedExperiment_1.42.0
+## [27] Biobase_2.72.0              GenomicRanges_1.64.0       
+## [29] Seqinfo_1.2.0               IRanges_2.46.0             
+## [31] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+## [33] Spectra_1.22.0              BiocParallel_1.46.0        
+## [35] S4Vectors_0.50.0            BiocGenerics_0.58.0        
+## [37] generics_0.1.4              mzR_2.46.0                 
+## [39] Rcpp_1.1.1-1.1              BiocStyle_2.40.0           
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] bitops_1.0-9            filelock_1.0.3          R.oo_1.27.1            
-##   [4] preprocessCore_1.72.0   XML_3.99-0.22           lifecycle_1.0.5        
+##   [4] preprocessCore_1.74.0   XML_3.99-0.23           lifecycle_1.0.5        
 ##   [7] httr2_1.2.2             rstatix_0.7.3           doParallel_1.0.17      
-##  [10] lattice_0.22-9          MASS_7.3-65             backports_1.5.0        
-##  [13] magrittr_2.0.4          sass_0.4.10             rmarkdown_2.30         
+##  [10] lattice_0.22-9          MASS_7.3-65             backports_1.5.1        
+##  [13] magrittr_2.0.5          sass_0.4.10             rmarkdown_2.31         
 ##  [16] jquerylib_0.1.4         yaml_2.3.12             otel_0.2.0             
 ##  [19] DBI_1.3.0               RColorBrewer_1.1-3      abind_1.4-8            
-##  [22] R.cache_0.17.0          R.utils_2.13.0          AnnotationFilter_1.34.0
-##  [25] RCurl_1.98-1.17         rappdirs_0.3.4          ggrepel_0.9.8          
-##  [28] pheatmap_1.0.13         MSnbase_2.37.1          ncdf4_1.24             
-##  [31] codetools_0.2-20        DelayedArray_0.36.0     xml2_1.5.2             
-##  [34] tidyselect_1.2.1        farver_2.1.2            BiocFileCache_3.0.0    
+##  [22] R.cache_0.17.0          R.utils_2.13.0          AnnotationFilter_1.36.0
+##  [25] RCurl_1.98-1.18         rappdirs_0.3.4          ggrepel_0.9.8          
+##  [28] pheatmap_1.0.13         MSnbase_2.37.0          ncdf4_1.24             
+##  [31] codetools_0.2-20        DelayedArray_0.38.1     xml2_1.5.2             
+##  [34] tidyselect_1.2.1        farver_2.1.2            BiocFileCache_3.2.0    
 ##  [37] jsonlite_2.0.0          Formula_1.2-5           iterators_1.0.14       
-##  [40] foreach_1.5.2           tools_4.5.0             glue_1.8.0             
-##  [43] SparseArray_1.10.9      BiocBaseUtils_1.12.0    xfun_0.56              
+##  [40] foreach_1.5.2           tools_4.6.0             glue_1.8.1             
+##  [43] SparseArray_1.12.2      BiocBaseUtils_1.14.0    xfun_0.57              
 ##  [46] withr_3.0.2             BiocManager_1.30.27     fastmap_1.2.0          
-##  [49] rhdf5filters_1.22.0     caTools_1.18.3          digest_0.6.39          
+##  [49] rhdf5filters_1.24.0     caTools_1.18.3          digest_0.6.39          
 ##  [52] timechange_0.4.0        R6_2.6.1                gtools_3.9.5           
 ##  [55] RSQLite_2.4.6           R.methodsS3_1.8.2       utf8_1.2.6             
-##  [58] data.table_1.18.2.1     PSMatch_1.14.0          httr_1.4.8             
-##  [61] S4Arrays_1.10.1         pkgconfig_2.0.3         gtable_0.3.6           
-##  [64] blob_1.3.0              S7_0.2.1                impute_1.84.0          
+##  [58] data.table_1.18.2.1     PSMatch_1.16.0          httr_1.4.8             
+##  [61] S4Arrays_1.12.0         pkgconfig_2.0.3         gtable_0.3.6           
+##  [64] blob_1.3.0              S7_0.2.2                impute_1.86.0          
 ##  [67] htmltools_0.5.9         carData_3.0-6           bookdown_0.34.2        
-##  [70] MALDIquant_1.22.3       ProtGenerics_1.42.0     clue_0.3-67            
+##  [70] MALDIquant_1.22.3       ProtGenerics_1.44.0     clue_0.3-68            
 ##  [73] scales_1.4.0            png_0.1-9               knitr_1.51             
-##  [76] MetaboCoreUtils_1.18.1  rstudioapi_0.18.0       tzdb_0.5.0             
-##  [79] reshape2_1.4.5          curl_7.0.0              cachem_1.1.0           
-##  [82] rhdf5_2.54.1            BiocVersion_3.22.0      KernSmooth_2.23-26     
-##  [85] parallel_4.5.0          AnnotationDbi_1.72.0    vsn_3.78.1             
-##  [88] msmbstyle_0.0.22        pillar_1.11.1           grid_4.5.0             
-##  [91] vctrs_0.7.1             pcaMethods_2.2.0        ggpubr_0.6.3           
+##  [76] MetaboCoreUtils_1.20.1  rstudioapi_0.18.0       tzdb_0.5.0             
+##  [79] reshape2_1.4.5          curl_7.1.0              cachem_1.1.0           
+##  [82] rhdf5_2.56.0            BiocVersion_3.23.1      KernSmooth_2.23-26     
+##  [85] parallel_4.6.0          AnnotationDbi_1.74.0    vsn_3.80.0             
+##  [88] msmbstyle_0.0.22        pillar_1.11.1           grid_4.6.0             
+##  [91] vctrs_0.7.3             pcaMethods_2.4.0        ggpubr_0.6.3           
 ##  [94] car_3.1-5               dbplyr_2.5.2            cluster_2.1.8.2        
-##  [97] evaluate_1.0.5          cli_3.6.5               compiler_4.5.0         
-## [100] rlang_1.1.7            
+##  [97] evaluate_1.0.5          cli_3.6.6               compiler_4.6.0         
+## [100] rlang_1.2.0            
 ##  [ reached 'max' / getOption("max.print") -- omitted 22 entries ]</code></pre>
 
 </div>
@@ -353,9 +353,9 @@ the book with</p>
 <a href="sec-anx.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-04-04
+2026-05-05
  using 
-R version 4.5.0 (2025-04-11)
+R version 4.6.0 (2026-04-24)
 </p>
 </div>
 </div>

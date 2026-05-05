@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-04-04" />
+<meta name="date" content="2026-05-05" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -450,17 +450,17 @@ spectra from the different data files.</p>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sec-raw.html#cb55-1" tabindex="-1"></a>fls</span></code></pre></div>
-<pre><code>##                                                   EH7809 
-## "/home/lgatto/.cache/R/ExperimentHub/baf70475f8f60_7859" 
-##                                                   EH7810 
-## "/home/lgatto/.cache/R/ExperimentHub/baf704370912d_7860"</code></pre>
+<pre><code>##                                                    EH7809 
+## "/home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859" 
+##                                                    EH7810 
+## "/home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860"</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-raw.html#cb57-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(fls)</span>
 <span id="cb57-2"><a href="sec-raw.html#cb57-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/.cache/R/ExperimentHub/baf704370912d_7860 
-##                                                    931 
-## /home/lgatto/.cache/R/ExperimentHub/baf70475f8f60_7859 
-##                                                    931</code></pre>
+## /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 
+##                                                     931 
+## /home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859 
+##                                                     931</code></pre>
 </div>
 <div id="backends" class="section level3" number="3.1.3">
 <h3>
@@ -475,7 +475,7 @@ used instead. The default backends are:</p>
 <ul>
 <li>
 <code>MsBackendMzR</code>: this backend keeps only general spectra variables in memory
-and relies on the <em><a href="https://bioconductor.org/packages/3.22/mzR">mzR</a></em> package to read mass peaks (m/z and
+and relies on the <em><a href="https://bioconductor.org/packages/3.23/mzR">mzR</a></em> package to read mass peaks (m/z and
 intensity values) from the original MS files on-demand.</li>
 </ul>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sec-raw.html#cb59-1" tabindex="-1"></a>sp_sciex</span></code></pre></div>
@@ -496,8 +496,8 @@ intensity values) from the original MS files on-demand.</li>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## baf70475f8f60_7859
-## baf704370912d_7860</code></pre>
+## 31c07e7c0029cc_7859
+## 31c07e6f78fcc7_7860</code></pre>
 <ul>
 <li>
 <code>MsBackendMemory</code> and <code>MsBackendDataFrame</code>: the full mass spectrometry data is
@@ -522,7 +522,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 34 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Sat Apr  4 22:49:46 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Tue May  5 18:23:38 2026]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -551,20 +551,20 @@ us to specify the storage location of the HDF5 file.</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-##  baf70475f8f60_7859.h5
-##  baf704370912d_7860.h5
+##  31c07e7c0029cc_7859.h5
+##  31c07e6f78fcc7_7860.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Sat Apr  4 22:49:54 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue May  5 18:23:42 2026]</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-raw.html#cb65-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/.cache/R/ExperimentHub/baf704370912d_7860 
-##                                                    931 
-## /home/lgatto/.cache/R/ExperimentHub/baf70475f8f60_7859 
-##                                                    931</code></pre>
+## /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 
+##                                                     931 
+## /home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859 
+##                                                     931</code></pre>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-raw.html#cb67-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmp8VjoEw/baf704370912d_7860.h5 /tmp/Rtmp8VjoEw/baf70475f8f60_7859.h5 
-##                                   931                                   931</code></pre>
+## /tmp/RtmpKwu8SM/31c07e6f78fcc7_7860.h5 /tmp/RtmpKwu8SM/31c07e7c0029cc_7859.h5 
+##                                    931                                    931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
 intensity values for the mass peaks.</p>
@@ -582,7 +582,7 @@ or provide access to certain MS data resources such as the
 Additional backends are being developed to address specific needs or
 technologies, while remaining compliant with the <code>Spectra</code> interface.</p>
 <p>If you would like to learn more about how the raw MS formats are
-handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.22/mzR">mzR</a></em> package,
+handled by <code>Spectra</code> via the <em><a href="https://bioconductor.org/packages/3.23/mzR">mzR</a></em> package,
 check out the <a href="sec-anx.html#sec-raw2">7.1</a> section in the annex.</p>
 <p>See also <a href="https://jorainer.github.io/SpectraTutorials/articles/Spectra-backends.html">Spectra
 backends</a>
@@ -687,7 +687,7 @@ children.</li>
 ## file(s):
 ## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Sat Apr  4 22:49:55 2026]</code></pre>
+##  Filter: select parent/children scans for 2807 [Tue May  5 18:23:42 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -971,8 +971,8 @@ between 175 and 189 seconds in the measurement run.</p>
 <div id="sol-body-8" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sec-raw.html#cb81-1" tabindex="-1"></a>fls <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span>
 <span id="cb81-2"><a href="sec-raw.html#cb81-2" tabindex="-1"></a>fls</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/ExperimentHub/baf70475f8f60_7859"
-## [2] "/home/lgatto/.cache/R/ExperimentHub/baf704370912d_7860"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859"
+## [2] "/home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860"</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sec-raw.html#cb83-1" tabindex="-1"></a>file_2 <span class="ot">&lt;-</span> <span class="fu">filterDataOrigin</span>(sp_sciex, <span class="at">dataOrigin =</span> fls[<span class="dv">2</span>])</span>
 <span id="cb83-2"><a href="sec-raw.html#cb83-2" tabindex="-1"></a><span class="fu">length</span>(file_2)</span></code></pre></div>
 <pre><code>## [1] 931</code></pre>
@@ -999,10 +999,10 @@ between 175 and 189 seconds in the measurement run.</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## baf704370912d_7860
+## 31c07e6f78fcc7_7860
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/baf704370912d_7860 [Sat Apr  4 22:49:57 2026]
-##  Filter: select retention time [175..189] on MS level(s)  [Sat Apr  4 22:49:57 2026]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 [Tue May  5 18:23:43 2026]
+##  Filter: select retention time [175..189] on MS level(s)  [Tue May  5 18:23:43 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1084,11 +1084,11 @@ below (next to Lazy evaluation queue).</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## baf70475f8f60_7859
-## baf704370912d_7860
+## 31c07e7c0029cc_7859
+## 31c07e6f78fcc7_7860
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Sat Apr  4 22:49:57 2026]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue May  5 18:23:43 2026]</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sec-raw.html#cb95-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="sec-raw.html#cb97-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1118,9 +1118,9 @@ vignette.</p>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-04-04
+2026-05-05
  using 
-R version 4.5.0 (2025-04-11)
+R version 4.6.0 (2026-04-24)
 </p>
 </div>
 </div>

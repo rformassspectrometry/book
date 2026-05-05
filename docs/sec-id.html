@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-04-04" />
+<meta name="date" content="2026-05-05" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -228,8 +228,8 @@ using <code>MSGFplus</code>:</p>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="sec-id.html#cb112-1" tabindex="-1"></a>idf</span></code></pre></div>
-<pre><code>##                                                   EH7807 
-## "/home/lgatto/.cache/R/ExperimentHub/418921373f689_7857"</code></pre>
+<pre><code>##                                                    EH7807 
+## "/home/lgatto/.cache/R/ExperimentHub/31c07e307d0acb_7857"</code></pre>
 <p>The easiest way to read identification data in <code>mzIdentML</code> (often
 abbreviated with <code>mzid</code>) into R is to read it with the <code>PSM()</code>
 constructor function from the
@@ -658,7 +658,7 @@ Figure 4.1: Identifcation data wrangling.
 </div>
 </div>
 <p>If you would like to learn more about how the mzid data are handled by
-<code>PSMatch</code> via the <em><a href="https://bioconductor.org/packages/3.22/mzR">mzR</a></em> and <em><a href="https://bioconductor.org/packages/3.22/mzID">mzID</a></em>
+<code>PSMatch</code> via the <em><a href="https://bioconductor.org/packages/3.23/mzR">mzR</a></em> and <em><a href="https://bioconductor.org/packages/3.23/mzID">mzID</a></em>
 packages, check out the <a href="sec-anx.html#sec-id2">7.2</a> section in the annex.</p>
 </div>
 <div id="adding-identification-data-to-raw-data" class="section level2" number="4.4">
@@ -741,9 +741,9 @@ has 4 matching PSMs in detail.</p>
 ##                                                                  spectrumFile
 ## EH7807.23 TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## EH7807.24 TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
-##                       idFile MS.GF.RawScore MS.GF.DeNovoScore MS.GF.SpecEValue
-## EH7807.23 418921373f689_7857            -22                79     4.555588e-07
-## EH7807.24 418921373f689_7857            -22                79     4.555588e-07
+##                        idFile MS.GF.RawScore MS.GF.DeNovoScore MS.GF.SpecEValue
+## EH7807.23 31c07e307d0acb_7857            -22                79     4.555588e-07
+## EH7807.24 31c07e307d0acb_7857            -22                79     4.555588e-07
 ##           MS.GF.EValue MS.GF.QValue MS.GF.PepQValue modPeptideRef
 ## EH7807.23     1.307689    0.9006211       0.8901099        Pep453
 ## EH7807.24     1.307689    0.9006211       0.8901099        Pep453
@@ -1114,7 +1114,7 @@ experiment.</p>
 <pre><code>## Loading erwinia_carotovora.fasta from cache.</code></pre>
 <pre><code>## [1] "/home/lgatto/.cache/R/rpx/4cdea72b57ef5_erwinia_carotovora.fasta"</code></pre>
 <p>The fasta file can be read into R as a dedicated <code>AAStringSet</code> from
-the <em><a href="https://bioconductor.org/packages/3.22/Biostrings">Biostrings</a></em> package, that can be used to
+the <em><a href="https://bioconductor.org/packages/3.23/Biostrings">Biostrings</a></em> package, that can be used to
 very efficiently manage DNA, RNA and protein sequence.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="sec-id.html#cb226-1" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span>
 <span id="cb226-2"><a href="sec-id.html#cb226-2" tabindex="-1"></a>(prots <span class="ot">&lt;-</span> <span class="fu">readAAStringSet</span>(fas))</span></code></pre></div>
@@ -1131,7 +1131,7 @@ very efficiently manage DNA, RNA and protein sequence.</p>
 ## [4497]   309 MFSNLSKRWAQRTLSKSFYSTA...KFKWAGIKTRKFVFNPPKPRK sp|P07143|CY1_YEA...
 ## [4498]   231 FPTDDDDKIVGGYTCAANSIPY...PGVYTKVCNYVNWIQQTIAAN sp|P00761|TRYP_PI...
 ## [4499]   269 GVSGSCNIDVVCPEGNGHRDVI...DAAGTGAQFIDGLDSTGTPPV sp|Q7M135|LYSC_LY...</code></pre>
-<p>Finally, the <em><a href="https://bioconductor.org/packages/3.22/cleaver">cleaver</a></em> package can be used to
+<p>Finally, the <em><a href="https://bioconductor.org/packages/3.23/cleaver">cleaver</a></em> package can be used to
 cleave protein sequences using any of the many proteases. Below, we’ll
 use trypsin without any miscleavages.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="sec-id.html#cb228-1" tabindex="-1"></a><span class="fu">library</span>(cleaver)</span>
@@ -1205,7 +1205,7 @@ measurement accuracy, etc.</p>
 <p>Let’s reproduce parts of the analysis described the <code>MSnID</code>
 vignette. You can explore more with</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-id.html#cb238-1" tabindex="-1"></a><span class="fu">vignette</span>(<span class="st">"msnid_vignette"</span>, <span class="at">package =</span> <span class="st">"MSnID"</span>)</span></code></pre></div>
-<p>The <em><a href="https://bioconductor.org/packages/3.22/MSnID">MSnID</a></em> package can be used for post-search filtering
+<p>The <em><a href="https://bioconductor.org/packages/3.23/MSnID">MSnID</a></em> package can be used for post-search filtering
 of MS/MS identifications. One starts with the construction of an
 <code>MSnID</code> object that is populated with identification results that can
 be imported from a <code>data.frame</code> or from <code>mzIdenML</code> files. Here, we
@@ -1447,9 +1447,9 @@ further processed and analysed using appropriate statistical tests.</p>
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-04-04
+2026-05-05
  using 
-R version 4.5.0 (2025-04-11)
+R version 4.6.0 (2026-04-24)
 </p>
 </div>
 </div>
