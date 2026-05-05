@@ -177,12 +177,11 @@ sp |>
 
 Download the [spectra and protein
 database](https://dataverse.uclouvain.be/dataset.xhtml?persistentId=doi:10.14428/DVN/QR0OYG&faces-redirect=true#)
-needed for the exercise (here is a [direct
-link](https://dataverse.uclouvain.be/api/access/dataset/:persistentId/?persistentId=doi:10.14428/DVN/QR0OYG]). The
-protein database is in fasta format and can be processed as described
-in the section \@ref(sec-id-seq) *Reading and processing protein
-sequences*. The MS2 spectra are provided in the Mascot Generic Format
-(MGF) format, that can be loaded using the dedicated
+needed for the exercise. The protein database is in fasta format and
+can be processed as described in the section \@ref(sec-id-seq)
+*Reading and processing protein sequences*. The MS2 spectra are
+provided in the Mascot Generic Format (MGF) format, that can be loaded
+using the dedicated
 [MsBackendMgf](https://rformassspectrometry.github.io/MsBackendMgf/)
 backend as `Spectra` objects.
 

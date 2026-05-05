@@ -762,6 +762,9 @@ recommended to explore missingness as part of the exploratory data
 analysis.], but (generally) not to perform a principal component
 analysis.
 
+The [Imputing quantitative proteomics
+data](https://rformassspectrometry.github.io/QFeatures/articles/Imputation.html)
+describes the `impute()` method with many examples.
 
 ### Identification quality control
 
