@@ -522,7 +522,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 34 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Tue May  5 18:32:55 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Tue May  5 21:43:59 2026]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -554,7 +554,7 @@ us to specify the storage location of the HDF5 file.</p>
 ##  31c07e7c0029cc_7859.h5
 ##  31c07e6f78fcc7_7860.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue May  5 18:32:59 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Tue May  5 21:44:09 2026]</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-raw.html#cb65-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 
@@ -563,7 +563,7 @@ us to specify the storage location of the HDF5 file.</p>
 ##                                                     931</code></pre>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-raw.html#cb67-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/Rtmp7l37yG/31c07e6f78fcc7_7860.h5 /tmp/Rtmp7l37yG/31c07e7c0029cc_7859.h5 
+## /tmp/RtmpGAPp21/31c07e6f78fcc7_7860.h5 /tmp/RtmpGAPp21/31c07e7c0029cc_7859.h5 
 ##                                    931                                    931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
@@ -687,7 +687,7 @@ children.</li>
 ## file(s):
 ## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Tue May  5 18:32:59 2026]</code></pre>
+##  Filter: select parent/children scans for 2807 [Tue May  5 21:44:09 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1001,8 +1001,8 @@ between 175 and 189 seconds in the measurement run.</p>
 ## file(s):
 ## 31c07e6f78fcc7_7860
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 [Tue May  5 18:33:00 2026]
-##  Filter: select retention time [175..189] on MS level(s)  [Tue May  5 18:33:00 2026]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 [Tue May  5 21:44:12 2026]
+##  Filter: select retention time [175..189] on MS level(s)  [Tue May  5 21:44:12 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1088,7 +1088,7 @@ below (next to Lazy evaluation queue).</p>
 ## 31c07e6f78fcc7_7860
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue May  5 18:33:00 2026]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Tue May  5 21:44:12 2026]</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sec-raw.html#cb95-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="sec-raw.html#cb97-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>

@@ -3,7 +3,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 deps <- c("dplyr", "factoextra", "ggplot2", "gplots", "limma",
           "magrittr", "MsCoreUtils", "MsDataHub", "MSnID", "mzID", "mzR",
-          "patchwork", "PSMatch", "QFeatures", "rpx", "Spectra",
+          "patchwork", "PSMatch", "PTMods", "QFeatures", "rpx", "Spectra",
           "tidyr", "tidyverse", "impute", "MSnID")
 BiocManager::install(deps, ask = FALSE, udpate = TRUE)
 
