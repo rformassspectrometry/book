@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-05-22" />
+<meta name="date" content="2026-06-09" />
 
 
 <meta name="description" content="Chapter 4 Identification data | R for Mass Spectrometry">
@@ -838,11 +838,12 @@ the 6103 MS2 spectra.</p>
 <pre><code>## 
 ## FALSE  TRUE 
 ##  2646  3457</code></pre>
-<p>Let’s compare the precursor/peptide mass to charges</p>
+<p>Let’s compare the precursor (experimental) and peptide (calculated)
+mass to charges</p>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-id.html#cb196-1" tabindex="-1"></a>sp_2 <span class="ot">&lt;-</span> sp_2[<span class="sc">!</span><span class="fu">is.na</span>(sp_2<span class="sc">$</span>sequence)]</span>
-<span id="cb196-2"><a href="sec-id.html#cb196-2" tabindex="-1"></a><span class="fu">summary</span>(sp_2<span class="sc">$</span>precursorMz <span class="sc">-</span> sp_2<span class="sc">$</span>experimentalMassToCharge)</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.0000  0.0000  0.0053  0.0000  2.0297</code></pre>
+<span id="cb196-2"><a href="sec-id.html#cb196-2" tabindex="-1"></a><span class="fu">summary</span>(sp_2<span class="sc">$</span>calculatedMassToCharge <span class="sc">-</span> sp_2<span class="sc">$</span>experimentalMassToCharge)</span></code></pre></div>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## -0.522095 -0.494202 -0.018585 -0.214069 -0.002808  0.022705</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1099,7 +1100,7 @@ experiment.</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="sec-id.html#cb221-1" tabindex="-1"></a>(fas <span class="ot">&lt;-</span> <span class="fu">pxget</span>(px, <span class="fu">grep</span>(<span class="st">"fasta"</span>, <span class="fu">pxfiles</span>(px))))</span></code></pre></div>
 <pre><code>## Project PXD000001 files (11):
 ##  [remote] F063721.dat
-##  [remote] F063721.dat-mztab.txt
+##  [local]  F063721.dat-mztab.txt
 ##  [remote] PRIDE_Exp_Complete_Ac_22134.xml.gz
 ##  [remote] PRIDE_Exp_mzData_Ac_22134.xml.gz
 ##  [remote] PXD000001_mztab.txt
@@ -1447,7 +1448,7 @@ further processed and analysed using appropriate statistical tests.</p>
 <a href="sec-quant.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-05-22
+2026-06-09
  using 
 R version 4.6.0 (2026-04-24)
 </p>

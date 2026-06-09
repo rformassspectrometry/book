@@ -397,11 +397,12 @@ sp_2 <- filterMsLevel(sp, 2)
 table(is.na(sp_2$sequence))
 ```
 
-Let's compare the precursor/peptide mass to charges
+Let's compare the precursor (experimental) and peptide (calculated)
+mass to charges
 
 ```{r}
 sp_2 <- sp_2[!is.na(sp_2$sequence)]
-summary(sp_2$precursorMz - sp_2$experimentalMassToCharge)
+summary(sp_2$calculatedMassToCharge - sp_2$experimentalMassToCharge)
 ```
 `r msmbstyle::solution_end()`
 
