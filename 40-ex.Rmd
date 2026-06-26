@@ -196,15 +196,17 @@ identification score.
   than 28 amino acids to reduce the search space.
 - Do not search each MS2 scan against the whole database, but focus on
   peptides that have a mass that is close to the scan's precuror mass.
-- To calculate the mass of a peptides, use `m/z * c - proton_mass *
-  c`, where `m/z` and `c` is the mass-over-charge and the charge of
-  the precursor and `proton_mass` is the mass of a proton (available
-  with `PSMatch::getAtomicMass()[["p"]]`).
-- The `PSMatch::getAminoAcids()` function returns a `data.frame` of
-  amino acid properties.
+- To calculate the mass of a peptides based on its precursor, use
+  `m/z * c - proton_mass * c`, where `m/z` and `c` is the
+  mass-over-charge and the charge of the precursor and `proton_mass`
+  is the mass of a proton (available with
+  `PSMatch::getAtomicMass()[["p"]]`).
+- To calculate the mass of a peptides based on its sequence, sum the
+  masses of its amino acids and the mass of water. The
+  `PSMatch::getAminoAcids()` function returns a `data.frame` of amino
+  acid properties.
 - Consider using `spectrapply` to iterate of the individual scans of a
   `Spectra` object.
-
 
 ## Quantitative data processing
 

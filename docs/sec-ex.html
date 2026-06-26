@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-06-09" />
+<meta name="date" content="2026-06-26" />
 
 
 <meta name="description" content="Chapter 6 Supplementary exercises | R for Mass Spectrometry">
@@ -237,11 +237,15 @@ identification score.</p>
 than 28 amino acids to reduce the search space.</li>
 <li>Do not search each MS2 scan against the whole database, but focus on
 peptides that have a mass that is close to the scan’s precuror mass.</li>
-<li>To calculate the mass of a peptides, use <code>m/z * c - proton_mass *   c</code>, where <code>m/z</code> and <code>c</code> is the mass-over-charge and the charge of
-the precursor and <code>proton_mass</code> is the mass of a proton (available
-with <code>PSMatch::getAtomicMass()[["p"]]</code>).</li>
-<li>The <code>PSMatch::getAminoAcids()</code> function returns a <code>data.frame</code> of
-amino acid properties.</li>
+<li>To calculate the mass of a peptides based on its precursor, use
+<code>m/z * c - proton_mass * c</code>, where <code>m/z</code> and <code>c</code> is the
+mass-over-charge and the charge of the precursor and <code>proton_mass</code>
+is the mass of a proton (available with
+<code>PSMatch::getAtomicMass()[["p"]]</code>).</li>
+<li>To calculate the mass of a peptides based on its sequence, sum the
+masses of its amino acids and the mass of water. The
+<code>PSMatch::getAminoAcids()</code> function returns a <code>data.frame</code> of amino
+acid properties.</li>
 <li>Consider using <code>spectrapply</code> to iterate of the individual scans of a
 <code>Spectra</code> object.</li>
 </ul>
@@ -500,7 +504,7 @@ the number of true/false positive/negative results.</li>
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-06-09
+2026-06-26
  using 
 R version 4.6.0 (2026-04-24)
 </p>
