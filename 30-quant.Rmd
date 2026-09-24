@@ -953,6 +953,12 @@ table(rowData(cptac[["proteins_med"]])$.n)
 
 ### Principal component analysis
 
+Below we apply PCA using the processed peptide level data and the summarized
+protein level data. Since PCA does not accept missing values we first need to
+remove `NA` using `filterNA`. Note that several alternative dimension
+reduction methods allow the use of incomplete data (e.g. nipals [@wold:1966] or
+bpca [@bishop:1998])
+
 ```{r pca, message = FALSE}
 library("factoextra")
 
