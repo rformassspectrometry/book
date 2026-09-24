@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-06-26" />
+<meta name="date" content="2026-09-24" />
 
 
 <meta name="description" content="Chapter 7 Annex | R for Mass Spectrometry">
@@ -63,8 +63,9 @@ function reset_tooltip(id) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -133,6 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -216,7 +218,7 @@ gather general information about a run.</p>
 <span id="cb442-2"><a href="sec-anx.html#cb442-2" tabindex="-1"></a>ms <span class="ot">&lt;-</span> <span class="fu">openMSfile</span>(f)</span>
 <span id="cb442-3"><a href="sec-anx.html#cb442-3" tabindex="-1"></a>ms</span></code></pre></div>
 <pre><code>## Mass Spectrometry file handle.
-## Filename:  31c07efa899c6_7858 
+## Filename:  bdd7779c6e837_7858 
 ## Number of scans:  7534</code></pre>
 <div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="sec-anx.html#cb444-1" tabindex="-1"></a>hd <span class="ot">&lt;-</span> <span class="fu">header</span>(ms)</span>
 <span id="cb444-2"><a href="sec-anx.html#cb444-2" tabindex="-1"></a><span class="fu">dim</span>(hd)</span></code></pre></div>
@@ -371,8 +373,8 @@ major difference is that the former leverages C++ code from
 <p>The main functions are <code>mzID</code> to read the data into a dedicated data
 class and <code>flatten</code> to transform it into a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="sec-anx.html#cb459-1" tabindex="-1"></a>idf</span></code></pre></div>
-<pre><code>##                                                    EH7807 
-## "/home/lgatto/.cache/R/ExperimentHub/31c07e307d0acb_7857"</code></pre>
+<pre><code>##                                                   EH7807 
+## "/home/lgatto/.cache/R/ExperimentHub/bdd7747129ce3_7857"</code></pre>
 <div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="sec-anx.html#cb461-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mzID"</span>)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'mzID'</code></pre>
@@ -380,7 +382,7 @@ class and <code>flatten</code> to transform it into a <code>data.frame</code>.</
 ## 
 ##     flatten</code></pre>
 <div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="sec-anx.html#cb464-1" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">mzID</span>(idf)</span></code></pre></div>
-<pre><code>## reading 31c07e307d0acb_7857...</code></pre>
+<pre><code>## reading bdd7747129ce3_7857...</code></pre>
 <pre><code>##  DONE!</code></pre>
 <div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="sec-anx.html#cb467-1" tabindex="-1"></a>id</span></code></pre></div>
 <pre><code>## An mzID object
@@ -422,10 +424,10 @@ accessor functions such as <code>database</code>, <code>software</code>, <code>s
 ## 1         outer membrane lipoprotein PVQIQAGEDSNVIGALGGAVLGGFLGNTIGGGSGR
 ## 2                     trigger factor        TQVLDGLINANDIEVPVALIDGEIDVLR
 ## 3 ribose-binding periplasmic protein   TKGLNVMQNLLTAHPDVQAVFAQNDEMALGALR
-##   modified modification              idFile
-## 1    FALSE         &lt;NA&gt; 31c07e307d0acb_7857
-## 2    FALSE         &lt;NA&gt; 31c07e307d0acb_7857
-## 3    FALSE         &lt;NA&gt; 31c07e307d0acb_7857
+##   modified modification             idFile
+## 1    FALSE         &lt;NA&gt; bdd7747129ce3_7857
+## 2    FALSE         &lt;NA&gt; bdd7747129ce3_7857
+## 3    FALSE         &lt;NA&gt; bdd7747129ce3_7857
 ##                                                          spectrumFile
 ## 1 TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## 2 TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
@@ -449,7 +451,7 @@ to see all available methods.</p>
 <span id="cb471-2"><a href="sec-anx.html#cb471-2" tabindex="-1"></a>id2 <span class="ot">&lt;-</span> <span class="fu">openIDfile</span>(idf)</span>
 <span id="cb471-3"><a href="sec-anx.html#cb471-3" tabindex="-1"></a>id2</span></code></pre></div>
 <pre><code>## Identification file handle.
-## Filename:  31c07e307d0acb_7857 
+## Filename:  bdd7747129ce3_7857 
 ## Number of psms:  5759</code></pre>
 <div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="sec-anx.html#cb473-1" tabindex="-1"></a><span class="fu">softwareInfo</span>(id2)</span></code></pre></div>
 <pre><code>## [1] "MS-GF+ Beta (v10072) "                        
@@ -503,9 +505,9 @@ to see all available methods.</p>
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-06-26
+2026-09-24
  using 
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 </p>
 </div>
 </div>

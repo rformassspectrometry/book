@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-06-26" />
+<meta name="date" content="2026-09-24" />
 
 
 <meta name="description" content="Chapter 3 Raw MS data | R for Mass Spectrometry">
@@ -63,8 +63,9 @@ function reset_tooltip(id) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -133,6 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -278,7 +280,7 @@ spectra variables available from the previous example.</li>
 <p>Let’s now create a new object using the mzML data previously
 downloaded and available in the <code>mzf</code> file.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sec-raw.html#cb42-1" tabindex="-1"></a>mzf</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/rpx/c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/rpx/113df15cff8547_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML"</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sec-raw.html#cb44-1" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(mzf)</span>
 <span id="cb44-2"><a href="sec-raw.html#cb44-2" tabindex="-1"></a>sp</span></code></pre></div>
 <pre><code>## MSn data (Spectra) with 7534 spectra in a MsBackendMzR backend:
@@ -298,7 +300,7 @@ downloaded and available in the <code>mzf</code> file.</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
+## 113df15cff8547_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML</code></pre>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -450,17 +452,17 @@ spectra from the different data files.</p>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sec-raw.html#cb55-1" tabindex="-1"></a>fls</span></code></pre></div>
-<pre><code>##                                                    EH7809 
-## "/home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859" 
-##                                                    EH7810 
-## "/home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860"</code></pre>
+<pre><code>##                                                   EH7809 
+## "/home/lgatto/.cache/R/ExperimentHub/bdd77724297ae_7859" 
+##                                                   EH7810 
+## "/home/lgatto/.cache/R/ExperimentHub/bdd7744e95384_7860"</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-raw.html#cb57-1" tabindex="-1"></a>sp_sciex <span class="ot">&lt;-</span> <span class="fu">Spectra</span>(fls)</span>
 <span id="cb57-2"><a href="sec-raw.html#cb57-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 
-##                                                     931 
-## /home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859 
-##                                                     931</code></pre>
+## /home/lgatto/.cache/R/ExperimentHub/bdd7744e95384_7860 
+##                                                    931 
+## /home/lgatto/.cache/R/ExperimentHub/bdd77724297ae_7859 
+##                                                    931</code></pre>
 </div>
 <div id="backends" class="section level3" number="3.1.3">
 <h3>
@@ -496,8 +498,8 @@ intensity values) from the original MS files on-demand.</li>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## 31c07e7c0029cc_7859
-## 31c07e6f78fcc7_7860</code></pre>
+## bdd77724297ae_7859
+## bdd7744e95384_7860</code></pre>
 <ul>
 <li>
 <code>MsBackendMemory</code> and <code>MsBackendDataFrame</code>: the full mass spectrometry data is
@@ -522,7 +524,7 @@ spectrum, a much higher memory footprint.</li>
 ## 1862         1   259.752       931
 ##  ... 34 more variables/columns.
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendMemory [Fri Jun 26 09:33:31 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendMemory [Thu Sep 24 18:33:21 2026]</code></pre>
 <ul>
 <li>
 <code>MsBackendHdf5Peaks</code>: similar to <code>MsBackendMzR</code> this backend reads peak data
@@ -551,20 +553,20 @@ us to specify the storage location of the HDF5 file.</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-##  31c07e7c0029cc_7859.h5
-##  31c07e6f78fcc7_7860.h5
+##  bdd77724297ae_7859.h5
+##  bdd7744e95384_7860.h5
 ## Processing:
-##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Fri Jun 26 09:33:35 2026]</code></pre>
+##  Switch backend from MsBackendMzR to MsBackendHdf5Peaks [Thu Sep 24 18:33:25 2026]</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-raw.html#cb65-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataOrigin)</span></code></pre></div>
 <pre><code>## 
-## /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 
-##                                                     931 
-## /home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859 
-##                                                     931</code></pre>
+## /home/lgatto/.cache/R/ExperimentHub/bdd7744e95384_7860 
+##                                                    931 
+## /home/lgatto/.cache/R/ExperimentHub/bdd77724297ae_7859 
+##                                                    931</code></pre>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-raw.html#cb67-1" tabindex="-1"></a><span class="fu">table</span>(sp_hdf5<span class="sc">$</span>dataStorage)</span></code></pre></div>
 <pre><code>## 
-## /tmp/RtmpFqyrmq/31c07e6f78fcc7_7860.h5 /tmp/RtmpFqyrmq/31c07e7c0029cc_7859.h5 
-##                                    931                                    931</code></pre>
+## /tmp/RtmpiqiUAI/bdd7744e95384_7860.h5 /tmp/RtmpiqiUAI/bdd77724297ae_7859.h5 
+##                                   931                                   931</code></pre>
 <p>All of the above mentioned backends support changing all of their their spectra
 variables, <strong>except</strong> the <code>MsBackendMzR</code> that does not support changing m/z or
 intensity values for the mass peaks.</p>
@@ -685,9 +687,9 @@ children.</li>
 ##  ... 35 more variables/columns.
 ## 
 ## file(s):
-## c83ad32ce6d20_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
+## 113df15cff8547_TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML
 ## Processing:
-##  Filter: select parent/children scans for 2807 [Fri Jun 26 09:33:35 2026]</code></pre>
+##  Filter: select parent/children scans for 2807 [Thu Sep 24 18:33:25 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -971,8 +973,8 @@ between 175 and 189 seconds in the measurement run.</p>
 <div id="sol-body-8" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sec-raw.html#cb81-1" tabindex="-1"></a>fls <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">dataOrigin</span>(sp_sciex))</span>
 <span id="cb81-2"><a href="sec-raw.html#cb81-2" tabindex="-1"></a>fls</span></code></pre></div>
-<pre><code>## [1] "/home/lgatto/.cache/R/ExperimentHub/31c07e7c0029cc_7859"
-## [2] "/home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860"</code></pre>
+<pre><code>## [1] "/home/lgatto/.cache/R/ExperimentHub/bdd77724297ae_7859"
+## [2] "/home/lgatto/.cache/R/ExperimentHub/bdd7744e95384_7860"</code></pre>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sec-raw.html#cb83-1" tabindex="-1"></a>file_2 <span class="ot">&lt;-</span> <span class="fu">filterDataOrigin</span>(sp_sciex, <span class="at">dataOrigin =</span> fls[<span class="dv">2</span>])</span>
 <span id="cb83-2"><a href="sec-raw.html#cb83-2" tabindex="-1"></a><span class="fu">length</span>(file_2)</span></code></pre></div>
 <pre><code>## [1] 931</code></pre>
@@ -999,10 +1001,10 @@ between 175 and 189 seconds in the measurement run.</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## 31c07e6f78fcc7_7860
+## bdd7744e95384_7860
 ## Processing:
-##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/31c07e6f78fcc7_7860 [Fri Jun 26 09:33:36 2026]
-##  Filter: select retention time [175..189] on MS level(s)  [Fri Jun 26 09:33:36 2026]</code></pre>
+##  Filter: select data origin(s) /home/lgatto/.cache/R/ExperimentHub/bdd7744e95384_7860 [Thu Sep 24 18:33:26 2026]
+##  Filter: select retention time [175..189] on MS level(s)  [Thu Sep 24 18:33:26 2026]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1084,11 +1086,11 @@ below (next to Lazy evaluation queue).</p>
 ##  ... 34 more variables/columns.
 ## 
 ## file(s):
-## 31c07e7c0029cc_7859
-## 31c07e6f78fcc7_7860
+## bdd77724297ae_7859
+## bdd7744e95384_7860
 ## Lazy evaluation queue: 1 processing step(s)
 ## Processing:
-##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Fri Jun 26 09:33:36 2026]</code></pre>
+##  Remove peaks with intensities outside [10, Inf] in spectra of MS level(s) 1. [Thu Sep 24 18:33:26 2026]</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sec-raw.html#cb95-1" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">intensity</span>(sp_sciex[<span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] 412</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="sec-raw.html#cb97-1" tabindex="-1"></a>sp_sciex<span class="sc">@</span>processingQueue</span></code></pre></div>
@@ -1118,9 +1120,9 @@ vignette.</p>
 <a href="sec-id.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-06-26
+2026-09-24
  using 
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 </p>
 </div>
 </div>

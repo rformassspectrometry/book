@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-06-26" />
+<meta name="date" content="2026-09-24" />
 
 
 <meta name="description" content="Chapter 6 Supplementary exercises | R for Mass Spectrometry">
@@ -63,8 +63,9 @@ function reset_tooltip(id) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -133,6 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -197,7 +199,7 @@ div.csl-indent {
 <ul>
 <li><p>Download the 3 first mzML and mzID files from the
 <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD022816">PXD022816</a>
-project <span class="citation">(<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">Morgenstern, Barzilay, and Levin 2021<span class="marginnote">Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBeans</span>: A Simple, Vendor-Independent, Raw-Data Quality-Control Tool.”</span> <em>Journal of Proteome Research</em>. <a href="https://doi.org/10.1021/acs.jproteome.0c00956">https://doi.org/10.1021/acs.jproteome.0c00956</a>.</span>)</span>.</p></li>
+project <span class="citation">(<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">Morgenstern, Barzilay, and Levin 2021<span class="marginnote">Morgenstern, David, Rotem Barzilay, and Yishai Levin. 2021. <span>“<span>RawBeans</span>: A Simple, Vendor-Independent, Raw-Data Quality-Control Tool.”</span> <em>Journal of Proteome Research</em>. <a href="https://doi.org/10.1021/acs.jproteome.0c00956">https://doi.org/10.1021/acs.jproteome.0c00956</a>.</span>)</span>.</p></li>
 <li><p>Generate a <code>Spectra</code> object and a table of filtered PSMs. Visualise
 the total ion chromatograms and check the quality of the
 identification data by comparing the density of the decoy and target
@@ -504,9 +506,9 @@ the number of true/false positive/negative results.</li>
 <a href="sec-anx.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-06-26
+2026-09-24
  using 
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 </p>
 </div>
 </div>

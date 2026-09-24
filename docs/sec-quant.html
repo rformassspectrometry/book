@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto, Sebastian Gibb, Johannes Rainer" />
 
-<meta name="date" content="2026-06-26" />
+<meta name="date" content="2026-09-24" />
 
 
 <meta name="description" content="Chapter 5 Quantitative data | R for Mass Spectrometry">
@@ -63,8 +63,9 @@ function reset_tooltip(id) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -133,6 +134,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -760,7 +762,7 @@ available in the <code>MsDataHub</code> package:</p>
 <div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-quant.html#cb346-1" tabindex="-1"></a><span class="fu">basename</span>(f <span class="ot">&lt;-</span> MsDataHub<span class="sc">::</span><span class="fu">cptac_a_b_peptides.txt</span>())</span></code></pre></div>
 <pre><code>## see ?MsDataHub and browseVignettes('MsDataHub') for documentation</code></pre>
 <pre><code>## loading from cache</code></pre>
-<pre><code>## [1] "31c07e3004a564_7855"</code></pre>
+<pre><code>## [1] "bdd776ae7754f_7855"</code></pre>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -1201,7 +1203,7 @@ Figure 5.11: Intensity disctribution of the <code>naset</code> data.
 <pre><code>## Imputing along margin 1 (features/rows).</code></pre>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-quant.html#cb392-1" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"orig"</span>, <span class="st">"knn"</span>, <span class="st">"zero"</span>, <span class="st">"MinDet"</span>, <span class="st">"bpca"</span>),</span>
 <span id="cb392-2"><a href="sec-quant.html#cb392-2" tabindex="-1"></a>       <span class="at">col =</span> cls, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div>
-<p><img src="R4MS_files/figure-html/naex3-1.png" width="672"></p>
+<p><img src="R4MS_files/figure-html/naex3-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1458,6 +1460,11 @@ less, while very few proteins are accounted for by tens of peptides.</p>
 <h3>
 <span class="header-section-number">5.4.8</span> Principal component analysis<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('principal-component-analysis')" onmouseout="reset_tooltip('principal-component-analysis-tooltip')"><span class="tooltiptext" id="principal-component-analysis-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
+<p>Below we apply PCA using the processed peptide level data and the summarized
+protein level data. Since PCA does not accept missing values we first need to
+remove <code>NA</code> using <code>filterNA</code>. Note that several alternative dimension
+reduction methods allow the use of incomplete data (e.g. nipals <span class="citation">(<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Wold 1966<span class="marginnote">Wold, H. 1966. <span>“Estimation of Principal Components and Related Models by Iterative Least Squares.”</span> <em>Multivariate Analysis</em>, 391–420. <a href="https://cir.nii.ac.jp/crid/1572261551103031296">https://cir.nii.ac.jp/crid/1572261551103031296</a>.</span>)</span> or
+bpca <span class="citation">(<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">Bishop 1998<span class="marginnote">Bishop, Christopher. 1998. <span>“Bayesian <span>PCA</span>”</span> 11. <a href="https://proceedings.neurips.cc/paper_files/paper/1998/hash/c88d8d0a6097754525e02c2246d8d27f-Abstract.html">https://proceedings.neurips.cc/paper_files/paper/1998/hash/c88d8d0a6097754525e02c2246d8d27f-Abstract.html</a>.</span>)</span>)</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-quant.html#cb418-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
 <span id="cb418-2"><a href="sec-quant.html#cb418-2" tabindex="-1"></a></span>
 <span id="cb418-3"><a href="sec-quant.html#cb418-3" tabindex="-1"></a>pca_pep <span class="ot">&lt;-</span></span>
@@ -1676,8 +1683,8 @@ the coefficient of interest.</p>
 <span id="cb435-4"><a href="sec-quant.html#cb435-4" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb435-5"><a href="sec-quant.html#cb435-5" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
 <span id="cb435-6"><a href="sec-quant.html#cb435-6" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 25 rows containing missing values or values outside the scale
-## range (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 25 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:vp"></span>
 <p class="caption marginnote shownote">
@@ -1705,7 +1712,7 @@ other 36 expected spike-in proteins.</p>
 by aggregating features using a robust summarisation (available as
 <code>MsCoreUtils::robustSummary()</code>), i.e robust regression with
 M-estimation using Huber weights, as described in section 2.7 in
-<span class="citation">(<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Sticker et al. 2019<span class="marginnote">Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.</span>)</span>.</p>
+<span class="citation">(<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">Sticker et al. 2019<span class="marginnote">Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven Clement. 2019. <span>“Robust Summarization and Inference in Proteome-Wide Label-Free Quantification.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/668863">https://doi.org/10.1101/668863</a>.</span>)</span>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-63"></span>
 <p class="caption marginnote shownote">
@@ -1726,9 +1733,9 @@ Figure 5.16: Aggregation using robust summarisation.
 <a href="sec-ex.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-06-26
+2026-09-24
  using 
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 </p>
 </div>
 </div>
